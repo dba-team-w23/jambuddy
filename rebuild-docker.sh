@@ -2,8 +2,10 @@
 # Exceute using `bash rebuild-docker.sh`
 
 check_docker_is_running() {
-  pgrep -x "dockerd" > /dev/null && echo "Docker" || echo "Docker is not running."
+  sc query "docker" | grep "STATE"
 }
+
+
 
 rebuild_project_container() {
   docker-compose down --remove-orphans

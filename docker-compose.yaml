@@ -1,15 +1,24 @@
 services:
-  api:
-    build: ./api
+  backend:
+    build: ./backend
     ports:
       - "8000:8000"
     volumes:
-      - ./api:/api
+      - ./backend:/backend
     command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    networks:
+      - jambuddy-network
+    hostname: backend
 
-  web:
+  frontend:
     build: ./frontend
     ports:
       - "3000:3000"
     volumes:
       - ./frontend:/frontend
+    networks:
+      - jambuddy-network
+
+networks:
+  jambuddy-network:
+    driver: bridge
