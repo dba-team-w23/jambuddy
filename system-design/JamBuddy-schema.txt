@@ -1,0 +1,97 @@
+//// -- LEVEL 1
+//// -- Schemas, Tables and References
+
+// Creating tables
+
+Table User as U {
+  id int [pk, increment]
+  fname varchar
+  lname varchar
+  street varchar
+  street2 varchar
+  city varchar
+  state varchar
+  zipcode varchar
+  phone varchar
+  email varchar
+  photo varchar
+  note varchar
+  created timestamp
+}
+
+Table UserInstrument as UI {
+  id int [pk, increment]
+  userid int [ref: > U.id]
+  instrumentid int [ref: > I.id]
+  exp_level int [ref: > EL.id]
+}
+
+Table UserGenre as UG {
+  id int [pk, increment]
+  userid int [ref: > U.id]
+  genreid int [ref: > MG.id]
+}
+
+Table JamRequest as JRQ {
+  id int [pk, increment]
+  userid int [ref: > U.id]
+  instrumentid int [ref: > I.id]
+  genreid int [ref: > MG.id]
+  location TBD
+  exp_level int [ref: > EL.id]
+  status varchar
+  created timestamp
+}
+
+Table JamResponse as JRP {
+  id int [pk, increment]
+  jrid int [ref: > JRQ.id]
+  userid int [ref: > U.id]
+  created timestamp
+  note text
+  status varchar
+  
+}
+
+Table ExperienceLevel as EL {
+  id int [pk, increment]
+  level varchar 
+}
+
+Table Instrument as I {
+  id int [pk, increment]
+  name varchar
+  type varchar [null]
+}
+
+Table MusicGenre as MG {
+  id int [pk, increment]
+  genre varchar
+}
+
+Table UserReview as UR {
+  id int [pk, increment]
+  userid int [ref: > U.id]
+  reviewerid int [ref: > U.id]
+  created timestamp
+  rating int
+  comment text
+}
+
+Table UserMedia as UM {
+  id int [pk, increment]
+  userid int [ref: > U.id]
+  type char
+  location varchar
+  seconds int
+}
+
+
+
+  
+// Creating references
+// You can also define relaionship separately
+// > many-to-one; < one-to-many; - one-to-one; <> many-to-many
+// Ref: U.country_code > countries.code  
+// Ref: ecommerce.merchants.country_code > countries.code
+
