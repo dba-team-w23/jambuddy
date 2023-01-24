@@ -6,14 +6,8 @@ function App() {
   const [currentDate, setCurrentDate] = useState(0);
   useEffect(() => {
   fetch(' http://localhost:8000').then(res => res.json()).then(data => {
-    const timeOptions = { timeZone: 'UTC', hour: 'numeric', minute: 'numeric', hour12: true };
-    const dateOptions = { timeZone: 'UTC', weekday: 'long', month: 'long', day: 'numeric' };
-    const formatter = new Intl.DateTimeFormat([], timeOptions);
-    const dateFormatter = new Intl.DateTimeFormat([], dateOptions);
-    const localTime = formatter.format(new Date(data.utc_time));
-    const localDate = dateFormatter.format(new Date(data.utc_date));
-    setCurrentTime(localTime);
-    setCurrentDate(localDate);
+    setCurrentTime(data.time);
+    setCurrentDate(data.date)
   });
   }, []);
   return (
