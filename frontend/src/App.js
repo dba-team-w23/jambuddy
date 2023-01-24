@@ -6,9 +6,9 @@ function App() {
   const [currentDate, setCurrentDate] = useState(0);
   useEffect(() => {
   fetch(' http://localhost:8000').then(res => res.json()).then(data => {
-    setCurrentTime(data.time);
-    setCurrentDate(data.date)
-  });
+      setCurrentTime(data.time);
+      setCurrentDate(data.date)
+    });
   }, []);
   return (
     <div className="App">
