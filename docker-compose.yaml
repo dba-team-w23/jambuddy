@@ -19,6 +19,16 @@ services:
     networks:
       - jambuddy-network
 
+  postgres:
+      image: postgres
+      env_file:
+        - ./backend/.env
+      volumes:
+        - pgdata:/var/lib/postgresql/data/
+
+volumes:
+  pgdata:
+
 networks:
   jambuddy-network:
     driver: bridge
