@@ -1,11 +1,9 @@
 import psycopg2
 import os
 import pytest
-from dotenv import load_dotenv
 
 
 def test_db_connection():
-    load_dotenv()
 
     # Retrieve the database connection details from environment variables
     host = os.getenv("POSTGRES_HOST")
