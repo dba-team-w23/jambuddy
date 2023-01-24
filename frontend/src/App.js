@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+import React from 'react';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Sidebar from './components/Sidebar';
+import Body from './components/Body';
+
+
+
 
 function App() {
-  const [currentTime, setCurrentTime] = useState(0);
-  const [currentDate, setCurrentDate] = useState(0);
-  useEffect(() => {
-  fetch(' http://localhost:8000').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
-      setCurrentDate(data.date)
-    });
-  }, []);
-  return (
-    <div className="App">
-      <header className="App-header">
-      <p>The date is {currentDate} and the time is {currentTime}.</p> <br/>
+      return (
+        <div>
+          <Header />
+          <Sidebar /> 
+          <Body />
+          <Footer />
 
-      </header>
-    </div>
-  );
+        </div>
+
+
+    );
+
 }
 
 export default App;
