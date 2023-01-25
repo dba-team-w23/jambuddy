@@ -1,13 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Switch } from "react-router-dom";
 import Feed from './Feed';
-import Header from './Header';
 import Profile from './Profile';
-import Footer from './Footer';
 import Posts from './Posts';
 import Profiles from './Profiles';
 import Search from './Search';
 import SignIn from './SignIn';
+import SignUp from './SignUp';
 import Error from './Error';
 
 function Body() {
@@ -15,6 +14,7 @@ function Body() {
         <Routes>
             <Route path="/" element={<Feed />} />
             <Route path="signin" element={<SignIn />} />
+            <Route path="signup" element={<SignUp />} />
             <Route path="search" element={<Search />} />
             <Route path="profiles"   element= { <Profiles />} />
             <Route path="posts"   element= { <Posts />} />

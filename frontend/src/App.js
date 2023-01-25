@@ -1,21 +1,37 @@
 import React from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Sidebar from './components/Sidebar';
 import Body from './components/Body';
+import Navigation from './components/Navigation';
+import { purple } from '@mui/material/colors';
+import { Toolbar } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import AppBar from '@mui/material/AppBar';
+import Typography from '@mui/material/Typography';
+import MenuIcon from '@mui/icons-material/Menu';
 
-
+const theme = ({
+  palette: {
+      primary: {
+          main: purple[500]
+      }
+  }
+})
 
 
 function App() {
       return (
         <div>
-          <Header />
-          <Sidebar /> 
+          <header className="app-header">
+            <AppBar position="static">
+              <Toolbar>
+                <Typography variant="h6">Jam Buddy</Typography>
+                <Navigation />
+              </Toolbar>
+            </AppBar>
+            </header>
           <Body />
-          <Footer />
 
-        </div>
+
+          </div>
 
 
     );
