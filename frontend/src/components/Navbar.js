@@ -12,9 +12,9 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const pages = ['Profiles', 'Posts', 'Sign In', 'Sign Up', 'Search'];
+const pages = ['Profiles', 'Posts', 'Sign In', 'Sign Up'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -56,7 +56,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            JamBuddy
+            JAM BUDDY
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -90,7 +90,9 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center"><Link to={`/${page.split(' ').join('')}`}>{page}</Link></Typography>
+                  <Typography textAlign="center">
+                    <Link to={`/${page.split(' ').join('')}`}>{page}</Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -112,7 +114,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            JamBuddy
+            jam buddy
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
