@@ -6,11 +6,15 @@ const baseURL = "https://api.github.com/users";
 export default function Profiles(){
     const [profiles, setProfiles] = React.useState([]);
 
+    const getData = async () => {
+        const {data} = await axios.get(baseURL);
+        setProfiles(data);
+    }
+
     React.useEffect(() => {
-        axios.get(baseURL).then((response) => {
-            setProfiles(response.data);
-        });
-    }, []);
+        getData();
+        }, []);
+        
     console.log(profiles.map((profile) => (
         <div>
             <h2>{profile.login}</h2>
