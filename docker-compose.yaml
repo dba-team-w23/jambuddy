@@ -10,14 +10,14 @@ services:
       - jambuddy-network
     hostname: backend
 
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/frontend
-    networks:
-      - jambuddy-network
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./frontend:/frontend
+  #   networks:
+  #     - jambuddy-network
 
   postgres:
       image: postgres
