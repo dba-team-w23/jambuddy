@@ -1,5 +1,7 @@
-import React from "react";  
+import React from "react";
+import ProfileCard from './Card'  
 import axios from "axios";
+import './Profiles.css'
 
 const baseURL = "https://api.github.com/users";
 
@@ -14,21 +16,11 @@ export default function Profiles(){
     React.useEffect(() => {
         getData();
         }, []);
-        
-    console.log(profiles.map((profile) => (
-        <div>
-            <h2>{profile.login}</h2>
-            <p>{profile.avatar_url}</p>
-        </div>
-    )));
 
     return(
-        <div>
-        {profiles.map((profile) => (
-            <>
-            <h2>{profile.login}</h2>
-            <img src={profile.avatar_url} />
-            </>
+        <div className="profiles">
+        {profiles.map((profile, i) => (
+            <ProfileCard key={i} profile={profile} />
         )
     )}
     </div>

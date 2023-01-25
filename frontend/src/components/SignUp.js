@@ -12,10 +12,11 @@ export default function SignUp() {
 
 
   return ( 
-    <Box component="form" sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }} noValidate autoComplete="off"  > 
+    <Box className="signIn" component="form" sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }} noValidate autoComplete="off"  > 
         <TextField id="outlined-basic" label="First Name" variant="outlined" />
         <TextField id="outlined-basic" label="Last Name" variant="outlined" />
         <TextField id="outlined-basic" label="Email" variant="outlined" />
+        <TextField id="outlined-basic" label="User Name" variant="outlined" />
         <TextField id="outlined-basic" label="Password" variant="outlined" />
         <Button variant="contained" >
                 Sign Up
