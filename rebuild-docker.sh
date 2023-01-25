@@ -50,3 +50,6 @@ check_variables "POSTGRES_HOST" "POSTGRES_USER" "POSTGRES_PASSWORD"
 
 check_docker_is_running
 rebuild_project_container
+cd frontend
+npm ci 
+npm start
