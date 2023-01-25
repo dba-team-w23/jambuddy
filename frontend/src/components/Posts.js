@@ -11,12 +11,7 @@ export default function Posts(){
             setPosts(response.data);
         });
     }, []);
-    console.log(posts.map((post) => (
-        <div>
-            <h2>{post.title}</h2>
-            <p>{post.body}</p>
-        </div>
-    )));
+
 
     return(
         <div>
