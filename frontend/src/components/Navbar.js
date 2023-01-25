@@ -123,7 +123,7 @@ function ResponsiveAppBar() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                <Link to={`/${page.split(' ').join('')}`}>{page}</Link>
               </Button>
             ))}
           </Box>
