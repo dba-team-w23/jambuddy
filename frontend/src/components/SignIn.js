@@ -1,10 +1,19 @@
-import React from "react";
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
-function SignIn(){
-    return(
-        <div>
-            <h1>Sign In</h1>
-        </div>
-    )
+import Box from '@mui/material/Box';
+
+export default function SignIn() {
+
+
+  return ( 
+    <Box component="form" sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }} noValidate autoComplete="off"  > 
+        <TextField id="outlined-basic" label="User Name" variant="outlined" />
+        <TextField id="outlined-basic" label="Password" variant="outlined" />
+        <Button variant="contained" >
+                Sign In
+                </Button>
+    </Box>
+  );
 }
-export default SignIn;
