@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
+import Navbar from './components/Navbar';
 
 const theme = ({
   palette: {
@@ -22,12 +23,13 @@ function App() {
       return (
         <div>
           <header className="app-header">
-            <AppBar position="static">
+            {/* <AppBar position="static">
               <Toolbar>
                 <Typography variant="h6">Jam Buddy</Typography>
                 <Navigation />
               </Toolbar>
-            </AppBar>
+            </AppBar> */}
+            <Navbar />
             </header>
           <Body />
 
