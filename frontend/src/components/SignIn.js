@@ -23,7 +23,8 @@ export default function SignIn() {
   };
 
   return ( 
-
+<><p>Sign In will show up at the root for non-logged in users</p>
+<p>For logged-in users, this page will show the "feed" of posts or profiles</p>
     <Box className="signIn" component="form" sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }} noValidate autoComplete="off"  > 
         <TextField id="outlined-basic" label="User Name" variant="outlined" />
         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
@@ -51,6 +52,6 @@ export default function SignIn() {
                 </Button>
                 <Link to={'/signup' } underline="hover">Sign Up</Link>
     </Box>
-
+    </>
   );
 }

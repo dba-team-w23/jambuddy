@@ -4,11 +4,8 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import './SignIn.css'
 import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
-import { FormHelperText } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Visibility from '@mui/icons-material/Visibility';
@@ -27,6 +24,7 @@ export default function SignUp() {
 
 
   return ( 
+    <><p>Sign Up will take the user to a Create Profile page</p>
     <Box className="signIn" component="form" sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }} noValidate autoComplete="off"  > 
         <TextField id="outlined-basic" label="First Name" variant="outlined" />
         <TextField id="outlined-basic" label="Last Name" variant="outlined" />
@@ -56,5 +54,6 @@ export default function SignUp() {
                 Sign Up
                 </Button>
     </Box>
+    </>
   );
 }

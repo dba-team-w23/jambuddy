@@ -15,7 +15,11 @@ export default function ControlledAccordions({posts}) {
 
   return (
     <div className="posts-container">
+      <p>This page will show posts -- Jam requests, ads, etc.</p>
+      <p>This should only be available for a logged in user</p>
+      <p>Needs a "Create Post" link</p>
         {posts.map((post, i) => (
+           <>
            
             <Accordion className="posts" key={i} expanded={expanded === i} onChange={handleChange(i)}>
                 <AccordionSummary
@@ -33,6 +37,7 @@ export default function ControlledAccordions({posts}) {
                 </Typography>
                 </AccordionDetails>
             </Accordion>
+            </>
         ) )}
     </div>
   );
