@@ -23,8 +23,8 @@ export default function ControlledAccordions({posts}) {
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
                 >
-                <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                    <h2>{post.title}</h2>
+                <Typography variant="h2">
+                    {post.title}
                 </Typography>
                 </AccordionSummary>
                 <AccordionDetails>

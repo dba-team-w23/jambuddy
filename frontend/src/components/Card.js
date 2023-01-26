@@ -48,18 +48,18 @@ export default function ProfileCard({profile}) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={profile.login}
+        title={`${profile.firstName} ${profile.lastName}`}
         subheader="content"
       />
       <CardMedia
         component="img"
         height="194"
-        image={profile.avatar_url}
-        alt={profile.login}
+        image={profile.image}
+        alt={profile.firstName}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {shortbio}
+          {profile.username}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -82,7 +82,10 @@ export default function ProfileCard({profile}) {
         <CardContent>
           <Typography h2>{profile.login}</Typography>
           <Typography paragraph>
-            {longbio}
+            {`${profile.address.city}, ${profile.address.state}`}
+          </Typography>
+          <Typography paragraph>
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
           </Typography>
         </CardContent>
       </Collapse>
