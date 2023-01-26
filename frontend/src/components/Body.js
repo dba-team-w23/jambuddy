@@ -12,7 +12,7 @@ import Error from './Error';
 function Body() {
     return (
         <Routes>
-            <Route path="/" element={<Feed />} />
+            <Route path="/" element={<SignIn />} />
             <Route path="signin" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="search" element={<Search />} />

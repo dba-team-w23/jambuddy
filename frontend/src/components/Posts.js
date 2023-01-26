@@ -20,7 +20,6 @@ export default function Posts(){
 
     return(
         <ControlledAccordions className="post-container" posts={posts} />
-        
     )
 }
 
