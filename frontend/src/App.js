@@ -1,25 +1,16 @@
 import React from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Sidebar from './components/Sidebar';
 import Body from './components/Body';
-
-
-
+import Navbar from './components/Navbar';
 
 function App() {
       return (
         <div>
-          <Header />
-          <Sidebar /> 
+          <header className="app-header">
+            <Navbar />
+            </header>
           <Body />
-          <Footer />
-
         </div>
-
-
     );
-
 }
 
 export default App;

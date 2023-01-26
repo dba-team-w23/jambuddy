@@ -32,7 +32,7 @@ CREATE TABLE "JamRequest" (
   "userid" int,
   "instrumentid" int,
   "genreid" int,
-  "location" TBD,
+  "location" varchar,
   "exp_level" int,
   "status" varchar,
   "created" timestamp
