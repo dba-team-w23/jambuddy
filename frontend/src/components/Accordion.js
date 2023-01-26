@@ -14,10 +14,10 @@ export default function ControlledAccordions({posts}) {
   };
 
   return (
-    <>
+    <div className="posts-container">
         {posts.map((post, i) => (
            
-            <Accordion key={i} expanded={expanded === i} onChange={handleChange(i)}>
+            <Accordion className="posts" key={i} expanded={expanded === i} onChange={handleChange(i)}>
                 <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1bh-content"
@@ -34,6 +34,6 @@ export default function ControlledAccordions({posts}) {
                 </AccordionDetails>
             </Accordion>
         ) )}
-    </>
+    </div>
   );
 }
