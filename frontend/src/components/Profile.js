@@ -12,7 +12,6 @@ export default function EditProfile() {
 
   return (
     <>
-      <p>This page will come up after sign up and is reachable from the icon on the right side of the navbar</p>
       <Box
         className="editProfile"
         component="form"

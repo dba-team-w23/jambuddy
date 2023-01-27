@@ -21,8 +21,6 @@ export default function SignIn() {
     <>
     <Switch checked={signedIn} onChange={handleChange} />
     <p>{signedIn ? "Signed In" : "Signed Out" }</p>
-    <p>Sign In will show up at the root for non-logged in users</p>
-    <p>For logged-in users, this page will show the "feed" of posts or profiles</p>
         {!signedIn && <Box className="signIn" component="form" sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }} noValidate autoComplete="off"  > 
             <TextField id="outlined-basic" label="User Name" variant="outlined" />
 

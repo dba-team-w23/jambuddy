@@ -1,8 +1,10 @@
 .MuiButton-root a {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   color: white;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
+  text-transform: capitalize;
 }
 .MuiMenu-list a {
   text-decoration: none;
