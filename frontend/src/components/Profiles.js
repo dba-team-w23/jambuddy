@@ -1,7 +1,7 @@
 import React from "react";
-import ProfileCard from './Card'  
+import ProfileCard from './partials/Card'  
 import axios from "axios";
-import './Profiles.css'
+import './css/Profiles.css'
 
 const baseURL = "https://dummyjson.com/users";
 

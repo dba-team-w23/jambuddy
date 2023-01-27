@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import ControlledAccordions from "./Accordion";
-import './Posts.css'
+import './css/Posts.css'
 
 const baseURL = "https://dummyjson.com/posts";
 

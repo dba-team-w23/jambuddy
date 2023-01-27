@@ -7,7 +7,7 @@ import Profiles from './Profiles';
 import Search from './Search';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
-import Error from './Error';
+import Error from './partials/Error';
 
 function Body() {
     return (
