@@ -3,7 +3,7 @@
 
 // Creating tables
 
-Table User as U {
+Table Users as U {
   id int [pk, increment]
   fname varchar
   lname varchar

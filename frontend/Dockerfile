@@ -7,7 +7,7 @@ WORKDIR /frontend
 COPY package.json package-lock.json ./
 
 # install dependencies from requirements.txt
-RUN npm ci
+RUN npm i
 RUN npm start
 
 # RUN pip install django django-cors-headers
