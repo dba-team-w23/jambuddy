@@ -22,6 +22,7 @@ function Body() {
             <Route path="profile" element= { <Profile />} />
             <Route path="feed" element= { <Feed />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="logout" element={<SignIn />} />
             <Route path="*" element={<Error />} />
         </Routes>
     )
