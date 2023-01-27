@@ -40,7 +40,7 @@ export default function ProfileCard({profile}) {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
-            R
+            {profile.firstName[0]}
           </Avatar>
         }
         action={
