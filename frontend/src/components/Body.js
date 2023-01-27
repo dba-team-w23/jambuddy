@@ -8,6 +8,7 @@ import Search from './Search';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Error from './partials/Error';
+import EditProfile from './EditProfile';
 
 function Body() {
     return (
@@ -16,10 +17,11 @@ function Body() {
             <Route path="signin" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="search" element={<Search />} />
-            <Route path="profiles"   element= { <Profiles />} />
-            <Route path="posts"   element= { <Posts />} />
-            <Route path="profile"   element= { <Profile />} />
-            <Route path="feed"   element= { <Feed />} />
+            <Route path="profiles" element= { <Profiles />} />
+            <Route path="posts" element= { <Posts />} />
+            <Route path="profile" element= { <Profile />} />
+            <Route path="feed" element= { <Feed />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="*" element={<Error />} />
         </Routes>
     )

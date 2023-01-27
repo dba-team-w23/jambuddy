@@ -6,3 +6,11 @@
     justify-content: center;
     margin: 0 auto;
 }
+.editProfile {
+    display: flex;
+    max-width: 600px;
+    flex-wrap: wrap;
+    padding: 1rem;
+    justify-content: center;
+    margin: 0 auto;
+}
