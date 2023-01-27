@@ -8,7 +8,6 @@ import Search from './Search';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Error from './partials/Error';
-import EditProfile from './EditProfile';
 
 function Body() {
     return (
@@ -21,7 +20,6 @@ function Body() {
             <Route path="posts" element= { <Posts />} />
             <Route path="profile" element= { <Profile />} />
             <Route path="feed" element= { <Feed />} />
-            <Route path="profile" element={<Profile />} />
             <Route path="logout" element={<SignIn />} />
             <Route path="*" element={<Error />} />
         </Routes>

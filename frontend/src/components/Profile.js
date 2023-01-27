@@ -6,6 +6,7 @@ import "./css/SignIn.css";
 import Password from "./partials/Password";
 import PickList from "./partials/PickList";
 import Multiline from "./partials/Multiline";
+import FileUpload from "./partials/FileUpload";
 
 export default function EditProfile() {
 
@@ -29,6 +30,7 @@ export default function EditProfile() {
         <Multiline default="Enter a detailed biography here" label="Full Bio" />
         <Password id="pw1"/> 
         <Password label="Repeat Password" id="pw2"/>
+        <FileUpload />
         <Button variant="contained">Sign Up</Button>
       </Box>
     </>
