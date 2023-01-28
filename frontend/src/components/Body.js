@@ -9,6 +9,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Error from './partials/Error';
 import { Switch } from '@mui/material'
+import './css/Global.css';
 
 function Body() {
     const [signedIn, setSignedIn] = React.useState(false);
@@ -19,6 +20,7 @@ function Body() {
 
     return (
         <>
+        <div className="signedIn">
         <h2>Signed in?  <Switch checked={signedIn} onChange={handleChange} /></h2>
            
         <Routes>
@@ -33,7 +35,7 @@ function Body() {
             <Route path="logout" element={<SignIn />} />
             <Route path="*" element={<Error />} />
         </Routes>
-
+        </div>
         </>
     )
 }
