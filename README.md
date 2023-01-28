@@ -18,4 +18,13 @@ To build (or rebuild) the Docker container, execute `bash rebuild-docker.sh` in 
 4. run `python manage.py createsuperuser`
 5. Follow the prompts, and take note of the `username` and `password` fields you fill out.
 6. Navigate to http://localhost:8000/admin, where you should be able to log in with the above credentials.
-7.
+
+## Updating Backend Production Deployment
+1. Log in to https://www.pythonanywhere.com/user/dbajamteam/consoles/
+2. Open a console, cd into jambuddy/backend
+3. run `git pull`
+4. run `pip install -r requirements.txt`
+5. run `python manage.py makemigrations`
+5. run `python manage.py migrate`
+6. Navigate to https://www.pythonanywhere.com/user/dbajamteam/webapps/#tab_id_dbajamteam_pythonanywhere_com
+7. Click Reload (green button)
