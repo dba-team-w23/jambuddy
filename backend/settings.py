@@ -137,6 +137,8 @@ REST_FRAMEWORK = {
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 # this should be put at the end of the settings.py file
 CORS_ORIGIN_WHITELIST = [
