@@ -34,7 +34,6 @@ INSTALLED_APPS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'jamrequestmodule',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'jamrequestmodule',
 ]
 
 MIDDLEWARE = [
