@@ -34,6 +34,7 @@ INSTALLED_APPS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'jamrequestmodule',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
