@@ -25,7 +25,7 @@ SECRET_KEY = 'cfi&wj6i3*57+&q*8#^im(n90voi&k7^(9whk!4#tz3idlc)7n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost']  # this is the host that Docker uses to run application
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'dbajamteam.pythonanywhere.com']  # this is the host that Docker uses to run application
 INSTALLED_APPS = [
     'corsheaders'  # this will be installed later
 ]

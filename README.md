@@ -24,11 +24,12 @@ To build (or rebuild) the Docker container, execute `bash rebuild-docker.sh` in 
 1. Log in to <https://www.pythonanywhere.com/user/dbajamteam/consoles/>
 2. Open a console, cd into jambuddy/backend
 3. run `git pull`
-4. run `pip install -r requirements.txt`
-5. run `python manage.py makemigrations`
-6. run `python manage.py migrate`
-7. Navigate to <https://www.pythonanywhere.com/user/dbajamteam/webapps/#tab_id_dbajamteam_pythonanywhere_com>
-8. Click Reload (green button)
+4. run `workon myvirtualenv`
+5. run `pip install -r requirements.txt`
+6. run `python manage.py makemigrations`
+7. run `python manage.py migrate`
+8. Navigate to <https://www.pythonanywhere.com/user/dbajamteam/webapps/#tab_id_dbajamteam_pythonanywhere_com>
+9. Click Reload (green button)
 
 ## Backend Test Suite
 
