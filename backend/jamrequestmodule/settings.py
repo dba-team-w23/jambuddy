@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS = [
     'jamrequestmodule',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,7 +60,7 @@ MIDDLEWARE = [
 INTERNAL_IPS = ['127.0.0.1']
 
 
-ROOT_URLCONF = 'project.urls'
+ROOT_URLCONF = 'jamrequestmodule.urls'
 
 TEMPLATES = [
     {
@@ -77,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'project.wsgi.application'
+WSGI_APPLICATION = 'jamrequestmodule.wsgi.application'
 
 
 # Database
@@ -122,6 +123,13 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ]
+}
+
 
 
 # Static files (CSS, JavaScript, Images)
