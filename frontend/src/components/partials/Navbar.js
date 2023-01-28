@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import './../css/Navbar.css'
 
-const pages = ['Profiles', 'Posts'];
+const pages = ['Profiles', 'Jam Requests'];
 const settings = ['Profile', 'Logout'];
 
 function ResponsiveAppBar() {
