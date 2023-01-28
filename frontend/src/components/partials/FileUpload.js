@@ -1,20 +1,51 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import Stack from '@mui/material/Stack';
-
-export default function UploadButtons() {
+import * as React from "react";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import {Image, AudioFile} from "@mui/icons-material";
+import {Grid} from "@mui/material";
+export default function FileUpload({ iconType, ...props }) {
+  const icon = iconType;
   return (
-    <Stack direction="row" alignItems="center" spacing={2}>
+    <>
+    <Grid item xs={6} >
+
+    <Photo />
+    </Grid>
+    <Grid  item xs={6} >
+    <Music />
+    </Grid>
+
+    </>
+  );
+}
+
+const Photo = () => {
+  return (
+    <>
       <Button variant="contained" component="label">
-        Upload
+        Upload Photo
         <input hidden accept="image/*" multiple type="file" />
-      </Button>
-      <IconButton color="primary" aria-label="upload picture" component="label">
+        <IconButton style={{color: "white"}} aria-label="upload picture" component="label">
         <input hidden accept="image/*" type="file" />
-        <PhotoCamera />
+        <Image />
       </IconButton>
-    </Stack>
+      </Button>
+
+    </>
+  );
+};
+const Music = () => {
+  return (
+    <>
+      <Button variant="contained" component="label">
+        Upload Audio
+        <input hidden accept="image/*" multiple type="file" />
+        <IconButton style={{color: "white"}} aria-label="upload audio" component="label">
+        <input hidden accept="audio/*" type="file" />
+        <AudioFile />
+      </IconButton>
+      </Button>
+
+    </>
   );
 }
