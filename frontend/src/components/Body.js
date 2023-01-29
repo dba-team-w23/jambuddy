@@ -12,7 +12,7 @@ import { Switch } from '@mui/material'
 import './css/Global.css';
 
 function Body() {
-    const [signedIn, setSignedIn] = React.useState(false);
+    const [signedIn, setSignedIn] = React.useState(true);
 
   const handleChange = (e) => {
     setSignedIn(e.target.checked);

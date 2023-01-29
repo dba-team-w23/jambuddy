@@ -58,6 +58,7 @@ export default function SignIn() {
             label="User Name"
             name="userName"
             variant="outlined"
+            required
             onChange={handleInput}
           />
 
