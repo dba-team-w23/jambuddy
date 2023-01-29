@@ -77,6 +77,7 @@ class UserGenreDetail(viewsets.ModelViewSet):
     serializer_class = UserGenreSerializer
 
 
+
 class UserInstrumentList(viewsets.ModelViewSet):
     queryset = UserInstrument.objects.all()
     serializer_class = UserInstrumentSerializer
@@ -93,7 +94,7 @@ class UserMediaList(viewsets.ModelViewSet):
 class UserMediaDetail(viewsets.ModelViewSet):
     queryset = UserMedia.objects.all()
     serializer_class = UserMediaSerializer
-    
+
 
 class UserReviewList(viewsets.ModelViewSet):
     queryset = UserReview.objects.all()
