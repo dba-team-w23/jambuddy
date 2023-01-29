@@ -27,17 +27,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'dbajamteam.pythonanywhere.com']  # this is the host that Docker uses to run application
 INSTALLED_APPS = [
-    'corsheaders'  # this will be installed later
-]
-
-
-# Application definition
-
-INSTALLED_APPS = [
+    # 'corsheaders',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -59,6 +53,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
 ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Used by Django Debug Toolbar
 INTERNAL_IPS = ['127.0.0.1']
