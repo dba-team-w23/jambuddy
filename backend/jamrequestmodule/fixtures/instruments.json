@@ -1,0 +1,29 @@
+{
+    "jamrequestmodule.Instrument": [
+        { "name": "Guitar", "type": "String" },
+        { "name": "Piano", "type": "Keyboard" },
+        { "name": "Drums", "type": "Percussion" },
+        { "name": "Bass", "type": "String" },
+        { "name": "Violin", "type": "String" },
+        { "name": "Trumpet", "type": "Brass" },
+        { "name": "Saxophone", "type": "Woodwind" },
+        { "name": "Flute", "type": "Woodwind" },
+        { "name": "Violin", "type": "String" },
+        { "name": "Clarinet", "type": "Woodwind" },
+        { "name": "Harmonica", "type": "Wind" },
+        { "name": "Banjo", "type": "String" },
+        { "name": "Mandolin", "type": "String" },
+        { "name": "Harp", "type": "String" },
+        { "name": "Accordion", "type": "Keyboard" },
+        { "name": "Trombone", "type": "Brass" },
+        { "name": "Viola", "type": "String" },
+        { "name": "French horn", "type": "Brass" },
+        { "name": "Oboe", "type": "Woodwind" },
+        { "name": "Bagpipes", "type": "Wind" },
+        { "name": "Ukulele", "type": "String" },
+        { "name": "Sitar", "type": "String" },
+        { "name": "Didgeridoo", "type": "Percussion" },
+        { "name": "Tabla", "type": "Percussion" }
+
+    ]
+}
