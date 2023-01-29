@@ -2,27 +2,11 @@ from django.contrib import admin
 
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, UserGenre, UserInstrument, UserMedia,
-                     UserReview, User)
+                     UserReview, Users)
 
 
 class UsersAdmin(admin.ModelAdmin):
     list_display = ('id', 'fname', 'lname', 'email', 'phone')
-
-
-class UserInstrumentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'userid', 'instrumentid', 'exp_level')
-
-
-class UserGenreAdmin(admin.ModelAdmin):
-    list_display = ('id', 'userid', 'genreid')
-
-
-class JamRequestAdmin(admin.ModelAdmin):
-    list_display = ('id', 'userid', 'instrumentid', 'genreid', 'location', 'exp_level', 'status')
-
-
-class JamResponseAdmin(admin.ModelAdmin):
-    list_display = ('id', 'jrid', 'userid', 'status')
 
 
 class ExperienceLevelAdmin(admin.ModelAdmin):
@@ -33,19 +17,35 @@ class InstrumentAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'type')
 
 
+class JamRequestAdmin(admin.ModelAdmin):
+    list_display = ('id', 'userid', 'instrumentid', 'genreid', 'location', 'exp_level', 'status')
+
+
+class JamResponseAdmin(admin.ModelAdmin):
+    list_display = ('id', 'jrid', 'userid', 'status')
+
+
 class MusicGenreAdmin(admin.ModelAdmin):
     list_display = ('id', 'genre')
 
 
-class UserReviewAdmin(admin.ModelAdmin):
-    list_display = ('id', 'userid', 'reviewerid', 'rating')
+class UserGenreAdmin(admin.ModelAdmin):
+    list_display = ('id', 'userid', 'genreid')
+
+
+class UserInstrumentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'userid', 'instrumentid', 'exp_level')
 
 
 class UserMediaAdmin(admin.ModelAdmin):
     list_display = ('id', 'userid', 'type', 'location', 'seconds')
 
 
-admin.site.register(User, UsersAdmin)
+class UserReviewAdmin(admin.ModelAdmin):
+    list_display = ('id', 'userid', 'reviewerid', 'rating')
+
+
+admin.site.register(Users, UsersAdmin)
 admin.site.register(UserInstrument, UserInstrumentAdmin)
 admin.site.register(UserGenre, UserGenreAdmin)
 admin.site.register(JamRequest, JamRequestAdmin)
