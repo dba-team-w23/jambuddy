@@ -18,25 +18,31 @@ class UserList(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+
 class UserInstrumentList(viewsets.ModelViewSet):
     queryset = UserInstrument.objects.all()
     serializer_class = UserInstrumentSerializer
+
 
 class UserDetail(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+
 class UserReviewList(viewsets.ModelViewSet):
     queryset = UserReview.objects.all()
     serializer_class = UserReviewSerializer
+
 
 class UserReviewDetail(viewsets.ModelViewSet):
     queryset = UserReview.objects.all()
     serializer_class = UserReviewSerializer
 
+
 class UserMediaList(viewsets.ModelViewSet):
     queryset = UserMedia.objects.all()
     serializer_class = UserMediaSerializer
+
 
 class UserMediaDetail(viewsets.ModelViewSet):
     queryset = UserMedia.objects.all()
