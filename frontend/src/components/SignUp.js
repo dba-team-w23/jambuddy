@@ -71,11 +71,14 @@ export default function SignUp() {
           id="lastName-textfield" 
           label="Last Name" 
           name="lastName"
-          variant="outlined" />
+          variant="outlined"
+          onChange={handleInput} 
+          />
         <TextField
           id="email-textfield"
           label="Email"
           name="email"
+          type="email"
           required
           variant="outlined"
           onChange={handleInput}
