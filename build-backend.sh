@@ -44,7 +44,7 @@ check_variables(){
 }
 
 check_backend_env_file
-check_variables "POSTGRES_HOST" "POSTGRES_USER" "POSTGRES_PASSWORD"
+check_variables "POSTGRES_HOST" "POSTGRES_USER" "POSTGRES_PASSWORD" "SECRET_KEY" "DEBUG"
 
 check_docker_is_running
 rebuild_project_container
