@@ -91,12 +91,12 @@ WSGI_APPLICATION = 'jamrequestmodule.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('POSTGRES_USER'), 
+        'NAME': env('POSTGRES_USER'),
         'USER': env('POSTGRES_USER'),
         'PASSWORD': env('POSTGRES_PASSWORD'),
         'HOST': env('POSTGRES_HOST'),
         'PORT':'5432'
-    }    
+    }
 }
 
 
@@ -149,6 +149,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 # this should be put at the end of the settings.py file
-CORS_ORIGIN_WHITELIST = [
-     'http://localhost:3000'
-]
+# CORS_ORIGIN_WHITELIST = [
+#      'http://localhost:3000'
+# ]
+
+CORS_ORIGIN_WHITELIST = ['*']
