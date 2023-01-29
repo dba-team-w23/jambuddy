@@ -43,7 +43,7 @@ export default function FormGrid() {
             <FileUpload />
         </Grid>
         <Grid item xs={12}>
-            <Button variant="contained">Sign Up</Button>
+            <Button variant="contained">Save Profile</Button>
         </Grid>
     </Grid>
   );

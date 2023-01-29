@@ -12,7 +12,6 @@ import Posts from './Posts';
 export default function SignIn() {
   const [signedIn, setSignedIn] = React.useState(false);
 
-
   return ( 
     <>
 
