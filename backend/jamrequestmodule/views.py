@@ -1,26 +1,46 @@
 # views.py
-from rest_framework import generics
-from .models import Instrument
-from .serializers import InstrumentSerializer
-from django.http import JsonResponse
 from datetime import datetime
+
 import pytz
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
-
-from django.shortcuts import render, get_object_or_404
 from jamrequestmodule.models import Instrument
+from rest_framework import generics, viewsets
+
+from .models import (Instrument, JamRequest, JamResponse, User, UserGenre,
+                     UserInstrument, UserMedia, UserReview, User)
+from .serializers import (InstrumentSerializer, UserMediaSerializer,
+                          UserReviewSerializer, UserInstrumentSerializer, UserSerializer)
 
 
-class InstrumentList(generics.ListCreateAPIView):
-    queryset = Instrument.objects.all()
-    serializer_class = InstrumentSerializer
+class UserList(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
-class InstrumentDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Instrument.objects.all()
-    serializer_class = InstrumentSerializer
+class UserInstrumentList(viewsets.ModelViewSet):
+    queryset = UserInstrument.objects.all()
+    serializer_class = UserInstrumentSerializer
 
+class UserDetail(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserReviewList(viewsets.ModelViewSet):
+    queryset = UserReview.objects.all()
+    serializer_class = UserReviewSerializer
+
+class UserReviewDetail(viewsets.ModelViewSet):
+    queryset = UserReview.objects.all()
+    serializer_class = UserReviewSerializer
+
+class UserMediaList(viewsets.ModelViewSet):
+    queryset = UserMedia.objects.all()
+    serializer_class = UserMediaSerializer
+
+class UserMediaDetail(viewsets.ModelViewSet):
+    queryset = UserMedia.objects.all()
+    serializer_class = UserMediaSerializer
 
 
 @csrf_exempt
