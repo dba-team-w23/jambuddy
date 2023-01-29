@@ -1,26 +1,108 @@
 # views.py
-from rest_framework import generics
-from .models import Instrument
-from .serializers import InstrumentSerializer
-from django.http import JsonResponse
 from datetime import datetime
+
 import pytz
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
-
-from django.shortcuts import render, get_object_or_404
 from jamrequestmodule.models import Instrument
+from rest_framework import generics, viewsets
+
+from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse, MusicGenre, UserGenre,
+                     UserInstrument, UserMedia, UserReview, Users)
+from .serializers import (ExperienceLevelSerializer, InstrumentSerializer, JamRequestSerializer,
+                    JamResponseSerializer, MusicGenreSerializer, UserGenreSerializer, UserInstrumentSerializer,
+                    UserMediaSerializer, UserReviewSerializer, UsersSerializer)
 
 
-class InstrumentList(generics.ListCreateAPIView):
+class UserList(viewsets.ModelViewSet):
+    queryset = Users.objects.all()
+    serializer_class = UsersSerializer
+
+class UserDetail(viewsets.ModelViewSet):
+    queryset = Users.objects.all()
+    serializer_class = UsersSerializer
+
+
+class ExperienceLevelList(viewsets.ModelViewSet):
+    queryset = ExperienceLevel.objects.all()
+    serializer_class = ExperienceLevelSerializer
+
+class ExperienceLevelDetail(viewsets.ModelViewSet):
+    queryset = ExperienceLevel.objects.all()
+    serializer_class = ExperienceLevelSerializer
+
+
+class InstrumentList(viewsets.ModelViewSet):
+    queryset = Instrument.objects.all()
+    serializer_class = InstrumentSerializer
+class InstrumentDetail(viewsets.ModelViewSet):
     queryset = Instrument.objects.all()
     serializer_class = InstrumentSerializer
 
-class InstrumentDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Instrument.objects.all()
-    serializer_class = InstrumentSerializer
 
+class JamRequestDetail(viewsets.ModelViewSet):
+    queryset = JamRequest.objects.all()
+    serializer_class = JamRequestSerializer
+
+class JamRequestList(viewsets.ModelViewSet):
+    queryset = JamRequest.objects.all()
+    serializer_class = JamRequestSerializer
+
+
+class JamResponseDetail(viewsets.ModelViewSet):
+    queryset = JamResponse.objects.all()
+    serializer_class = JamResponseSerializer
+
+class JamResponseList(viewsets.ModelViewSet):
+    queryset = JamResponse.objects.all()
+    serializer_class = JamResponseSerializer
+
+
+class MusicGenreList(viewsets.ModelViewSet):
+    queryset = MusicGenre.objects.all()
+    serializer_class = MusicGenreSerializer
+
+class MusicGenreDetail(viewsets.ModelViewSet):
+    queryset = MusicGenre.objects.all()
+    serializer_class = MusicGenreSerializer
+
+
+class UserGenreList(viewsets.ModelViewSet):
+    queryset = UserGenre.objects.all()
+    serializer_class = UserGenreSerializer
+
+class UserGenreDetail(viewsets.ModelViewSet):
+    queryset = UserGenre.objects.all()
+    serializer_class = UserGenreSerializer
+
+
+
+class UserInstrumentList(viewsets.ModelViewSet):
+    queryset = UserInstrument.objects.all()
+    serializer_class = UserInstrumentSerializer
+
+class UserInstrumentDetail(viewsets.ModelViewSet):
+    queryset = UserInstrument.objects.all()
+    serializer_class = UserInstrumentSerializer
+
+
+class UserMediaList(viewsets.ModelViewSet):
+    queryset = UserMedia.objects.all()
+    serializer_class = UserMediaSerializer
+
+class UserMediaDetail(viewsets.ModelViewSet):
+    queryset = UserMedia.objects.all()
+    serializer_class = UserMediaSerializer
+
+
+class UserReviewList(viewsets.ModelViewSet):
+    queryset = UserReview.objects.all()
+    serializer_class = UserReviewSerializer
+
+class UserReviewDetail(viewsets.ModelViewSet):
+    queryset = UserReview.objects.all()
+    serializer_class = UserReviewSerializer
 
 
 @csrf_exempt
