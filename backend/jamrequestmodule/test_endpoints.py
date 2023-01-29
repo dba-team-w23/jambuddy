@@ -230,3 +230,60 @@ class ExperienceLevelTests(APITestCase):
         response = self.client.delete(reverse('experiencelevel-detail', kwargs={'pk': experiencelevel.pk}))
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(ExperienceLevel.objects.count(), 0)
+
+class GetAllJamRequestsTest(APITestCase):
+
+    @staticmethod
+    def create_jamrequest(user="", instrument="", genre="", location="", exp_level="", status=""):
+        if user != "" and instrument != "" and genre != "" and location != "" and exp_level != "" and status != "":
+            JamRequest.objects.create(user=user, instrument=instrument, genre=genre, location=location, exp_level=exp_level, status=status)
+
+    def setUp(self):
+        # add test data
+        self.create_jamrequest("test user", "test instrument", "test genre", "test location", "test exp level", "test status")
+        self.create_jamrequest("test user 2", "test instrument 2", "test genre 2", "test location 2", "test exp level 2", "test status 2")
+        self.valid_payload = {
+            'user': "valid user",
+            'instrument': "valid instrument",
+            'genre': "valid genre",
+            'location': "valid location",
+            'exp_level': "valid exp level",
+            'status': "valid status"
+        }
+        self.invalid_payload = {
+            'user': "",
+            'instrument': "",
+            'genre': "",
+            'location': "",
+            'exp_level': "",
+            'status': ""
+        }
+
+    def test_get_all_jamrequests(self):
+        # get API response
+        response = self.client.get(reverse('jamrequest-list'))
+        # get data from db
+        jamrequests = JamRequest.objects.all()
+        serializer = JamRequestSerializer(jamrequests, many=True)
+        self.assertEqual(response.data, serializer.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_create_valid_jamrequest(self):
+        response = self.client.post(
+            reverse('jamrequest-list'),
+            data=self.valid_payload
+        )
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_create_invalid_jamrequest(self):
+        response = self.client.post(
+            reverse('jamrequest-list'),
+            data=self.invalid_payload
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_get_valid_single_jamrequest(self):
+        response = self.client.get(
+            reverse('jamrequest-detail', kwargs={'pk': 1})
+        )
+        jamrequest = JamRequest.objects.get(pk
