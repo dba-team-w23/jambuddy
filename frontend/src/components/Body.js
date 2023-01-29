@@ -8,20 +8,21 @@ import Search from './Search';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Error from './partials/Error';
-import { Switch } from '@mui/material'
+import Navbar from './partials/Navbar';
 import './css/Global.css';
 
 function Body() {
-    const [signedIn, setSignedIn] = React.useState(true);
+    const [signedIn, setSignedIn] = React.useState(false);
 
-  const handleChange = (e) => {
-    setSignedIn(e.target.checked);
+  const handleChange = () => {
+    setSignedIn(!signedIn);
   };
 
     return (
         <>
+        <Navbar signedIn={signedIn} setSignedIn={setSignedIn}/>
         <div className="signedIn">
-        <h2>Signed in?  <Switch checked={signedIn} onChange={handleChange} /></h2>
+        {signedIn ? <h2 onClick={handleChange}>Signed in</h2> : <h2 onClick={handleChange}>Signed out</h2>}
            
         <Routes>
             <Route path="/" element={signedIn ? <Posts /> : <SignIn />} />
@@ -32,7 +33,7 @@ function Body() {
             <Route path="jamrequests" element= { signedIn ? <Posts /> : "Sign in to see Jam Requests"} />
             <Route path="profile" element= { signedIn ? <Profile /> : "Sign in to create a profile"}/>
             <Route path="feed" element= { <Feed />} />
-            <Route path="logout" element={<SignIn />} />
+            <Route path="logout" onClick={handleChange} element={<SignIn />} />
             <Route path="*" element={<Error />} />
         </Routes>
         </div>

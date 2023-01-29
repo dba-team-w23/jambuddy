@@ -5,7 +5,7 @@ import Navbar from './components/partials/Navbar';
 function App() {
       return (
         <div>
-          <Navbar />
+          
           <Body />
         </div>
     );

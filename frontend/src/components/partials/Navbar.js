@@ -18,7 +18,8 @@ import './../css/Navbar.css'
 const pages = ['Profiles', 'Jam Requests'];
 const settings = ['Profile', 'Logout'];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar(props) {
+  const { signedIn, setSignedIn } = props;
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -36,6 +37,11 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const signOut = () => {
+    handleCloseUserMenu();
+    setSignedIn(false);
+  }
 
   return (
     <AppBar position="static">
@@ -129,10 +135,10 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          {signedIn && <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="" src="" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -151,17 +157,21 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <Button
-                key={setting}
-                onClick={handleCloseUserMenu}
+
+              <Button
+                key='Profile' 
+                onClick={handleCloseUserMenu} 
                 sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                <Link to={`/${setting}`}>{setting}</Link>
+                ><Link to='/profile'>Profile</Link>
+                </Button>
+              <Button
+                key='Logout' 
+                onClick={signOut} 
+                sx={{ my: 2, color: 'white', display: 'block' }}
+                ><Link to='/'>Logout</Link>
               </Button>
-              ))}
             </Menu>
-          </Box>
+          </Box>}
         </Toolbar>
       </Container>
     </AppBar>
