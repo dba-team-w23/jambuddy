@@ -50,17 +50,18 @@ export default function FormGrid() {
               label="Full Bio"
               id="longBio" />
         </Grid>
-        <Grid item xs={6}>
-            <Password id="pw1"/> 
-        </Grid>
-        <Grid item xs={6}>
-            <Password label="Repeat Password" id="pw2"/>
-        </Grid>
-        <Grid item xs={6}>
+
+          <Grid item xs={6}>
+              <Password id="pw1"/> 
+          </Grid>
+          
+
+          <Grid item xs={6}>
+              <Password label="Repeat Password" id="pw2"/>
+          </Grid>
             <FileUpload />
-        </Grid>
-        <Grid item xs={6}>
-            <Button variant="contained">Save Profile</Button>
+        <Grid item xs={12}>
+            <Button variant="contained" >Save Profile</Button>
         </Grid>
     </Grid>
   );

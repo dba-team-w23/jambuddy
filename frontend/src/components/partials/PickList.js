@@ -5,10 +5,10 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 export default function PickList(props) {
   const { label, list } = props;
-  console.log(list)
+
   return (
     <Autocomplete
-      id="object-select"
+      id={`${list}-select`}
       options={list}
       autoHighlight
       getOptionLabel={(option) => option.label}

@@ -23,7 +23,7 @@ const Photo = () => {
   return (
     <>
       <Button variant="contained" component="label">
-        Upload Photo
+        Photo
         <input hidden accept="image/*" multiple type="file" />
         <IconButton style={{color: "white"}} aria-label="upload picture" component="label">
         <input hidden accept="image/*" type="file" />
@@ -38,7 +38,7 @@ const Music = () => {
   return (
     <>
       <Button variant="contained" component="label">
-        Upload Audio
+        Audio
         <input hidden accept="image/*" multiple type="file" />
         <IconButton style={{color: "white"}} aria-label="upload audio" component="label">
         <input hidden accept="audio/*" type="file" />
