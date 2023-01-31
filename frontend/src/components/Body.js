@@ -12,7 +12,7 @@ import Navbar from './partials/Navbar';
 import './css/Global.css';
 
 function Body() {
-    const [signedIn, setSignedIn] = React.useState(false);
+    const [signedIn, setSignedIn] = React.useState(true);
 
   const handleChange = () => {
     setSignedIn(!signedIn);

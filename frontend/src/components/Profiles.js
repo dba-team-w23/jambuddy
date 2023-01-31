@@ -3,14 +3,15 @@ import ProfileCard from './partials/Card'
 import axios from "axios";
 import './css/Profiles.css'
 
-const baseURL = "https://dummyjson.com/users";
+const baseURL = "http://localhost:8000/api/users/";
 
 export default function Profiles(){
     const [profiles, setProfiles] = React.useState([]);
 
     const getData = async () => {
         const {data} = await axios.get(baseURL);
-        setProfiles(data.users);
+        const profiles = (data)
+        setProfiles(data);
     }
 
     React.useEffect(() => {
