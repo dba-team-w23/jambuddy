@@ -133,6 +133,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+API_PORT = env('API_PORT')
+API_HOST = env('API_HOST')
+
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
