@@ -1,12 +1,14 @@
 # views.py
-from datetime import datetime
-
 import pytz
+from datetime import datetime
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 from jamrequestmodule.models import Instrument
-from rest_framework import generics, viewsets
+from rest_framework import generics, viewsets, status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse, MusicGenre, UserGenre,
                      UserInstrument, UserMedia, UserReview, Users)
@@ -77,7 +79,6 @@ class UserGenreDetail(viewsets.ModelViewSet):
     serializer_class = UserGenreSerializer
 
 
-
 class UserInstrumentList(viewsets.ModelViewSet):
     queryset = UserInstrument.objects.all()
     serializer_class = UserInstrumentSerializer
@@ -126,8 +127,28 @@ def index(request):
     current_date = utc_time.strftime("%A %m %-Y")
 
     data = {
+            'page': "Welcome to the test page!",
             'utc_time': current_time,
             'utc_date': current_date,
         }
-
     return JsonResponse(data)
+
+
+@api_view(['GET'])
+def checkserver(request):
+    date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    message = 'Server check-in successful. Current time is: '
+    return Response(data=message + date, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def login_user(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+
+    if user is not None:
+        login(request, user)
+        return Response(data="Login success!", status=status.HTTP_200_OK)
+    else:
+        return Response(data="Login error!", status=status.HTTP_401_UNAUTHORIZED)
