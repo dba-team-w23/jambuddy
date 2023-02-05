@@ -1,6 +1,7 @@
 import React from "react";
 import ProfileCard from './partials/Card'  
 import axios from "axios";
+import { Grid } from '@mui/material';
 import './css/Profiles.css'
 
 const baseURL = "https://cors-anywhere.herokuapp.com/https://dbajamteam.pythonanywhere.com/api/users/";
@@ -10,7 +11,6 @@ export default function Profiles(){
 
     const getData = async () => {
         const {data} = await axios.get(baseURL);
-        const profiles = (data)
         setProfiles(data);
     }
 
@@ -19,12 +19,14 @@ export default function Profiles(){
         }, []);
 
     return(
-        <div className="profiles">
+    <Grid container spacing={2}>
         {profiles.map((profile, i) => (
-            <ProfileCard key={i} profile={profile} />
+            <Grid item key={i} xs={12} sm={6} md={4} lg={3}>
+                <ProfileCard profile={profile} />
+            </Grid>
         )
     )}
-    </div>
+    </Grid>
     )   
 
 }
