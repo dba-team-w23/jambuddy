@@ -41,15 +41,17 @@ urlpatterns = [
 
     path('api/usergenres/', views.UserGenreList.as_view(actions={'get': 'list', 'post': 'create'}), name='usergenre-list'),
     path('api/usergenres/<int:pk>/', views.UserGenreDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='usergenre-detail'),
-    
+
     path('api/userinstruments/', views.UserInstrumentList.as_view(actions={'get': 'list', 'post': 'create'}), name='userinstrument-list'),
     path('api/userinstruments/<int:pk>/', views.UserInstrumentDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='userinstrument-detail'),
 
     path('api/usermedia/', views.UserMediaList.as_view(actions={'get': 'list', 'post': 'create'}), name='usermedia-list'),
     path('api/usermedia/<int:pk>/', views.UserMediaDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='usermedia-detail'),
-    
+
     path('api/userreviews/', views.UserReviewList.as_view(actions={'get': 'list', 'post': 'create'}), name='userreview-list'),
     path('api/userreviews/<int:pk>/', views.UserReviewDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='userreview-detail'),
+
+    path('api/user-details/<int:pk>/', views.UserDetailsView.as_view(), name='user-details'),
 
     path("update_server/", views.update, name="update"),
     path('', views.index),

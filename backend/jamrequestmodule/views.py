@@ -1,20 +1,25 @@
 # views.py
-import pytz
 from datetime import datetime
+
+import pytz
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 from jamrequestmodule.models import Instrument
-from rest_framework import generics, viewsets, status
+from rest_framework import generics, status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse, MusicGenre, UserGenre,
-                     UserInstrument, UserMedia, UserReview, Users)
-from .serializers import (ExperienceLevelSerializer, InstrumentSerializer, JamRequestSerializer,
-                    JamResponseSerializer, MusicGenreSerializer, UserGenreSerializer, UserInstrumentSerializer,
-                    UserMediaSerializer, UserReviewSerializer, UsersSerializer)
+from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
+                     MusicGenre, UserGenre, UserInstrument, UserMedia,
+                     UserReview, Users)
+from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
+                          JamRequestSerializer, JamResponseSerializer,
+                          MusicGenreSerializer, UserGenreSerializer,
+                          UserInstrumentSerializer, UserMediaSerializer,
+                          UserReviewSerializer,
+                          UsersSerializer)
 
 
 class UserList(viewsets.ModelViewSet):
@@ -104,6 +109,32 @@ class UserReviewList(viewsets.ModelViewSet):
 class UserReviewDetail(viewsets.ModelViewSet):
     queryset = UserReview.objects.all()
     serializer_class = UserReviewSerializer
+
+
+class UserDetailsView(generics.RetrieveAPIView):
+    queryset = Users.objects.all()
+    serializer_class = UsersSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        user = self.get_object()
+        user_genres = UserGenre.objects.filter(userid=user).all()
+        user_instruments = UserInstrument.objects.filter(userid=user).all()
+        user_media = UserMedia.objects.filter(userid=user).all()
+        user_reviews = UserReview.objects.filter(userid=user).all()
+
+        user_serializer = UsersSerializer(user)
+        user_genres_serializer = UserGenreSerializer(user_genres, many=True)
+        user_instruments_serializer = UserInstrumentSerializer(user_instruments, many=True)
+        user_media_serializer = UserMediaSerializer(user_media, many=True)
+        user_reviews_serializer = UserReviewSerializer(user_reviews, many=True)
+
+        return Response({
+            'user': user_serializer.data,
+            'genres': user_genres_serializer.data,
+            'instruments': user_instruments_serializer.data,
+            'media': user_media_serializer.data,
+            'reviews': user_reviews_serializer.data
+        })
 
 
 @csrf_exempt
