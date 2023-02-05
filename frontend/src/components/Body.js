@@ -14,8 +14,8 @@ import './css/Global.css';
 export default function Body(props) {
     // const [signedIn, setSignedIn] = React.useState(props.signedIn);
     const [signedIn, setSignedIn] = React.useState(true);
-    // const [username, setUsername] = React.useState(props.username)
-    const [username, setUserId] = React.useState(5)
+    // const [username, setUsername] = React.useState(props.userId)
+    const [userId, setUserId] = React.useState(5)
    
     const handleChange = () => {
       setSignedIn(!signedIn);
@@ -25,7 +25,7 @@ export default function Body(props) {
         <>
         <Navbar signedIn={signedIn} setSignedIn={setSignedIn}/>
         <div className="signedIn">
-        {signedIn ? <h2 onClick={handleChange}>Signed in as {username}</h2> : <h2 onClick={handleChange}>Signed out</h2>}
+        {signedIn ? <h2 onClick={handleChange}>Signed in as {userId}</h2> : <h2 onClick={handleChange}>Signed out</h2>}
            
         <Routes>
             <Route path="/" element={signedIn ? <Posts /> : <SignIn />} />
@@ -34,7 +34,7 @@ export default function Body(props) {
             <Route path="search" element={<Search />} />
             <Route path="profiles" element= { signedIn ? <Profiles /> : "Sign in to see profiles"} />
             <Route path="jamrequests" element= { signedIn ? <Posts /> : "Sign in to see Jam Requests"} />
-            <Route path="profile" element= { signedIn ? <Profile /> : "Sign in to create a profile"}/>
+            <Route path="profile" element= { signedIn ? <Profile signedIn={signedIn} userId={userId} /> : "Sign in to create a profile"}/>
             <Route path="feed" element= { <Feed />} />
             <Route path="logout" onClick={handleChange} element={<SignIn />} />
             <Route path="*" element={<Error />} />
