@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jamrequestmodule',
-    'corsheaders',
+    # 'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django.middleware.common.CommonMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
+    # "corsheaders.middleware.CorsMiddleware",
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -162,3 +162,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # ]
 
 # CORS_ORIGIN_WHITELIST = ['*']
+
+CORS_ORIGIN_WHITELIST = [
+     'http://localhost:3000',
+     "https://jambuddy.vercel.app/",
+]
+
