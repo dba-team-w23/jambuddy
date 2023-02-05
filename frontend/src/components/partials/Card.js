@@ -4,11 +4,11 @@ import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { blue } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import '../css/Global.css'
 import {
   Card,
   CardContent,
@@ -21,20 +21,13 @@ const ExpandMore = styled((props) => {
   const { expand, setExpanded, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    "&.expanded": {
-      height: "100%",
-      position: "relative",
-      zIndex: 1,
-  },
   transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
   marginLeft: "auto",
   transition: theme.transitions.create("transform", {
     duration: theme.transitions.duration.shortest,
   }),
 }));
+
 
 export default function ProfileCard({ profile }) {
   const [expanded, setExpanded] = React.useState(false);
@@ -60,13 +53,9 @@ export default function ProfileCard({ profile }) {
   };
 
   return (
-    <Card >
+    <Card sx={{position: 'relative'}}>
       <CardHeader
-        avatar={
-          <Avatar aria-label="recipe">
-            {profile.fname[0]}
-          </Avatar>
-        }
+        avatar={<Avatar aria-label="recipe">{profile.fname[0]}</Avatar>}
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
@@ -94,7 +83,7 @@ export default function ProfileCard({ profile }) {
           <ShareIcon />
         </IconButton>
         <ExpandMore
-          className={'expanded' && ExpandMore}
+          className={"expanded" && ExpandMore}
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
@@ -103,28 +92,34 @@ export default function ProfileCard({ profile }) {
           <ExpandMoreIcon />
         </ExpandMore>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography h2>{profile.login}</Typography>
-          <Typography paragraph>
-            {`${profile.city}, ${profile.state}`}
-          </Typography>
-          <Typography paragraph>
-            At vero eos et accusamus et iusto odio dignissimos ducimus qui
-            blanditiis praesentium voluptatum deleniti atque corrupti quos
-            dolores et quas molestias excepturi sint occaecati cupiditate non
-            provident, similique sunt in culpa qui officia deserunt mollitia
-            animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis
-            est et expedita distinctio. Nam libero tempore, cum soluta nobis est
-            eligendi optio cumque nihil impedit quo minus id quod maxime placeat
-            facere possimus, omnis voluptas assumenda est, omnis dolor
-            repellendus. Temporibus autem quibusdam et aut officiis debitis aut
-            rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint
-            et molestiae non recusandae. Itaque earum rerum hic tenetur a
-            sapiente delectus, ut aut reiciendis voluptatibus maiores alias
-            consequatur aut perferendis doloribus asperiores repellat.
-          </Typography>
-        </CardContent>
+      <Collapse 
+        in={expanded} 
+        timeout="auto" 
+        unmountOnExit
+        className={`expandable-collapse ${expanded && 'expanded'}`}
+        >
+          <CardContent>
+            <Typography h2>{profile.login}</Typography>
+            <Typography paragraph>
+              {`${profile.city}, ${profile.state}`}
+            </Typography>
+            <Typography paragraph>
+              At vero eos et accusamus et iusto odio dignissimos ducimus qui
+              blanditiis praesentium voluptatum deleniti atque corrupti quos
+              dolores et quas molestias excepturi sint occaecati cupiditate non
+              provident, similique sunt in culpa qui officia deserunt mollitia
+              animi, id est laborum et dolorum fuga. Et harum quidem rerum
+              facilis est et expedita distinctio. Nam libero tempore, cum soluta
+              nobis est eligendi optio cumque nihil impedit quo minus id quod
+              maxime placeat facere possimus, omnis voluptas assumenda est,
+              omnis dolor repellendus. Temporibus autem quibusdam et aut
+              officiis debitis aut rerum necessitatibus saepe eveniet ut et
+              voluptates repudiandae sint et molestiae non recusandae. Itaque
+              earum rerum hic tenetur a sapiente delectus, ut aut reiciendis
+              voluptatibus maiores alias consequatur aut perferendis doloribus
+              asperiores repellat.
+            </Typography>
+          </CardContent>
       </Collapse>
     </Card>
   );

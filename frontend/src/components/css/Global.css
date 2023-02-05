@@ -3,6 +3,23 @@
     width: 90%;
     margin: 0 auto;
 }
-header {
+/* header {
     position: fixed;
-}
+} */
+.expandable-collapse {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .expandable-collapse.expanded {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    z-index: 10;
+  }
+ 
