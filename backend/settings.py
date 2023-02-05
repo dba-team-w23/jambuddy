@@ -31,7 +31,6 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'dbajamteam.pythonanywhere.com']  # this is the host that Docker uses to run application
 INSTALLED_APPS = [
-    # 'corsheaders',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,7 +49,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
 ]
 CORS_ALLOW_ALL_ORIGINS = True
@@ -134,6 +132,9 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+API_PORT = env('API_PORT')
+API_HOST = env('API_HOST')
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [

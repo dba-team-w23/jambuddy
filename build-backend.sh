@@ -1,17 +1,4 @@
 #!/usr/bin/env bash
-check_docker_is_running() {
-    if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
-        sc query "docker" | grep "STATE"
-    else
-        launchctl list | grep docker
-    fi
-}
-
-rebuild_project_container() {
-  docker-compose down --remove-orphans
-  docker-compose build
-  docker-compose up -d
-}
 
 check_backend_env_file(){
     if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
@@ -43,8 +30,21 @@ check_variables(){
     done
 }
 
-check_backend_env_file
-check_variables "POSTGRES_HOST" "POSTGRES_USER" "POSTGRES_PASSWORD" "SECRET_KEY" "DEBUG"
+check_docker_is_running() {
+    if [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
+        sc query "docker" | grep "STATE"
+    else
+        launchctl list | grep docker
+    fi
+}
 
+rebuild_project_container() {
+  docker-compose down --remove-orphans
+  docker-compose build
+  docker-compose up -d
+}
+
+check_backend_env_file
+check_variables "POSTGRES_HOST" "POSTGRES_USER" "POSTGRES_PASSWORD" "SECRET_KEY" "DEBUG" "API_PORT" "API_HOST"
 check_docker_is_running
 rebuild_project_container
