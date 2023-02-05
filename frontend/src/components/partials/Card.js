@@ -9,6 +9,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import '../css/Global.css'
+import Modal from './Modal'
 import {
   Card,
   CardContent,
@@ -82,7 +83,7 @@ export default function ProfileCard({ profile }) {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        <ExpandMore
+        {/* <ExpandMore
           className={"expanded" && ExpandMore}
           expand={expanded}
           onClick={handleExpandClick}
@@ -90,9 +91,10 @@ export default function ProfileCard({ profile }) {
           aria-label="show more"
         >
           <ExpandMoreIcon />
-        </ExpandMore>
+        </ExpandMore> */}
       </CardActions>
-      <Collapse 
+      <Modal {...profile} />
+      {/* <Collapse 
         in={expanded} 
         timeout="auto" 
         unmountOnExit
@@ -120,7 +122,7 @@ export default function ProfileCard({ profile }) {
               asperiores repellat.
             </Typography>
           </CardContent>
-      </Collapse>
+      </Collapse> */}
     </Card>
   );
 }
