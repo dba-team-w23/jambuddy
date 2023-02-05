@@ -29,7 +29,9 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'dbajamteam.pythonanywhere.com']  # this is the host that Docker uses to run application
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'dbajamteam.pythonanywhere.com'] 
+# pythonanywhere.com is the host that Docker uses to run application
+
 INSTALLED_APPS = [
     'rest_framework',
     'django.contrib.admin',

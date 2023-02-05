@@ -53,5 +53,8 @@ urlpatterns = [
 
     path("update_server/", views.update, name="update"),
     path('', views.index),
+
+    path('api/login_user', views.login_user, name='login'),
+    path('checkserver', views.checkserver),
 ]
 
