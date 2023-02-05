@@ -29,7 +29,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'dbajamteam.pythonanywhere.com'] 
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'dbajamteam.pythonanywhere.com']
 # pythonanywhere.com is the host that Docker uses to run application
 
 INSTALLED_APPS = [
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jamrequestmodule',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django.middleware.common.CommonMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -159,4 +161,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #      'http://localhost:3000'
 # ]
 
-CORS_ORIGIN_WHITELIST = ['*']
+# CORS_ORIGIN_WHITELIST = ['*']
