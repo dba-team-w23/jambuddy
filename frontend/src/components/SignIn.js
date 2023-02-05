@@ -23,7 +23,6 @@ export default function SignIn() {
     }
   );
   const [showPassword, setShowPassword] = React.useState(false);
-  const [password, setPassword] = React.useState("");
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -35,7 +34,6 @@ export default function SignIn() {
     const name = evt.target.name;
     const value = evt.target.value;
     setFormInput({ [name]: value });
-    console.log(name, value);
   };
 
   const handlePassword = (evt) => {
@@ -49,7 +47,6 @@ export default function SignIn() {
     evt.preventDefault();
     let data = { username: formInput.username, password: formInput.password };
     console.log(data);
-    alert(`Submitting userName ${data.username} ${data.password}`);
 
     fetch(baseURL, {
       method: "POST",
