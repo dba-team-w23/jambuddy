@@ -11,20 +11,21 @@ import Error from './partials/Error';
 import Navbar from './partials/Navbar';
 import './css/Global.css';
 
-function Body() {
+export default function Body(props) {
+    // const [signedIn, setSignedIn] = React.useState(props.signedIn);
     const [signedIn, setSignedIn] = React.useState(true);
-
-  const handleChange = () => {
-    setSignedIn(!signedIn);
-
-    
-  };
+    // const [username, setUsername] = React.useState(props.username)
+    const [username, setUserId] = React.useState(5)
+   
+    const handleChange = () => {
+      setSignedIn(!signedIn);
+    };
 
     return (
         <>
         <Navbar signedIn={signedIn} setSignedIn={setSignedIn}/>
         <div className="signedIn">
-        {signedIn ? <h2 onClick={handleChange}>Signed in</h2> : <h2 onClick={handleChange}>Signed out</h2>}
+        {signedIn ? <h2 onClick={handleChange}>Signed in as {username}</h2> : <h2 onClick={handleChange}>Signed out</h2>}
            
         <Routes>
             <Route path="/" element={signedIn ? <Posts /> : <SignIn />} />
@@ -42,4 +43,3 @@ function Body() {
         </>
     )
 }
-export default Body;

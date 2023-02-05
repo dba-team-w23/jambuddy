@@ -41,7 +41,7 @@ export default function SignIn() {
     setFormInput({ password: evt.target.value});
   };
 
-  const baseURL = "http://localhost:8000/api/users/";
+  const baseURL = "https://dbajamteam.pythonanywhere.com/api/users/";
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -62,7 +62,7 @@ export default function SignIn() {
 
   return (
     <>
-      <p>{signedIn ? "Signed In" : "Signed Out"}</p>
+      {/* <p>{signedIn ? "Signed In" : "Signed Out"}</p> */}
       {!signedIn && (
         <Box
           className="signIn"

@@ -3,7 +3,7 @@ import React from "react";
 import ControlledAccordions from "./Accordion";
 import './css/Posts.css'
 
-const baseURL = "https://dummyjson.com/posts";
+const baseURL = "https://dbajamteam.pythonanywhere.com/api/jamrequests/";
 
 export default function Posts(){   
     const [posts, setPosts] = React.useState([]);

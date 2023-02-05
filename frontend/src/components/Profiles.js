@@ -3,7 +3,7 @@ import ProfileCard from './partials/Card'
 import axios from "axios";
 import './css/Profiles.css'
 
-const baseURL = "http://localhost:8000/api/users/";
+const baseURL = "https://cors-anywhere.herokuapp.com/https://dbajamteam.pythonanywhere.com/api/users/";
 
 export default function Profiles(){
     const [profiles, setProfiles] = React.useState([]);

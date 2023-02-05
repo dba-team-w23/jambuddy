@@ -55,7 +55,7 @@ export default function ProfileCard({profile}) {
       <CardMedia
         component="img"
         height="194"
-        image={profile.photo}
+        image={profile.photo ? profile.photo : `https://source.unsplash.com/random/?face&${Math.random()}`}
         alt={profile.fname}
       />
       <CardContent>

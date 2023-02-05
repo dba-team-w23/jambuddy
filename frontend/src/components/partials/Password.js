@@ -22,8 +22,8 @@ export default function Password({handlePassword}) {
         console.log(password)
 
     }
-    console.log(password)
-    handlePassword(password)
+    // console.log(password)
+    // handlePassword(password)
 
     return(
         <FormControl variant="outlined">
