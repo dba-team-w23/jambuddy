@@ -1,10 +1,10 @@
 import React from "react";
-import ProfileCard from './partials/Card'  
+import ProfileCard from './partials/Card'
 import axios from "axios";
 import { Grid } from '@mui/material';
 import './css/Profiles.css'
 
-const baseURL = "https://cors-anywhere.herokuapp.com/https://dbajamteam.pythonanywhere.com/api/users/";
+const baseURL = "https://dbajamteam.pythonanywhere.com/api/users/";
 
 export default function Profiles(){
     const [profiles, setProfiles] = React.useState([]);
@@ -27,7 +27,7 @@ export default function Profiles(){
         )
     )}
     </Grid>
-    )   
+    )
 
 }
 // const tempProfiles = [

@@ -8,8 +8,8 @@ import FormGrid from "./partials/FormGrid";
 export default function EditProfile(props) {
   const { signedIn, userId } = props;
   console.log("userId", userId)
-  
-  const baseURL = `https://cors-anywhere.herokuapp.com/https://dbajamteam.pythonanywhere.com/api/users/${userId}/`;
+
+  const baseURL = `https://dbajamteam.pythonanywhere.com/api/users/${userId}/`;
   let user = {}
 
   const getProfile = async () => {
@@ -17,14 +17,14 @@ export default function EditProfile(props) {
     user=data;
     console.log(data)
   }
-  
+
   React.useEffect(() => {
       getProfile();
       }, []);
 
   return (
     <>
-    
+
     <Box
       component="form"
       sx={{ "& > :not(style)": { m: "0 auto", width: "50ch" } }}
