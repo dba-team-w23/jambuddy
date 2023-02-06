@@ -177,6 +177,7 @@ def checkserver(request):
     return Response(data=message + date, status=status.HTTP_200_OK)
 
 
+@csrf_exempt
 @api_view(['POST'])
 def login_user(request):
     username = request.data.get('username', None)
@@ -189,9 +190,13 @@ def login_user(request):
 
     if user is not None:
         # login(request, user)
-        return Response({"user_id":user.pk, "status":1}, status=status.HTTP_200_OK)
+        response = Response({"user_id":user.pk, "status":1}, status=status.HTTP_200_OK)
+        response["Access-Control-Allow-Headers"] = "content-type"
+        return response
     else:
-        return Response({"status":0}, status=status.HTTP_200_OK)
+        response = Response({"status":0}, status=status.HTTP_200_OK)
+        response["Access-Control-Allow-Headers"] = "content-type"
+        return response
 
 
 @api_view(['POST'])
@@ -211,11 +216,11 @@ def create_user(request):
     user.last_name = lname
     user.username = username
     user.save()
-    
+
     street = request.POST['street']
     city = request.POST['city']
     state = request.POST['state']
     zip = request.POST['zip']
     phone = request.POST['phone']
-    
+
 
