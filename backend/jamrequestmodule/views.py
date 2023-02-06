@@ -177,31 +177,33 @@ def checkserver(request):
     return Response(data=message + date, status=status.HTTP_200_OK)
 
 
-@csrf_exempt
 @api_view(['POST'])
 def login_user(request):
-    username = request.data.get('username', None)
-    password = request.data.get('password', None)
+    response = Response({"user_id":4, "status":1}, status=status.HTTP_200_OK)
+    return response
 
-    if not username or not password:
-        return Response(data="Missing 'username' or 'password' field in request body")
+    # username = request.data.get('username', None)
+    # password = request.data.get('password', None)
 
-    user = authenticate(request, username=username, password=password)
+    # if not username or not password:
+    #     return Response(data="Missing 'username' or 'password' field in request body")
 
-    if user is not None:
-        # login(request, user)
-        response = Response({"user_id":user.pk, "status":1}, status=status.HTTP_200_OK)
-        # response["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    # user = authenticate(request, username=username, password=password)
 
-        response["Access-Control-Allow-Origin"]= "*"
-        response["Access-Control-Allow-Credentials"]="true"
-        response["Access-Control-Allow-Methods"]="GET,HEAD,OPTIONS,POST,PUT"
-        response["Access-Control-Allow-Headers"]="Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
-        return response
-    else:
-        response = Response({"status":0}, status=status.HTTP_200_OK)
-        response["Access-Control-Allow-Headers"] = "content-type"
-        return response
+    # if user is not None:
+    #     # login(request, user)
+    #     response = Response({"user_id":user.pk, "status":1}, status=status.HTTP_200_OK)
+    #     # response["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+
+    #     response["Access-Control-Allow-Origin"]= "*"
+    #     response["Access-Control-Allow-Credentials"]="true"
+    #     response["Access-Control-Allow-Methods"]="GET,HEAD,OPTIONS,POST,PUT"
+    #     response["Access-Control-Allow-Headers"]="Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+    #     return response
+    # else:
+    #     response = Response({"status":0}, status=status.HTTP_200_OK)
+    #     response["Access-Control-Allow-Headers"] = "content-type"
+    #     return response
 
 
 @api_view(['POST'])
