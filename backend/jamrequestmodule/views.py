@@ -3,6 +3,7 @@ from datetime import datetime
 
 import pytz
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
@@ -10,7 +11,6 @@ from jamrequestmodule.models import Instrument
 from rest_framework import generics, status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, UserGenre, UserInstrument, UserMedia,
                      UserReview, Users)
@@ -156,6 +156,7 @@ def update(request):
     else:
         return HttpResponse("Couldn't update the code on PythonAnywhere")
 
+
 def index(request):
     utc_time = datetime.now(pytz.utc)
     current_time = utc_time.strftime("%-I:%S %p")
@@ -176,14 +177,55 @@ def checkserver(request):
     return Response(data=message + date, status=status.HTTP_200_OK)
 
 
+@csrf_exempt
 @api_view(['POST'])
 def login_user(request):
-    username = request.POST['username']
-    password = request.POST['password']
+    username = request.data.get('username', None)
+    password = request.data.get('password', None)
+
+    if not username or not password:
+        return Response(data="Missing 'username' or 'password' field in request body")
+
     user = authenticate(request, username=username, password=password)
 
     if user is not None:
-        login(request, user)
-        return Response(data="Login success!", status=status.HTTP_200_OK)
+        # login(request, user)
+        response = Response({"user_id":user.pk, "status":1}, status=status.HTTP_200_OK)
+        response["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+
+        # response["Access-Control-Allow-Origin", "*");
+        # response["Access-Control-Allow-Credentials", "true");
+        # response["Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+        # response["Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+        return response
     else:
-        return Response(data="Login error!", status=status.HTTP_401_UNAUTHORIZED)
+        response = Response({"status":0}, status=status.HTTP_200_OK)
+        response["Access-Control-Allow-Headers"] = "content-type"
+        return response
+
+
+@api_view(['POST'])
+def logout_user(request):
+    logout(request)
+
+
+@api_view(['POST'])
+def create_user(request):
+    fname = request.POST['firstname']
+    email = request.POST['email']
+    password = request.POST['password']
+    user = User.objects.create_user(fname, email, password)
+
+    lname = request.POST['lastname']
+    username = request.POST['username']
+    user.last_name = lname
+    user.username = username
+    user.save()
+
+    street = request.POST['street']
+    city = request.POST['city']
+    state = request.POST['state']
+    zip = request.POST['zip']
+    phone = request.POST['phone']
+
+
