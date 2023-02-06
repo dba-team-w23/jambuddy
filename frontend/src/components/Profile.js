@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import axios from 'axios';
 import "./css/SignIn.css";
-import Card from './partials/Card';
+import Card from './partials/ProfileCard';
 import FormGrid from "./partials/FormGrid";
 
 export default function EditProfile(props) {
@@ -39,22 +39,3 @@ export default function EditProfile(props) {
   );
 }
 
-// temporary user
-const profile = {
-  "id": 5,
-  "username": "jsmith",
-  "password": "123",
-  "lastlogin": "2023-01-29T05:00:00Z",
-  "fname": "John",
-  "lname": "Smith",
-  "street": "123 Main St",
-  "street2": null,
-  "city": "Anytown",
-  "state": "CA",
-  "zipcode": "12345",
-  "phone": "555-555-5555",
-  "email": "john.smith@example.com",
-  "photo": null,
-  "note": null,
-  "created": "2023-01-29T05:00:00Z"
-  }
