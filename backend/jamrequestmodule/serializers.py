@@ -55,6 +55,12 @@ class UserInstrumentSerializer(serializers.ModelSerializer):
         db_table = UserInstrument
         fields = '__all__'
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['instrument'] = InstrumentSerializer(instance.instrumentid).data
+        representation['exp_level'] = ExperienceLevelSerializer(instance.exp_level).data
+        return representation
+
 class UserMediaSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserMedia
