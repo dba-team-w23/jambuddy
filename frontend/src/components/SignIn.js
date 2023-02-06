@@ -41,7 +41,7 @@ export default function SignIn() {
     setFormInput({ password: evt.target.value});
   };
 
-  const baseURL = "https://dbajamteam.pythonanywhere.com/api/users/";
+  const baseURL = "https://dbajamteam.pythonanywhere.com/api/login_user";
 
   const handleSubmit = (evt) => {
     evt.preventDefault();

@@ -10,7 +10,7 @@ from jamrequestmodule.models import Instrument
 from rest_framework import generics, status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+from django.core.exceptions import KeyError
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, UserGenre, UserInstrument, UserMedia,
                      UserReview, Users)
@@ -178,10 +178,13 @@ def checkserver(request):
 
 @api_view(['POST'])
 def login_user(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(request, username=username, password=password)
+    try:
+        username = request.POST['username']
+        password = request.POST['password']
+    except KeyError as e:
+        return Response(data=f"Missing key error: {str(e)}", status=status.HTTP_400_BAD_REQUEST)
 
+    user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
         return Response(data="Login success!", status=status.HTTP_200_OK)
