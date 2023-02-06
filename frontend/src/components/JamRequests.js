@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import BasicCard from './partials/BasicCard'
+import Grid from '@mui/material/Grid'
 
 const baseURL = 'https://dbajamteam.pythonanywhere.com/api/jamrequests/'
 
@@ -14,20 +16,17 @@ export default function JamRequests() {
     React.useEffect(() => {
         getData();
         }, []);
-console.log(jamRequests)
 
   return (
-    jamRequests.map((request, i) => {
+    <Grid container spacing={3}>
+        {jamRequests.map((request, i) => {
         return (
-            <div key={i}>
-                <p>{request.location}</p>
-                <p>{request.status}</p>
-                <p>{request.created}</p>
-                <p>{request.instrumentid}</p>
-                <p>{request.genreid}</p>
-            </div>
+        <Grid item key={i} xs={3}>
+            <BasicCard request={request} />
+        </Grid>
         )
-    })
+          })}
+    </Grid>
     
   )
 }

@@ -62,7 +62,6 @@ export default function SignIn() {
 
   return (
     <>
-      {/* <p>{signedIn ? "Signed In" : "Signed Out"}</p> */}
       {!signedIn && (
         <Box
           className="signIn"
