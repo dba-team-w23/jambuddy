@@ -1,9 +1,5 @@
 import React from "react";
-<<<<<<< Updated upstream
-import ProfileCard from './partials/Card'
-=======
-import ProfileCard from './partials/ProfileCard'  
->>>>>>> Stashed changes
+import ProfileCard from './partials/ProfileCard'
 import axios from "axios";
 import { Grid } from '@mui/material';
 import './css/Profiles.css'
