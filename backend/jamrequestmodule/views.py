@@ -191,12 +191,12 @@ def login_user(request):
     if user is not None:
         # login(request, user)
         response = Response({"user_id":user.pk, "status":1}, status=status.HTTP_200_OK)
-        response["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+        # response["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization"
 
-        # response["Access-Control-Allow-Origin", "*");
-        # response["Access-Control-Allow-Credentials", "true");
-        # response["Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-        # response["Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+        response["Access-Control-Allow-Origin"]= "*"
+        response["Access-Control-Allow-Credentials"]="true"
+        response["Access-Control-Allow-Methods"]="GET,HEAD,OPTIONS,POST,PUT"
+        response["Access-Control-Allow-Headers"]="Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
         return response
     else:
         response = Response({"status":0}, status=status.HTTP_200_OK)
