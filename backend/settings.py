@@ -165,7 +165,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # CORS_ORIGIN_WHITELIST = ['*']
 
 CORS_ORIGIN_WHITELIST = [
+     "http://jambuddy.vercel.app/",
      "https://jambuddy.vercel.app/",
      'http://localhost:3000',
+     'https://localhost:3000',
 ]
 
