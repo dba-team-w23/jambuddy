@@ -17,6 +17,7 @@ export default function Posts(){
         getData();
         }, []);
 
+        console.log(posts)
     return(
         <ControlledAccordions className="post-container" posts={posts} />
     )
