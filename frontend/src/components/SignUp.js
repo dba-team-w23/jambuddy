@@ -25,7 +25,7 @@ export default function SignUp() {
 
     let data = { formInput };
 
-    fetch("/api/users", { /* need api route*/
+    fetch("https://dbajamteam.pythonanywhere.com/api/users", { 
       method: "POST",
       body: JSON.stringify(data),
       headers: {

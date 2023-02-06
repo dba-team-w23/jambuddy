@@ -7,6 +7,7 @@ import FormGrid from "./partials/FormGrid";
 
 export default function EditProfile(props) {
   const { signedIn, userId } = props;
+  console.log("userid: ", userId)
   const [user, setUser] = React.useState({})
 
   const baseURL = `https://dbajamteam.pythonanywhere.com/api/users/${userId}/`;
@@ -20,7 +21,7 @@ export default function EditProfile(props) {
   React.useEffect(() => {
       getProfile();
       }, []);
-
+      console.log("user: ", user)
   return (
     <>
     <Box
