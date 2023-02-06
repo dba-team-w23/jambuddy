@@ -29,7 +29,15 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'dbajamteam.pythonanywhere.com']
+ALLOWED_HOSTS = [
+    '0.0.0.0',
+    'localhost',
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'http://dbajamteam.pythonanywhere.com',
+    'https://dbajamteam.pythonanywhere.com',
+    'dbajamteam.pythonanywhere.com'
+    ]
 # pythonanywhere.com is the host that Docker uses to run application
 
 INSTALLED_APPS = [
@@ -164,10 +172,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # CORS_ORIGIN_WHITELIST = ['*']
 
+CORS_ORIGIN_ALLOW_ALL = False
+
 CORS_ORIGIN_WHITELIST = [
      "http://jambuddy.vercel.app/",
      "https://jambuddy.vercel.app/",
      'http://localhost:3000',
      'https://localhost:3000',
+     'http://localhost:8000',
+     'https://localhost:8000',
 ]
 
