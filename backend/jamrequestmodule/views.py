@@ -117,24 +117,28 @@ class UserDetailsView(generics.RetrieveAPIView):
 
     def retrieve(self, request, *args, **kwargs):
         user = self.get_object()
-        user_genres = UserGenre.objects.filter(userid=user).all()
         user_instruments = UserInstrument.objects.filter(userid=user).all()
         user_media = UserMedia.objects.filter(userid=user).all()
         user_reviews = UserReview.objects.filter(userid=user).all()
+        user_genres = UserGenre.objects.filter(userid=user).all()
 
         user_serializer = UsersSerializer(user)
-        user_genres_serializer = UserGenreSerializer(user_genres, many=True)
         user_instruments_serializer = UserInstrumentSerializer(user_instruments, many=True)
         user_media_serializer = UserMediaSerializer(user_media, many=True)
         user_reviews_serializer = UserReviewSerializer(user_reviews, many=True)
 
+        genres = [user_genre.genreid for user_genre in user_genres]
+        serialized_genres = MusicGenreSerializer(genres, many=True)
+
+
         return Response({
             'user': user_serializer.data,
-            'genres': user_genres_serializer.data,
+            'genres': serialized_genres.data,
             'instruments': user_instruments_serializer.data,
             'media': user_media_serializer.data,
             'reviews': user_reviews_serializer.data
         })
+
 
 
 @csrf_exempt
