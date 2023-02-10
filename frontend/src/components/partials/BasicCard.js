@@ -13,24 +13,21 @@ const bull = (
   </Box>
 );
 
-export default function BasicCard({request}) {
+export default function BasicCard({request, instrument, genre, contact}) {
 
   return (
     <Card >
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            {request.location}
+        <Typography variant="h5" color="text.secondary" gutterBottom>
+            {request.location} -- {request.status}
           </Typography>
-          <Typography variant="h5" component="div">
-            {request.status}
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            {request.userid}
+          <Typography variant="body2" color="text.secondary">
+            contact name: {contact}
           </Typography>
           <Typography variant="body2">
-            {request.instrumentid}
+            We need: {instrument}
             <br />
-            {request.genreid}
+            We play {genre}
           </Typography>
       </CardContent>
 

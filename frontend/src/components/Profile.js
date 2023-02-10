@@ -11,9 +11,9 @@ export default function EditProfile(props) {
   const [user, setUser] = React.useState({})
 
   const baseURL = `https://dbajamteam.pythonanywhere.com/api/users/${userId}/`;
+  console.log(baseURL)
 
   const getProfile = async () => {
-
     const {data} = await axios.get(baseURL);
     setUser(data);
   }
@@ -21,7 +21,7 @@ export default function EditProfile(props) {
   React.useEffect(() => {
       getProfile();
       }, []);
-      console.log("user: ", user)
+
   return (
     <>
     <Box
