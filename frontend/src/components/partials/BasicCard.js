@@ -25,12 +25,11 @@ export default function BasicCard({request, instrument, genre, contact}) {
             contact name: {contact}
           </Typography>
           <Typography variant="body2">
-            We need: {instrument}
+            We need:{instrument}
             <br />
-            We play {genre}
+            We play: {genre}
           </Typography>
       </CardContent>
-
     </Card>
   );
 }

@@ -5,29 +5,32 @@ import "./css/SignIn.css";
 import ProfileCard from './partials/ProfileCard';
 import FormGrid from "./partials/FormGrid";
 
+
 export default function EditProfile(props) {
   const { signedIn, userId } = props;
-  console.log("userid: ", userId)
-  const [user, setUser] = React.useState({})
-
+  const [user, setUser] = React.useState([])
+  const [isLoading, setIsLoading] = React.useState(true)
+  
   const baseURL = `https://dbajamteam.pythonanywhere.com/api/users/${userId}/`;
-  console.log(baseURL)
-
-  const getProfile = async () => {
-    const {data} = await axios.get(baseURL);
-    setUser(data);
-  }
 
   React.useEffect(() => {
-      getProfile();
-      }, []);
+    async function getData() {
+      const userData = await axios.get(baseURL);
+      setUser(userData.data);
+      setIsLoading(false);
+    }
+    getData();
 
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
     <Box
       component="form"
       sx={{ "& > :not(style)": { m: "0 auto", width: "50ch" } }}
-
       noValidate
       autoComplete="off"
     >

@@ -33,7 +33,7 @@ export default function JamRequests() {
       setUsers(userData.data)
     }
     getData()}, []);
-    console.log(instruments)
+
   return (
     <Grid container spacing={3}>
         {jamRequests.map((request, i) => {
