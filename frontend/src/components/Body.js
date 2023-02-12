@@ -10,7 +10,6 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Error from './partials/Error';
 import Navbar from './partials/Navbar';
-import CSRFTOKEN from "./partials/csrftoken";
 import './css/Global.css';
 
 export default function Body(props) {
@@ -25,8 +24,8 @@ export default function Body(props) {
     const handleChange = () => {
       setSignedIn(!signedIn);
     };
-    const corsHeader = 'https://cors-anywhere.herokuapp.com/'
-    const userURL = `${corsHeader}https://dbajamteam.pythonanywhere.com/api/users/${userId}`;
+    
+    const userURL = `https://dbajamteam.pythonanywhere.com/api/users/${userId}`;
 
     React.useEffect(() => {
         async function getUser() {
