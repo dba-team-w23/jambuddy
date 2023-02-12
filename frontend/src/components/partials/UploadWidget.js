@@ -1,42 +1,28 @@
-
 import React, { Component } from "react";
+import Button from "@mui/material/Button";
 
-    class CloudinaryUploadWidget extends Component {
-      componentDidMount() {
-        cloudName: 'dg2srlhdk';
-        uploadPreset: 'zodoubq4';
+export default function CloudinaryUploadWidget() {
+  const showWidget = (e) => {
+    e.preventDefault();
+    const widget = window.cloudinary.createUploadWidget(
+      {
+        cloudName: "dg2srlhdk",
+        uploadPreset: "zodoubq4",
+      },
+      (error, result) => {
+        if (!error) {
+          console.log(result);
+        }
+      },
+      
+    );
+    console.log(widget)
+    widget.open();
+  };
+
+  return (
     
-        var myWidget = window.cloudinary.createUploadWidget(
-          {
-            cloudName: cloudName,
-            uploadPreset: uploadPreset
-          },
-          (error, result) => {
-            if (!error && result && result.event === "success") {
-              console.log("Done! Here is the image info: ", result.info);
-              document
-                .getElementById("uploadedimage")
-                .setAttribute("src", result.info.secure_url);
-            }
-          }
-        );
-        document.getElementById("upload_widget").addEventListener(
-          "click",
-          function () {
-            myWidget.open();
-          },
-          false
-        );
-      }
-    
-      render() {
-        return (
-          <button id="upload_widget" className="cloudinary-button">
-            Upload
-          </button>
-        );
-      }
-    }
-    
-    export default CloudinaryUploadWidget;
-    
+      <Button variant="contained" onClick={showWidget}>Upload Image</Button>
+      
+  );
+}

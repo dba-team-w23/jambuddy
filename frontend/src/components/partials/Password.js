@@ -19,9 +19,7 @@ export default function Password({label}) {
     };
     const handleChange = (event) => {
         setPassword(event.target.value)
-        console.log("asfd")
-        console.log(password)
-
+        
     }
 
 

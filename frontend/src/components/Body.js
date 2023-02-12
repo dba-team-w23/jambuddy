@@ -18,8 +18,8 @@ export default function Body(props) {
     // const [username, setUsername] = React.useState(props.userId)
     const [userId, setUserId] = React.useState(5)
     const [user, setUser] = React.useState({})
-    const [isLoading, setIsLoading] = React.useState(true);
-    
+    const [isLoading, setIsLoading] = React.useState(false);
+    const tempUser = {id: 5, username: "dkeech", password: "123", lastlogin: "", fname: "Dan", lname: "Keech", city: "Raleigh", state: "NC", email: "ddkeech@gmail.com", photo: "https://res.cloudinary.com/dg2srlhdk/image/upload/v1676075859/dan_k_cmwsxh.png"}
 
     const handleChange = () => {
       setSignedIn(!signedIn);
@@ -27,15 +27,15 @@ export default function Body(props) {
     
     const userURL = `https://dbajamteam.pythonanywhere.com/api/users/${userId}`;
 
-    React.useEffect(() => {
-        async function getUser() {
-          const userData = await axios.get(userURL);
-          setUser(userData.data);
-          setIsLoading(false);
-        }
-        getUser();
+    // React.useEffect(() => {
+    //     async function getUser() {
+    //       const userData = await axios.get(userURL);
+    //       setUser(userData.data);
+    //       setIsLoading(false);
+    //     }
+    //     getUser();
     
-      }, []);
+    //   }, []);
 
       if (isLoading) return <div>Loading...</div>;
 

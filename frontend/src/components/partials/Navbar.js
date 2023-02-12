@@ -21,7 +21,7 @@ function ResponsiveAppBar(props) {
   const { signedIn, setSignedIn } = props;
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [profilePhoto, setProfilePhoto] = React.useState(`https://source.unsplash.com/random/?face&${Math.random()}`)
+  const [profilePhoto, setProfilePhoto] = React.useState(`https://res.cloudinary.com/dg2srlhdk/image/upload/v1676075859/dan_k_cmwsxh.png`)
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);

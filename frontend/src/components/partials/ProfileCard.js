@@ -28,7 +28,7 @@ export default function ProfileCard({ profile }) {
   return (
     <Card sx={{position: 'relative'}}>
       <CardHeader
-        avatar={<Avatar aria-label="recipe">{profile.fname[0]}</Avatar>}
+        avatar={<Avatar aria-label="recipe"><img src={photoURL} width={40} height={40} /></Avatar>}
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
