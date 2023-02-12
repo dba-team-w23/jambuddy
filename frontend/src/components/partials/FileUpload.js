@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import {Image, AudioFile} from "@mui/icons-material";
 import {Grid} from "@mui/material";
+import UploadWidget from "./UploadWidget";
 export default function FileUpload({ iconType, ...props }) {
   const icon = iconType;
   return (
@@ -11,9 +12,9 @@ export default function FileUpload({ iconType, ...props }) {
 
     <Photo />
     </Grid>
-    <Grid  item xs={6} >
+    {/* <Grid  item xs={6} >
     <Music />
-    </Grid>
+    </Grid> */}
 
     </>
   );
@@ -22,11 +23,11 @@ export default function FileUpload({ iconType, ...props }) {
 const Photo = () => {
   return (
     <>
-      <Button variant="contained" component="label">
+      <Button id="upload_widget" className="cloudinary-button" variant="contained" component="label">
         Photo
-        <input hidden accept="image/*" multiple type="file" />
+       
         <IconButton style={{color: "white"}} aria-label="upload picture" component="label">
-        <input hidden accept="image/*" type="file" />
+        
         <Image />
       </IconButton>
       </Button>
@@ -34,18 +35,18 @@ const Photo = () => {
     </>
   );
 };
-const Music = () => {
-  return (
-    <>
-      <Button variant="contained" component="label">
-        Audio
-        <input hidden accept="image/*" multiple type="file" />
-        <IconButton style={{color: "white"}} aria-label="upload audio" component="label">
-        <input hidden accept="audio/*" type="file" />
-        <AudioFile />
-      </IconButton>
-      </Button>
+// const Music = () => {
+//   return (
+//     <>
+//       <Button variant="contained" component="label">
+//         Audio
+//         <input hidden accept="image/*" multiple type="file" />
+//         <IconButton style={{color: "white"}} aria-label="upload audio" component="label">
+//         <input hidden accept="audio/*" type="file" />
+//         <AudioFile />
+//       </IconButton>
+//       </Button>
 
-    </>
-  );
-}
+//     </>
+//   );
+// }

@@ -6,7 +6,6 @@ import IconButton from '@mui/material/IconButton';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -22,6 +21,7 @@ function ResponsiveAppBar(props) {
   const { signedIn, setSignedIn } = props;
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [profilePhoto, setProfilePhoto] = React.useState(`https://source.unsplash.com/random/?face&${Math.random()}`)
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -42,6 +42,7 @@ function ResponsiveAppBar(props) {
     handleCloseUserMenu();
     setSignedIn(false);
   }
+
 
   return (
     <AppBar position="static">
@@ -73,9 +74,8 @@ function ResponsiveAppBar(props) {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="inherit"             
             >
-              <MenuIcon />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -138,7 +138,7 @@ function ResponsiveAppBar(props) {
           {signedIn && <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="" src="" />
+                <Avatar alt="" src={profilePhoto} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -157,7 +157,6 @@ function ResponsiveAppBar(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-
               <Button
                 key='Profile' 
                 onClick={handleCloseUserMenu} 

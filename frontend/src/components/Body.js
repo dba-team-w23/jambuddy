@@ -1,11 +1,11 @@
 import React from "react";
+import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Feed from './Feed';
 import Profile from './Profile';
 import JamRequests from './JamRequests';
 import NewJamRequest from './NewJamRequest';
 import Profiles from './Profiles';
-import Search from './Search';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Error from './partials/Error';
@@ -17,14 +17,31 @@ export default function Body(props) {
     const [signedIn, setSignedIn] = React.useState(true);
     // const [username, setUsername] = React.useState(props.userId)
     const [userId, setUserId] = React.useState(5)
+    const [user, setUser] = React.useState({})
+    const [isLoading, setIsLoading] = React.useState(true);
+    
 
     const handleChange = () => {
       setSignedIn(!signedIn);
     };
+    const corsHeader = 'https://cors-anywhere.herokuapp.com/'
+    const userURL = `${corsHeader}https://dbajamteam.pythonanywhere.com/api/users/${userId}`;
+
+    React.useEffect(() => {
+        async function getUser() {
+          const userData = await axios.get(userURL);
+          setUser(userData.data);
+          setIsLoading(false);
+        }
+        getUser();
+    
+      }, []);
+
+      if (isLoading) return <div>Loading...</div>;
 
     return (
         <>
-        <Navbar signedIn={signedIn} setSignedIn={setSignedIn}/>
+        <Navbar signedIn={signedIn} setSignedIn={setSignedIn} />
         <div className="signedIn">
         {signedIn ? <h2 onClick={handleChange}>Signed in as {userId}</h2> : <h2 onClick={handleChange}>Signed out</h2>}
 
@@ -32,7 +49,6 @@ export default function Body(props) {
             <Route path="/" element={signedIn ? <JamRequests /> : <SignIn />} />
             <Route path="signin" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
-            <Route path="search" element={<Search />} />
             <Route path="profiles" element= { signedIn ? <Profiles /> : "Sign in to see profiles"} />
             <Route path="jamrequests" element= { signedIn ? <JamRequests /> : "Sign in to see Jam Requests"} />
             <Route path="newjamrequest" element= { signedIn ? <NewJamRequest /> : "Sign in to see Jam Requests"} />

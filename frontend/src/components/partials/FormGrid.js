@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import Password from "./Password";
 import PickList from "./PickList";
 import Multiline from "./Multiline";
-import FileUpload from "./FileUpload";
+import UploadWidget from "./UploadWidget";
 import { Grid, TextField } from '@mui/material';
 
 export default function FormGrid() {
@@ -51,14 +51,14 @@ export default function FormGrid() {
         </Grid>
 
           <Grid item xs={6}>
-              <Password id="pw1"/> 
+              <Password label="Password" id="pw1"/> 
           </Grid>
-          
-
           <Grid item xs={6}>
               <Password label="Repeat Password" id="pw2"/>
           </Grid>
-            <FileUpload />
+
+          <UploadWidget />
+          
         <Grid item xs={12}>
             <Button variant="contained" >Save Profile</Button>
         </Grid>
