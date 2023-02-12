@@ -174,18 +174,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # CORS_ORIGIN_ALLOW_ALL = False
 
-CORS_ORIGIN_WHITELIST = [
-     "http://jambuddy.vercel.app",
-     "https://jambuddy.vercel.app",
-     'http://localhost:3000',
-     'https://localhost:3000',
-     'http://localhost:8000',
-     'https://localhost:8000',
-]
+# CORS_ORIGIN_WHITELIST = [
+#      "http://jambuddy.vercel.app",
+#      "https://jambuddy.vercel.app",
+#      'http://localhost:3000',
+#      'https://localhost:3000',
+#      'http://localhost:8000',
+#      'https://localhost:8000',
+# ]
 
-CORS_ORIGIN_REGEX_WHITELIST = (
-    r'^(https?://)?(www\.)?(jambuddy\.vercel\.app|localhost:3000)\.*$'
-)
+# CORS_ORIGIN_REGEX_WHITELIST = (
+#     r'^(https?://)?(www\.)?(jambuddy\.vercel\.app|localhost:3000)\.*$'
+# )
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
