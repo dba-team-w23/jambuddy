@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import "./css/SignIn.css";
 import Password from "./partials/Password";
+import axios from "axios";
 
 export default function SignUp() {
   const [formInput, setFormInput] = React.useReducer(
@@ -25,16 +26,13 @@ export default function SignUp() {
 
     let data = { formInput };
 
-    fetch("https://dbajamteam.pythonanywhere.com/api/users", { 
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
+    axios.post("https://dbajamteam.pythonanywhere.com/api/users", data, {
+    mode: "no-cors"
+    }).then(response => {
+      console.log("success",JSON.stringify(response))
+    }).catch(error => {
+      console.error("Error: "+error)
     })
-      .then((response) => response.json())
-      .then((response) => console.log("success", JSON.stringify(response)))
-      .catch((error) => console.error("Error:", error));
   };
 
   const handleInput = (evt) => {
@@ -67,12 +65,12 @@ export default function SignUp() {
           variant="outlined"
           onChange={handleInput}
         />
-        <TextField 
-          id="lastName-textfield" 
-          label="Last Name" 
+        <TextField
+          id="lastName-textfield"
+          label="Last Name"
           name="lastName"
           variant="outlined"
-          onChange={handleInput} 
+          onChange={handleInput}
           />
         <TextField
           id="email-textfield"
@@ -83,11 +81,11 @@ export default function SignUp() {
           variant="outlined"
           onChange={handleInput}
         />
-        <TextField 
-          id="outlined-basic-4" 
-          label="User Name" 
+        <TextField
+          id="outlined-basic-4"
+          label="User Name"
           name="userName"
-          variant="outlined" 
+          variant="outlined"
           onChange={handleInput}
           />
         <Password />

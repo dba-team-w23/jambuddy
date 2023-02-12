@@ -14,7 +14,11 @@ form.addEventListener("submit", (e) => {
 
     fetch(url, {
       method: "POST",
-      body: formData
+      body: formData,
+      init: {
+        mode: 'no-cors',
+    },
+      mode: 'no-cors'
     })
       .then((response) => {
         return response.text();
