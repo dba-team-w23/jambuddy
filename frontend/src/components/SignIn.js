@@ -12,6 +12,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { getCookie } from "./partials/csrftoken";
 import axios from "axios";
 
 export default function SignIn() {
@@ -53,7 +54,8 @@ export default function SignIn() {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-CSRFToken": getCookie("csrftoken"),
       },
       mode: 'no-cors',
     })

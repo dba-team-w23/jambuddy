@@ -10,6 +10,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Error from './partials/Error';
 import Navbar from './partials/Navbar';
+import CSRFTOKEN from "./partials/csrftoken";
 import './css/Global.css';
 
 export default function Body(props) {

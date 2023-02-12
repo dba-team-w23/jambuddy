@@ -1,14 +1,13 @@
 import React from 'react'
 
 const csrftoken = getCookie('csrftoken')
-console.log(csrftoken)
 
 const CSRFTOKEN = () => {
     return (
         <input type="hidden" name="csrfmiddlewaretoken" value={csrftoken} />
     )
 }
-function getCookie(name) {
+export function getCookie(name) {
     let cookieValue = null;
 
     if(document.cookie && document.cookie !== ''){
