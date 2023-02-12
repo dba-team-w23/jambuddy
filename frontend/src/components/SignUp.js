@@ -26,10 +26,12 @@ export default function SignUp() {
 
     let data = { formInput };
 
-    axios.post("https://dbajamteam.pythonanywhere.com/api/users", data).then(response => {
-    console.log("success",JSON.stringify(response))
+    axios.post("https://dbajamteam.pythonanywhere.com/api/users", data, {
+    mode: "no-cors"
+    }).then(response => {
+      console.log("success",JSON.stringify(response))
     }).catch(error => {
-        console.error("Error: "+error)
+      console.error("Error: "+error)
     })
   };
 

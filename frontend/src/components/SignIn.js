@@ -54,7 +54,8 @@ export default function SignIn() {
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json"
-      }
+      },
+      mode: 'no-cors',
     })
       .then((response) => response.json())
       .then((response) => console.log("success", JSON.stringify(response)))

@@ -5,6 +5,7 @@ import App from './App';
 import axios from 'axios';
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.mode = 'no-cors';
 
 const root = createRoot( document.getElementById('root'));
 
