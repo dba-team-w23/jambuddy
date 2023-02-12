@@ -10,7 +10,7 @@ COPY requirements.txt .
 # install dependencies from requirements.txt
 RUN pip install -r requirements.txt
 
-RUN pip install django django-cors-headers
+# RUN pip install django django-cors-headers
 
 
 # copy from the current directory of the Dockerfile to /api in the image
