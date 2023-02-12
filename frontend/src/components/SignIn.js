@@ -12,6 +12,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import axios from "axios";
 
 export default function SignIn() {
   const [signedIn, setSignedIn] = React.useState(false);
@@ -48,12 +49,12 @@ export default function SignIn() {
     let data = { username: formInput.username, password: formInput.password };
     console.log(data);
 
-    fetch(baseURL, {
+    axios(baseURL, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     })
       .then((response) => response.json())
       .then((response) => console.log("success", JSON.stringify(response)))
