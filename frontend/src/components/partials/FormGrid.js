@@ -4,15 +4,6 @@ import PickList from "./PickList";
 import Multiline from "./Multiline";
 import UploadWidget from "./UploadWidget";
 import { Grid, TextField } from "@mui/material";
-//cloudinary
-import {
-  CloudinaryContext,
-  Image,
-  Transformation,
-  Video,
-} from "cloudinary-react";
-
-// end cloudinary
 
 export default function FormGrid() {
   return (
@@ -65,9 +56,9 @@ export default function FormGrid() {
       <Grid item xs={6}>
         <Password label="Repeat Password" id="pw2" />
       </Grid>
-      <Grid item xs={6}>
+
         <UploadWidget />
-      </Grid>
+
 
       <Grid item xs={12}>
         <Button variant="contained">Save Profile</Button>
