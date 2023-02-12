@@ -25,9 +25,9 @@ export default function Password({label}) {
 
     return(
         <FormControl variant="outlined">
-        <InputLabel htmlFor={`outlined-adornment-password`}>{passwordLabel}</InputLabel>
+        <InputLabel htmlFor={`outlined-adornment-${passwordLabel[0]}`}>{passwordLabel}</InputLabel>
         <OutlinedInput
-            id={`outlined-adornment-password`}
+            id={`outlined-adornment-${passwordLabel[0]}`}
             label={passwordLabel}
             type={showPassword ? 'text' : 'password'}
             name="password"
