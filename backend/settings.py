@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jamrequestmodule',
-    'corsheaders',
+    # 'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -58,9 +58,9 @@ MIDDLEWARE = [
     # StackOverflow suggests this is an issue with dependencies (Django and CorsHeaders mismatch)
     # Both within, and outside of, the VirtualEnv, Django and CorsHeaders are both the most up-to-date versions: which per the docs are compatible
     # Whyyyyy is this happening???
-    'corsheaders.middleware.CorsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    "jamrequestmodule.middleware.CorsMiddleware",
+    # "jamrequestmodule.middleware.CorsMiddleware",
 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -193,17 +193,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #     r'^(https?://)?(www\.)?(jambuddy\.vercel\.app|localhost:3000)\.*$'
 # )
 
-CORS_ALLOWED_ORIGINS = [
-     "http://jambuddy.vercel.app",
-     "https://jambuddy.vercel.app",
-     "http://jambuddy.vercel.app/",
-     "https://jambuddy.vercel.app/",
-     'http://localhost:3000',
-     'https://localhost:3000',
-     'http://localhost:8000',
-     'https://localhost:8000',
-]
+# CORS_ALLOWED_ORIGINS = [
+#      "http://jambuddy.vercel.app",
+#      "https://jambuddy.vercel.app",
+#      "http://jambuddy.vercel.app/",
+#      "https://jambuddy.vercel.app/",
+#      'http://localhost:3000',
+#      'https://localhost:3000',
+#      'http://localhost:8000',
+#      'https://localhost:8000',
+# ]
 
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ALLOW_CREDENTIALS = True
 
