@@ -19,18 +19,18 @@ export default function JamRequests() {
 
     useEffect(() => {
     async function getData() {
-      const [jamData, instrumentData, genreData, levelData, userData] = await Promise.all([
-        axios.get(jamApi),
-        axios.get(instrumentApi),
-        axios.get(genreApi),
-        axios.get(levelApi),
-        axios.get(usersApi)
-      ])
-      setJamRequests(jamData.data)
-      setInstruments(instrumentData.data)
-      setGenres(genreData.data)
-      setLevels(levelData.data)
-      setUsers(userData.data)
+      const [jamResponse, instrumentResponse, genreResponse, levelResponse, userResponse] = await Promise.all(
+        [jamApi, instrumentApi, genreApi, levelApi, usersApi].map(url =>
+          fetch(url).then(res => res.json())
+        )
+      );
+      setJamRequests(jamResponse);
+      setInstruments(instrumentResponse);
+      setGenres(genreResponse);
+      setLevels(levelResponse);
+      setUsers(userResponse);
+      console.log(jamResponse)
+      console.log(instrumentResponse)
     }
     getData()}, []);
 
