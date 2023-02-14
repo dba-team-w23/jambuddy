@@ -36,7 +36,8 @@ ALLOWED_HOSTS = [
     'http://localhost:8000',
     'http://dbajamteam.pythonanywhere.com',
     'https://dbajamteam.pythonanywhere.com',
-    'dbajamteam.pythonanywhere.com'
+    'dbajamteam.pythonanywhere.com',
+    'sea-turtle-app-zggz6.ondigitalocean.app',
     ]
 # pythonanywhere.com is the host that Docker uses to run application
 
