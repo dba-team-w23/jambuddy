@@ -13,6 +13,7 @@ exceptiongroup==1.1.0
 factory-boy==3.2.1
 Faker==16.6.0
 gitdb==4.0.10
+Gunicorn==19.9.0
 GitPython==3.1.30
 iniconfig==2.0.0
 packaging==23.0
