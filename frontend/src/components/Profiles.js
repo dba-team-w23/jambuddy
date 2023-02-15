@@ -4,7 +4,9 @@ import axios from "axios";
 import { Grid } from '@mui/material';
 import './css/Profiles.css'
 
-const baseURL = "https://dbajamteam.pythonanywhere.com/api/users/";
+// const apiRoot = 'http://localhost:8000'
+const apiRoot = 'https://sea-turtle-app-zggz6.ondigitalocean.app/'
+const baseURL = `${apiRoot}/api/users/`
 
 export default function Profiles(){
     const [profiles, setProfiles] = React.useState(tempProfiles);
@@ -28,7 +30,6 @@ export default function Profiles(){
     )}
     </Grid>
     )
-
 }
 
 const tempProfiles = [

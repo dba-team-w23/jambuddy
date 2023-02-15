@@ -25,7 +25,7 @@ export default function Body(props) {
       setSignedIn(!signedIn);
     };
     
-    const userURL = `https://dbajamteam.pythonanywhere.com/api/users/${userId}`;
+    const userURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/${userId}`;
 
     // React.useEffect(() => {
     //     async function getUser() {

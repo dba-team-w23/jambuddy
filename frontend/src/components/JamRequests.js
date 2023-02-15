@@ -4,11 +4,14 @@ import axios from 'axios'
 import BasicCard from './partials/BasicCard'
 import Grid from '@mui/material/Grid'
 
-const jamApi = 'https://dbajamteam.pythonanywhere.com/api/jamrequests/'
-const instrumentApi = 'https://dbajamteam.pythonanywhere.com/api/instruments/'
-const genreApi = 'https://dbajamteam.pythonanywhere.com/api/musicgenres/'
-const levelApi = 'https://dbajamteam.pythonanywhere.com/api/experiencelevels/'
-const usersApi = 'https://dbajamteam.pythonanywhere.com/api/users/'
+// const apiRoot = 'http://localhost:8000'
+const apiRoot = 'https://sea-turtle-app-zggz6.ondigitalocean.app'
+
+const jamApi = `${apiRoot}/api/jamrequests/`
+const instrumentApi = `${apiRoot}/api/instruments/`
+const genreApi = `${apiRoot}/api/musicgenres/`
+const levelApi = `${apiRoot}/api/experiencelevels/`
+const usersApi = `${apiRoot}/api/users/`
 
 export default function JamRequests() {
     const [jamRequests, setJamRequests] = React.useState([])

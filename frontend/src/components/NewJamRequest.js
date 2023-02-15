@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const BASE_URL = "https://dbajamteam.pythonanywhere.com/api/";
+const BASE_URL = "https://sea-turtle-app-zggz6.ondigitalocean.app/api/";
 
 const JamRequestForm = () => {
   const [instruments, setInstruments] = useState([]);

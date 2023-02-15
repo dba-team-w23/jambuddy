@@ -10,7 +10,7 @@ export default function EditProfile(props) {
   const [user, setUser] = React.useState({})
   const [isLoading, setIsLoading] = React.useState(false)
   
-  const baseURL = `https://dbajamteam.pythonanywhere.com/api/users/${userId}/`;
+  const baseURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/${userId}/`;
   const tempUser = {id: 5, username: "dkeech", password: "123", lastlogin: "", fname: "Dan", lname: "Keech", city: "Raleigh", state: "NC", email: "ddkeech@gmail.com", photo: "https://res.cloudinary.com/dg2srlhdk/image/upload/v1676075859/dan_k_cmwsxh.png"}
 
 
