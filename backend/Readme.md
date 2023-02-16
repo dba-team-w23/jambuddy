@@ -23,5 +23,4 @@ The following URLs API endpoints should be active on both local development (`lo
 -api/usermedia/<int:pk>/:GET (all) and POST actions
 -api/userreviews/: GET (singular), PUT, and DELETE actions
 -api/userreviews/<int:pk>/:GET (all) and POST actions
--update_server/: Update action (Not working currently, trying to hook up with GitHub for auto-deploy)
 ```

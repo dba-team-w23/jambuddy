@@ -140,21 +140,39 @@ class UserDetailsView(generics.RetrieveAPIView):
         })
 
 
+@api_view(('GET',))
+def getUserGenres(request, user_id):
+    user_genres = UserGenre.objects.filter(userid=user_id).all()
+    genres = [user_genre.genreid for user_genre in user_genres]
+    ser_genres = MusicGenreSerializer(genres, many=True)
+    return Response({
+        'genres': ser_genres.data
+    })
 
-@csrf_exempt
-def update(request):
-    if request.method == "POST":
-        '''
-        pass the path of the diectory where your project will be
-        stored on PythonAnywhere in the git.Repo() as parameter.
-        Here the name of my directory is "test.pythonanywhere.com"
-        '''
-        repo = git.Repo("dbajamteam.pythonanywhere.com/")
-        origin = repo.remotes.origin
-        origin.pull()
-        return HttpResponse("Updated code on PythonAnywhere")
-    else:
-        return HttpResponse("Couldn't update the code on PythonAnywhere")
+@api_view(('GET',))
+def getUserInstruments(request, user_id):
+    user_instruments = UserInstrument.objects.filter(userid=user_id).all()
+    instruments = [user_instrument.instrumentid for user_instrument in user_instruments]
+    ser_instruments = InstrumentSerializer(instruments, many=True)
+    return Response({
+        'instruments': ser_instruments.data
+    })
+
+@api_view(('GET',))
+def getUserMedia(request, user_id):
+    user_media = UserMedia.objects.filter(userid=user_id).all()
+    ser_media = UserMediaSerializer(user_media, many=True)
+    return Response({
+        'media': ser_media.data
+    })
+
+@api_view(('GET',))
+def getUserReviews(request, user_id):
+    user_reviews = UserReview.objects.filter(userid=user_id).all()
+    ser_reviews = UserReviewSerializer(user_reviews, many=True)
+    return Response({
+        'reviews': ser_reviews.data
+    })
 
 
 def index(request):
@@ -179,55 +197,26 @@ def checkserver(request):
 
 @api_view(['POST'])
 def login_user(request):
-    response = Response({"user_id":4, "status":1}, status=status.HTTP_200_OK)
-    return response
+    username = request.data.get('username', None)
+    password = request.data.get('password', None)
 
-    # username = request.data.get('username', None)
-    # password = request.data.get('password', None)
+    user = authenticate(request, username=username, password=password)
 
-    # if not username or not password:
-    #     return Response(data="Missing 'username' or 'password' field in request body")
+    if user is not None and user.is_authenticated:
+        login(request, user)
+        response = Response({"user_id":user.pk, "status":1}, status=status.HTTP_200_OK)
+        response["Access-Control-Allow-Origin"]= "*"
+        response["Access-Control-Allow-Credentials"]="true"
+        response["Access-Control-Allow-Methods"]="GET,HEAD,OPTIONS,POST,PUT"
+        response["Access-Control-Allow-Headers"]="Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
 
-    # user = authenticate(request, username=username, password=password)
-
-    # if user is not None:
-    #     # login(request, user)
-    #     response = Response({"user_id":user.pk, "status":1}, status=status.HTTP_200_OK)
-    #     # response["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-
-    #     response["Access-Control-Allow-Origin"]= "*"
-    #     response["Access-Control-Allow-Credentials"]="true"
-    #     response["Access-Control-Allow-Methods"]="GET,HEAD,OPTIONS,POST,PUT"
-    #     response["Access-Control-Allow-Headers"]="Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
-    #     return response
-    # else:
-    #     response = Response({"status":0}, status=status.HTTP_200_OK)
-    #     response["Access-Control-Allow-Headers"] = "content-type"
-    #     return response
+        return response
+    else:
+        response = Response({"status":0}, status=status.HTTP_200_OK)
+        response["Access-Control-Allow-Headers"] = "content-type"
+        return response
 
 
 @api_view(['POST'])
 def logout_user(request):
     logout(request)
-
-
-@api_view(['POST'])
-def create_user(request):
-    fname = request.POST['firstname']
-    email = request.POST['email']
-    password = request.POST['password']
-    user = User.objects.create_user(fname, email, password)
-
-    lname = request.POST['lastname']
-    username = request.POST['username']
-    user.last_name = lname
-    user.username = username
-    user.save()
-
-    street = request.POST['street']
-    city = request.POST['city']
-    state = request.POST['state']
-    zip = request.POST['zip']
-    phone = request.POST['phone']
-
-
