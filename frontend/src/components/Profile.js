@@ -16,14 +16,13 @@ export default function EditProfile(props) {
     async function getData() {
       const userData = await fetch(baseURL).then(res => res.json())
       setUser(userData);
-      console.log(user)
       setIsLoading(false);
 }
     getData();
   }, []);
 
   if (isLoading) {
-    return <div>Loading Profile.js before return...</div>;
+    return <div>Loading...</div>;
   }
   return (
     <>
@@ -38,7 +37,7 @@ export default function EditProfile(props) {
       <FormGrid style={{ margin: "0 auto"}} />
     </Box>
     ) : (
-      <div>Loading in Profile.js...</div>
+      <div>Loading...</div>
     )
 }
     </>

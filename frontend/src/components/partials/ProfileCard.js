@@ -11,12 +11,10 @@ import Modal from './Modal'
 import { Card,CardContent, CardHeader, IconButton } from "@mui/material";
 
 export default function ProfileCard({ profile }) {
-  console.log("profile", profile)
   //temp photo
   const [photoURL, setPhotoURL] = React.useState(
     `https://source.unsplash.com/random/?face&${Math.random()}`
   );
-
 
   return (
     <Card sx={{position: 'relative'}}>

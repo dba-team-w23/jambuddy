@@ -3,7 +3,6 @@ import ProfileCard from './partials/ProfileCard'
 import { Grid } from '@mui/material';
 import './css/Profiles.css'
 
-// const apiRoot = 'http://localhost:8000'
 const apiRoot = 'https://sea-turtle-app-zggz6.ondigitalocean.app'
 const baseURL = `${apiRoot}/api/users/`
 
@@ -17,10 +16,7 @@ export default function Profiles(){
     React.useEffect(() => {
         getData();
         }, []);
-    React.useEffect(() => {
-        console.log("profiles: ", profiles)
-        console.log("profiles.length: ", profiles.length)
-    })
+
     return(
         <div>
        {profiles.length > 0 ? (     
@@ -31,7 +27,7 @@ export default function Profiles(){
                 </Grid>
             )
         )}
-        </Grid>
+        </Grid>         
        ) : (
               <div className="loading">Loading profiles...</div>
        )}
