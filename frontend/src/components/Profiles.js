@@ -11,7 +11,7 @@ export default function Profiles(){
     const [profiles, setProfiles] = React.useState([]);
 
     const getData = async () => {
-        const [data] = await fetch(baseURL).then(response => response.json())
+        const data = await fetch(baseURL).then(response => response.json())
         setProfiles(data);
     }
     React.useEffect(() => {
