@@ -175,22 +175,6 @@ def getUserReviews(request, user_id):
     })
 
 
-@csrf_exempt
-def update(request):
-    if request.method == "POST":
-        '''
-        pass the path of the diectory where your project will be
-        stored on PythonAnywhere in the git.Repo() as parameter.
-        Here the name of my directory is "test.pythonanywhere.com"
-        '''
-        repo = git.Repo("dbajamteam.pythonanywhere.com/")
-        origin = repo.remotes.origin
-        origin.pull()
-        return HttpResponse("Updated code on PythonAnywhere")
-    else:
-        return HttpResponse("Couldn't update the code on PythonAnywhere")
-
-
 def index(request):
     utc_time = datetime.now(pytz.utc)
     current_time = utc_time.strftime("%-I:%S %p")
@@ -221,7 +205,6 @@ def login_user(request):
     if user is not None and user.is_authenticated:
         login(request, user)
         response = Response({"user_id":user.pk, "status":1}, status=status.HTTP_200_OK)
-        # response["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization"
         response["Access-Control-Allow-Origin"]= "*"
         response["Access-Control-Allow-Credentials"]="true"
         response["Access-Control-Allow-Methods"]="GET,HEAD,OPTIONS,POST,PUT"
