@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Feed from './Feed';
 import Profile from './Profile';
@@ -25,17 +24,19 @@ export default function Body(props) {
       setSignedIn(!signedIn);
     };
     
-    const userURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/${userId}`;
+    const userURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/${userId}/`;
 
-    // React.useEffect(() => {
-    //     async function getUser() {
-    //       const userData = await axios.get(userURL);
-    //       setUser(userData.data);
-    //       setIsLoading(false);
-    //     }
-    //     getUser();
+    React.useEffect(() => {
+        async function getUser() {
+          const userData = await fetch(userURL).then(res=>res.json())
+          console.log("userData:", userData)
+          setUser(userData);
+          setIsLoading(false);
+
+        }
+        getUser();
     
-    //   }, []);
+      }, []);
 
       if (isLoading) return <div>Loading...</div>;
 
@@ -43,7 +44,7 @@ export default function Body(props) {
         <>
         <Navbar signedIn={signedIn} setSignedIn={setSignedIn} />
         <div className="signedIn">
-        {signedIn ? <h2 onClick={handleChange}>Signed in as {userId}</h2> : <h2 onClick={handleChange}>Signed out</h2>}
+        {signedIn ? <h2 onClick={handleChange}>Signed in as {user.username}</h2> : <h2 onClick={handleChange}>Signed out</h2>}
 
         <Routes>
             <Route path="/" element={signedIn ? <JamRequests /> : <SignIn />} />

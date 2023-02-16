@@ -50,21 +50,29 @@ export default function SignIn() {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     let data = { username: formInput.username, password: formInput.password };
-    console.log(data);
 
-    axios(baseURL, {
+    fetch(baseURL, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
         "X-CSRFToken": getCookie("csrftoken"),
       },
-      mode: 'no-cors',
+
     })
-      .then((response) => response.json())
+      // .then((response) => response.json())
+      .then((response) => {
+        if(!response.ok) {
+          throw new Error("Network response was not ok")
+        }
+        return response.json()
+      })
       .then((response) => console.log("success", JSON.stringify(response)))
-      .catch((error) => console.error("Error:", error));
-  };
+      .catch((error) => {
+        console.error("Error:", error)
+        console.log("response obj: ", error.response)
+      });
+  }
 
   return (
     <>

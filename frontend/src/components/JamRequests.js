@@ -1,6 +1,5 @@
 import React from 'react'
 import { useEffect } from 'react'
-import axios from 'axios'
 import BasicCard from './partials/BasicCard'
 import Grid from '@mui/material/Grid'
 
@@ -32,8 +31,6 @@ export default function JamRequests() {
       setGenres(genreResponse);
       setLevels(levelResponse);
       setUsers(userResponse);
-      console.log(jamResponse)
-      console.log(instrumentResponse)
     }
     getData()}, []);
 
@@ -60,7 +57,6 @@ export default function JamRequests() {
         )
           })}
     </Grid>
-    
   )
 }
 
