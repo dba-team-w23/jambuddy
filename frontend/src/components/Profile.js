@@ -11,17 +11,15 @@ export default function EditProfile(props) {
   const [isLoading, setIsLoading] = React.useState(false)
   
   const baseURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/${userId}/`;
-  const tempUser = {id: 5, username: "dkeech", password: "123", lastlogin: "", fname: "Dan", lname: "Keech", city: "Raleigh", state: "NC", email: "ddkeech@gmail.com", photo: "https://res.cloudinary.com/dg2srlhdk/image/upload/v1676075859/dan_k_cmwsxh.png"}
+  
+  React.useEffect(() => {
+    async function getData() {
+      const userData = await axios.get(baseURL);
+      setUser(userData.data);
+}
+    getData();
 
-
-//   React.useEffect(() => {
-//     async function getData() {
-//       const userData = await axios.get(baseURL);
-//       setUser(userData.data);
-// }
-//     getData();
-
-//   }, []);
+  }, []);
 
 
   if (isLoading) {
@@ -35,7 +33,7 @@ export default function EditProfile(props) {
       noValidate
       autoComplete="off"
     >
-      <ProfileCard profile={tempUser} />
+      <ProfileCard profile={user} />
       <FormGrid style={{ margin: "0 auto"}} />
     </Box>
     </>

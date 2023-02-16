@@ -58,9 +58,8 @@ export default function SignIn() {
         "Content-Type": "application/json",
         "X-CSRFToken": getCookie("csrftoken"),
       },
-
+      mode: 'no-cors',
     })
-      // .then((response) => response.json())
       .then((response) => {
         if(!response.ok) {
           throw new Error("Network response was not ok")
