@@ -29,7 +29,6 @@ export default function Body(props) {
     React.useEffect(() => {
         async function getUser() {
           const userData = await fetch(userURL).then(res=>res.json())
-          console.log("userData:", userData)
           setUser(userData);
           setIsLoading(false);
 
