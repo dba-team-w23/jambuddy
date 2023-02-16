@@ -49,11 +49,15 @@ export default function Body(props) {
             <Route path="/" element={signedIn ? <JamRequests /> : <SignIn />} />
             <Route path="signin" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
-            <Route path="profiles" element= { signedIn ? <Profiles /> : "Sign in to see profiles"} />
-            <Route path="jamrequests" element= { signedIn ? <JamRequests /> : "Sign in to see Jam Requests"} />
-            <Route path="newjamrequest" element= { signedIn ? <NewJamRequest /> : "Sign in to see Jam Requests"} />
-            <Route path="profile" element= { signedIn ? <Profile signedIn={signedIn} userId={userId} /> : "Sign in to create a profile"}/>
-            <Route path="feed" element= { <Feed />} />
+            <Route path="profiles" 
+              element= { signedIn ? <Profiles /> : <SignIn />} />
+            <Route path="jamrequests" 
+              element= { signedIn ? <JamRequests /> : <SignIn />} />
+            <Route path="newjamrequest" 
+              element= { signedIn ? <NewJamRequest /> : <SignIn />} />
+            <Route path="profile" 
+              element= { signedIn ? 
+              <Profile signedIn={signedIn} userId={userId} /> : <SignIn />}/>
             <Route path="logout" onClick={handleChange} element={<SignIn />} />
             <Route path="*" element={<Error />} />
         </Routes>

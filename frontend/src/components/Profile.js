@@ -14,19 +14,20 @@ export default function EditProfile(props) {
   
   React.useEffect(() => {
     async function getData() {
-      const userData = await axios.get(baseURL);
-      setUser(userData.data);
+      const userData = await fetch(baseURL).then(res => res.json())
+      setUser(userData);
+      console.log(user)
+      setIsLoading(false);
 }
     getData();
-
   }, []);
 
-
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading Profile.js before return...</div>;
   }
   return (
     <>
+    {user ? (
     <Box
       component="form"
       sx={{ "& > :not(style)": { m: "0 auto", width: "50ch" } }}
@@ -36,6 +37,10 @@ export default function EditProfile(props) {
       <ProfileCard profile={user} />
       <FormGrid style={{ margin: "0 auto"}} />
     </Box>
+    ) : (
+      <div>Loading in Profile.js...</div>
+    )
+}
     </>
   );
 }
