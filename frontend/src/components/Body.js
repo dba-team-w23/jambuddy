@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Feed from './Feed';
 import Profile from './Profile';
@@ -25,17 +24,18 @@ export default function Body(props) {
       setSignedIn(!signedIn);
     };
     
-    const userURL = `https://dbajamteam.pythonanywhere.com/api/users/${userId}`;
+    const userURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/${userId}/`;
 
-    // React.useEffect(() => {
-    //     async function getUser() {
-    //       const userData = await axios.get(userURL);
-    //       setUser(userData.data);
-    //       setIsLoading(false);
-    //     }
-    //     getUser();
+    React.useEffect(() => {
+        async function getUser() {
+          const userData = await fetch(userURL).then(res=>res.json())
+          setUser(userData);
+          setIsLoading(false);
+
+        }
+        getUser();
     
-    //   }, []);
+      }, []);
 
       if (isLoading) return <div>Loading...</div>;
 
@@ -43,17 +43,21 @@ export default function Body(props) {
         <>
         <Navbar signedIn={signedIn} setSignedIn={setSignedIn} />
         <div className="signedIn">
-        {signedIn ? <h2 onClick={handleChange}>Signed in as {userId}</h2> : <h2 onClick={handleChange}>Signed out</h2>}
+        {signedIn ? <h2 onClick={handleChange}>Signed in as {user.username}</h2> : <h2 onClick={handleChange}>Signed out</h2>}
 
         <Routes>
             <Route path="/" element={signedIn ? <JamRequests /> : <SignIn />} />
             <Route path="signin" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
-            <Route path="profiles" element= { signedIn ? <Profiles /> : "Sign in to see profiles"} />
-            <Route path="jamrequests" element= { signedIn ? <JamRequests /> : "Sign in to see Jam Requests"} />
-            <Route path="newjamrequest" element= { signedIn ? <NewJamRequest /> : "Sign in to see Jam Requests"} />
-            <Route path="profile" element= { signedIn ? <Profile signedIn={signedIn} userId={userId} /> : "Sign in to create a profile"}/>
-            <Route path="feed" element= { <Feed />} />
+            <Route path="profiles" 
+              element= { signedIn ? <Profiles /> : <SignIn />} />
+            <Route path="jamrequests" 
+              element= { signedIn ? <JamRequests /> : <SignIn />} />
+            <Route path="newjamrequest" 
+              element= { signedIn ? <NewJamRequest /> : <SignIn />} />
+            <Route path="profile" 
+              element= { signedIn ? 
+              <Profile signedIn={signedIn} userId={userId} /> : <SignIn />}/>
             <Route path="logout" onClick={handleChange} element={<SignIn />} />
             <Route path="*" element={<Error />} />
         </Routes>

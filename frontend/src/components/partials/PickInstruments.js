@@ -11,10 +11,11 @@ export default function PickList(props) {
       id={`${list}-select`}
       options={list}
       autoHighlight
-      getOptionLabel={(option) => option.label}
+      getOptionLabel={(option) => option.name}
       renderOption={(props, option) => (
-        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-          {option.label} 
+        <Box key={option.id} component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+  
+          {option.name} 
         </Box>
       )}
       renderInput={(params) => (

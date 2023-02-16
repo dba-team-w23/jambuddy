@@ -43,14 +43,15 @@ export default function SignIn() {
     setFormInput({ password: evt.target.value});
   };
 
-  const baseURL = "https://dbajamteam.pythonanywhere.com/api/login_user";
+  // const apiRoot = 'http://localhost:8000'
+  const apiRoot = 'https://sea-turtle-app-zggz6.ondigitalocean.app'
+  const baseURL = `${apiRoot}/api/login_user`
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     let data = { username: formInput.username, password: formInput.password };
-    console.log(data);
 
-    axios(baseURL, {
+    fetch(baseURL, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -59,10 +60,18 @@ export default function SignIn() {
       },
       mode: 'no-cors',
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if(!response.ok) {
+          throw new Error("Network response was not ok")
+        }
+        return response.json()
+      })
       .then((response) => console.log("success", JSON.stringify(response)))
-      .catch((error) => console.error("Error:", error));
-  };
+      .catch((error) => {
+        console.error("Error:", error)
+        console.log("response obj: ", error.response)
+      });
+  }
 
   return (
     <>

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
@@ -14,16 +13,8 @@ import { Card,CardContent, CardHeader, IconButton } from "@mui/material";
 export default function ProfileCard({ profile }) {
   //temp photo
   const [photoURL, setPhotoURL] = React.useState(
-    profile.photo || `https://source.unsplash.com/random/?face&${Math.random()}`
+    `https://source.unsplash.com/random/?face&${Math.random()}`
   );
-
-  React.useEffect(() => {
-    if (!profile.photo) {
-      console.log("no photo");
-      return;
-    }
-    setPhotoURL(profile.photo);
-  }, [profile]);
 
   return (
     <Card sx={{position: 'relative'}}>

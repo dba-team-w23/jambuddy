@@ -1,11 +1,38 @@
-import Button from "@mui/material/Button";
-import Password from "./Password";
-import PickList from "./PickList";
-import Multiline from "./Multiline";
-import UploadWidget from "./UploadWidget";
-import { Grid, TextField } from "@mui/material";
+import React from 'react'
+import Button from "@mui/material/Button"
+import Password from "./Password"
+import PickList from "./PickList"
+import PickInstruments from './PickInstruments'
+import Multiline from "./Multiline"
+import UploadWidget from "./UploadWidget"
+import { Grid, TextField } from "@mui/material"
 
 export default function FormGrid() {
+  const [instruments, setInstruments] = React.useState([]);
+  const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app"
+  const instrumentApi = `${baseURL}/api/instruments/`
+
+  const sortObject = (arr) => {
+    arr.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+  React.useEffect(() => {
+    async function getData() {
+      const instruments = await fetch(instrumentApi)
+      .then(res => res.json())
+      sortObject(instruments)
+      setInstruments(instruments)
+    }
+    getData()
+  }, [])
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={6}>
@@ -31,7 +58,7 @@ export default function FormGrid() {
         <PickList label="State" list={states} />
       </Grid>
       <Grid item xs={12}>
-        <PickList label="Primary Instrument" list={instruments} />
+        <PickInstruments label="Primary Instrument" list={instruments} />
       </Grid>
       <Grid item xs={12}>
         <Multiline
@@ -65,59 +92,9 @@ export default function FormGrid() {
       </Grid>
     </Grid>
   );
+  
 }
 
-const instruments = [
-  { id: 1, label: "Piano" },
-  { id: 2, label: "Guitar" },
-  { id: 3, label: "Drums" },
-  { id: 4, label: "Bass" },
-  { id: 5, label: "Violin" },
-  { id: 6, label: "Trumpet" },
-  { id: 7, label: "Saxophone" },
-  { id: 8, label: "Cello" },
-  { id: 9, label: "Flute" },
-  { id: 10, label: "Clarinet" },
-  { id: 11, label: "Trombone" },
-  { id: 12, label: "Harp" },
-  { id: 13, label: "Oboe" },
-  { id: 14, label: "Bagpipes" },
-  { id: 15, label: "Timpani" },
-  { id: 16, label: "Banjo" },
-  { id: 17, label: "Mandolin" },
-  { id: 18, label: "Accordion" },
-  { id: 19, label: "Steel drums" },
-  { id: 20, label: "Xylophone" },
-  { id: 21, label: "Harmonica" },
-  { id: 22, label: "Didgeridoo" },
-  { id: 23, label: "Electric Piano" },
-  { id: 24, label: "Electric Bass" },
-  { id: 25, label: "Electric Guitar" },
-  { id: 26, label: "Keyboard" },
-  { id: 27, label: "Drum Kit" },
-  { id: 28, label: "Bongo" },
-  { id: 29, label: "Conga" },
-  { id: 30, label: "Tambourine" },
-  { id: 31, label: "Castanets" },
-  { id: 32, label: "Maracas" },
-  { id: 33, label: "Triangle" },
-  { id: 34, label: "Cymbals" },
-  { id: 35, label: "Gong" },
-  { id: 36, label: "Kazoo" },
-  { id: 37, label: "Kalimba" },
-  { id: 38, label: "Sitar" },
-  { id: 39, label: "Dulcimer" },
-  { id: 40, label: "Lute" },
-  { id: 41, label: "Bouzouki" },
-  { id: 42, label: "Sarod" },
-  { id: 43, label: "Santoor" },
-  { id: 44, label: "Shehnai" },
-  { id: 46, label: "Tabla" },
-  { id: 47, label: "Veena" },
-  { id: 48, label: "Ukelele" },
-  { id: 49, label: "Harmonium" },
-  { id: 50, label: "Recorder" },
-];
 const states = [
   { id: "Alabama", label: "AL" },
   { id: "Alaska", label: "AK" },
