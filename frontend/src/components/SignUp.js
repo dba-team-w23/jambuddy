@@ -4,7 +4,6 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import "./css/SignIn.css";
 import Password from "./partials/Password";
-import axios from "axios";
 
 export default function SignUp() {
   const [formInput, setFormInput] = React.useReducer(
@@ -17,21 +16,26 @@ export default function SignUp() {
       password: "",
     }
   );
+  const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/"
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    alert(
-      `Submitting Name ${formInput.firstName} ${formInput.lastName} ${formInput.email} ${formInput.userName} ${formInput.password}`
-    );
-
     let data = { formInput };
-
-    axios.post("https://sea-turtle-app-zggz6.ondigitalocean.app/api/users", data, {
-    mode: "no-cors"
-    }).then(response => {
+  
+    fetch(baseURL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Length": 50,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
       console.log("success",JSON.stringify(response))
-    }).catch(error => {
-      console.error("Error: "+error)
+    })
+    .catch(error => {
+      console.error("Error: " + error)
     })
   };
 
