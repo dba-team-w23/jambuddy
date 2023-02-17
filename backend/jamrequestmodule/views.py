@@ -43,6 +43,7 @@ class ExperienceLevelDetail(viewsets.ModelViewSet):
 class InstrumentList(viewsets.ModelViewSet):
     queryset = Instrument.objects.all()
     serializer_class = InstrumentSerializer
+
 class InstrumentDetail(viewsets.ModelViewSet):
     queryset = Instrument.objects.all()
     serializer_class = InstrumentSerializer
