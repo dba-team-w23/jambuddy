@@ -11,6 +11,7 @@ from jamrequestmodule.models import Instrument
 from rest_framework import generics, status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.parsers import JSONParser
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, UserGenre, UserInstrument, UserMedia,
                      UserReview, Users)
@@ -22,13 +23,19 @@ from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
                           UsersSerializer)
 
 
+
+# @api_view(['GET', 'POST'])
 class UserList(viewsets.ModelViewSet):
     queryset = Users.objects.all()
     serializer_class = UsersSerializer
+    parser_classes = (JSONParser,)
 
+
+# @api_view(['GET', 'PUT', 'DELETE', 'PATCH'])
 class UserDetail(viewsets.ModelViewSet):
     queryset = Users.objects.all()
     serializer_class = UsersSerializer
+    parser_classes = (JSONParser,)
 
 
 class ExperienceLevelList(viewsets.ModelViewSet):
