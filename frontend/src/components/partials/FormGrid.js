@@ -28,16 +28,15 @@ export default function FormGrid() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const { name, value } = evt.target
-    console.log("handling form submission")
-    setFormValues((prevValues) => ({ ...prevValues, [name]: value }))
+    const formData = new FormData(evt.target);
+    const data = Object.fromEntries(formData.entries());
+    console.log("form data: ", data)
 
     fetch(`${baseURL}/api/users/`, {
       method: "POST",
-      body: JSON.stringify(formValues),
+      body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
-        "X-CSRFToken": getCookie("csrftoken"),
       },
       mode: 'no-cors',
     })
@@ -122,15 +121,6 @@ export default function FormGrid() {
             id="bio"
           />
         </Grid>
-        <Grid item xs={12}>
-          <Multiline
-            className="longBio"
-            name="longBio"
-            default="Enter a detailed biography here"
-            label="Full Bio"
-            id="longBio"
-          />
-        </Grid>
 
         <Grid item xs={6}>
           <Password label="Password" name="password" id="pw1" />
@@ -139,7 +129,7 @@ export default function FormGrid() {
           <Password label="Repeat Password" id="pw2" />
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained">Save Profile</Button>
+          <Button type="submit" variant="contained">Save Profile</Button>
         </Grid>
       </Grid>
       <UploadWidget />
