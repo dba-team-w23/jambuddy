@@ -26,7 +26,7 @@ export default function ProfileCard({ profile }) {
           </IconButton>
         }
         title={`${profile.fname} ${profile.lname}`}
-        subheader="content"
+        subheader={profile.username}
       />
       <CardMedia
         component="img"
@@ -36,16 +36,17 @@ export default function ProfileCard({ profile }) {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {profile.username}
+          {profile.city}, {profile.state}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {profile.genre}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+
         </CardActions>
       <Modal {...profile} />
     </Card>
