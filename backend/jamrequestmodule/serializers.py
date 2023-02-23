@@ -1,16 +1,17 @@
 # serializers.py
 
+from django.conf import settings
 from rest_framework import serializers
 
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
-                     MusicGenre, Users, UserGenre, UserInstrument, UserMedia,
+                     MusicGenre, Profile, UserGenre, UserInstrument, UserMedia,
                      UserReview)
 
 
-class UsersSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Users
-        db_table = Users
+        model = settings.AUTH_USER_MODEL
+        db_table = Profile
         fields = '__all__'
 
 class ExperienceLevelSerializer(serializers.ModelSerializer):

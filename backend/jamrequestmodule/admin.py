@@ -2,11 +2,11 @@ from django.contrib import admin
 
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, UserGenre, UserInstrument, UserMedia,
-                     UserReview, Users)
+                     UserReview, Profile)
 
 
-class UsersAdmin(admin.ModelAdmin):
-    list_display = ('id', 'fname', 'lname', 'email', 'phone')
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('id', 'first_name', 'last_name', 'email', 'phone')
 
 
 class ExperienceLevelAdmin(admin.ModelAdmin):
@@ -45,7 +45,7 @@ class UserReviewAdmin(admin.ModelAdmin):
     list_display = ('id', 'userid', 'reviewerid', 'rating')
 
 
-admin.site.register(Users, UsersAdmin)
+admin.site.register(Profile, ProfileAdmin)
 admin.site.register(UserInstrument, UserInstrumentAdmin)
 admin.site.register(UserGenre, UserGenreAdmin)
 admin.site.register(JamRequest, JamRequestAdmin)
