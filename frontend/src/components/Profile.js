@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import "./css/SignIn.css";
 import ProfileCard from "./partials/ProfileCard";
 import FormGrid from "./partials/FormGrid";
-// import ProfileForm from './partials/ProfileForm'
 
 export default function EditProfile(props) {
   const { signedIn, userId } = props;

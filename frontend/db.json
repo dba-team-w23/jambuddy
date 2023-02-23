@@ -1,0 +1,706 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "test1",
+      "password": "test2",
+      "lastlogin": "2023-01-29T05:00:00Z",
+      "fname": "jabba",
+      "lname": "hutt",
+      "street": "123",
+      "street2": null,
+      "city": "slc",
+      "state": "ut",
+      "zipcode": "12345",
+      "phone": "808080001",
+      "email": "hi@hi.com",
+      "photo": null,
+      "instruments": [],
+      "genres": [],
+      "exp_level": null,
+      "note": null,
+      "created": "2023-01-29T05:00:00Z"
+    },
+    {
+      "id": 5,
+      "username": "jsmith",
+      "password": "123",
+      "lastlogin": "2023-01-29T05:00:00Z",
+      "fname": "John",
+      "lname": "Smith",
+      "street": "123 Main St",
+      "street2": null,
+      "city": "Anytown",
+      "state": "CA",
+      "zipcode": "12345",
+      "phone": "555-555-5555",
+      "email": "john.smith@example.com",
+      "photo": null,
+      "instruments": [],
+      "genres": [],
+      "exp_level": null,
+      "note": null,
+      "created": "2023-01-29T05:00:00Z"
+    },
+    {
+      "id": 6,
+      "username": "jdoe",
+      "password": "123",
+      "lastlogin": "2023-01-29T05:00:00Z",
+      "fname": "Jane",
+      "lname": "Doe",
+      "street": "456 Park Ave",
+      "street2": null,
+      "city": "Anytown",
+      "state": "CA",
+      "zipcode": "67890",
+      "phone": "555-555-5555",
+      "email": "jane.doe@example.com",
+      "photo": null,
+      "instruments": [],
+      "genres": [],
+      "exp_level": null,
+      "note": null,
+      "created": "2023-01-29T05:00:00Z"
+    },
+    {
+      "id": 7,
+      "username": "bjonny",
+      "password": "123",
+      "lastlogin": "2023-01-29T05:00:00Z",
+      "fname": "Bob",
+      "lname": "Johnson",
+      "street": "789 Elm St",
+      "street2": null,
+      "city": "Anytown",
+      "state": "NY",
+      "zipcode": "09876",
+      "phone": "555-555-5555",
+      "email": "bob.johnson@example.com",
+      "photo": null,
+      "instruments": [],
+      "genres": [],
+      "exp_level": null,
+      "note": null,
+      "created": "2023-01-29T05:00:00Z"
+    },
+    {
+      "id": 8,
+      "username": "swilly",
+      "password": "123",
+      "lastlogin": "2023-01-29T05:00:00Z",
+      "fname": "Samantha",
+      "lname": "Williams",
+      "street": "321 Oak St",
+      "street2": null,
+      "city": "Anytown",
+      "state": "FL",
+      "zipcode": "54321",
+      "phone": "555-555-5555",
+      "email": "samantha.williams@example.com",
+      "photo": null,
+      "instruments": [],
+      "genres": [],
+      "exp_level": null,
+      "note": null,
+      "created": "2023-01-29T05:00:00Z"
+    },
+    {
+      "id": 9,
+      "username": "mbrown",
+      "password": "123",
+      "lastlogin": "2023-01-29T05:00:00Z",
+      "fname": "Michael",
+      "lname": "Brown",
+      "street": "654 Pine St",
+      "street2": null,
+      "city": "Anytown",
+      "state": "TX",
+      "zipcode": "67890",
+      "phone": "555-555-5555",
+      "email": "michael.brown@example.com",
+      "photo": null,
+      "instruments": [],
+      "genres": [],
+      "exp_level": null,
+      "note": null,
+      "created": "2023-01-29T05:00:00Z"
+    },
+    {
+      "id": 10,
+      "username": "ajones",
+      "password": "123",
+      "lastlogin": "2023-01-29T05:00:00Z",
+      "fname": "Ashley",
+      "lname": "Jones",
+      "street": "987 Cedar St",
+      "street2": null,
+      "city": "Anytown",
+      "state": "IL",
+      "zipcode": "13579",
+      "phone": "555-555-5555",
+      "email": "ashley.jones@example.com",
+      "photo": null,
+      "instruments": [],
+      "genres": [],
+      "exp_level": null,
+      "note": null,
+      "created": "2023-01-29T05:00:00Z"
+    },
+    {
+      "id": 11,
+      "username": "jmiller",
+      "password": "123",
+      "lastlogin": "2023-01-29T05:00:00Z",
+      "fname": "Joshua",
+      "lname": "Miller",
+      "street": "246 Birch St",
+      "street2": null,
+      "city": "Anytown",
+      "state": "PA",
+      "zipcode": "24680",
+      "phone": "555-555-5555",
+      "email": "joshua.miller@example.com",
+      "photo": null,
+      "instruments": [],
+      "genres": [],
+      "exp_level": null,
+      "note": null,
+      "created": "2023-01-29T05:00:00Z"
+    },
+    {
+      "id": 12,
+      "username": "jdavis",
+      "password": "123",
+      "lastlogin": "2023-01-29T05:00:00Z",
+      "fname": "Jessica",
+      "lname": "Davis",
+      "street": "369 Maple St",
+      "street2": null,
+      "city": "Anytown",
+      "state": "OH",
+      "zipcode": "36912",
+      "phone": "555-555-5555",
+      "email": "jessica.davis@example.com",
+      "photo": null,
+      "instruments": [],
+      "genres": [],
+      "exp_level": null,
+      "note": null,
+      "created": "2023-01-29T05:00:00Z"
+    },
+    {
+      "id": 13,
+      "username": "jgarcia",
+      "password": "123",
+      "lastlogin": "2023-01-29T05:00:00Z",
+      "fname": "Jacob",
+      "lname": "Garcia",
+      "street": "159 Willow St",
+      "street2": null,
+      "city": "Anytown",
+      "state": "NC",
+      "zipcode": "15935",
+      "phone": "555-555-5555",
+      "email": "jacob.garcia@example.com",
+      "photo": null,
+      "instruments": [],
+      "genres": [],
+      "exp_level": null,
+      "note": null,
+      "created": "2023-01-29T05:00:00Z"
+    },
+    {
+      "id": 14,
+      "username": "aroddd",
+      "password": "123",
+      "lastlogin": "2023-01-29T05:00:00Z",
+      "fname": "Amanda",
+      "lname": "Rodriguez",
+      "street": "753 Oak St",
+      "street2": null,
+      "city": "Anytown",
+      "state": "WA",
+      "zipcode": "753",
+      "phone": "555-555-5555",
+      "email": "amanda.rodriguez@example.com",
+      "photo": null,
+      "instruments": [],
+      "genres": [],
+      "exp_level": null,
+      "note": null,
+      "created": "2023-01-29T05:00:00Z"
+    },
+    {
+      "id": 15,
+      "username": "test1",
+      "password": "test2",
+      "lastlogin": "2023-02-16T05:29:41.680030Z",
+      "fname": "rancor",
+      "lname": "monster",
+      "street": "123",
+      "street2": null,
+      "city": "slc",
+      "state": "ut",
+      "zipcode": "12345",
+      "phone": "808080001",
+      "email": "hi@hi.com",
+      "photo": null,
+      "instruments": [],
+      "genres": [],
+      "exp_level": null,
+      "note": null,
+      "created": "2023-02-16T05:29:41.680393Z"
+    },
+    {
+      "id": 16,
+      "username": "test1",
+      "password": "test2",
+      "lastlogin": "2023-02-16T05:30:39.744247Z",
+      "fname": "rancor",
+      "lname": "monster",
+      "street": "123",
+      "street2": null,
+      "city": "slc",
+      "state": "ut",
+      "zipcode": "12345",
+      "phone": "808080001",
+      "email": "hi@hi.com",
+      "photo": null,
+      "instruments": [],
+      "genres": [],
+      "exp_level": null,
+
+      "note": null,
+      "created": "2023-02-16T05:30:39.744483Z"
+    },
+    {
+      "id": 17,
+      "username": "test",
+      "password": "test",
+      "lastlogin": "2023-02-17T01:03:15.529198Z",
+      "fname": "test",
+      "lname": "test",
+      "street": "test",
+      "street2": null,
+      "city": "test",
+      "state": "test",
+      "zipcode": "test",
+      "phone": null,
+      "email": "test",
+      "photo": null,
+      "instruments": [],
+      "genres": [],
+      "exp_level": null,
+      "note": null,
+      "created": "2023-02-17T01:03:15.529323Z"
+    }
+  ],
+  "jamrequests": [
+    {
+      "id": 25,
+      "location": "San Francisco",
+      "status": "Open",
+      "created": "2023-02-05T20:00:00Z",
+      "userid": 1,
+      "instrument": "guitar",
+      "genre": "hip hop",
+      "exp_level": "intermediate"
+    },
+    {
+      "id": 26,
+      "location": "New York",
+      "status": "Open",
+      "created": "2023-02-05T20:01:00Z",
+      "userid": 5,
+      "instrument": "guitar",
+      "genre": "hip hop",
+      "exp_level": "intermediate"
+    },
+    {
+      "id": 27,
+      "location": "Los Angeles",
+      "status": "Closed",
+      "created": "2023-02-05T20:02:00Z",
+      "userid": 6,
+      "instrument": "guitar",
+      "genre": "hip hop",
+      "exp_level": "intermediate"
+    },
+    {
+      "id": 28,
+      "location": "New York",
+      "status": "Open",
+      "created": "2023-02-05T21:00:00Z",
+      "userid": 7,
+      "instrument": "guitar",
+      "genre": "hip hop",
+      "exp_level": "intermediate"
+    },
+    {
+      "id": 29,
+      "location": "Paris",
+      "status": "Open",
+      "created": "2023-02-05T23:00:00Z",
+      "userid": 8,
+      "instrument": "guitar",
+      "genre": "hip hop",
+      "exp_level": "intermediate"
+    },
+    {
+      "id": 30,
+      "location": "London",
+      "status": "Open",
+      "created": "2023-02-05T22:00:00Z",
+      "userid": 5,
+      "instrument": "guitar",
+      "genre": "hip hop",
+      "exp_level": "intermediate"
+    },
+    {
+      "id": 31,
+      "location": "Berlin",
+      "status": "Open",
+      "created": "2023-02-06T00:00:00Z",
+      "userid": 7,
+      "instrument": "guitar",
+      "genre": "hip hop",
+      "exp_level": "intermediate"
+    },
+    {
+      "id": 32,
+      "location": "Rome",
+      "status": "Open",
+      "created": "2023-02-06T01:00:00Z",
+      "userid": 6,
+      "instrument": "guitar",
+      "genre": "hip hop",
+      "exp_level": "intermediate"
+    }
+  ],
+  "userreviews": [
+    {
+      "id": 61,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 4,
+      "comment": "Good musician with great skills",
+      "userid": 1,
+      "reviewerid": 10
+    },
+    {
+      "id": 62,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 3,
+      "comment": "She has potential but needs improvement",
+      "userid": 12,
+      "reviewerid": 10
+    },
+    {
+      "id": 63,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 5,
+      "comment": "Awesome jammer with a great style",
+      "userid": 13,
+      "reviewerid": 1
+    },
+    {
+      "id": 64,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 4,
+      "comment": "Talented musician with a unique sound",
+      "userid": 11,
+      "reviewerid": 14
+    },
+    {
+      "id": 65,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 3,
+      "comment": "She has potential but lacks experience",
+      "userid": 12,
+      "reviewerid": 11
+    },
+    {
+      "id": 66,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 5,
+      "comment": "Fantastic jammer with exceptional talent",
+      "userid": 13,
+      "reviewerid": 10
+    },
+    {
+      "id": 67,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 4,
+      "comment": "Exceptionally skilled musician",
+      "userid": 11,
+      "reviewerid": 7
+    },
+    {
+      "id": 68,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 3,
+      "comment": "He has room for improvement but shows promise",
+      "userid": 12,
+      "reviewerid": 8
+    },
+    {
+      "id": 69,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 5,
+      "comment": "Incredible jammer with a natural ability",
+      "userid": 13,
+      "reviewerid": 9
+    },
+    {
+      "id": 70,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 4,
+      "comment": "Gifted musician with a passion for music",
+      "userid": 1,
+      "reviewerid": 10
+    },
+    {
+      "id": 71,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 3,
+      "comment": "He has potential but needs more practice",
+      "userid": 12,
+      "reviewerid": 11
+    },
+    {
+      "id": 72,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 5,
+      "comment": "Amazing jammer with a unique flair",
+      "userid": 13,
+      "reviewerid": 10
+    },
+    {
+      "id": 73,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 4,
+      "comment": "Very talented musician with a great ear",
+      "userid": 1,
+      "reviewerid": 13
+    },
+    {
+      "id": 74,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 3,
+      "comment": "He has potential but needs to find his niche",
+      "userid": 12,
+      "reviewerid": 14
+    },
+    {
+      "id": 75,
+      "created": "2023-02-05T22:16:33.895760Z",
+      "rating": 5,
+      "comment": "Outstanding jammer with exceptional talent",
+      "userid": 13,
+      "reviewerid": 9
+    }
+  ],
+  "musicgenres": [
+    {
+      "id": 1,
+      "genre": "Rock"
+    },
+    {
+      "id": 2,
+      "genre": "Pop"
+    },
+    {
+      "id": 3,
+      "genre": "Punk"
+    },
+    {
+      "id": 4,
+      "genre": "Country"
+    },
+    {
+      "id": 5,
+      "genre": "Bluegrass"
+    },
+    {
+      "id": 6,
+      "genre": "Classical"
+    },
+    {
+      "id": 7,
+      "genre": "SynthPop"
+    },
+    {
+      "id": 8,
+      "genre": "Jazz"
+    },
+    {
+      "id": 9,
+      "genre": "Reggae"
+    },
+    {
+      "id": 10,
+      "genre": "Funk"
+    },
+    {
+      "id": 11,
+      "genre": "Heavy Metal"
+    },
+    {
+      "id": 12,
+      "genre": "Folk"
+    },
+    {
+      "id": 13,
+      "genre": "New Age"
+    },
+    {
+      "id": 14,
+      "genre": "Hardcore"
+    },
+    {
+      "id": 15,
+      "genre": "Soft Rock"
+    }
+  ],
+  "experiencelevels": [
+    {
+      "id": 1,
+      "level": "Beginner"
+    },
+    {
+      "id": 2,
+      "level": "Intermediate"
+    },
+    {
+      "id": 3,
+      "level": "Advanced"
+    }
+  ],
+  "instruments": [
+    {
+      "id": 1,
+      "name": "Tabla",
+      "type": "Percussion"
+    },
+    {
+      "id": 2,
+      "name": "Guitar",
+      "type": "String"
+    },
+    {
+      "id": 3,
+      "name": "Piano",
+      "type": "Keyboard"
+    },
+    {
+      "id": 4,
+      "name": "Drums",
+      "type": "Percussion"
+    },
+    {
+      "id": 5,
+      "name": "Bass",
+      "type": "String"
+    },
+    {
+      "id": 6,
+      "name": "Violin",
+      "type": "String"
+    },
+    {
+      "id": 7,
+      "name": "Trumpet",
+      "type": "Brass"
+    },
+    {
+      "id": 8,
+      "name": "Saxophone",
+      "type": "Woodwind"
+    },
+    {
+      "id": 9,
+      "name": "Flute",
+      "type": "Woodwind"
+    },
+    {
+      "id": 10,
+      "name": "Violin",
+      "type": "String"
+    },
+    {
+      "id": 11,
+      "name": "Clarinet",
+      "type": "Woodwind"
+    },
+    {
+      "id": 12,
+      "name": "Harmonica",
+      "type": "Wind"
+    },
+    {
+      "id": 13,
+      "name": "Banjo",
+      "type": "String"
+    },
+    {
+      "id": 14,
+      "name": "Mandolin",
+      "type": "String"
+    },
+    {
+      "id": 15,
+      "name": "Harp",
+      "type": "String"
+    },
+    {
+      "id": 16,
+      "name": "Accordion",
+      "type": "Keyboard"
+    },
+    {
+      "id": 17,
+      "name": "Trombone",
+      "type": "Brass"
+    },
+    {
+      "id": 18,
+      "name": "Viola",
+      "type": "String"
+    },
+    {
+      "id": 19,
+      "name": "French horn",
+      "type": "Brass"
+    },
+    {
+      "id": 20,
+      "name": "Oboe",
+      "type": "Woodwind"
+    },
+    {
+      "id": 21,
+      "name": "Bagpipes",
+      "type": "Wind"
+    },
+    {
+      "id": 22,
+      "name": "Ukulele",
+      "type": "String"
+    },
+    {
+      "id": 23,
+      "name": "Sitar",
+      "type": "String"
+    },
+    {
+      "id": 24,
+      "name": "Didgeridoo",
+      "type": "Percussion"
+    },
+    {
+      "id": 25,
+      "name": "Tabla",
+      "type": "Percussion"
+    }
+  ]
+}

@@ -1,67 +1,81 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Feed from './Feed';
-import Profile from './Profile';
-import JamRequests from './JamRequests';
-import NewJamRequest from './NewJamRequest';
-import Profiles from './Profiles';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
-import Error from './partials/Error';
-import Navbar from './partials/Navbar';
-import './css/Global.css';
+import Feed from "./Feed";
+import Profile from "./Profile";
+import JamRequests from "./JamRequests";
+import NewJamRequest from "./NewJamRequest";
+import Profiles from "./Profiles";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
+import Error from "./partials/Error";
+import Navbar from "./partials/Navbar";
+import "./css/Global.css";
 
 export default function Body(props) {
-    // const [signedIn, setSignedIn] = React.useState(props.signedIn);
-    const [signedIn, setSignedIn] = React.useState(true);
-    // const [username, setUsername] = React.useState(props.userId)
-    const [userId, setUserId] = React.useState(5)
-    const [user, setUser] = React.useState({})
-    const [isLoading, setIsLoading] = React.useState(false);
-    const tempUser = {id: 5, username: "dkeech", password: "123", lastlogin: "", fname: "Dan", lname: "Keech", city: "Raleigh", state: "NC", email: "ddkeech@gmail.com", photo: "https://res.cloudinary.com/dg2srlhdk/image/upload/v1676075859/dan_k_cmwsxh.png"}
+  // const [signedIn, setSignedIn] = React.useState(props.signedIn);
+  const [signedIn, setSignedIn] = React.useState(true);
+  // const [username, setUsername] = React.useState(props.userId)
+  const [userId, setUserId] = React.useState(5);
+  const [user, setUser] = React.useState({});
+  const [isLoading, setIsLoading] = React.useState(false);
 
-    const handleChange = () => {
-      setSignedIn(!signedIn);
-    };
-    
-    const userURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/${userId}/`;
+  const handleChange = () => {
+    setSignedIn(!signedIn);
+  };
 
-    React.useEffect(() => {
-        async function getUser() {
-          const userData = await fetch(userURL).then(res=>res.json())
-          setUser(userData);
-          setIsLoading(false);
+  const userURL = `http://localhost:8088/api/users/${userId}/`;
 
-        }
-        getUser();
-    
-      }, []);
+  React.useEffect(() => {
+    async function getUser() {
+      const userData = await fetch(userURL).then((res) => res.json());
+      setUser(userData);
+      setIsLoading(false);
+    }
+    getUser();
+  }, []);
 
-      if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>;
 
-    return (
-        <>
-        <Navbar signedIn={signedIn} setSignedIn={setSignedIn} />
-        <div className="signedIn">
-        {signedIn ? <h2 onClick={handleChange}>Signed in as {user.username}</h2> : <h2 onClick={handleChange}>Signed out</h2>}
+  return (
+    <>
+      <Navbar signedIn={signedIn} setSignedIn={setSignedIn} />
+      <div className="signedIn">
+        {signedIn ? (
+          <h2 onClick={handleChange}>Signed in as {user.username}</h2>
+        ) : (
+          <h2 onClick={handleChange}>Signed out</h2>
+        )}
 
         <Routes>
-            <Route path="/" element={signedIn ? <JamRequests /> : <SignIn />} />
-            <Route path="signin" element={<SignIn />} />
-            <Route path="signup" element={<SignUp />} />
-            <Route path="profiles" 
-              element= { signedIn ? <Profiles /> : <SignIn />} />
-            <Route path="jamrequests" 
-              element= { signedIn ? <JamRequests /> : <SignIn />} />
-            <Route path="newjamrequest" 
-              element= { signedIn ? <NewJamRequest /> : <SignIn />} />
-            <Route path="profile" 
-              element= { signedIn ? 
-              <Profile signedIn={signedIn} userId={userId} /> : <SignIn />}/>
-            <Route path="logout" onClick={handleChange} element={<SignIn />} />
-            <Route path="*" element={<Error />} />
+          <Route path="/" element={signedIn ? <JamRequests /> : <SignIn />} />
+          <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route
+            path="profiles"
+            element={signedIn ? <Profiles /> : <SignIn />}
+          />
+          <Route
+            path="jamrequests"
+            element={signedIn ? <JamRequests /> : <SignIn />}
+          />
+          <Route
+            path="newjamrequest"
+            element={signedIn ? <NewJamRequest /> : <SignIn />}
+          />
+          <Route
+            path="profile"
+            element={
+              signedIn ? (
+                <Profile signedIn={signedIn} userId={userId} />
+              ) : (
+                <SignIn />
+              )
+            }
+          />
+          <Route path="logout" onClick={handleChange} element={<SignIn />} />
+          <Route path="*" element={<Error />} />
         </Routes>
-        </div>
-        </>
-    )
+      </div>
+    </>
+  );
 }

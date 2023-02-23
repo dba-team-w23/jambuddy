@@ -39,12 +39,13 @@ export default function SignIn() {
 
   const handlePassword = (evt) => {
     console.log(evt.target.value);
-    setFormInput({ password: evt.target.value});
+    setFormInput({ password: evt.target.value });
   };
 
   // const apiRoot = 'http://localhost:8000'
-  const apiRoot = 'https://sea-turtle-app-zggz6.ondigitalocean.app'
-  const baseURL = `${apiRoot}/api/login_user`
+  // const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
+  const apiRoot = "http://localhost:8088";
+  const baseURL = `${apiRoot}/api/login_user`;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -57,20 +58,20 @@ export default function SignIn() {
         "Content-Type": "application/json",
         "X-CSRFToken": getCookie("csrftoken"),
       },
-      mode: 'no-cors',
+      mode: "no-cors",
     })
       .then((response) => {
-        if(!response.ok) {
-          throw new Error("Network response was not ok")
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
-        return response.json()
+        return response.json();
       })
       .then((response) => console.log("success", JSON.stringify(response)))
       .catch((error) => {
-        console.error("Error:", error)
-        console.log("response obj: ", error.response)
+        console.error("Error:", error);
+        console.log("response obj: ", error.response);
       });
-  }
+  };
 
   return (
     <>
