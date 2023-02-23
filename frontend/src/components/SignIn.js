@@ -13,7 +13,6 @@ import InputLabel from "@mui/material/InputLabel";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { getCookie } from "./partials/csrftoken";
-import axios from "axios";
 
 export default function SignIn() {
   const [signedIn, setSignedIn] = React.useState(false);
