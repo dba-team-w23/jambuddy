@@ -5,7 +5,7 @@ from rest_framework import serializers
 
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, Profile, UserGenre, UserInstrument, UserMedia,
-                     UserReview)
+                     UserReview, ProfilePhoto)
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -38,6 +38,13 @@ class InstrumentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instrument
         db_table = Instrument
+        fields = '__all__'
+
+
+class ProfilePhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProfilePhoto
+        db_table = ProfilePhoto
         fields = '__all__'
 
 class JamRequestSerializer(serializers.ModelSerializer):

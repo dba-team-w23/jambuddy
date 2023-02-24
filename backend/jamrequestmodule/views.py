@@ -14,12 +14,14 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser, FormParser, MultiPartParser
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, UserGenre, UserInstrument, UserMedia,
-                     UserReview, Profile)
+                     UserReview, Profile, ProfilePhoto)
 from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
                           JamRequestSerializer, JamResponseSerializer,
                           MusicGenreSerializer, UserGenreSerializer,
                           UserInstrumentSerializer, UserMediaSerializer,
-                          UserReviewSerializer, ProfileSerializer)
+                          UserReviewSerializer, ProfileSerializer,
+                          ProfilePhotoSerializer,
+                          ProfileSerializer)
 
 
 
@@ -117,32 +119,45 @@ class UserReviewDetail(viewsets.ModelViewSet):
     serializer_class = UserReviewSerializer
 
 
+class PhotosDetail(viewsets.ModelViewSet):
+    queryset = ProfilePhoto.objects.all()
+    serializer_class = ProfilePhotoSerializer
+
+
+class PhotosList(viewsets.ModelViewSet):
+    queryset = ProfilePhoto.objects.all()
+    serializer_class = ProfilePhotoSerializer
+
+
 class UserDetailsView(generics.RetrieveAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
     def retrieve(self, request, *args, **kwargs):
         user = self.get_object()
+
         user_instruments = UserInstrument.objects.filter(profileid=user).all()
         user_media = UserMedia.objects.filter(profileid=user).all()
         user_reviews = UserReview.objects.filter(profileid=user).all()
         user_genres = UserGenre.objects.filter(profileid=user).all()
+        user_photos = ProfilePhoto.objects.filter(profileid=user).all()
 
         user_serializer = ProfileSerializer(user)
         user_instruments_serializer = UserInstrumentSerializer(user_instruments, many=True)
         user_media_serializer = UserMediaSerializer(user_media, many=True)
         user_reviews_serializer = UserReviewSerializer(user_reviews, many=True)
+        user_photos_serializer = ProfilePhotoSerializer(user_photos, many=True)
 
         genres = [user_genre.genreid for user_genre in user_genres]
         serialized_genres = MusicGenreSerializer(genres, many=True)
-
 
         return Response({
             'user': user_serializer.data,
             'genres': serialized_genres.data,
             'instruments': user_instruments_serializer.data,
             'media': user_media_serializer.data,
-            'reviews': user_reviews_serializer.data
+            'reviews': user_reviews_serializer.data,
+            'photos': user_photos_serializer.data
         })
 
 
@@ -220,16 +235,16 @@ def login_user(request):
     if user is not None and user.is_authenticated:
         login(request, user)
         response = Response({"status":1, "profile_id":user.pk}, status=status.HTTP_200_OK)
-        response["Access-Control-Allow-Origin"]= "*"
-        response["Access-Control-Allow-Credentials"]="true"
-        response["Access-Control-Allow-Methods"]="GET,HEAD,OPTIONS,POST,PUT"
-        response["Access-Control-Allow-Headers"]="Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+        response["Access-Control-Allow-Origin"] = "*"
+        response["Access-Control-Allow-Credentials"] = "true"
+        response["Access-Control-Allow-Methods"] = "GET,HEAD,OPTIONS,POST,PUT"
+        response["Access-Control-Allow-Headers"] = "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
 
-        return response
     else:
         response = Response({"status":0, "error":"Invalid username or password"}, status=status.HTTP_200_OK)
         response["Access-Control-Allow-Headers"] = "content-type"
-        return response
+
+    return response
 
 
 @api_view(['POST'])
