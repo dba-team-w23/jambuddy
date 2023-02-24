@@ -14,12 +14,14 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { getCookie } from "./partials/csrftoken";
 
-export default function SignIn() {
-  const [signedIn, setSignedIn] = React.useState(false);
+export default function SignIn({ signedInUser, setSignedInUser }) {
+  console.log("signedInUser: ", signedInUser);
+  console.log(typeof setSignedInUser);
   const [formInput, setFormInput] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
       username: "",
+      email: "",
       password: "",
     }
   );
@@ -38,18 +40,19 @@ export default function SignIn() {
   };
 
   const handlePassword = (evt) => {
-    console.log(evt.target.value);
     setFormInput({ password: evt.target.value });
   };
 
-  // const apiRoot = 'http://localhost:8000'
-  // const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
   const apiRoot = "http://localhost:8088";
-  const baseURL = `${apiRoot}/api/login_user`;
+  const baseURL = `${apiRoot}/api/users`;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    let data = { username: formInput.username, password: formInput.password };
+    let data = {
+      username: formInput.username,
+      email: formInput.email,
+      password: formInput.password,
+    };
 
     fetch(baseURL, {
       method: "POST",
@@ -58,7 +61,7 @@ export default function SignIn() {
         "Content-Type": "application/json",
         "X-CSRFToken": getCookie("csrftoken"),
       },
-      mode: "no-cors",
+      mode: "cors",
     })
       .then((response) => {
         if (!response.ok) {
@@ -66,7 +69,10 @@ export default function SignIn() {
         }
         return response.json();
       })
-      .then((response) => console.log("success", JSON.stringify(response)))
+      .then((response) => {
+        console.log("success", JSON.stringify(response));
+        setSignedInUser(response);
+      })
       .catch((error) => {
         console.error("Error:", error);
         console.log("response obj: ", error.response);
@@ -75,7 +81,7 @@ export default function SignIn() {
 
   return (
     <>
-      {!signedIn && (
+      {!signedInUser && (
         <Box
           className="signIn"
           component="form"
@@ -88,6 +94,14 @@ export default function SignIn() {
             id="outlined-basic"
             label="User Name"
             name="username"
+            variant="outlined"
+            required
+            onChange={handleInput}
+          />
+          <TextField
+            id="outlined-basic-2"
+            label="Email"
+            name="email"
             variant="outlined"
             required
             onChange={handleInput}
@@ -125,7 +139,7 @@ export default function SignIn() {
           </Link>
         </Box>
       )}
-      {signedIn && <Posts />}
+      {signedInUser && <Posts />}
     </>
   );
 }

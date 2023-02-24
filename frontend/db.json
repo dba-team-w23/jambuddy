@@ -233,8 +233,8 @@
     },
     {
       "id": 15,
-      "username": "test1",
-      "password": "test2",
+      "username": "rmonster",
+      "password": "123",
       "lastlogin": "2023-02-16T05:29:41.680030Z",
       "fname": "rancor",
       "lname": "monster",
@@ -251,28 +251,6 @@
       "exp_level": null,
       "note": null,
       "created": "2023-02-16T05:29:41.680393Z"
-    },
-    {
-      "id": 16,
-      "username": "test1",
-      "password": "test2",
-      "lastlogin": "2023-02-16T05:30:39.744247Z",
-      "fname": "rancor",
-      "lname": "monster",
-      "street": "123",
-      "street2": null,
-      "city": "slc",
-      "state": "ut",
-      "zipcode": "12345",
-      "phone": "808080001",
-      "email": "hi@hi.com",
-      "photo": null,
-      "instruments": [],
-      "genres": [],
-      "exp_level": null,
-
-      "note": null,
-      "created": "2023-02-16T05:30:39.744483Z"
     },
     {
       "id": 17,
@@ -294,6 +272,105 @@
       "exp_level": null,
       "note": null,
       "created": "2023-02-17T01:03:15.529323Z"
+    },
+    {
+      "id": 18
+    },
+    {
+      "id": 19
+    },
+    {
+      "id": 20
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 21
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 22
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 23
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 24
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 25
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 26
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 27
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 28
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 29
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 30
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 31
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 32
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 33
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 34
+    },
+    {
+      "username": "test1",
+      "email": "hi@hi.com",
+      "password": "test2",
+      "id": 35
     }
   ],
   "jamrequests": [
@@ -701,6 +778,11 @@
       "id": 25,
       "name": "Tabla",
       "type": "Percussion"
+    }
+  ],
+  "login_user": [
+    {
+      "username": "test1"
     }
   ]
 }
