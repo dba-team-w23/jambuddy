@@ -19,7 +19,8 @@ from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
                           JamRequestSerializer, JamResponseSerializer,
                           MusicGenreSerializer, UserGenreSerializer,
                           UserInstrumentSerializer, UserMediaSerializer,
-                          UserReviewSerializer, PhotoSerializer,
+                          UserReviewSerializer, ProfileSerializer,
+                          PhotoSerializer,
                           ProfileSerializer)
 
 
@@ -134,10 +135,11 @@ class UserDetailsView(generics.RetrieveAPIView):
 
     def retrieve(self, request, *args, **kwargs):
         user = self.get_object()
-        user_instruments = UserInstrument.objects.filter(userid=user).all()
-        user_media = UserMedia.objects.filter(userid=user).all()
-        user_reviews = UserReview.objects.filter(userid=user).all()
-        user_genres = UserGenre.objects.filter(userid=user).all()
+
+        user_instruments = UserInstrument.objects.filter(profileid=user).all()
+        user_media = UserMedia.objects.filter(profileid=user).all()
+        user_reviews = UserReview.objects.filter(profileid=user).all()
+        user_genres = UserGenre.objects.filter(profileid=user).all()
         user_photos = Photo.objects.filter(profileid=user).all()
 
         user_serializer = ProfileSerializer(user)
@@ -160,8 +162,8 @@ class UserDetailsView(generics.RetrieveAPIView):
 
 
 @api_view(('GET',))
-def getUserGenres(request, user_id):
-    user_genres = UserGenre.objects.filter(userid=user_id).all()
+def getUserGenres(request, profile_id):
+    user_genres = UserGenre.objects.filter(profileid=profile_id).all()
     genres = [user_genre.genreid for user_genre in user_genres]
     ser_genres = MusicGenreSerializer(genres, many=True)
     return Response({
@@ -169,8 +171,8 @@ def getUserGenres(request, user_id):
     })
 
 @api_view(('GET',))
-def getUserInstruments(request, user_id):
-    user_instruments = UserInstrument.objects.filter(userid=user_id).all()
+def getUserInstruments(request, profile_id):
+    user_instruments = UserInstrument.objects.filter(profileid=profile_id).all()
     instruments = [user_instrument.instrumentid for user_instrument in user_instruments]
     ser_instruments = InstrumentSerializer(instruments, many=True)
     return Response({
@@ -178,16 +180,24 @@ def getUserInstruments(request, user_id):
     })
 
 @api_view(('GET',))
-def getUserMedia(request, user_id):
-    user_media = UserMedia.objects.filter(userid=user_id).all()
+def getUserMedia(request, profile_id):
+    user_media = UserMedia.objects.filter(profileid=profile_id).all()
     ser_media = UserMediaSerializer(user_media, many=True)
     return Response({
         'media': ser_media.data
     })
 
 @api_view(('GET',))
-def getUserReviews(request, user_id):
-    user_reviews = UserReview.objects.filter(userid=user_id).all()
+def getUserReviewsForUser(request, profile_id):
+    user_reviews = UserReview.objects.filter(profileid=profile_id).all()
+    ser_reviews = UserReviewSerializer(user_reviews, many=True)
+    return Response({
+        'reviews': ser_reviews.data
+    })
+
+@api_view(('GET',))
+def getUserReviewsByUser(request, profile_id):
+    user_reviews = UserReview.objects.filter(reviewerid=profile_id).all()
     ser_reviews = UserReviewSerializer(user_reviews, many=True)
     return Response({
         'reviews': ser_reviews.data

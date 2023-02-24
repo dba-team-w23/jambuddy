@@ -1,6 +1,6 @@
 BEGIN;
 
-INSERT INTO public.jamrequestmodule_jamresponse (created, note, status, jrid_id, userid_id)
+INSERT INTO public.jamrequestmodule_jamresponse (created, note, status, jrid_id, profileid_id)
 VALUES
 (NOW(), 'Sounds like a great jam session!', 'Accepted', 25, 7),
 (NOW(), 'Youve got a nice melody!', 'Accepted', 26, 8),
