@@ -11,7 +11,7 @@ from jamrequestmodule.models import Instrument
 from rest_framework import generics, status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.parsers import JSONParser
+from rest_framework.parsers import JSONParser, FormParser, MultiPartParser
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, UserGenre, UserInstrument, UserMedia,
                      UserReview, Profile)
@@ -27,7 +27,7 @@ from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
 class UserList(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    parser_classes = (JSONParser,)
+    parser_classes = (JSONParser,FormParser,MultiPartParser,)
 
 # @api_view(['GET', 'PUT', 'DELETE', 'PATCH'])
 class UserDetail(viewsets.ModelViewSet):
@@ -219,7 +219,7 @@ def login_user(request):
 
     if user is not None and user.is_authenticated:
         login(request, user)
-        response = Response({"user_id":user.pk, "status":1}, status=status.HTTP_200_OK)
+        response = Response({"status":1, "profile_id":user.pk}, status=status.HTTP_200_OK)
         response["Access-Control-Allow-Origin"]= "*"
         response["Access-Control-Allow-Credentials"]="true"
         response["Access-Control-Allow-Methods"]="GET,HEAD,OPTIONS,POST,PUT"
@@ -227,7 +227,7 @@ def login_user(request):
 
         return response
     else:
-        response = Response({"status":0}, status=status.HTTP_200_OK)
+        response = Response({"status":0, "error":"Invalid username or password"}, status=status.HTTP_200_OK)
         response["Access-Control-Allow-Headers"] = "content-type"
         return response
 
