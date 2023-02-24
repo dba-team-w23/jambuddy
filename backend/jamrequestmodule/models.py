@@ -33,7 +33,7 @@ class Instrument(models.Model):
         return str(self.name)
 
 
-class Photo(models.Model):
+class ProfilePhoto(models.Model):
     profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
     url_link = models.URLField()
     is_primary = models.BooleanField(default=False)
