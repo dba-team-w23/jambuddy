@@ -10,367 +10,401 @@
 			"name": "Users",
 			"item": [
 				{
-					"name": "Login_User",
-					"event": [
+					"name": "GET",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var xsrfCookie = pm.getResponseCookie(\"csrftoken\")",
-									"pm.environment.set(\"csrftoken\", xsrfCookie.value);",
-									"",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRFToken",
-								"value": "{{csrftoken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "username",
-									"value": "swally",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "swally",
-									"type": "text"
+							"name": "GET users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/users/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"users",
+										""
+									]
 								}
-							]
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "localhost:8000/api/login_user",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"login_user"
-							]
+						{
+							"name": "GET user by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/users/2/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"users",
+										"2",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET userDetails by userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/user-details/2/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"user-details",
+										"2",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET userGenres",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/usergenres/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"usergenres",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET userGenre by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/usergenres/39/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"usergenres",
+										"39",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET userGenre by userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/usergenresforuser/7/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"usergenresforuser",
+										"7",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET userInstruments",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/userinstruments/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"userinstruments",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET userInstruments by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/userinstruments/86/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"userinstruments",
+										"86",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET userInstruments by userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/userinstrumentsforuser/6/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"userinstrumentsforuser",
+										"6",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET userMedia",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/usermedia",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"usermedia"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET userMedia by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/usermedia/12/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"usermedia",
+										"12",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET userMedia by userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/usermediaforuser/8/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"usermediaforuser",
+										"8",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET userReviews",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/userreviews/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"userreviews",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET userReviews by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/userreviews/20/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"userreviews",
+										"20",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET userReviews for userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/userreviewsforuser/11/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"userreviewsforuser",
+										"11",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET userReviews by userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/userreviewsbyuser/10/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"userreviewsbyuser",
+										"10",
+										""
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "GET users",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/users/",
-							"host": [
-								"localhost"
+					"name": "POST",
+					"item": [
+						{
+							"name": "Login_User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
 							],
-							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								""
-							]
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "swally",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "swally",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/api/login_user",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"login_user"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "GET user by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/users/6/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								"6",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET userDetails by userid",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/user-details/10/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"user-details",
-								"10",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET userGenres",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/usergenres/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"usergenres",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET userGenre by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/usergenres/356/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"usergenres",
-								"356",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET userGenre by userid",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/usergenresforuser/9/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"usergenresforuser",
-								"9",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET userInstruments",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/userinstruments/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"userinstruments",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET userInstruments by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/userinstruments/170/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"userinstruments",
-								"170",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET userInstruments by userid",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/userinstrumentsforuser/11/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"userinstrumentsforuser",
-								"11",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET userMedia",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/usermedia",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"usermedia"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET userMedia by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/usermedia/12/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"usermedia",
-								"12",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET userMedia by userid",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/usermediaforuser/12/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"usermediaforuser",
-								"12",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET userReviews",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/userreviews/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"userreviews",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET userReviews by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/userreviews/61/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"userreviews",
-								"61",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET userReviews by userid",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/userreviewsforuser/11/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"userreviewsforuser",
-								"11",
-								""
-							]
-						}
-					},
-					"response": []
+					"name": "PUT",
+					"item": []
 				}
 			]
 		},
@@ -378,85 +412,98 @@
 			"name": "Jams",
 			"item": [
 				{
-					"name": "GET jamRequests",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/jamrequests/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"jamrequests",
-								""
-							]
+					"name": "GET",
+					"item": [
+						{
+							"name": "GET jamRequests",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/jamrequests/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"jamrequests",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET jamRequest by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/jamrequests/14",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"jamrequests",
+										"14"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET jamResponses",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/jamresponses/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"jamresponses",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET jamResponse by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/jamresponses/16/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"jamresponses",
+										"16",
+										""
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "GET jamRequest by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/jamrequests/30",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"jamrequests",
-								"30"
-							]
-						}
-					},
-					"response": []
+					"name": "POST",
+					"item": []
 				},
 				{
-					"name": "GET jamResponses",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/jamresponses/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"jamresponses",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET jamResponse by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8000/api/jamresponses/8/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"jamresponses",
-								"8",
-								""
-							]
-						}
-					},
-					"response": []
+					"name": "PUT",
+					"item": []
 				}
 			]
 		},
