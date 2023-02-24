@@ -18,11 +18,11 @@ class InstrumentAdmin(admin.ModelAdmin):
 
 
 class JamRequestAdmin(admin.ModelAdmin):
-    list_display = ('id', 'userid', 'instrumentid', 'genreid', 'location', 'exp_level', 'status')
+    list_display = ('id', 'profileid', 'instrumentid', 'genreid', 'location', 'exp_level', 'status')
 
 
 class JamResponseAdmin(admin.ModelAdmin):
-    list_display = ('id', 'jrid', 'userid', 'status')
+    list_display = ('id', 'jrid', 'profileid', 'status')
 
 
 class MusicGenreAdmin(admin.ModelAdmin):
@@ -30,19 +30,19 @@ class MusicGenreAdmin(admin.ModelAdmin):
 
 
 class UserGenreAdmin(admin.ModelAdmin):
-    list_display = ('id', 'userid', 'genreid')
+    list_display = ('id', 'profileid', 'genreid')
 
 
 class UserInstrumentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'userid', 'instrumentid', 'exp_level')
+    list_display = ('id', 'profileid', 'instrumentid', 'exp_level')
 
 
 class UserMediaAdmin(admin.ModelAdmin):
-    list_display = ('id', 'userid', 'type', 'location', 'seconds')
+    list_display = ('id', 'profileid', 'type', 'location', 'seconds')
 
 
 class UserReviewAdmin(admin.ModelAdmin):
-    list_display = ('id', 'userid', 'reviewerid', 'rating')
+    list_display = ('id', 'profileid', 'reviewerid', 'rating')
 
 
 admin.site.register(Profile, ProfileAdmin)
