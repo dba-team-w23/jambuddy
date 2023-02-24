@@ -234,17 +234,17 @@ def login_user(request):
 
     if user is not None and user.is_authenticated:
         login(request, user)
-        response = Response({"user_id":user.pk, "status":1}, status=status.HTTP_200_OK)
-        response["Access-Control-Allow-Origin"]= "*"
-        response["Access-Control-Allow-Credentials"]="true"
-        response["Access-Control-Allow-Methods"]="GET,HEAD,OPTIONS,POST,PUT"
-        response["Access-Control-Allow-Headers"]="Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+        response = Response({"user_id": user.pk, "status": 1}, status=status.HTTP_200_OK)
+        response["Access-Control-Allow-Origin"] = "*"
+        response["Access-Control-Allow-Credentials"] = "true"
+        response["Access-Control-Allow-Methods"] = "GET,HEAD,OPTIONS,POST,PUT"
+        response["Access-Control-Allow-Headers"] = "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
 
-        return response
     else:
-        response = Response({"status":0}, status=status.HTTP_200_OK)
+        response = Response({"status": 0}, status=status.HTTP_200_OK)
         response["Access-Control-Allow-Headers"] = "content-type"
-        return response
+
+    return response
 
 
 @api_view(['POST'])
