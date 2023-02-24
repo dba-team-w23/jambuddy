@@ -21,7 +21,6 @@ function ResponsiveAppBar(props) {
   const [signedInUser, setSignedInUser] = React.useState({ props });
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  console.log("in navbar: ", signedInUser);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -35,11 +34,12 @@ function ResponsiveAppBar(props) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    setSignedInUser(null);
+    console.log("signedInUser", signedInUser);
   };
 
   const signOut = () => {
     handleCloseUserMenu();
-    setSignedIn(false);
   };
 
   return (

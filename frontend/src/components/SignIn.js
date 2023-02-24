@@ -15,8 +15,6 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { getCookie } from "./partials/csrftoken";
 
 export default function SignIn({ signedInUser, setSignedInUser }) {
-  console.log("signedInUser: ", signedInUser);
-  console.log(typeof setSignedInUser);
   const [formInput, setFormInput] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -61,6 +59,7 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
         "Content-Type": "application/json",
         "X-CSRFToken": getCookie("csrftoken"),
       },
+      // change to no-cors if there are still cors errors in production
       mode: "cors",
     })
       .then((response) => {

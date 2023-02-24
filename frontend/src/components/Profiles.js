@@ -6,7 +6,7 @@ import "./css/Profiles.css";
 const apiRoot = "http://localhost:8088";
 const baseURL = `${apiRoot}/api/users/`;
 
-export default function Profiles() {
+export default function Profiles(props) {
   const [profiles, setProfiles] = React.useState([]);
 
   const getData = async () => {
@@ -22,7 +22,7 @@ export default function Profiles() {
       {profiles.length > 0 ? (
         <Grid container spacing={2}>
           {profiles.map((profile, i) => (
-            <Grid item key={i} xs={12} sm={6} md={4} lg={3}>
+            <Grid item key={i} xs={12} sm={6} md={6} lg={4}>
               <ProfileCard profile={profile} />
             </Grid>
           ))}

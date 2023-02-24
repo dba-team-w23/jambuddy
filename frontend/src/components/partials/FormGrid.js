@@ -6,13 +6,14 @@ import PickInstruments from "./PickInstruments";
 import Multiline from "./Multiline";
 import UploadWidget from "./UploadWidget";
 import { Grid, TextField } from "@mui/material";
-import {allStates} from './variables'
-import { FormControl } from '@mui/material'
-import Box from '@mui/material/Box'
+import { allStates } from "./variables";
+import { FormControl } from "@mui/material";
+import Box from "@mui/material/Box";
 
 export default function FormGrid() {
   const [instruments, setInstruments] = React.useState([]);
-  const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app";
+  // const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app";
+  const baseURL = "http://localhost:8088";
   const instrumentApi = `${baseURL}/api/instruments/`;
   const [formValues, setFormValues] = React.useState({
     fname: "",
@@ -30,7 +31,6 @@ export default function FormGrid() {
     evt.preventDefault();
     const formData = new FormData(evt.target);
     const data = Object.fromEntries(formData.entries());
-    console.log("form data: ", data)
 
     fetch(`${baseURL}/api/users/`, {
       method: "POST",
@@ -38,20 +38,20 @@ export default function FormGrid() {
       headers: {
         "Content-Type": "application/json",
       },
-      mode: 'no-cors',
+      mode: "no-cors",
     })
       .then((response) => {
-        if(!response.ok) {
-          throw new Error("Network response was not ok")
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
-        return response.json()
+        return response.json();
       })
       .then((response) => console.log("success", JSON.stringify(response)))
       .catch((error) => {
-        console.error("Error:", error)
-        console.log("response obj: ", error.response)
+        console.error("Error:", error);
+        console.log("response obj: ", error.response);
       });
-  }
+  };
 
   const sortObject = (arr) => {
     arr.sort((a, b) => {
@@ -74,8 +74,8 @@ export default function FormGrid() {
   }, []);
 
   return (
-     <form onSubmit={handleSubmit}>
-       <Grid container spacing={2}>
+    <form onSubmit={handleSubmit}>
+      <Grid container spacing={2}>
         <Grid item xs={6}>
           <TextField
             id="outlined-basic-1"
@@ -104,13 +104,22 @@ export default function FormGrid() {
           />
         </Grid>
         <Grid item xs={8}>
-          <TextField id="outlined-basic-5" name="city" label="City" variant="outlined" />
+          <TextField
+            id="outlined-basic-5"
+            name="city"
+            label="City"
+            variant="outlined"
+          />
         </Grid>
         <Grid item xs={4}>
           <PickList label="State" name="state" list={allStates} />
         </Grid>
         <Grid item xs={12}>
-          <PickInstruments label="Primary Instrument" name="instrument" list={instruments} />
+          <PickInstruments
+            label="Primary Instrument"
+            name="instrument"
+            list={instruments}
+          />
         </Grid>
         <Grid item xs={12}>
           <Multiline
@@ -129,11 +138,12 @@ export default function FormGrid() {
           <Password label="Repeat Password" id="pw2" />
         </Grid>
         <Grid item xs={12}>
-          <Button type="submit" variant="contained">Save Profile</Button>
+          <Button type="submit" variant="contained">
+            Save Profile
+          </Button>
         </Grid>
       </Grid>
       <UploadWidget />
-      </form>
-   );
+    </form>
+  );
 }
-

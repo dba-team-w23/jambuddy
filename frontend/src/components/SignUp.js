@@ -16,36 +16,34 @@ export default function SignUp() {
       password: "",
     }
   );
-  const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/"
+  const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/";
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     let data = { formInput };
-  
+
     fetch(baseURL, {
       method: "POST",
       mode: "no-cors",
       headers: {
         "Content-Length": 50,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-    .then(response => {
-      console.log("success",JSON.stringify(response))
-    })
-    .catch(error => {
-      console.error("Error: " + error)
-    })
+      .then((response) => {
+        console.log("success", JSON.stringify(response));
+      })
+      .catch((error) => {
+        console.error("Error: " + error);
+      });
   };
 
   const handleInput = (evt) => {
     const name = evt.target.name;
     const newValue = evt.target.value;
     setFormInput({ [name]: newValue });
-    console.log(name, newValue)
   };
-
 
   return (
     <>
@@ -61,7 +59,6 @@ export default function SignUp() {
         autoComplete="off"
         onSubmit={handleSubmit}
       >
-
         <TextField
           id="firstName-textfield"
           name="firstName"
@@ -75,7 +72,7 @@ export default function SignUp() {
           name="lastName"
           variant="outlined"
           onChange={handleInput}
-          />
+        />
         <TextField
           id="email-textfield"
           label="Email"
@@ -91,12 +88,11 @@ export default function SignUp() {
           name="userName"
           variant="outlined"
           onChange={handleInput}
-          />
+        />
         <Password />
         <Button type="submit" variant="contained">
           Sign Up
         </Button>
-
       </Box>
     </>
   );
