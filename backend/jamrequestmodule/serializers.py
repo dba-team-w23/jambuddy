@@ -10,9 +10,11 @@ from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = settings.AUTH_USER_MODEL
+        model = Profile
         db_table = Profile
-        fields = '__all__'
+        fields = ['id', 'last_login','date_joined','username','first_name','last_name',
+            'email','street','street2','city','state','zipcode','phone','photo','note']
+        #fields = '__all__'
 
 class ExperienceLevelSerializer(serializers.ModelSerializer):
     class Meta:
