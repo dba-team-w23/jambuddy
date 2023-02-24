@@ -399,6 +399,74 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Create_User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "bretest1",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "brettest2",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "garbage@garb.com",
+											"type": "text"
+										},
+										{
+											"key": "fname",
+											"value": "Sly",
+											"type": "text"
+										},
+										{
+											"key": "lname",
+											"value": "Fox",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8000/api/users",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},

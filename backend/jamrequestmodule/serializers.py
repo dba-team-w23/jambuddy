@@ -17,6 +17,17 @@ class ProfileSerializer(serializers.ModelSerializer):
             'instruments','genres','exp_level']
         #fields = '__all__'
 
+    def create(self, validated_data):
+        user = Profile.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=self.initial_data['password'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+        )
+
+        return user
+
 class ExperienceLevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExperienceLevel

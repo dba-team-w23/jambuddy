@@ -5,11 +5,11 @@ from datetime import datetime
 
 class Profile(AbstractUser):
     email = models.CharField(max_length=255)
-    street = models.CharField(max_length=255)
+    street = models.CharField(max_length=255, null=True)
     street2 = models.CharField(max_length=255, null=True)
-    city = models.CharField(max_length=255)
-    state = models.CharField(max_length=255)
-    zipcode = models.CharField(max_length=255)
+    city = models.CharField(max_length=255, null=True)
+    state = models.CharField(max_length=255, null=True)
+    zipcode = models.CharField(max_length=255, null=True)
     phone = models.CharField(max_length=255, null=True)
     photo = models.CharField(max_length=255, null=True)
     note = models.TextField(null=True)
