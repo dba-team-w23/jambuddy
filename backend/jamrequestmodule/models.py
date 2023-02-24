@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from datetime import datetime
 
 class Profile(AbstractUser):
     email = models.CharField(max_length=255)
@@ -32,9 +33,19 @@ class Instrument(models.Model):
         return str(self.name)
 
 
+class Photo(models.Model):
+    profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    url_link = models.URLField()
+    is_primary = models.BooleanField(default=False)
+    created_date = models.DateTimeField(default=datetime.now)
+
+    def __str__(self):
+        return f'Photo: {self.url_link}'
+
+
 class MusicGenre(models.Model):
     genre = models.CharField(max_length=255)
-    
+
     def __str__(self):
         return self.genre
 

@@ -14,12 +14,14 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, UserGenre, UserInstrument, UserMedia,
-                     UserReview, Profile)
+                     UserReview, Profile, Photo)
 from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
                           JamRequestSerializer, JamResponseSerializer,
                           MusicGenreSerializer, UserGenreSerializer,
                           UserInstrumentSerializer, UserMediaSerializer,
-                          UserReviewSerializer, ProfileSerializer)
+                          UserReviewSerializer, ProfileSerializer,
+                          PhotoSerializer,
+                          ProfileSerializer)
 
 
 
@@ -117,32 +119,45 @@ class UserReviewDetail(viewsets.ModelViewSet):
     serializer_class = UserReviewSerializer
 
 
+class PhotosDetail(viewsets.ModelViewSet):
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
+
+
+class PhotosList(viewsets.ModelViewSet):
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
+
+
 class UserDetailsView(generics.RetrieveAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
     def retrieve(self, request, *args, **kwargs):
         user = self.get_object()
+
         user_instruments = UserInstrument.objects.filter(profileid=user).all()
         user_media = UserMedia.objects.filter(profileid=user).all()
         user_reviews = UserReview.objects.filter(profileid=user).all()
         user_genres = UserGenre.objects.filter(profileid=user).all()
+        user_photos = Photo.objects.filter(profileid=user).all()
 
         user_serializer = ProfileSerializer(user)
         user_instruments_serializer = UserInstrumentSerializer(user_instruments, many=True)
         user_media_serializer = UserMediaSerializer(user_media, many=True)
         user_reviews_serializer = UserReviewSerializer(user_reviews, many=True)
+        user_photos_serializer = PhotoSerializer(user_photos, many=True)
 
         genres = [user_genre.genreid for user_genre in user_genres]
         serialized_genres = MusicGenreSerializer(genres, many=True)
-
 
         return Response({
             'user': user_serializer.data,
             'genres': serialized_genres.data,
             'instruments': user_instruments_serializer.data,
             'media': user_media_serializer.data,
-            'reviews': user_reviews_serializer.data
+            'reviews': user_reviews_serializer.data,
+            'photos': user_photos_serializer.data
         })
 
 
