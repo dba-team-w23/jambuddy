@@ -13,6 +13,9 @@ class Profile(AbstractUser):
     photo = models.CharField(max_length=255, null=True)
     note = models.TextField(null=True)
     created = models.DateTimeField(auto_now_add=True)
+    instruments = models.TextField(null=True)
+    genres = models.TextField(null=True)
+    exp_level = models.TextField(null=True)
 
 class ExperienceLevel(models.Model):
     level = models.CharField(max_length=255)
@@ -44,6 +47,9 @@ class JamRequest(models.Model):
     exp_level = models.ForeignKey(ExperienceLevel, on_delete=models.CASCADE)
     status = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
+    instrument = models.TextField(null=True)
+    genre = models.TextField(null=True)
+    exp_level = models.TextField(null=True)
 
 
 class JamResponse(models.Model):
