@@ -14,27 +14,26 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, UserGenre, UserInstrument, UserMedia,
-                     UserReview, Users)
+                     UserReview, Profile)
 from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
                           JamRequestSerializer, JamResponseSerializer,
                           MusicGenreSerializer, UserGenreSerializer,
                           UserInstrumentSerializer, UserMediaSerializer,
                           UserReviewSerializer,
-                          UsersSerializer)
+                          ProfileSerializer)
 
 
 
 # @api_view(['GET', 'POST'])
 class UserList(viewsets.ModelViewSet):
-    queryset = Users.objects.all()
-    serializer_class = UsersSerializer
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
     parser_classes = (JSONParser,)
-
 
 # @api_view(['GET', 'PUT', 'DELETE', 'PATCH'])
 class UserDetail(viewsets.ModelViewSet):
-    queryset = Users.objects.all()
-    serializer_class = UsersSerializer
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
     parser_classes = (JSONParser,)
 
 
@@ -120,8 +119,8 @@ class UserReviewDetail(viewsets.ModelViewSet):
 
 
 class UserDetailsView(generics.RetrieveAPIView):
-    queryset = Users.objects.all()
-    serializer_class = UsersSerializer
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
 
     def retrieve(self, request, *args, **kwargs):
         user = self.get_object()
@@ -130,7 +129,7 @@ class UserDetailsView(generics.RetrieveAPIView):
         user_reviews = UserReview.objects.filter(userid=user).all()
         user_genres = UserGenre.objects.filter(userid=user).all()
 
-        user_serializer = UsersSerializer(user)
+        user_serializer = ProfileSerializer(user)
         user_instruments_serializer = UserInstrumentSerializer(user_instruments, many=True)
         user_media_serializer = UserMediaSerializer(user_media, many=True)
         user_reviews_serializer = UserReviewSerializer(user_reviews, many=True)
@@ -203,6 +202,7 @@ def checkserver(request):
     return Response(data=message + date, status=status.HTTP_200_OK)
 
 
+@csrf_exempt
 @api_view(['POST'])
 def login_user(request):
     username = request.data.get('username', None)

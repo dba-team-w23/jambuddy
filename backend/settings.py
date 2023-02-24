@@ -69,8 +69,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
+
+AUTH_USER_MODEL = 'jamrequestmodule.Profile'
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Used by Django Debug Toolbar
@@ -162,7 +164,7 @@ REST_FRAMEWORK = {
     ]
 }
 
-
+APPEND_SLASH = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
