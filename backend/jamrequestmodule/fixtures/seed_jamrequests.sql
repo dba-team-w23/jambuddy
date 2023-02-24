@@ -1,5 +1,5 @@
 BEGIN;
-INSERT INTO public.jamrequestmodule_jamrequest("location", status, created, exp_level_id, genreid_id, instrumentid_id, userid_id)
+INSERT INTO public.jamrequestmodule_jamrequest("location", status, created, exp_level_id, genreid_id, instrumentid_id, profileid_id)
 VALUES
 ('San Francisco', 'Open', '2023-02-05 12:00:00', 1, 1, 1, 1),
 ('New York', 'Open', '2023-02-05 12:01:00', 2, 2, 2, 5),
