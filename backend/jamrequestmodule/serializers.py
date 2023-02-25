@@ -48,6 +48,13 @@ class JamRequestSerializer(serializers.ModelSerializer):
 
         list_serializer = serializers.ListSerializer(child=serializers.IntegerField())
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['instrument'] = InstrumentSerializer(instance.instrumentid).data
+        representation['genre'] = MusicGenreSerializer(instance.genreid).data
+        representation['requestor_profile'] = ProfileSerializer(instance.profileid).data
+        return representation
+
 class JamResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = JamResponse
