@@ -10,9 +10,8 @@ const ApiTest = () => {
 
   const doLoginUser = `${doApi}/api/login_user`;
   const lhLoginUser = `${localApi}/api/login_user`;
+  const [corsMode, setCorsMode] = useState('mode: "cors"');
 
-
-  const [profiles, setProfiles] = React.useState([]);
   const [doProfiles, setDoProfiles] = React.useState([]);
   const [lhProfiles, setLhProfiles] = React.useState([]);
   const [DOLoginUserResp, setDoLoginUserResp] = React.useState([]);
@@ -36,20 +35,20 @@ const ApiTest = () => {
     setDoProfiles([]);
   };
 
-
   const doApiHandlePostLoginUser = async () => {
     const data = await fetch(doLoginUser, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         first_name: "hal",
         last_name: "9000",
         email: "hal@robot.com",
         username: "hal9000",
-        password: "mystery"
-      })
+        password: "mystery",
+      }),
+      corsMode,
     }).then((response) => response.json());
     console.log(data);
     setDoLoginUserResp(data);
@@ -57,17 +56,18 @@ const ApiTest = () => {
 
   const lhApiHandlePostLoginUser = async () => {
     const data = await fetch(lhLoginUser, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         first_name: "hal",
         last_name: "9000",
         email: "hal@robot.com",
         username: "hal9000",
-        password: "mystery"
-      })
+        password: "mystery",
+      }),
+      corsMode,
     }).then((response) => response.json());
     console.log(data);
     setDoLoginUserResp(data);
@@ -79,115 +79,120 @@ const ApiTest = () => {
     setDoLoginUserResp([]);
   };
 
+  const toggleCorsMode = () => {
+    if (corsMode === 'mode: "cors"') {
+      setCorsMode('mode: "no-cors"');
+    } else {
+      setCorsMode('mode: "cors"');
+    }
+  };
   return (
-    <span><div className="flex">
-      <div className="p-4 m-5 border">
+    <span>
+      <div className="flex">
+        <div className="p-4 m-5 border">
+          <h2>Digital Ocean GET users</h2>
+          <button
+            className="text-white bg-blue-500 p-2 rounded m-1"
+            onClick={doApiHandle}
+          >
+            DO GET users
+          </button>
+          <button
+            onClick={clearDoUsers}
+            className="text-white bg-blue-500 p-2 rounded m-1"
+          >
+            clear
+          </button>
+          <ul>
+            {doProfiles.map((profile, i) => (
+              <li key={i}>
+                <h4>{profile.username}</h4>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        <h2>Digital Ocean GET users</h2>
-        <button
-          className="text-white bg-blue-500 p-2 rounded m-1"
-          onClick={doApiHandle}
-        >
-          DO GET users
-        </button>
-        <button
-          onClick={clearDoUsers}
-          className="text-white bg-blue-500 p-2 rounded m-1"
-        >
-          clear
-        </button>
-        <ul>
-          {doProfiles.map((profile, i) => (
-            <li key={i}>
-              <h4>{profile.username}</h4>
-            </li>
-          ))}
-        </ul>
+        <div className="p-4 m-5 border">
+          <h2>Localhost GET users</h2>
+          <button
+            className="text-white bg-blue-500 p-2 rounded m-1"
+            onClick={lhApiHandle}
+          >
+            {" "}
+            LocalHost GET users
+          </button>
+          <button
+            onClick={clearLocalUsers}
+            className="text-white bg-blue-500 p-2 rounded m-1"
+          >
+            clear
+          </button>
+          <ul>
+            {lhProfiles.map((profile, i) => (
+              <li key={i}>
+                <h4>{profile.username}</h4>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
-      <div className="p-4 m-5 border">
-        <h2>Localhost GET users</h2>
-        <button
-          className="text-white bg-blue-500 p-2 rounded m-1"
-          onClick={lhApiHandle}
-        >
-          {" "}
-          LocalHost GET users
-        </button>
-        <button
-          onClick={clearLocalUsers}
-          className="text-white bg-blue-500 p-2 rounded m-1"
-        >
-          clear
-        </button>
-        <ul>
-          {lhProfiles.map((profile, i) => (
-            <li key={i}>
-              <h4>{profile.username}</h4>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-    </div>
-
-    <div className="flex">
-      <div className="p-4 m-5 border">
-
-        <h2>Digital Ocean POST /login_user</h2>
-        <button
-          className="text-white bg-blue-500 p-2 rounded m-1"
-          onClick={doApiHandlePostLoginUser}
-        >
-          DO POST /login_user
-        </button>
-        <button
-          onClick={clearDOLoginUserResult}
-          className="text-white bg-blue-500 p-2 rounded m-1"
-        >
-          clear
-        </button>
-        <ul>
-          {
-            DOLoginUserResp && DOLoginUserResp.length !== 0 ? (
+      <div className="flex">
+        <div className="p-4 m-5 border">
+          <h2>Digital Ocean POST /login_user</h2>
+          <button
+            className="text-white bg-blue-500 p-2 rounded m-1"
+            onClick={doApiHandlePostLoginUser}
+          >
+            DO POST /login_user
+          </button>
+          <button
+            onClick={clearDOLoginUserResult}
+            className="text-white bg-blue-500 p-2 rounded m-1"
+          >
+            clear
+          </button>
+          <button
+            onClick={toggleCorsMode}
+            className="text-white bg-blue-500 p-2 rounded m-1"
+          >
+            Toggle {corsMode}
+          </button>
+          <ul>
+            {DOLoginUserResp && DOLoginUserResp.length !== 0 ? (
               <>
                 <h4>status = {DOLoginUserResp.status}</h4>
                 <h4>profile_id = {DOLoginUserResp.profile_id}</h4>
               </>
-            ) : null
-          }
-        </ul>
-      </div>
+            ) : null}
+          </ul>
+        </div>
 
-      <div className="p-4 m-5 border">
-        <h2>Localhost POST /login_user</h2>
-        <button
-          className="text-white bg-blue-500 p-2 rounded m-1"
-          onClick={lhApiHandlePostLoginUser}
-        >
-          {" "}
-          LocalHost POST /login_user
-        </button>
-        <button
-          onClick={clearLocalLoginUserResult}
-          className="text-white bg-blue-500 p-2 rounded m-1"
-        >
-          clear
-        </button>
-        <ul>
-          {
-            LhLoginUserResp && LhLoginUserResp.length !== 0 ? (
+        <div className="p-4 m-5 border">
+          <h2>Localhost POST /login_user</h2>
+          <button
+            className="text-white bg-blue-500 p-2 rounded m-1"
+            onClick={lhApiHandlePostLoginUser}
+          >
+            {" "}
+            LocalHost POST /login_user
+          </button>
+          <button
+            onClick={clearLocalLoginUserResult}
+            className="text-white bg-blue-500 p-2 rounded m-1"
+          >
+            clear
+          </button>
+          <ul>
+            {LhLoginUserResp && LhLoginUserResp.length !== 0 ? (
               <>
                 <h4>status = {LhLoginUserResp.status}</h4>
                 <h4>profile_id = {LhLoginUserResp.profile_id}</h4>
               </>
-            ) : null
-          }
-        </ul>
+            ) : null}
+          </ul>
+        </div>
       </div>
-
-    </div>
-
     </span>
   );
 };
