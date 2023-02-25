@@ -41,11 +41,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # These should work per Django docs, but when enabled, PythonAnywhere VirtualEnv does not load.
-    # The error states corsheaders/signals.py received an unexpected keyword argument 'providing_args'
-    # StackOverflow suggests this is an issue with dependencies (Django and CorsHeaders mismatch)
-    # Both within, and outside of, the VirtualEnv, Django and CorsHeaders are both the most up-to-date versions: which per the docs are compatible
-    # Whyyyyy is this happening???
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
