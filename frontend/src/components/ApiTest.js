@@ -136,7 +136,14 @@ const ApiTest = () => {
           </ul>
         </div>
       </div>
-
+      <div className="w-full flex justify-center">
+        <button
+          onClick={toggleCorsMode}
+          className="text-white bg-blue-500 p-2 rounded m-1"
+        >
+          Toggle {corsMode}
+        </button>
+      </div>
       <div className="flex">
         <div className="p-4 m-5 border">
           <h2>Digital Ocean POST /users</h2>
@@ -152,12 +159,7 @@ const ApiTest = () => {
           >
             clear
           </button>
-          <button
-            onClick={toggleCorsMode}
-            className="text-white bg-blue-500 p-2 rounded m-1"
-          >
-            Toggle {corsMode}
-          </button>
+
           <ul>
             {DOCreateUserResp && DOCreateUserResp.length !== 0 ? (
               <>
