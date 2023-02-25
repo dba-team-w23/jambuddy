@@ -4,7 +4,7 @@ import BasicCard from "./partials/BasicCard";
 import Grid from "@mui/material/Grid";
 
 // const apiRoot = 'https://sea-turtle-app-zggz6.ondigitalocean.app'
-const apiRoot = "http://localhost:8088";
+const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
 
 const jamApi = `${apiRoot}/api/jamrequests/`;
 
