@@ -5,8 +5,9 @@ const ApiTest = () => {
   const doApi = "https://sea-turtle-app-zggz6.ondigitalocean.app";
   const localApi = "http://localhost:8000";
   const localStorageApi = "http://localhost:8088";
-  const getUsers = `${doApi}/api/users/`;
-  const localUsers = `${localApi}/api/users/`;
+  const getUsers = `${doApi}/api/users`;
+  const localUsers = `${localApi}/api/users`;
+
 
   const [profiles, setProfiles] = React.useState([]);
   const [doProfiles, setDoProfiles] = React.useState([]);
@@ -19,7 +20,7 @@ const ApiTest = () => {
   };
 
   const lhApiHandle = async () => {
-    const data = await fetch(getUsers).then((response) => response.json());
+    const data = await fetch(localUsers).then((response) => response.json());
     console.log(data);
     setLhProfiles(data);
   };
