@@ -19,7 +19,6 @@ environ.Env.read_env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -29,17 +28,23 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
+# MISC APP ENV VARS
+API_PORT = env('API_PORT')
+API_HOST = env('API_HOST')
+AUTH_USER_MODEL = 'jamrequestmodule.Profile'
+APPEND_SLASH = False
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = True
+WSGI_APPLICATION = 'jamrequestmodule.wsgi.application'
+
+
 ALLOWED_HOSTS = [
     '0.0.0.0',
     'localhost',
     'http://localhost:3000',
     'http://localhost:8000',
-    'http://dbajamteam.pythonanywhere.com',
-    'https://dbajamteam.pythonanywhere.com',
-    'dbajamteam.pythonanywhere.com',
     'sea-turtle-app-zggz6.ondigitalocean.app',
     ]
-# pythonanywhere.com is the host that Docker uses to run application
 
 INSTALLED_APPS = [
     'rest_framework',
@@ -50,7 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jamrequestmodule',
-    # 'corsheaders',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -59,10 +64,8 @@ MIDDLEWARE = [
     # StackOverflow suggests this is an issue with dependencies (Django and CorsHeaders mismatch)
     # Both within, and outside of, the VirtualEnv, Django and CorsHeaders are both the most up-to-date versions: which per the docs are compatible
     # Whyyyyy is this happening???
-    # 'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # "jamrequestmodule.middleware.CorsMiddleware",
-
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -70,16 +73,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-AUTH_USER_MODEL = 'jamrequestmodule.Profile'
-
-CORS_ALLOW_ALL_ORIGINS = True
-
-# Used by Django Debug Toolbar
-INTERNAL_IPS = ['127.0.0.1']
-
-
-ROOT_URLCONF = 'jamrequestmodule.urls'
 
 TEMPLATES = [
     {
@@ -96,8 +89,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = 'jamrequestmodule.wsgi.application'
 
 
 # Database
@@ -141,38 +132,29 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/3.0/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-API_PORT = env('API_PORT')
-API_HOST = env('API_HOST')
-
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
     ]
 }
 
-APPEND_SLASH = False
+# Internationalization
+# https://docs.djangoproject.com/en/3.0/topics/i18n/
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+
+# Used by Django Debug Toolbar
+INTERNAL_IPS = ['127.0.0.1']
+ROOT_URLCONF = 'jamrequestmodule.urls'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
 STATIC_URL = '/static/'
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 
 # this should be put at the end of the settings.py file
 # CORS_ORIGIN_WHITELIST = [
@@ -206,8 +188,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #      'http://localhost:8000',
 #      'https://localhost:8000',
 # ]
-
-# CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOW_CREDENTIALS = True
-
