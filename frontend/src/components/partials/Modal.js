@@ -32,7 +32,7 @@ export default function BasicModal({...profile}) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {profile.fname} {profile.lname}
+            {profile.first_name} {profile.last_name}
           </Typography>
           <Typography id="modal-sub-title" variant="h6" component="h3">
           {profile.city}, {profile.state}

@@ -16,8 +16,8 @@ export default function FormGrid() {
   const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app";
   const instrumentApi = `${baseURL}/api/instruments/`;
   const [formValues, setFormValues] = React.useState({
-    fname: "",
-    lname: "",
+    first_name: "",
+    last_name: "",
     email: "",
     username: "",
     city: "",
@@ -79,7 +79,7 @@ export default function FormGrid() {
         <Grid item xs={6}>
           <TextField
             id="outlined-basic-1"
-            name="fname"
+            name="first_name"
             label="First Name"
             variant="outlined"
           />
@@ -87,7 +87,7 @@ export default function FormGrid() {
         <Grid item xs={6}>
           <TextField
             id="outlined-basic-2"
-            name="lname"
+            name="last_name"
             label="Last Name"
             variant="outlined"
           />

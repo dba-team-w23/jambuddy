@@ -29,14 +29,14 @@ export default function ProfileCard({ profile }) {
               <MoreVertIcon />
             </IconButton>
           }
-          title={`${profile.fname} ${profile.lname}`}
+          title={`${profile.first_name} ${profile.last_name}`}
           subheader={profile.username}
         />
         <CardMedia
           component="img"
           height="194"
           image={photoURL}
-          alt={profile.fname}
+          alt={profile.first_name}
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
