@@ -8,14 +8,14 @@ const ApiTest = () => {
   const getUsers = `${doApi}/api/users`;
   const localUsers = `${localApi}/api/users`;
 
-  const doLoginUser = `${doApi}/api/login_user`;
-  const lhLoginUser = `${localApi}/api/login_user`;
+  const doCreateUser = `${doApi}/api/users`;
+  const lhCreateUser = `${localApi}/api/users`;
   const [corsMode, setCorsMode] = useState('mode: "cors"');
 
   const [doProfiles, setDoProfiles] = React.useState([]);
   const [lhProfiles, setLhProfiles] = React.useState([]);
-  const [DOLoginUserResp, setDoLoginUserResp] = React.useState([]);
-  const [LhLoginUserResp, setLhLoginUserResp] = React.useState([]);
+  const [DOCreateUserResp, setDoCreateUserResp] = React.useState([]);
+  const [LhCreateUserResp, setLhCreateUserResp] = React.useState([]);
 
   const doApiHandle = async () => {
     const data = await fetch(getUsers).then((response) => response.json());
@@ -35,8 +35,8 @@ const ApiTest = () => {
     setDoProfiles([]);
   };
 
-  const doApiHandlePostLoginUser = async () => {
-    const data = await fetch(doLoginUser, {
+  const doApiHandlePostCreateUser = async () => {
+    const data = await fetch(doCreateUser, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,11 +51,11 @@ const ApiTest = () => {
       corsMode,
     }).then((response) => response.json());
     console.log(data);
-    setDoLoginUserResp(data);
+    setDoCreateUserResp(data);
   };
 
-  const lhApiHandlePostLoginUser = async () => {
-    const data = await fetch(lhLoginUser, {
+  const lhApiHandlePostCreateUser = async () => {
+    const data = await fetch(lhCreateUser, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,13 +70,13 @@ const ApiTest = () => {
       corsMode,
     }).then((response) => response.json());
     console.log(data);
-    setDoLoginUserResp(data);
+    setDoCreateUserResp(data);
   };
-  const clearLocalLoginUserResult = () => {
-    setLhLoginUserResp([]);
+  const clearLocalCreateUserResult = () => {
+    setLhCreateUserResp([]);
   };
-  const clearDOLoginUserResult = () => {
-    setDoLoginUserResp([]);
+  const clearDOCreateUserResult = () => {
+    setDoCreateUserResp([]);
   };
 
   const toggleCorsMode = () => {
@@ -139,15 +139,15 @@ const ApiTest = () => {
 
       <div className="flex">
         <div className="p-4 m-5 border">
-          <h2>Digital Ocean POST /login_user</h2>
+          <h2>Digital Ocean POST /users</h2>
           <button
             className="text-white bg-blue-500 p-2 rounded m-1"
-            onClick={doApiHandlePostLoginUser}
+            onClick={doApiHandlePostCreateUser}
           >
-            DO POST /login_user
+            DO POST /users
           </button>
           <button
-            onClick={clearDOLoginUserResult}
+            onClick={clearDOCreateUserResult}
             className="text-white bg-blue-500 p-2 rounded m-1"
           >
             clear
@@ -159,35 +159,35 @@ const ApiTest = () => {
             Toggle {corsMode}
           </button>
           <ul>
-            {DOLoginUserResp && DOLoginUserResp.length !== 0 ? (
+            {DOCreateUserResp && DOCreateUserResp.length !== 0 ? (
               <>
-                <h4>status = {DOLoginUserResp.status}</h4>
-                <h4>profile_id = {DOLoginUserResp.profile_id}</h4>
+                <h4>status = {DOCreateUserResp.status}</h4>
+                <h4>profile_id = {DOCreateUserResp.profile_id}</h4>
               </>
             ) : null}
           </ul>
         </div>
 
         <div className="p-4 m-5 border">
-          <h2>Localhost POST /login_user</h2>
+          <h2>Localhost POST /users</h2>
           <button
             className="text-white bg-blue-500 p-2 rounded m-1"
-            onClick={lhApiHandlePostLoginUser}
+            onClick={lhApiHandlePostCreateUser}
           >
             {" "}
-            LocalHost POST /login_user
+            LocalHost POST /users
           </button>
           <button
-            onClick={clearLocalLoginUserResult}
+            onClick={clearLocalCreateUserResult}
             className="text-white bg-blue-500 p-2 rounded m-1"
           >
             clear
           </button>
           <ul>
-            {LhLoginUserResp && LhLoginUserResp.length !== 0 ? (
+            {LhCreateUserResp && LhCreateUserResp.length !== 0 ? (
               <>
-                <h4>status = {LhLoginUserResp.status}</h4>
-                <h4>profile_id = {LhLoginUserResp.profile_id}</h4>
+                <h4>status = {LhCreateUserResp.status}</h4>
+                <h4>profile_id = {LhCreateUserResp.profile_id}</h4>
               </>
             ) : null}
           </ul>
