@@ -177,6 +177,26 @@ const ApiTest = () => {
             ) : null}
           </ul>
         </div>
+
+        <div className="p-4 m-5 border">
+          <h2>Localhost POST /users</h2>
+          <button
+            className="text-white bg-blue-500 p-2 rounded m-1"
+            onClick={lhApiHandlePostCreateUser}
+          >
+            {" "}
+            LocalHost POST /users
+          </button>
+
+          <ul>
+            {LhCreateUserResp && LhCreateUserResp.length !== 0 ? (
+              <>
+                <h4>status = {LhCreateUserResp.status}</h4>
+                <h4>profile_id = {LhCreateUserResp.profile_id}</h4>
+              </>
+            ) : null}
+          </ul>
+        </div>
       </div>
     </span>
   );

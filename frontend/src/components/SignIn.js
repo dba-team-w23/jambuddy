@@ -4,7 +4,6 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import "./css/SignIn.css";
 import { Link } from "react-router-dom";
-import Posts from "./Posts";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -19,11 +18,11 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
     (state, newState) => ({ ...state, ...newState }),
     {
       username: "",
-      email: "",
       password: "",
     }
   );
   const [showPassword, setShowPassword] = React.useState(false);
+  const [userId, setUserId] = React.useState(null);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -40,29 +39,25 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
     setFormInput({ password: evt.target.value });
   };
 
-  // const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
-  const apiRoot = "localhost:8088";
-  const baseURL = `${apiRoot}/api/users/`;
+  const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
+  // const apiRoot = "http://localhost:8000";
+  const baseURL = `${apiRoot}/api/users`;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     let data = {
       username: formInput.username,
-      email: formInput.email,
       password: formInput.password,
     };
 
     fetch(baseURL, {
       method: "POST",
-      body: JSON.stringify(data),
+      body: data,
       headers: {
         "Content-Type": "application/json",
         "X-CSRFToken": getCookie("csrftoken"),
       },
-      // maybe no-cors with database
-      // mode: "no-cors",
-      // "cors" with local server
-      // mode: "cors",
+      mode: "cors",
     })
       .then((response) => {
         if (!response.ok) {
@@ -72,7 +67,8 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
       })
       .then((response) => {
         console.log("success", JSON.stringify(response));
-        setSignedInUser(response);
+        setUserId(response.profile_id);
+        console.log("userid", userId);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -99,15 +95,6 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
             required
             onChange={handleInput}
           />
-          <TextField
-            id="outlined-basic-2"
-            label="Email"
-            name="email"
-            variant="outlined"
-            required
-            onChange={handleInput}
-          />
-
           <FormControl variant="outlined">
             <InputLabel htmlFor={`outlined-adornment-password`}>
               Password
@@ -140,7 +127,7 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
           </Link>
         </Box>
       )}
-      {signedInUser && <Posts />}
+      {signedInUser && <h1>User name</h1>}
     </>
   );
 }
