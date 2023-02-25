@@ -1,5 +1,6 @@
 # JamBuddy
 
+
 ## Project Dependencies
 
 You must have [NodeJs](https://nodejs.org/en/), [Python](https://www.python.org/downloads/) and [Docker](https://www.docker.com/products/docker-desktop/) installed locally to run this project.
