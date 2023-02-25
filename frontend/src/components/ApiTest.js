@@ -10,7 +10,7 @@ const ApiTest = () => {
 
   const doCreateUser = `${doApi}/api/users`;
   const lhCreateUser = `${localApi}/api/users`;
-  const [corsMode, setCorsMode] = useState('mode: "cors"');
+  const [corsMode, setCorsMode] = useState("cors");
 
   const [doProfiles, setDoProfiles] = React.useState([]);
   const [lhProfiles, setLhProfiles] = React.useState([]);
@@ -36,6 +36,7 @@ const ApiTest = () => {
   };
 
   const doApiHandlePostCreateUser = async () => {
+    console.log("cors mode", corsMode, "DigitalOcean POST");
     const data = await fetch(doCreateUser, {
       method: "POST",
       headers: {
@@ -51,10 +52,10 @@ const ApiTest = () => {
       mode: corsMode,
     }).then((response) => response.json());
     console.log(data);
-    setDoCreateUserResp(data);
   };
 
   const lhApiHandlePostCreateUser = async () => {
+    console.log("cors mode", corsMode, "Localhost POST");
     const data = await fetch(lhCreateUser, {
       method: "POST",
       headers: {
@@ -70,13 +71,6 @@ const ApiTest = () => {
       mode: corsMode,
     }).then((response) => response.json());
     console.log(data);
-    setDoCreateUserResp(data);
-  };
-  const clearLocalCreateUserResult = () => {
-    setLhCreateUserResp([]);
-  };
-  const clearDOCreateUserResult = () => {
-    setDoCreateUserResp([]);
   };
 
   const toggleCorsMode = () => {
@@ -153,12 +147,6 @@ const ApiTest = () => {
           >
             DO POST /users
           </button>
-          <button
-            onClick={clearDOCreateUserResult}
-            className="text-white bg-blue-500 p-2 rounded m-1"
-          >
-            clear
-          </button>
 
           <ul>
             {DOCreateUserResp && DOCreateUserResp.length !== 0 ? (
@@ -179,12 +167,7 @@ const ApiTest = () => {
             {" "}
             LocalHost POST /users
           </button>
-          <button
-            onClick={clearLocalCreateUserResult}
-            className="text-white bg-blue-500 p-2 rounded m-1"
-          >
-            clear
-          </button>
+
           <ul>
             {LhCreateUserResp && LhCreateUserResp.length !== 0 ? (
               <>
