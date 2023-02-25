@@ -13,7 +13,7 @@
 					"name": "GET",
 					"item": [
 						{
-							"name": "GET users",
+							"name": "users",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -33,7 +33,7 @@
 							"response": []
 						},
 						{
-							"name": "GET user by id",
+							"name": "user by id",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -54,7 +54,7 @@
 							"response": []
 						},
 						{
-							"name": "GET userDetails by userid",
+							"name": "userDetails by userid",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -75,7 +75,7 @@
 							"response": []
 						},
 						{
-							"name": "GET userGenres",
+							"name": "userGenres",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -95,7 +95,7 @@
 							"response": []
 						},
 						{
-							"name": "GET userGenre by id",
+							"name": "userGenre by id",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -116,7 +116,7 @@
 							"response": []
 						},
 						{
-							"name": "GET userGenre by userid",
+							"name": "userGenre by userid",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -137,7 +137,28 @@
 							"response": []
 						},
 						{
-							"name": "GET userInstruments",
+							"name": "userFaveJamReq for userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/userfavejamreqs/2/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"userfavejamreqs",
+										"2",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userInstruments",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -157,7 +178,7 @@
 							"response": []
 						},
 						{
-							"name": "GET userInstruments by id",
+							"name": "userInstruments by id",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -178,7 +199,7 @@
 							"response": []
 						},
 						{
-							"name": "GET userInstruments by userid",
+							"name": "userInstruments by userid",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -199,7 +220,7 @@
 							"response": []
 						},
 						{
-							"name": "GET userMedia",
+							"name": "userMedia",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -218,7 +239,7 @@
 							"response": []
 						},
 						{
-							"name": "GET userMedia by id",
+							"name": "userMedia by id",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -239,7 +260,7 @@
 							"response": []
 						},
 						{
-							"name": "GET userMedia by userid",
+							"name": "userMedia by userid",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -260,7 +281,7 @@
 							"response": []
 						},
 						{
-							"name": "GET userReviews",
+							"name": "userReviews",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -280,7 +301,7 @@
 							"response": []
 						},
 						{
-							"name": "GET userReviews by id",
+							"name": "userReviews by id",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -301,7 +322,7 @@
 							"response": []
 						},
 						{
-							"name": "GET userReviews for userid",
+							"name": "userReviews for userid",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -322,7 +343,7 @@
 							"response": []
 						},
 						{
-							"name": "GET userReviews by userid",
+							"name": "userReviews by userid",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -463,6 +484,35 @@
 									"path": [
 										"api",
 										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userFaveJamReq",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"profileid\":2, \"jrid\":9}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8000/api/userfavejamreqs/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"userfavejamreqs",
+										""
 									]
 								}
 							},
