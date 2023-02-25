@@ -2,6 +2,7 @@
 from datetime import datetime
 
 import pytz
+import pkg_resources
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse, JsonResponse
@@ -260,8 +261,15 @@ def index(request):
 
 @api_view(['GET'])
 def checkserver(request):
-    date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    message = 'Server check-in successful. Current time is: '
+    #Gather important library versions
+    message = "Libraries: "
+    libraries_to_display = ["Django", "django-cors-headers", "django-cors-middleware"]
+    for library in libraries_to_display:
+        version = pkg_resources.get_distribution(library).version
+        message += library + " v" + version + ", "
+
+    date = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+    message += "Server time is: "
     return Response(data=message + date, status=status.HTTP_200_OK)
 
 

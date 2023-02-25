@@ -1,11 +1,34 @@
 {
 	"info": {
-		"_postman_id": "bd71776a-027a-4157-ad82-c02fb92326ed",
+		"_postman_id": "e36e46fd-2b80-44da-ada1-70ca93af3fb4",
 		"name": "JamBuddy - Local",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "17886123"
+		"_exporter_id": "11092666"
 	},
 	"item": [
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Checkserver",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/checkserver",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"checkserver"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "Users",
 			"item": [
@@ -18,15 +41,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/users/",
+									"raw": "localhost:8000/api/users",
 									"host": [
 										"localhost"
 									],
 									"port": "8000",
 									"path": [
 										"api",
-										"users",
-										""
+										"users"
 									]
 								}
 							},
@@ -38,7 +60,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/users/2/",
+									"raw": "localhost:8000/api/users/2",
 									"host": [
 										"localhost"
 									],
@@ -46,8 +68,7 @@
 									"path": [
 										"api",
 										"users",
-										"2",
-										""
+										"2"
 									]
 								}
 							},
@@ -59,7 +80,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/user-details/2/",
+									"raw": "localhost:8000/api/user-details/2",
 									"host": [
 										"localhost"
 									],
@@ -67,8 +88,7 @@
 									"path": [
 										"api",
 										"user-details",
-										"2",
-										""
+										"2"
 									]
 								}
 							},
@@ -80,15 +100,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/usergenres/",
+									"raw": "localhost:8000/api/usergenres",
 									"host": [
 										"localhost"
 									],
 									"port": "8000",
 									"path": [
 										"api",
-										"usergenres",
-										""
+										"usergenres"
 									]
 								}
 							},
@@ -100,7 +119,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/usergenres/39/",
+									"raw": "localhost:8000/api/usergenres/39",
 									"host": [
 										"localhost"
 									],
@@ -108,8 +127,7 @@
 									"path": [
 										"api",
 										"usergenres",
-										"39",
-										""
+										"39"
 									]
 								}
 							},
@@ -121,7 +139,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/usergenresforuser/7/",
+									"raw": "localhost:8000/api/usergenresforuser/7",
 									"host": [
 										"localhost"
 									],
@@ -129,8 +147,7 @@
 									"path": [
 										"api",
 										"usergenresforuser",
-										"7",
-										""
+										"7"
 									]
 								}
 							},
@@ -142,7 +159,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userfavejamreqs/2/",
+									"raw": "localhost:8000/api/userfavejamreqs/2",
 									"host": [
 										"localhost"
 									],
@@ -150,8 +167,7 @@
 									"path": [
 										"api",
 										"userfavejamreqs",
-										"2",
-										""
+										"2"
 									]
 								}
 							},
@@ -163,7 +179,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userfaveprofiles/2/",
+									"raw": "localhost:8000/api/userfaveprofiles/2",
 									"host": [
 										"localhost"
 									],
@@ -171,8 +187,7 @@
 									"path": [
 										"api",
 										"userfaveprofiles",
-										"2",
-										""
+										"2"
 									]
 								}
 							},
@@ -184,15 +199,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userinstruments/",
+									"raw": "localhost:8000/api/userinstruments",
 									"host": [
 										"localhost"
 									],
 									"port": "8000",
 									"path": [
 										"api",
-										"userinstruments",
-										""
+										"userinstruments"
 									]
 								}
 							},
@@ -204,7 +218,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userinstruments/86/",
+									"raw": "localhost:8000/api/userinstruments/86",
 									"host": [
 										"localhost"
 									],
@@ -212,8 +226,7 @@
 									"path": [
 										"api",
 										"userinstruments",
-										"86",
-										""
+										"86"
 									]
 								}
 							},
@@ -225,7 +238,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userinstrumentsforuser/6/",
+									"raw": "localhost:8000/api/userinstrumentsforuser/6",
 									"host": [
 										"localhost"
 									],
@@ -233,8 +246,7 @@
 									"path": [
 										"api",
 										"userinstrumentsforuser",
-										"6",
-										""
+										"6"
 									]
 								}
 							},
@@ -265,7 +277,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/usermedia/12/",
+									"raw": "localhost:8000/api/usermedia/12",
 									"host": [
 										"localhost"
 									],
@@ -273,8 +285,7 @@
 									"path": [
 										"api",
 										"usermedia",
-										"12",
-										""
+										"12"
 									]
 								}
 							},
@@ -286,7 +297,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/usermediaforuser/8/",
+									"raw": "localhost:8000/api/usermediaforuser/8",
 									"host": [
 										"localhost"
 									],
@@ -294,8 +305,7 @@
 									"path": [
 										"api",
 										"usermediaforuser",
-										"8",
-										""
+										"8"
 									]
 								}
 							},
@@ -307,15 +317,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userreviews/",
+									"raw": "localhost:8000/api/userreviews",
 									"host": [
 										"localhost"
 									],
 									"port": "8000",
 									"path": [
 										"api",
-										"userreviews",
-										""
+										"userreviews"
 									]
 								}
 							},
@@ -327,7 +336,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userreviews/20/",
+									"raw": "localhost:8000/api/userreviews/20",
 									"host": [
 										"localhost"
 									],
@@ -335,8 +344,7 @@
 									"path": [
 										"api",
 										"userreviews",
-										"20",
-										""
+										"20"
 									]
 								}
 							},
@@ -348,7 +356,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userreviewsforuser/11/",
+									"raw": "localhost:8000/api/userreviewsforuser/11",
 									"host": [
 										"localhost"
 									],
@@ -356,8 +364,7 @@
 									"path": [
 										"api",
 										"userreviewsforuser",
-										"11",
-										""
+										"11"
 									]
 								}
 							},
@@ -369,7 +376,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userreviewsbyuser/10/",
+									"raw": "localhost:8000/api/userreviewsbyuser/10",
 									"host": [
 										"localhost"
 									],
@@ -377,8 +384,7 @@
 									"path": [
 										"api",
 										"userreviewsbyuser",
-										"10",
-										""
+										"10"
 									]
 								}
 							},
@@ -467,34 +473,13 @@
 									}
 								],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "username",
-											"value": "bretest1",
-											"type": "text"
-										},
-										{
-											"key": "password",
-											"value": "brettest2",
-											"type": "text"
-										},
-										{
-											"key": "email",
-											"value": "garbage@garb.com",
-											"type": "text"
-										},
-										{
-											"key": "fname",
-											"value": "Sly",
-											"type": "text"
-										},
-										{
-											"key": "lname",
-											"value": "Fox",
-											"type": "text"
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"hal\",\n    \"last_name\": \"9000\",\n    \"email\": \"hal@robot.com\",\n    \"username\": \"hal9000\",\n    \"password\": \"mystery\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
 										}
-									]
+									}
 								},
 								"url": {
 									"raw": "localhost:8000/api/users",
@@ -525,54 +510,20 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8000/api/userfavejamreqs/",
+									"raw": "localhost:8000/api/userfavejamreqs",
 									"host": [
 										"localhost"
 									],
 									"port": "8000",
 									"path": [
 										"api",
-										"userfavejamreqs",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "userFaveProfile",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\"profileid\":2, \"favorite_profileid\":4}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:8000/api/userfaveprofiles/",
-									"host": [
-										"localhost"
-									],
-									"port": "8000",
-									"path": [
-										"api",
-										"userfaveprofiles",
-										""
+										"userfavejamreqs"
 									]
 								}
 							},
 							"response": []
 						}
 					]
-				},
-				{
-					"name": "PUT",
-					"item": []
 				}
 			]
 		},
@@ -802,24 +753,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "Checkserver",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8000/checkserver",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"checkserver"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }
