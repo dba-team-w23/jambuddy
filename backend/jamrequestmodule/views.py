@@ -1,6 +1,7 @@
 # views.py
 from datetime import datetime
 
+import environ
 import pytz
 import pkg_resources
 from django.contrib.auth import authenticate, login, logout
@@ -261,16 +262,19 @@ def index(request):
 
 @api_view(['GET'])
 def checkserver(request):
+    path = request.META.get('HTTP_HOST') 
+    message = "Host is '" + path + "' -- "
+
     #Gather important library versions
-    message = "Libraries: "
+    message += "Libraries: "
     libraries_to_display = ["Django", "django-cors-headers", "django-cors-middleware"]
     for library in libraries_to_display:
         version = pkg_resources.get_distribution(library).version
         message += library + " v" + version + ", "
 
     date = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-    message += "Server time is: "
-    return Response(data=message + date, status=status.HTTP_200_OK)
+    message += " -- Server time is: " + date
+    return Response(data=message, status=status.HTTP_200_OK)
 
 
 @csrf_exempt
