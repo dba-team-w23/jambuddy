@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "e36e46fd-2b80-44da-ada1-70ca93af3fb4",
-		"name": "JamBuddy - Local",
+		"_postman_id": "da4f57cb-148e-4265-b1f7-91ad946b1922",
+		"name": "JamBuddy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "11092666"
 	},
@@ -15,11 +15,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/checkserver",
+							"raw": "{{base_url}}/checkserver",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8000",
 							"path": [
 								"checkserver"
 							]
@@ -41,11 +40,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/users",
+									"raw": "{{base_url}}/api/users",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"users"
@@ -60,11 +58,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/users/2",
+									"raw": "{{base_url}}/api/users/2",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"users",
@@ -80,11 +77,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/user-details/2",
+									"raw": "{{base_url}}/api/user-details/2",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"user-details",
@@ -100,11 +96,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/usergenres",
+									"raw": "{{base_url}}/api/usergenres",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"usergenres"
@@ -119,11 +114,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/usergenres/39",
+									"raw": "{{base_url}}/api/usergenres/39",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"usergenres",
@@ -139,11 +133,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/usergenresforuser/7",
+									"raw": "{{base_url}}/api/usergenresforuser/7",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"usergenresforuser",
@@ -159,11 +152,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userfavejamreqs/2",
+									"raw": "{{base_url}}/api/userfavejamreqs/2",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"userfavejamreqs",
@@ -179,11 +171,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userfaveprofiles/2",
+									"raw": "{{base_url}}/api/userfaveprofiles/2",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"userfaveprofiles",
@@ -199,11 +190,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userinstruments",
+									"raw": "{{base_url}}/api/userinstruments",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"userinstruments"
@@ -218,11 +208,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userinstruments/86",
+									"raw": "{{base_url}}/api/userinstruments/86",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"userinstruments",
@@ -238,11 +227,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userinstrumentsforuser/6",
+									"raw": "{{base_url}}/api/userinstrumentsforuser/6",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"userinstrumentsforuser",
@@ -258,11 +246,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/usermedia",
+									"raw": "{{base_url}}/api/usermedia",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"usermedia"
@@ -277,11 +264,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/usermedia/12",
+									"raw": "{{base_url}}/api/usermedia/12",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"usermedia",
@@ -297,11 +283,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/usermediaforuser/8",
+									"raw": "{{base_url}}/api/usermediaforuser/8",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"usermediaforuser",
@@ -317,11 +302,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userreviews",
+									"raw": "{{base_url}}/api/userreviews",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"userreviews"
@@ -336,11 +320,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userreviews/20",
+									"raw": "{{base_url}}/api/userreviews/20",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"userreviews",
@@ -356,11 +339,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userreviewsforuser/11",
+									"raw": "{{base_url}}/api/userreviewsforuser/11",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"userreviewsforuser",
@@ -376,11 +358,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/userreviewsbyuser/10",
+									"raw": "{{base_url}}/api/userreviewsbyuser/10",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"userreviewsbyuser",
@@ -420,26 +401,19 @@
 									}
 								],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "username",
-											"value": "swally",
-											"type": "text"
-										},
-										{
-											"key": "password",
-											"value": "swally",
-											"type": "text"
+									"mode": "raw",
+									"raw": "{\n    \"username\":\"swally\",\n    \"password\":\"swally\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
 										}
-									]
+									}
 								},
 								"url": {
-									"raw": "localhost:8000/api/login_user",
+									"raw": "{{base_url}}/api/login_user",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"login_user"
@@ -482,11 +456,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8000/api/users",
+									"raw": "{{base_url}}/api/users",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"users"
@@ -510,11 +483,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8000/api/userfavejamreqs",
+									"raw": "{{base_url}}/api/userfavejamreqs",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"userfavejamreqs"
@@ -539,11 +511,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/jamrequests/",
+									"raw": "{{base_url}}/api/jamrequests/",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"jamrequests",
@@ -559,11 +530,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/jamrequests/14",
+									"raw": "{{base_url}}/api/jamrequests/14",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"jamrequests",
@@ -579,11 +549,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/jamresponses/",
+									"raw": "{{base_url}}/api/jamresponses/",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"jamresponses",
@@ -599,11 +568,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8000/api/jamresponses/16/",
+									"raw": "{{base_url}}/api/jamresponses/16/",
 									"host": [
-										"localhost"
+										"{{base_url}}"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"jamresponses",
@@ -635,11 +603,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/experiencelevels/",
+							"raw": "{{base_url}}/api/experiencelevels/",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"experiencelevels",
@@ -655,11 +622,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/experiencelevels/3/",
+							"raw": "{{base_url}}/api/experiencelevels/3/",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"experiencelevels",
@@ -676,11 +642,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/instruments/",
+							"raw": "{{base_url}}/api/instruments/",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"instruments",
@@ -696,11 +661,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/instruments/13/",
+							"raw": "{{base_url}}/api/instruments/13/",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"instruments",
@@ -717,11 +681,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/musicgenres/",
+							"raw": "{{base_url}}/api/musicgenres/",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"musicgenres",
@@ -737,11 +700,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/musicgenres/13/",
+							"raw": "{{base_url}}/api/musicgenres/13/",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"musicgenres",
