@@ -40,6 +40,10 @@ urlpatterns = [
     path('api/musicgenres/', views.MusicGenreList.as_view(actions={'get': 'list', 'post': 'create'}), name='musicgenre-list'),
     path('api/musicgenres/<int:pk>/', views.MusicGenreDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='musicgenre-detail'),
 
+    path('api/userfavejamreqs/', views.UserFaveJamReqList.as_view(actions={'post': 'create', 'delete': 'destroy'}), 
+            name='userfavejr-list' ),
+    path('api/userfavejamreqs/<int:profile_id>/', views.getUserFaveJamReqs, name='userfavejr'),
+
     path('api/usergenres/', views.UserGenreList.as_view(actions={'get': 'list', 'post': 'create'}), name='usergenre-list'),
     path('api/usergenres/<int:pk>/', views.UserGenreDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='usergenre-detail'),
     path('api/usergenresforuser/<int:profile_id>/', views.getUserGenres, name='user-genres-list'),
