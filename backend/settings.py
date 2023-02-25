@@ -35,6 +35,8 @@ AUTH_USER_MODEL = 'jamrequestmodule.Profile'
 APPEND_SLASH = False
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_ALLOW_ALL = True
+# library corsheaders.CorsModel did not specify PK, this suppresses the warning
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 WSGI_APPLICATION = 'jamrequestmodule.wsgi.application'
 
 
