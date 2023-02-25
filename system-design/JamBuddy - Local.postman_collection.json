@@ -7,6 +7,29 @@
 	},
 	"item": [
 		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Checkserver",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/checkserver",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"checkserver"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Users",
 			"item": [
 				{
@@ -144,6 +167,26 @@
 									"path": [
 										"api",
 										"userfavejamreqs",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userFaveProfiles for userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/api/userfaveprofiles/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"userfaveprofiles",
 										"2"
 									]
 								}
@@ -481,10 +524,6 @@
 							"response": []
 						}
 					]
-				},
-				{
-					"name": "PUT",
-					"item": []
 				}
 			]
 		},
@@ -714,24 +753,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "Checkserver",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8000/checkserver",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"checkserver"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }
