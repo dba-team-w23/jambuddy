@@ -28,28 +28,8 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-# MISC APP ENV VARS
-API_PORT = env('API_PORT')
-API_HOST = env('API_HOST')
-AUTH_USER_MODEL = 'jamrequestmodule.Profile'
-APPEND_SLASH = False
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ORIGIN_ALLOW_ALL = True
-# library corsheaders.CorsModel did not specify PK, this suppresses the warning
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
-WSGI_APPLICATION = 'jamrequestmodule.wsgi.application'
-
-
-ALLOWED_HOSTS = [
-    '0.0.0.0',
-    'localhost',
-    'http://localhost:3000',
-    'http://localhost:8000',
-    'sea-turtle-app-zggz6.ondigitalocean.app',
-    ]
-
 INSTALLED_APPS = [
-    'rest_framework',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jamrequestmodule',
-    'corsheaders',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +56,43 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# MISC APP ENV VARS
+API_PORT = env('API_PORT')
+API_HOST = env('API_HOST')
+AUTH_USER_MODEL = 'jamrequestmodule.Profile'
+APPEND_SLASH = False
+# library corsheaders.CorsModel did not specify PK, this suppresses the warning
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+WSGI_APPLICATION = 'jamrequestmodule.wsgi.application'
+
+ALLOWED_HOSTS = ['*']
+CORS_ALLOW_ALL_ORIGINS = True       #New versions of cors library
+CORS_ORIGIN_ALLOW_ALL = True        #Older versions of cors library
+
+# ALLOWED_HOSTS = [
+#     '0.0.0.0',
+#     'localhost',
+#     'http://localhost:3000',
+#     'http://localhost:8000',
+#     'sea-turtle-app-zggz6.ondigitalocean.app',
+# ]
+
+# #New Versions of cors library
+# CORS_ALLOWED_ORIGINS = [
+#      "http://jambuddy.vercel.app",
+#      "http://jambuddy.vercel.app/",
+#      "https://jambuddy.vercel.app",
+#      "https://jambuddy.vercel.app/",
+#      'http://localhost:3000',
+#      'https://localhost:3000',
+#      'http://localhost:8000',
+#      'https://localhost:8000',
+# ]
+
+# #Older Versions of cors library
+# CORS_ORIGIN_WHITELIST = CORS_ALLOWED_ORIGINS
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -91,7 +108,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -148,7 +164,6 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
 # Used by Django Debug Toolbar
 INTERNAL_IPS = ['127.0.0.1']
 ROOT_URLCONF = 'jamrequestmodule.urls'
@@ -157,36 +172,3 @@ ROOT_URLCONF = 'jamrequestmodule.urls'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-# this should be put at the end of the settings.py file
-# CORS_ORIGIN_WHITELIST = [
-#      'http://localhost:3000'
-# ]
-
-# CORS_ORIGIN_WHITELIST = ['*']
-
-# CORS_ORIGIN_ALLOW_ALL = False
-
-# CORS_ORIGIN_WHITELIST = [
-#      "http://jambuddy.vercel.app",
-#      "https://jambuddy.vercel.app",
-#      'http://localhost:3000',
-#      'https://localhost:3000',
-#      'http://localhost:8000',
-#      'https://localhost:8000',
-# ]
-
-# CORS_ORIGIN_REGEX_WHITELIST = (
-#     r'^(https?://)?(www\.)?(jambuddy\.vercel\.app|localhost:3000)\.*$'
-# )
-
-# CORS_ALLOWED_ORIGINS = [
-#      "http://jambuddy.vercel.app",
-#      "https://jambuddy.vercel.app",
-#      "http://jambuddy.vercel.app/",
-#      "https://jambuddy.vercel.app/",
-#      'http://localhost:3000',
-#      'https://localhost:3000',
-#      'http://localhost:8000',
-#      'https://localhost:8000',
-# ]
