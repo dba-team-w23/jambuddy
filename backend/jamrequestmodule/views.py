@@ -17,7 +17,7 @@ from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
                      UserReview, Profile)
 from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
                           JamRequestSerializer, JamResponseSerializer,
-                          MusicGenreSerializer, UserFavoriteJamRequestSerializer, 
+                          MusicGenreSerializer, UserFavoriteJamRequestSerializer,
                           UserFaveJamReqSerializer, UserGenreSerializer,
                           UserInstrumentSerializer, UserMediaSerializer,
                           UserReviewSerializer, ProfileSerializer)
@@ -153,10 +153,13 @@ class UserDetailsView(generics.RetrieveAPIView):
 
 @api_view(('GET',))
 def getUserFaveJamReqs(request, profile_id):
-    fave_reqs = UserFavoriteJamRequest.objects.filter(profileid=profile_id).order_by('jrid')
-    ser_fave_reqs = UserFaveJamReqSerializer(fave_reqs, many=True)
+    fave_req_ids = UserFavoriteJamRequest.objects.filter(profileid=profile_id).values_list('jrid', flat=True)
+    ids = [int(fave_req_id) for fave_req_id in fave_req_ids]
+    ids.sort()
 
-    return Response({'jamrequests': ser_fave_reqs.data})
+    jam_requests = JamRequest.objects.filter(id__in=ids).all()
+
+    return Response({'jamrequest_ids': ids, 'jamrequests': JamRequestSerializer(jam_requests, many=True).data})
 
 @api_view(('GET',))
 def getUserGenres(request, profile_id):

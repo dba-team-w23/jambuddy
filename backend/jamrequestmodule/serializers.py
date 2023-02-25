@@ -46,6 +46,8 @@ class JamRequestSerializer(serializers.ModelSerializer):
         db_table = JamRequest
         fields = '__all__'
 
+        list_serializer = serializers.ListSerializer(child=serializers.IntegerField())
+
 class JamResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = JamResponse
