@@ -11,7 +11,7 @@ import Navbar from "./partials/Navbar";
 import "./css/Global.css";
 import "../index.css";
 import HomePage from "./HomePage";
-import ApiTest from "./ApiTest"
+import ApiTest from "./ApiTest";
 
 export default function Body() {
   const [signedInUser, setSignedInUser] = React.useState(null);

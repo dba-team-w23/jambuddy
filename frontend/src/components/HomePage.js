@@ -1,7 +1,6 @@
 import React from "react";
 import JamRequests from "./JamRequests";
 import ProfileCard from "./partials/ProfileCard";
-import { Grid } from "@mui/material";
 
 const HomePage = () => {
   const [favProfiles, setFavProfiles] = React.useState([]);

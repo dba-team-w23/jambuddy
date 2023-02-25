@@ -10,6 +10,7 @@ const ApiTest = () => {
 
   const doCreateUser = `${doApi}/api/users`;
   const lhCreateUser = `${localApi}/api/users`;
+  const doLoginUser = `${doApi}/api/login_user`;
   const [corsMode, setCorsMode] = useState("cors");
 
   const [doProfiles, setDoProfiles] = React.useState([]);
@@ -67,6 +68,22 @@ const ApiTest = () => {
         email: "hal@robot.com",
         username: "hal9000",
         password: "mystery",
+      }),
+      mode: corsMode,
+    }).then((response) => response.json());
+    console.log(data);
+  };
+
+  const doHandlePostLoginUser = async () => {
+    console.log("cors mode", corsMode, "Localhost POST");
+    const data = await fetch(doLoginUser, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: "swally",
+        password: "swally",
       }),
       mode: corsMode,
     }).then((response) => response.json());
@@ -147,15 +164,6 @@ const ApiTest = () => {
           >
             DO POST /users
           </button>
-
-          <ul>
-            {DOCreateUserResp && DOCreateUserResp.length !== 0 ? (
-              <>
-                <h4>status = {DOCreateUserResp.status}</h4>
-                <h4>profile_id = {DOCreateUserResp.profile_id}</h4>
-              </>
-            ) : null}
-          </ul>
         </div>
 
         <div className="p-4 m-5 border">
@@ -164,38 +172,19 @@ const ApiTest = () => {
             className="text-white bg-blue-500 p-2 rounded m-1"
             onClick={lhApiHandlePostCreateUser}
           >
-            {" "}
             LocalHost POST /users
           </button>
-
-          <ul>
-            {LhCreateUserResp && LhCreateUserResp.length !== 0 ? (
-              <>
-                <h4>status = {LhCreateUserResp.status}</h4>
-                <h4>profile_id = {LhCreateUserResp.profile_id}</h4>
-              </>
-            ) : null}
-          </ul>
         </div>
 
         <div className="p-4 m-5 border">
-          <h2>Localhost POST /users</h2>
+          <h2>Digital Ocean POST /login_user</h2>
           <button
             className="text-white bg-blue-500 p-2 rounded m-1"
-            onClick={lhApiHandlePostCreateUser}
+            onClick={doHandlePostLoginUser}
           >
             {" "}
-            LocalHost POST /users
+            DO POST /login_user
           </button>
-
-          <ul>
-            {LhCreateUserResp && LhCreateUserResp.length !== 0 ? (
-              <>
-                <h4>status = {LhCreateUserResp.status}</h4>
-                <h4>profile_id = {LhCreateUserResp.profile_id}</h4>
-              </>
-            ) : null}
-          </ul>
         </div>
       </div>
     </span>

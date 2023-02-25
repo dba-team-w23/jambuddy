@@ -41,39 +41,24 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
 
   const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
   // const apiRoot = "http://localhost:8000";
-  const baseURL = `${apiRoot}/api/users`;
+  const baseURL = `${apiRoot}/api/login_user`;
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
     let data = {
       username: formInput.username,
       password: formInput.password,
     };
 
-    fetch(baseURL, {
+    const resData = await fetch(baseURL, {
       method: "POST",
-      body: data,
       headers: {
         "Content-Type": "application/json",
-        "X-CSRFToken": getCookie("csrftoken"),
       },
+      body: data,
       mode: "cors",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((response) => {
-        console.log("success", JSON.stringify(response));
-        setUserId(response.profile_id);
-        console.log("userid", userId);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        console.log("response obj: ", error.response);
-      });
+    }).then((response) => response.json());
+    console.log(data);
   };
 
   return (
