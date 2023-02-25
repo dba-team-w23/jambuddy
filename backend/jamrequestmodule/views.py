@@ -25,18 +25,13 @@ from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
                           UserReviewSerializer, ProfileSerializer)
 
 
-
-# @api_view(['GET', 'POST'])
 class UserList(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    parser_classes = (JSONParser,FormParser,MultiPartParser,)
 
-# @api_view(['GET', 'PUT', 'DELETE', 'PATCH'])
 class UserDetail(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    parser_classes = (JSONParser,)
 
 
 class ExperienceLevelList(viewsets.ModelViewSet):
