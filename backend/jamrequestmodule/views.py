@@ -13,12 +13,12 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser, FormParser, MultiPartParser
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
-                     MusicGenre, UserFavoriteJamRequest, UserGenre, UserInstrument, UserMedia,
+                     MusicGenre, UserFavoriteJamRequest, UserFavoriteProfile, UserGenre, UserInstrument, UserMedia,
                      UserReview, Profile)
 from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
                           JamRequestSerializer, JamResponseSerializer,
                           MusicGenreSerializer, UserFavoriteJamRequestSerializer,
-                          UserFaveJamReqSerializer, UserGenreSerializer,
+                          UserFaveProfileSerializer, UserGenreSerializer,
                           UserInstrumentSerializer, UserMediaSerializer,
                           UserReviewSerializer, ProfileSerializer)
 
@@ -86,6 +86,9 @@ class UserFaveJamReqList(viewsets.ModelViewSet):
     queryset = UserFavoriteJamRequest.objects.all()
     serializer_class = UserFavoriteJamRequestSerializer
 
+class UserFaveProfileList(viewsets.ModelViewSet):
+    queryset = UserFavoriteProfile.objects.all()
+    serializer_class = UserFaveProfileSerializer
 
 class UserGenreList(viewsets.ModelViewSet):
     queryset = UserGenre.objects.all()
@@ -160,6 +163,18 @@ def getUserFaveJamReqs(request, profile_id):
     jam_requests = JamRequest.objects.filter(id__in=ids).all()
 
     return Response({'jamrequest_ids': ids, 'jamrequests': JamRequestSerializer(jam_requests, many=True).data})
+
+
+@api_view(('GET',))
+def getUserFaveProfiles(request, profile_id):
+    fave_profile_ids = UserFavoriteProfile.objects.filter(profileid=profile_id).values_list('favorite_profileid', flat=True)
+    ids = [int(fave_profile_id) for fave_profile_id in fave_profile_ids if fave_profile_id != profile_id and fave_profile_id != None]
+    ids.sort()
+
+    profiles = Profile.objects.filter(id__in=ids).all()
+
+    return Response({'profile_ids': ids, 'profiles': ProfileSerializer(profiles, many=True).data})
+
 
 @api_view(('GET',))
 def getUserGenres(request, profile_id):

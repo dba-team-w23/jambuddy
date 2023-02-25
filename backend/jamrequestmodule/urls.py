@@ -23,7 +23,7 @@ urlpatterns = [
 
     path('api/users/', views.UserList.as_view(actions={'get': 'list', 'post': 'create'}), name='user-list'),
     path('api/users/<int:pk>/', views.UserDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='user-detail'),
-    path('api/user-details/<int:pk>/', views.UserDetailsView.as_view(), name='user-details'),    
+    path('api/user-details/<int:pk>/', views.UserDetailsView.as_view(), name='user-details'),
 
     path('api/experiencelevels/', views.ExperienceLevelList.as_view(actions={'get': 'list', 'post': 'create'}), name='experiencelevel-list'),
     path('api/experiencelevels/<int:pk>/', views.ExperienceLevelDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='experiencelevel-detail'),
@@ -40,9 +40,13 @@ urlpatterns = [
     path('api/musicgenres/', views.MusicGenreList.as_view(actions={'get': 'list', 'post': 'create'}), name='musicgenre-list'),
     path('api/musicgenres/<int:pk>/', views.MusicGenreDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='musicgenre-detail'),
 
-    path('api/userfavejamreqs/', views.UserFaveJamReqList.as_view(actions={'post': 'create', 'delete': 'destroy'}), 
+    path('api/userfavejamreqs/', views.UserFaveJamReqList.as_view(actions={'post': 'create', 'delete': 'destroy'}),
             name='userfavejr-list' ),
     path('api/userfavejamreqs/<int:profile_id>/', views.getUserFaveJamReqs, name='userfavejr'),
+
+    path('api/userfaveprofiles/', views.UserFaveProfileList.as_view(actions={'post': 'create', 'delete': 'destroy'}),
+            name='userfave-profile-list' ),
+    path('api/userfaveprofiles/<int:profile_id>/', views.getUserFaveProfiles, name='userfaveprofile'),
 
     path('api/usergenres/', views.UserGenreList.as_view(actions={'get': 'list', 'post': 'create'}), name='usergenre-list'),
     path('api/usergenres/<int:pk>/', views.UserGenreDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='usergenre-detail'),
