@@ -75,7 +75,7 @@ class JamRequestList(viewsets.ModelViewSet):
         filter_lookup = {
             'instrument_name': 'instrumentid__name',
             'instrument_type': 'instrumentid__type',
-            'genre': 'genreid__name',
+            'genre': 'genreid__genre',
             'location': 'location',
             'status': 'status',
             'requestor_username': 'profileid__username',
@@ -83,7 +83,10 @@ class JamRequestList(viewsets.ModelViewSet):
         for client_key, backend_key in filter_lookup.items():
             if self.request.query_params.get(client_key):
                 client_value = self.request.query_params.get(client_key)
-                queryset = queryset.filter(**{backend_key: client_value})
+                case_insensitive_client_value = client_value.lower()
+                queryset = queryset.filter(
+                    **{f'{backend_key}__icontains': case_insensitive_client_value}
+                )
         return queryset
 
     serializer_class = JamRequestSerializer
