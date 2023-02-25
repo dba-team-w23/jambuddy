@@ -48,7 +48,7 @@ const ApiTest = () => {
         username: "hal9000",
         password: "mystery",
       }),
-      corsMode,
+      mode: corsMode,
     }).then((response) => response.json());
     console.log(data);
     setDoCreateUserResp(data);
@@ -67,7 +67,7 @@ const ApiTest = () => {
         username: "hal9000",
         password: "mystery",
       }),
-      corsMode,
+      mode: corsMode,
     }).then((response) => response.json());
     console.log(data);
     setDoCreateUserResp(data);
@@ -80,10 +80,10 @@ const ApiTest = () => {
   };
 
   const toggleCorsMode = () => {
-    if (corsMode === 'mode: "cors"') {
-      setCorsMode('mode: "no-cors"');
+    if (corsMode === "cors") {
+      setCorsMode("no-cors");
     } else {
-      setCorsMode('mode: "cors"');
+      setCorsMode("cors");
     }
   };
   return (
