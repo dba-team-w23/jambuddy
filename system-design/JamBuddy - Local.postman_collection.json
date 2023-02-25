@@ -430,34 +430,13 @@
 									}
 								],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "username",
-											"value": "bretest1",
-											"type": "text"
-										},
-										{
-											"key": "password",
-											"value": "brettest2",
-											"type": "text"
-										},
-										{
-											"key": "email",
-											"value": "garbage@garb.com",
-											"type": "text"
-										},
-										{
-											"key": "fname",
-											"value": "Sly",
-											"type": "text"
-										},
-										{
-											"key": "lname",
-											"value": "Fox",
-											"type": "text"
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"hal\",\n    \"last_name\": \"9000\",\n    \"email\": \"hal@robot.com\",\n    \"username\": \"hal9000\",\n    \"password\": \"mystery\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
 										}
-									]
+									}
 								},
 								"url": {
 									"raw": "localhost:8000/api/users",

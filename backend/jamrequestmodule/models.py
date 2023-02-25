@@ -34,7 +34,7 @@ class Instrument(models.Model):
 
 class MusicGenre(models.Model):
     genre = models.CharField(max_length=255)
-    
+
     def __str__(self):
         return self.genre
 
@@ -94,4 +94,10 @@ class UserReview(models.Model):
 class UserFavoriteJamRequest(models.Model):
     profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     jrid = models.ForeignKey(JamRequest, on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)    
+    created = models.DateTimeField(auto_now_add=True)
+
+
+class UserFavoriteProfile(models.Model):
+    profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    favorite_profileid = models.IntegerField()
+    created = models.DateTimeField(auto_now_add=True)

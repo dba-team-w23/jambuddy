@@ -33,7 +33,7 @@ export default function EditProfile(props) {
           noValidate
           autoComplete="off"
         >
-          <ProfileCard className="min-w-200" profile={user} />
+          <ProfileCard profile={user} />
           <FormGrid style={{ margin: "40px auto" }} />
         </Box>
       ) : (

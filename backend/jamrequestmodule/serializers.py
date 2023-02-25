@@ -5,7 +5,7 @@ from rest_framework import serializers
 
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, Profile, UserGenre, UserInstrument, UserMedia,
-                     UserReview, UserFavoriteJamRequest)
+                     UserReview, UserFavoriteJamRequest, UserFavoriteProfile)
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -45,6 +45,15 @@ class JamRequestSerializer(serializers.ModelSerializer):
         model = JamRequest
         db_table = JamRequest
         fields = '__all__'
+
+        list_serializer = serializers.ListSerializer(child=serializers.IntegerField())
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['instrument'] = InstrumentSerializer(instance.instrumentid).data
+        representation['genre'] = MusicGenreSerializer(instance.genreid).data
+        representation['requestor_profile'] = ProfileSerializer(instance.profileid).data
+        return representation
 
 class JamResponseSerializer(serializers.ModelSerializer):
     class Meta:
@@ -94,7 +103,10 @@ class UserFavoriteJamRequestSerializer(serializers.ModelSerializer):
         db_table = UserFavoriteJamRequest
         fields = ['profileid','jrid']
 
-class UserFaveJamReqSerializer(serializers.ModelSerializer):
+
+class UserFaveProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = UserFavoriteJamRequest
-        fields = ['jrid']
+        model = UserFavoriteProfile
+        db_table = UserFavoriteProfile
+        fields = ['profileid','favorite_profileid']
+

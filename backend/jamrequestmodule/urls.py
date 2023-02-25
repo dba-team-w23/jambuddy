@@ -19,7 +19,11 @@ from . import views
 
 
 urlpatterns = [
+    path('', views.index),
     path('admin', admin.site.urls),
+    path('checkserver', views.checkserver),
+    
+    path('api/login_user', views.login_user, name='login'),
 
     path('api/users', views.UserList.as_view(actions={'get': 'list', 'post': 'create'}), name='user-list'),
     path('api/users/<int:pk>', views.UserDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='user-detail'),
@@ -44,6 +48,10 @@ urlpatterns = [
             name='userfavejr-list' ),
     path('api/userfavejamreqs/<int:profile_id>', views.getUserFaveJamReqs, name='userfavejr'),
 
+    path('api/userfaveprofiles', views.UserFaveProfileList.as_view(actions={'post': 'create', 'delete': 'destroy'}),
+            name='userfave-profile-list' ),
+    path('api/userfaveprofiles/<int:profile_id>', views.getUserFaveProfiles, name='userfaveprofile'),
+
     path('api/usergenres', views.UserGenreList.as_view(actions={'get': 'list', 'post': 'create'}), name='usergenre-list'),
     path('api/usergenres/<int:pk>', views.UserGenreDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='usergenre-detail'),
     path('api/usergenresforuser/<int:profile_id>', views.getUserGenres, name='user-genres-list'),
@@ -60,9 +68,4 @@ urlpatterns = [
     path('api/userreviews/<int:pk>', views.UserReviewDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='userreview-detail'),
     path('api/userreviewsforuser/<int:profile_id>', views.getUserReviewsForUser, name='user-reviews-list-for'),
     path('api/userreviewsbyuser/<int:profile_id>', views.getUserReviewsByUser, name='user-reviews-list-by'),
-
-    path('', views.index),
-
-    path('api/login_user', views.login_user, name='login'),
-    path('checkserver', views.checkserver),
 ]

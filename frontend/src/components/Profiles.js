@@ -3,7 +3,7 @@ import ProfileCard from "./partials/ProfileCard";
 import { Grid } from "@mui/material";
 import "./css/Profiles.css";
 
-const apiRoot = "http://localhost:8088";
+const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
 const baseURL = `${apiRoot}/api/users/`;
 
 export default function Profiles(props) {

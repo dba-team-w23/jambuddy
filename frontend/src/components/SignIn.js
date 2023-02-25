@@ -30,7 +30,6 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
   const handleInput = (evt) => {
     const name = evt.target.name;
     const value = evt.target.value;
@@ -41,8 +40,9 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
     setFormInput({ password: evt.target.value });
   };
 
-  const apiRoot = "http://localhost:8088";
-  const baseURL = `${apiRoot}/api/users`;
+  // const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
+  const apiRoot = "localhost:8088";
+  const baseURL = `${apiRoot}/api/users/`;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -59,8 +59,10 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
         "Content-Type": "application/json",
         "X-CSRFToken": getCookie("csrftoken"),
       },
-      // change to no-cors if there are still cors errors in production
-      mode: "cors",
+      // maybe no-cors with database
+      // mode: "no-cors",
+      // "cors" with local server
+      // mode: "cors",
     })
       .then((response) => {
         if (!response.ok) {

@@ -14,12 +14,12 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser, FormParser, MultiPartParser
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
-                     MusicGenre, UserFavoriteJamRequest, UserGenre, UserInstrument, UserMedia,
+                     MusicGenre, UserFavoriteJamRequest, UserFavoriteProfile, UserGenre, UserInstrument, UserMedia,
                      UserReview, Profile)
 from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
                           JamRequestSerializer, JamResponseSerializer,
-                          MusicGenreSerializer, UserFavoriteJamRequestSerializer, 
-                          UserFaveJamReqSerializer, UserGenreSerializer,
+                          MusicGenreSerializer, UserFavoriteJamRequestSerializer,
+                          UserFaveProfileSerializer, UserGenreSerializer,
                           UserInstrumentSerializer, UserMediaSerializer,
                           UserReviewSerializer, ProfileSerializer)
 
@@ -61,7 +61,35 @@ class JamRequestDetail(viewsets.ModelViewSet):
     serializer_class = JamRequestSerializer
 
 class JamRequestList(viewsets.ModelViewSet):
-    queryset = JamRequest.objects.all()
+    filter_params = [
+        'instrument_name',
+        'instrument_type',
+        'genre',
+        'location',
+        'status',
+        'requestor_username',
+    ]
+
+    def get_queryset(self):
+        queryset = JamRequest.objects.all()
+
+        filter_lookup = {
+            'instrument_name': 'instrumentid__name',
+            'instrument_type': 'instrumentid__type',
+            'genre': 'genreid__genre',
+            'location': 'location',
+            'status': 'status',
+            'requestor_username': 'profileid__username',
+        }
+        for client_key, backend_key in filter_lookup.items():
+            if self.request.query_params.get(client_key):
+                client_value = self.request.query_params.get(client_key)
+                case_insensitive_client_value = client_value.lower()
+                queryset = queryset.filter(
+                    **{f'{backend_key}__icontains': case_insensitive_client_value}
+                )
+        return queryset
+
     serializer_class = JamRequestSerializer
 
 
@@ -87,6 +115,9 @@ class UserFaveJamReqList(viewsets.ModelViewSet):
     queryset = UserFavoriteJamRequest.objects.all()
     serializer_class = UserFavoriteJamRequestSerializer
 
+class UserFaveProfileList(viewsets.ModelViewSet):
+    queryset = UserFavoriteProfile.objects.all()
+    serializer_class = UserFaveProfileSerializer
 
 class UserGenreList(viewsets.ModelViewSet):
     queryset = UserGenre.objects.all()
@@ -154,10 +185,25 @@ class UserDetailsView(generics.RetrieveAPIView):
 
 @api_view(('GET',))
 def getUserFaveJamReqs(request, profile_id):
-    fave_reqs = UserFavoriteJamRequest.objects.filter(profileid=profile_id).order_by('jrid')
-    ser_fave_reqs = UserFaveJamReqSerializer(fave_reqs, many=True)
+    fave_req_ids = UserFavoriteJamRequest.objects.filter(profileid=profile_id).values_list('jrid', flat=True)
+    ids = [int(fave_req_id) for fave_req_id in fave_req_ids]
+    ids.sort()
 
-    return Response({'jamrequests': ser_fave_reqs.data})
+    jam_requests = JamRequest.objects.filter(id__in=ids).all()
+
+    return Response({'jamrequest_ids': ids, 'jamrequests': JamRequestSerializer(jam_requests, many=True).data})
+
+
+@api_view(('GET',))
+def getUserFaveProfiles(request, profile_id):
+    fave_profile_ids = UserFavoriteProfile.objects.filter(profileid=profile_id).values_list('favorite_profileid', flat=True)
+    ids = [int(fave_profile_id) for fave_profile_id in fave_profile_ids if fave_profile_id != profile_id and fave_profile_id != None]
+    ids.sort()
+
+    profiles = Profile.objects.filter(id__in=ids).all()
+
+    return Response({'profile_ids': ids, 'profiles': ProfileSerializer(profiles, many=True).data})
+
 
 @api_view(('GET',))
 def getUserGenres(request, profile_id):

@@ -4,7 +4,7 @@ import BasicCard from "./partials/BasicCard";
 import Grid from "@mui/material/Grid";
 
 // const apiRoot = 'https://sea-turtle-app-zggz6.ondigitalocean.app'
-const apiRoot = "http://localhost:8088";
+const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
 
 const jamApi = `${apiRoot}/api/jamrequests/`;
 
@@ -29,8 +29,8 @@ export default function JamRequests() {
     <Grid container spacing={3}>
       {jamRequests.map((request, i) => {
         const thisUser = users.find((user) => user.id === request.userid);
-        const userFirst = thisUser.fname;
-        const userLast = thisUser.lname;
+        const userFirst = thisUser.first_name;
+        const userLast = thisUser.last_name;
         const userName = `${userFirst} ${userLast}`;
 
         return (
