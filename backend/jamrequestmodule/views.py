@@ -60,7 +60,18 @@ class JamRequestDetail(viewsets.ModelViewSet):
     serializer_class = JamRequestSerializer
 
 class JamRequestList(viewsets.ModelViewSet):
-    queryset = JamRequest.objects.all()
+    filter_params = ['instrument', 'genre']
+
+    def get_queryset(self):
+        queryset = JamRequest.objects.all()
+        for param in self.filter_params:
+            if self.request.query_params.get(param):
+                value = self.request.query_params.get(param)
+                query_param = f'{param}id__name'
+                queryset = queryset.filter(**{query_param: value})
+        return queryset
+
+    # queryset = JamRequest.objects.all()
     serializer_class = JamRequestSerializer
 
 
