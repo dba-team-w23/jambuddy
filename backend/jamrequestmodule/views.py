@@ -140,7 +140,7 @@ class UserDetailsView(generics.RetrieveAPIView):
         user_media = UserMedia.objects.filter(profileid=user).all()
         user_reviews = UserReview.objects.filter(profileid=user).all()
         user_genres = UserGenre.objects.filter(profileid=user).all()
-        user_photos = ProfilePhoto.objects.filter(profileid=user).all()
+        user_photos = ProfilePhoto.objects.filter(profile_id=user).all()
 
         user_serializer = ProfileSerializer(user)
         user_instruments_serializer = UserInstrumentSerializer(user_instruments, many=True)

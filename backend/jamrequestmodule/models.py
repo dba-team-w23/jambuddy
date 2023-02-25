@@ -34,7 +34,7 @@ class Instrument(models.Model):
 
 
 class ProfilePhoto(models.Model):
-    profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     url_link = models.URLField()
     is_primary = models.BooleanField(default=False)
     created_date = models.DateTimeField(default=datetime.now)
