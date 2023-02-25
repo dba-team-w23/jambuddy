@@ -13,11 +13,12 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser, FormParser, MultiPartParser
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
-                     MusicGenre, UserGenre, UserInstrument, UserMedia,
+                     MusicGenre, UserFavoriteJamRequest, UserGenre, UserInstrument, UserMedia,
                      UserReview, Profile)
 from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
                           JamRequestSerializer, JamResponseSerializer,
-                          MusicGenreSerializer, UserGenreSerializer,
+                          MusicGenreSerializer, UserFavoriteJamRequestSerializer, 
+                          UserFaveJamReqSerializer, UserGenreSerializer,
                           UserInstrumentSerializer, UserMediaSerializer,
                           UserReviewSerializer, ProfileSerializer)
 
@@ -79,6 +80,11 @@ class MusicGenreList(viewsets.ModelViewSet):
 class MusicGenreDetail(viewsets.ModelViewSet):
     queryset = MusicGenre.objects.all()
     serializer_class = MusicGenreSerializer
+
+
+class UserFaveJamReqList(viewsets.ModelViewSet):
+    queryset = UserFavoriteJamRequest.objects.all()
+    serializer_class = UserFavoriteJamRequestSerializer
 
 
 class UserGenreList(viewsets.ModelViewSet):
@@ -145,6 +151,12 @@ class UserDetailsView(generics.RetrieveAPIView):
             'reviews': user_reviews_serializer.data
         })
 
+@api_view(('GET',))
+def getUserFaveJamReqs(request, profile_id):
+    fave_reqs = UserFavoriteJamRequest.objects.filter(profileid=profile_id).order_by('jrid')
+    ser_fave_reqs = UserFaveJamReqSerializer(fave_reqs, many=True)
+
+    return Response({'jamrequests': ser_fave_reqs.data})
 
 @api_view(('GET',))
 def getUserGenres(request, profile_id):
@@ -184,9 +196,7 @@ def getUserReviewsForUser(request, profile_id):
 def getUserReviewsByUser(request, profile_id):
     user_reviews = UserReview.objects.filter(reviewerid=profile_id).all()
     ser_reviews = UserReviewSerializer(user_reviews, many=True)
-    return Response({
-        'reviews': ser_reviews.data
-    })
+    return JsonResponse(ser_reviews.data)
 
 
 def index(request):

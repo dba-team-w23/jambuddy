@@ -90,3 +90,8 @@ class UserReview(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField()
     comment = models.TextField(null=True)
+
+class UserFavoriteJamRequest(models.Model):
+    profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    jrid = models.ForeignKey(JamRequest, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)    
