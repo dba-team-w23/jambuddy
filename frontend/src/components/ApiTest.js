@@ -8,10 +8,15 @@ const ApiTest = () => {
   const getUsers = `${doApi}/api/users`;
   const localUsers = `${localApi}/api/users`;
 
+  const doLoginUser = `${doApi}/api/login_user`;
+  const lhLoginUser = `${localApi}/api/login_user`;
+
 
   const [profiles, setProfiles] = React.useState([]);
   const [doProfiles, setDoProfiles] = React.useState([]);
   const [lhProfiles, setLhProfiles] = React.useState([]);
+  const [DOLoginUserResp, setDoLoginUserResp] = React.useState([]);
+  const [LhLoginUserResp, setLhLoginUserResp] = React.useState([]);
 
   const doApiHandle = async () => {
     const data = await fetch(getUsers).then((response) => response.json());
@@ -31,9 +36,53 @@ const ApiTest = () => {
     setDoProfiles([]);
   };
 
+
+  const doApiHandlePostLoginUser = async () => {
+    const data = await fetch(doLoginUser, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        first_name: "hal",
+        last_name: "9000",
+        email: "hal@robot.com",
+        username: "hal9000",
+        password: "mystery"
+      })
+    }).then((response) => response.json());
+    console.log(data);
+    setDoLoginUserResp(data);
+  };
+
+  const lhApiHandlePostLoginUser = async () => {
+    const data = await fetch(lhLoginUser, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        first_name: "hal",
+        last_name: "9000",
+        email: "hal@robot.com",
+        username: "hal9000",
+        password: "mystery"
+      })
+    }).then((response) => response.json());
+    console.log(data);
+    setDoLoginUserResp(data);
+  };
+  const clearLocalLoginUserResult = () => {
+    setLhLoginUserResp([]);
+  };
+  const clearDOLoginUserResult = () => {
+    setDoLoginUserResp([]);
+  };
+
   return (
-    <div className="flex">
+    <span><div className="flex">
       <div className="p-4 m-5 border">
+
         <h2>Digital Ocean GET users</h2>
         <button
           className="text-white bg-blue-500 p-2 rounded m-1"
@@ -55,6 +104,7 @@ const ApiTest = () => {
           ))}
         </ul>
       </div>
+
       <div className="p-4 m-5 border">
         <h2>Localhost GET users</h2>
         <button
@@ -78,7 +128,67 @@ const ApiTest = () => {
           ))}
         </ul>
       </div>
+
     </div>
+
+    <div className="flex">
+      <div className="p-4 m-5 border">
+
+        <h2>Digital Ocean POST /login_user</h2>
+        <button
+          className="text-white bg-blue-500 p-2 rounded m-1"
+          onClick={doApiHandlePostLoginUser}
+        >
+          DO POST /login_user
+        </button>
+        <button
+          onClick={clearDOLoginUserResult}
+          className="text-white bg-blue-500 p-2 rounded m-1"
+        >
+          clear
+        </button>
+        <ul>
+          {
+            DOLoginUserResp && DOLoginUserResp.length !== 0 ? (
+              <>
+                <h4>status = {DOLoginUserResp.status}</h4>
+                <h4>profile_id = {DOLoginUserResp.profile_id}</h4>
+              </>
+            ) : null
+          }
+        </ul>
+      </div>
+
+      <div className="p-4 m-5 border">
+        <h2>Localhost POST /login_user</h2>
+        <button
+          className="text-white bg-blue-500 p-2 rounded m-1"
+          onClick={lhApiHandlePostLoginUser}
+        >
+          {" "}
+          LocalHost POST /login_user
+        </button>
+        <button
+          onClick={clearLocalLoginUserResult}
+          className="text-white bg-blue-500 p-2 rounded m-1"
+        >
+          clear
+        </button>
+        <ul>
+          {
+            LhLoginUserResp && LhLoginUserResp.length !== 0 ? (
+              <>
+                <h4>status = {LhLoginUserResp.status}</h4>
+                <h4>profile_id = {LhLoginUserResp.profile_id}</h4>
+              </>
+            ) : null
+          }
+        </ul>
+      </div>
+
+    </div>
+
+    </span>
   );
 };
 
