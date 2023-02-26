@@ -1,14 +1,13 @@
 import * as React from "react";
-import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
-import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "../css/Global.css";
 import Modal from "./Modal";
-import ReviewModal from "./ReviewModal";
+import JamsModal from "./JamsModal";
 import Reviews from "./Reviews";
+import ReviewModal from "./ReviewModal";
 
 import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
 
@@ -45,6 +44,7 @@ export default function ProfileCard({ profile }) {
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
+          <JamsModal {...profile} />
         </CardActions>
         <div className="flex place-content-between  ">
           <Modal {...profile} />

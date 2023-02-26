@@ -31,7 +31,7 @@ const HomePage = () => {
       <div className="bg-blue-50 rounded shadow p-4 flex flex-row flex-wrap">
         <h2 className="text-center w-full">Favorite Musicians</h2>
         {favProfiles.map((profile, i) => (
-          <ProfileCardMini profile={profile} />
+          <ProfileCardMini key={i} profile={profile} />
         ))}
       </div>
       <div className="bg-blue-50 rounded shadow p-4 flex flex-row flex-wrap">

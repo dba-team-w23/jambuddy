@@ -66,10 +66,15 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
       mode: "cors",
     }).then((response) => response.json());
 
-    const userData = await fetchUserData(resData.profile_id);
-    setSignedInUser(userData);
-    setUserId(resData.profile_id);
-    localStorage.setItem("user", JSON.stringify(userData));
+    React.useEffect =
+      (() => {
+        const userData = fetchUserData(resData.profile_id);
+        console.log("user data", userData);
+        setSignedInUser(userData);
+        setUserId(resData.profile_id);
+        localStorage.setItem("user", JSON.stringify(userData));
+      },
+      []);
   };
 
   return (

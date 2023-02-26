@@ -1,14 +1,12 @@
 import * as React from "react";
-import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
-import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import ReviewModal from "./ReviewModal";
 import "../css/Global.css";
 import Modal from "./Modal";
 import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
+import JamsModal from "./JamsModal";
 
 export default function ProfileCard({ profile }) {
   return (
@@ -38,10 +36,9 @@ export default function ProfileCard({ profile }) {
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
-          <div className="rounded-full hover:bg-blue-50 w-[40px] h-[40px] flex items-center justify-center cursor-pointer">
-            <MusicNoteIcon style={{ color: "#1976d2" }} />
-          </div>
+          <JamsModal {...profile} />
         </CardActions>
+
         <Modal {...profile} />
       </Card>
     </div>

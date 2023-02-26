@@ -17,9 +17,9 @@ import "./../css/Navbar.css";
 const pages = ["Profiles", "Jam Requests"];
 const settings = ["Profile", "Logout"];
 
-function ResponsiveAppBar(props) {
+function Navbar(props) {
   const [signedInUser, setSignedInUser] = React.useState({ props });
-  const [profilePhoto, setProfilePhoto] = React.useState(props);
+  const [handleLogout] = React.useState(props);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const handleOpenNavMenu = (event) => {
@@ -42,7 +42,7 @@ function ResponsiveAppBar(props) {
   };
 
   const signOut = () => {
-    handleCloseUserMenu();
+    handleLogout;
   };
 
   return (
@@ -185,4 +185,4 @@ function ResponsiveAppBar(props) {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default Navbar;

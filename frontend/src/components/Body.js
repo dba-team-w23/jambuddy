@@ -23,9 +23,14 @@ export default function Body(alreadySignedInUser) {
   };
   const handleLogout = () => {
     setSignedInUser(null);
+    localStorage.removeItem("user");
+
+    console.log("signed in user", signedInUser);
+    console.log("local storage", localStorage);
   };
 
   if (isLoading) return <div>Loading...</div>;
+  console.log(signedInUser);
 
   return (
     <>
@@ -34,6 +39,7 @@ export default function Body(alreadySignedInUser) {
         setSignedInUser={setSignedInUser}
         updateSignedInUser={updateSignedInUser}
         profilePhoto={signedInUser && signedInUser.photo}
+        handleLogout={handleLogout}
       />
       <div className="max-w-[90%] sm:max-w-[80%] md:max-w-[70%] m-auto">
         <div className="w-48 py-4 m-auto border border-blue-500 my-4 shadow-blue-500/50 rounded-md">
@@ -51,7 +57,7 @@ export default function Body(alreadySignedInUser) {
               path="/"
               element={
                 signedInUser ? (
-                  <HomePage />
+                  <HomePage signedInUser={signedInUser} />
                 ) : (
                   <SignIn
                     signedInUser={signedInUser}

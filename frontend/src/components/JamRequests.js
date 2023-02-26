@@ -47,7 +47,7 @@ export default function JamRequests() {
 
         return (
           <Grid key={i} item xs={3}>
-            <BasicCard post={post} author={author} />
+            <BasicCard key={i * 100} post={post} author={author} />
           </Grid>
         );
       })}
