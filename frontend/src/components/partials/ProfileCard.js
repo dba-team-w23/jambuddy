@@ -13,11 +13,6 @@ import Reviews from "./Reviews";
 import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
 
 export default function ProfileCard({ profile }) {
-  //temp photo
-  const [photoURL, setPhotoURL] = React.useState(
-    `https://source.unsplash.com/random/?face&${Math.random()}`
-  );
-
   return (
     <div className="m-5">
       <Card sx={{ position: "relative" }}>
@@ -32,7 +27,7 @@ export default function ProfileCard({ profile }) {
         />
         <div className="aspect-[4/3]">
           <img
-            src={photoURL}
+            src={profile.photo}
             alt={profile.first_name}
             className="object-cover position-absolute w-full h-full"
           />
