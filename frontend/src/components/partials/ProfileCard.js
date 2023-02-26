@@ -16,7 +16,7 @@ export default function ProfileCard({ profile }) {
   );
 
   return (
-    <div className="max-w-[40%] m-5">
+    <div className="m-5">
       <Card sx={{ position: "relative" }}>
         <CardHeader
           avatar={

@@ -40,8 +40,14 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
   };
 
   const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
-  // const apiRoot = "http://localhost:8000";
   const baseURL = `${apiRoot}/api/login_user`;
+
+  const fetchUserData = async (userId) => {
+    const userData = await fetch(`${apiRoot}/api/users/${userId}`).then((res) =>
+      res.json()
+    );
+    return userData;
+  };
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
@@ -54,12 +60,19 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-CSRFToken": getCookie("csrftoken"),
       },
-      body: data,
+      body: JSON.stringify(data),
       mode: "cors",
     }).then((response) => response.json());
-    console.log(data);
+
+    const userData = await fetchUserData(resData.profile_id);
+    setSignedInUser(userData);
+    setUserId(resData.profile_id);
   };
+  React.useEffect(() => {
+    console.log("User: ", signedInUser, "userId: ", userId);
+  }, [signedInUser, userId]);
 
   return (
     <>
@@ -112,7 +125,6 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
           </Link>
         </Box>
       )}
-      {signedInUser && <h1>User name</h1>}
     </>
   );
 }

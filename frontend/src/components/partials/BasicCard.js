@@ -13,20 +13,20 @@ const bull = (
   </Box>
 );
 
-export default function BasicCard({ request, instrument, genre, contact }) {
+export default function BasicCard({ post, author }) {
   return (
     <Card>
       <CardContent>
         <Typography variant="h5" color="text.secondary" gutterBottom>
-          {request.location} -- {request.status}
+          {post.location} -- {post.status}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          contact name: {contact}
+          contact name: {author.first_name} {author.last_name}
         </Typography>
         <Typography variant="body2">
-          We need:{request.instrument}
+          We need:{post.instrument}
           <br />
-          We play: {request.genre}
+          We play: {post.genre}
         </Typography>
       </CardContent>
     </Card>

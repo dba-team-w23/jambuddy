@@ -12,7 +12,6 @@ import Box from "@mui/material/Box";
 
 export default function FormGrid() {
   const [instruments, setInstruments] = React.useState([]);
-  // const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app";
   const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app";
   const instrumentApi = `${baseURL}/api/instruments/`;
   const [formValues, setFormValues] = React.useState({

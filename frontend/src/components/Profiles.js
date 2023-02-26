@@ -4,7 +4,7 @@ import { Grid } from "@mui/material";
 import "./css/Profiles.css";
 
 const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
-const baseURL = `${apiRoot}/api/users/`;
+const baseURL = `${apiRoot}/api/users`;
 
 export default function Profiles(props) {
   const [profiles, setProfiles] = React.useState([]);

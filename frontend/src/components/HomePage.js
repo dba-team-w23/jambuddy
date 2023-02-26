@@ -7,8 +7,8 @@ const HomePage = () => {
   const [favJams, setFavJams] = React.useState([]);
 
   const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
-  const baseURL = `${apiRoot}/api/users/`;
-  const jamURL = `${apiRoot}/api/jamrequests/`;
+  const baseURL = `${apiRoot}/api/users`;
+  const jamURL = `${apiRoot}/api/jamrequests`;
 
   const getProfiles = async () => {
     const data = await fetch(baseURL).then((response) => response.json());
@@ -35,7 +35,7 @@ const HomePage = () => {
         ))}
       </div>
       <div className="bg-blue-50 rounded shadow p-4 flex flex-row flex-wrap">
-        <JamRequests />
+        {/* <JamRequests /> */}
       </div>
     </div>
   );
