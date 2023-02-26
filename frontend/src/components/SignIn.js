@@ -71,9 +71,6 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
     setUserId(resData.profile_id);
     localStorage.setItem("user", JSON.stringify(userData));
   };
-  React.useEffect(() => {
-    console.log("User: ", signedInUser, "userId: ", userId);
-  }, [signedInUser, userId]);
 
   return (
     <>

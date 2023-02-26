@@ -19,6 +19,7 @@ const settings = ["Profile", "Logout"];
 
 function ResponsiveAppBar(props) {
   const [signedInUser, setSignedInUser] = React.useState({ props });
+  const [profilePhoto, setProfilePhoto] = React.useState(props);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const handleOpenNavMenu = (event) => {
@@ -35,7 +36,9 @@ function ResponsiveAppBar(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
     setSignedInUser(null);
-    localStorage.removeItem("signedInUser");
+    localStorage.removeItem("user");
+    console.log(signedInUser);
+    console.log(localStorage);
   };
 
   const signOut = () => {

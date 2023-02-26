@@ -5,6 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import "../css/Global.css";
 import Modal from "./Modal";
 import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
@@ -49,6 +50,7 @@ export default function ProfileCard({ profile }) {
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
+          <MusicNoteIcon />
         </CardActions>
         <Modal {...profile} />
       </Card>

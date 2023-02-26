@@ -7,6 +7,9 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "../css/Global.css";
 import Modal from "./Modal";
+import ReviewModal from "./ReviewModal";
+import Reviews from "./Reviews";
+
 import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
 
 export default function ProfileCard({ profile }) {
@@ -19,11 +22,6 @@ export default function ProfileCard({ profile }) {
     <div className="m-5">
       <Card sx={{ position: "relative" }}>
         <CardHeader
-          avatar={
-            <Avatar aria-label="recipe">
-              <img src={photoURL} width={40} height={40} />
-            </Avatar>
-          }
           action={
             <IconButton aria-label="settings">
               <MoreVertIcon />
@@ -32,12 +30,14 @@ export default function ProfileCard({ profile }) {
           title={`${profile.first_name} ${profile.last_name}`}
           subheader={profile.username}
         />
-        <CardMedia
-          component="img"
-          height="194"
-          image={photoURL}
-          alt={profile.first_name}
-        />
+        <div className="aspect-[4/3] bg-red-600">
+          <img
+            src={photoURL}
+            alt={profile.first_name}
+            className="object-cover position-absolute w-full h-full"
+          />
+        </div>
+
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             {profile.city}, {profile.state}
@@ -51,7 +51,11 @@ export default function ProfileCard({ profile }) {
             <FavoriteIcon />
           </IconButton>
         </CardActions>
-        <Modal {...profile} />
+        <div className="flex place-content-between  ">
+          <Modal {...profile} />
+          <ReviewModal {...profile} />
+          <Reviews {...profile} />
+        </div>
       </Card>
     </div>
   );

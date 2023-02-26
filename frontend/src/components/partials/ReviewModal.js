@@ -23,7 +23,7 @@ export default function BasicModal({ ...profile }) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>About</Button>
+      <Button onClick={handleOpen}>Review Me</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -31,16 +31,7 @@ export default function BasicModal({ ...profile }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {profile.first_name} {profile.last_name}
-          </Typography>
-          <Typography id="modal-sub-title" variant="h6" component="h3">
-            {profile.city}, {profile.state}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {profile.note}
-          </Typography>
-          <Typography>Reviews</Typography>
+          <h2>Leave a review for {profile.username}</h2>
         </Box>
       </Modal>
     </div>

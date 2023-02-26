@@ -3,6 +3,8 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Typography } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const bull = (
   <Box
@@ -28,6 +30,9 @@ export default function BasicCard({ post, author }) {
           <br />
           We play: {post.genre}
         </Typography>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
       </CardContent>
     </Card>
   );

@@ -33,6 +33,7 @@ export default function Body(alreadySignedInUser) {
         signedInUser={signedInUser}
         setSignedInUser={setSignedInUser}
         updateSignedInUser={updateSignedInUser}
+        profilePhoto={signedInUser && signedInUser.photo}
       />
       <div className="max-w-[90%] sm:max-w-[80%] md:max-w-[70%] m-auto">
         <div className="w-48 py-4 m-auto border border-blue-500 my-4 shadow-blue-500/50 rounded-md">
