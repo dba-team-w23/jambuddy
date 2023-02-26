@@ -30,7 +30,7 @@ export default function ProfileCard({ profile }) {
           title={`${profile.first_name} ${profile.last_name}`}
           subheader={profile.username}
         />
-        <div className="aspect-[4/3] bg-red-600">
+        <div className="aspect-[4/3]">
           <img
             src={photoURL}
             alt={profile.first_name}

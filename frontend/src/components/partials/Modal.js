@@ -40,7 +40,6 @@ export default function BasicModal({ ...profile }) {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {profile.note}
           </Typography>
-          <Typography>Reviews</Typography>
         </Box>
       </Modal>
     </div>
