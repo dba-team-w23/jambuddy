@@ -10,8 +10,6 @@ export default function EditProfile(props) {
   const [user, setUser] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
 
-  // const baseURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/${signedInUser.userId}/`;
-  // const baseURL = `http://localhost:8088/api/users/${signedInUser.userId}/`;
   const baseURL = `http://localhost:8000/api/users/${signedInUser.userId}/`;
 
   React.useEffect(() => {
@@ -34,7 +32,7 @@ export default function EditProfile(props) {
           noValidate
           autoComplete="off"
         >
-          <ProfileCard profile={user} />
+          <MiniProfileCard profile={user} />
           <FormGrid style={{ margin: "40px auto" }} />
         </Box>
       ) : (

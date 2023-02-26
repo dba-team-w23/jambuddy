@@ -13,10 +13,14 @@ import "../index.css";
 import HomePage from "./HomePage";
 import ApiTest from "./ApiTest";
 
-export default function Body() {
-  const [signedInUser, setSignedInUser] = React.useState(null);
-
+export default function Body(alreadySignedInUser) {
+  const [signedInUser, setSignedInUser] = React.useState(alreadySignedInUser);
   const [isLoading, setIsLoading] = React.useState(false);
+  const updateSignedInUser = (user) => {
+    console.log("updateSignedInUser", user);
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+    setSignedInUser(updatedUser);
+  };
   const handleLogout = () => {
     setSignedInUser(null);
   };
@@ -25,7 +29,11 @@ export default function Body() {
 
   return (
     <>
-      <Navbar signedInUser={signedInUser} setSignedInUser={setSignedInUser} />
+      <Navbar
+        signedInUser={signedInUser}
+        setSignedInUser={setSignedInUser}
+        updateSignedInUser={updateSignedInUser}
+      />
       <div className="max-w-[90%] sm:max-w-[80%] md:max-w-[70%] m-auto">
         <div className="w-48 py-4 m-auto border border-blue-500 my-4 shadow-blue-500/50 rounded-md">
           {signedInUser && (
@@ -44,17 +52,21 @@ export default function Body() {
                   <SignIn
                     signedInUser={signedInUser}
                     setSignedInUser={setSignedInUser}
+                    updateSignedInUser={updateSignedInUser}
                   />
                 )
               }
             />
 
-            <Route path="signup" element={<SignUp />} />
+            <Route
+              path="signup"
+              element={<SignUp updateSignedInUser={updateSignedInUser} />}
+            />
             <Route
               path="profiles"
               element={
                 signedInUser ? (
-                  <Profiles />
+                  <Profiles updateSignedInUser={updateSignedInUser} />
                 ) : (
                   <SignIn
                     signedInUser={signedInUser}
@@ -72,6 +84,7 @@ export default function Body() {
                   <SignIn
                     signedInUser={signedInUser}
                     setSignedInUser={setSignedInUser}
+                    updateSignedInUser={updateSignedInUser}
                   />
                 )
               }
@@ -80,11 +93,12 @@ export default function Body() {
               path="newjamrequest"
               element={
                 signedInUser ? (
-                  <NewJamRequest />
+                  <NewJamRequest updateSignedInUser={updateSignedInUser} />
                 ) : (
                   <SignIn
                     signedInUser={signedInUser}
                     setSignedInUser={setSignedInUser}
+                    updateSignedInUser={updateSignedInUser}
                   />
                 )
               }
@@ -93,11 +107,15 @@ export default function Body() {
               path="profile"
               element={
                 signedInUser ? (
-                  <Profile signedInUser={signedInUser} />
+                  <Profile
+                    signedInUser={signedInUser}
+                    updateSignedInUser={updateSignedInUser}
+                  />
                 ) : (
                   <SignIn
                     signedInUser={signedInUser}
                     setSignedInUser={setSignedInUser}
+                    updateSignedInUser={updateSignedInUser}
                   />
                 )
               }
@@ -109,6 +127,7 @@ export default function Body() {
                 <SignIn
                   signedInUser={signedInUser}
                   setSignedInUser={setSignedInUser}
+                  updateSignedInUser={updateSignedInUser}
                 />
               }
             />

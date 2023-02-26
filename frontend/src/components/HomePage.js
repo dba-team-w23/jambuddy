@@ -25,17 +25,18 @@ const HomePage = () => {
   React.useEffect(() => {
     getJams();
   }, []);
-  console.log(favProfiles);
 
   return (
     <div className="grid grid-cols-2 gap-4">
       <div className="bg-blue-50 rounded shadow p-4 flex flex-row flex-wrap">
+        <h2>Favorite Musicians</h2>
         {favProfiles.map((profile, i) => (
           <ProfileCard profile={profile} />
         ))}
       </div>
       <div className="bg-blue-50 rounded shadow p-4 flex flex-row flex-wrap">
-        {/* <JamRequests /> */}
+        <h2>Saved Jam Requests</h2>
+        <JamRequests />
       </div>
     </div>
   );

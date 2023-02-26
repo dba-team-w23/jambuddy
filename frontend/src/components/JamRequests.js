@@ -16,7 +16,6 @@ export default function JamRequests() {
   useEffect(() => {
     Promise.all([fetch(jamApi), fetch(usersApi)])
       .then(function (responses) {
-        // Get a JSON object from each of the responses
         return Promise.all(
           responses.map(function (response) {
             return response.json();
@@ -26,7 +25,6 @@ export default function JamRequests() {
       .then(function (data) {
         setJamRequests(data[0]);
         setUsers(data[1]);
-        console.log(data);
       })
       .catch(function (error) {
         console.log(error);
@@ -43,13 +41,13 @@ export default function JamRequests() {
           location: request.location,
           status: request.status,
           instrument: request.instrument.name,
-          genre: request.genre.name,
+          genre: request.genre.genre,
           exp_level: request.exp_level,
         };
 
         return (
-          <Grid item key={i} xs={3}>
-            <BasicCard post={post} author={author} />
+          <Grid item xs={3}>
+            <BasicCard key={i} post={post} author={author} />
           </Grid>
         );
       })}

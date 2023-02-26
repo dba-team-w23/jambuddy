@@ -69,6 +69,7 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
     const userData = await fetchUserData(resData.profile_id);
     setSignedInUser(userData);
     setUserId(resData.profile_id);
+    localStorage.setItem("user", JSON.stringify(userData));
   };
   React.useEffect(() => {
     console.log("User: ", signedInUser, "userId: ", userId);
