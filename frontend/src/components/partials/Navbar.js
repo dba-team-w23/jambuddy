@@ -35,7 +35,7 @@ function ResponsiveAppBar(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
     setSignedInUser(null);
-    console.log("signedInUser", signedInUser);
+    localStorage.removeItem("signedInUser");
   };
 
   const signOut = () => {

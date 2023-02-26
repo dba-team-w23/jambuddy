@@ -37,7 +37,10 @@ export default function Body(alreadySignedInUser) {
       <div className="max-w-[90%] sm:max-w-[80%] md:max-w-[70%] m-auto">
         <div className="w-48 py-4 m-auto border border-blue-500 my-4 shadow-blue-500/50 rounded-md">
           {signedInUser && (
-            <h1 className="text-4xl text-center">{signedInUser.username}</h1>
+            <h1 className="text-4xl text-center">
+              {signedInUser.username}
+              {signedInUser.first_name}
+            </h1>
           )}
         </div>
 

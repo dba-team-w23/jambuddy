@@ -17,7 +17,9 @@ const ApiTest = () => {
   const [lhProfiles, setLhProfiles] = React.useState([]);
   const [DOCreateUserResp, setDoCreateUserResp] = React.useState([]);
   const [LhCreateUserResp, setLhCreateUserResp] = React.useState([]);
-
+  const randomArray = Array.from({ length: 25 }, () =>
+    Math.floor(Math.random() * 1000)
+  );
   const doApiHandle = async () => {
     const data = await fetch(getUsers).then((response) => response.json());
     console.log(data);
@@ -98,7 +100,7 @@ const ApiTest = () => {
     }
   };
   return (
-    <span>
+    <>
       <div className="flex">
         <div className="p-4 m-5 border">
           <h2>Digital Ocean GET users</h2>
@@ -187,7 +189,45 @@ const ApiTest = () => {
           </button>
         </div>
       </div>
-    </span>
+      <div>
+        <h2>men</h2>
+        <ul>
+          {randomArray.map((num, i) => (
+            <li key={i}>https://source.unsplash.com/random/?man&${num}</li>
+          ))}
+        </ul>
+        <h2>women</h2>
+        <ul>
+          {randomArray.map((num, i) => (
+            <li key={i}>https://source.unsplash.com/random/?woman&${num}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2>men</h2>
+        <ul>
+          {randomArray.map((num, i) => (
+            <li key={i}>
+              <img
+                className="max-w-xs"
+                src={`https://source.unsplash.com/random/?man&${num}`}
+              />
+            </li>
+          ))}
+        </ul>
+        <h2>women</h2>
+        <ul>
+          {randomArray.map((num, i) => (
+            <li key={i}>
+              <img
+                className="max-w-xs"
+                src={`https://source.unsplash.com/random/?woman&${num}`}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 

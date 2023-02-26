@@ -1,6 +1,6 @@
 import React from "react";
 import JamRequests from "./JamRequests";
-import ProfileCard from "./partials/ProfileCard";
+import ProfileCardMini from "./partials/ProfileCardMini";
 
 const HomePage = () => {
   const [favProfiles, setFavProfiles] = React.useState([]);
@@ -27,15 +27,15 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="flex flex-wrap">
       <div className="bg-blue-50 rounded shadow p-4 flex flex-row flex-wrap">
-        <h2>Favorite Musicians</h2>
+        <h2 className="text-center w-full">Favorite Musicians</h2>
         {favProfiles.map((profile, i) => (
-          <ProfileCard profile={profile} />
+          <ProfileCardMini profile={profile} />
         ))}
       </div>
       <div className="bg-blue-50 rounded shadow p-4 flex flex-row flex-wrap">
-        <h2>Saved Jam Requests</h2>
+        <h2 className="text-center w-full py-5">Saved Jam Requests</h2>
         <JamRequests />
       </div>
     </div>

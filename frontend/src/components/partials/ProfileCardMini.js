@@ -16,7 +16,7 @@ export default function ProfileCard({ profile }) {
   );
 
   return (
-    <div className="m-5">
+    <div className="m-5 max-w-[200px]">
       <Card sx={{ position: "relative" }}>
         <CardHeader
           avatar={
@@ -29,18 +29,17 @@ export default function ProfileCard({ profile }) {
               <MoreVertIcon />
             </IconButton>
           }
-          title={`${profile.first_name} ${profile.last_name}`}
-          subheader={profile.username}
         />
-        <CardMedia
-          component="img"
-          height="194"
-          image={photoURL}
-          alt={profile.first_name}
-        />
+
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            {profile.city}, {profile.state}
+            <h3>{`${profile.first_name} ${profile.last_name}`}</h3>
+            <h3>{profile.username}</h3>
+            <h3>
+              {profile.city && profile.state
+                ? `${profile.city}, ${profile.state}`
+                : `${profile.city} ${profile.state}`}
+            </h3>
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {profile.genre}

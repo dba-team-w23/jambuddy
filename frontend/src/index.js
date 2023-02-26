@@ -10,7 +10,7 @@ axios.defaults.mode = "no-cors";
 const root = createRoot(document.getElementById("root"));
 const savedUser = JSON.parse(localStorage.getItem("user"));
 const initialUser = savedUser ? savedUser : null;
-console.log("initial user:", initialUser);
+
 window.React1 = require("react");
 
 root.render(
