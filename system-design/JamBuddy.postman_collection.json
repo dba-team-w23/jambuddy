@@ -1,0 +1,793 @@
+{
+	"info": {
+		"_postman_id": "da4f57cb-148e-4265-b1f7-91ad946b1922",
+		"name": "JamBuddy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11092666"
+	},
+	"item": [
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Checkserver",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/checkserver",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"checkserver"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/users/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userDetails by userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/user-details/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"user-details",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userGenres",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/usergenres",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"usergenres"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userGenre by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/usergenres/39",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"usergenres",
+										"39"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userGenre by userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/usergenresforuser/7",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"usergenresforuser",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userFaveJamReq for userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/userfavejamreqs/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userfavejamreqs",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userFaveProfiles for userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/userfaveprofiles/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userfaveprofiles",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userInstruments",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/userinstruments",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userinstruments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userInstruments by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/userinstruments/86",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userinstruments",
+										"86"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userInstruments by userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/userinstrumentsforuser/6",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userinstrumentsforuser",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userMedia",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/usermedia",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"usermedia"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userMedia by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/usermedia/12",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"usermedia",
+										"12"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userMedia by userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/usermediaforuser/8",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"usermediaforuser",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userReviews",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/userreviews",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userreviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userReviews by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/userreviews/20",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userreviews",
+										"20"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userReviews for userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/userreviewsforuser/11",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userreviewsforuser",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userReviews by userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/userreviewsbyuser/10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userreviewsbyuser",
+										"10"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "Login_User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\":\"swally\",\n    \"password\":\"swally\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/login_user",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"login_user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout_User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/logout_user",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"logout_user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create_User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"Dan\",\n    \"last_name\": \"Dan\",\n    \"email\": \"dan@jambuddy.com\",\n    \"username\": \"dan\",\n    \"password\": \"dan\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userFaveJamReq",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"profileid\":2, \"jrid\":9}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/userfavejamreqs",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userfavejamreqs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userFaveJamReq Copy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"profileid\":2, \"jrid\":9}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/userfavejamreqs",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userfavejamreqs"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Jams",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "GET jamRequests",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/jamrequests/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"jamrequests",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET jamRequest by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/jamrequests/14",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"jamrequests",
+										"14"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET jamResponses",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/jamresponses/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"jamresponses",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET jamResponse by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/jamresponses/16/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"jamresponses",
+										"16",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST",
+					"item": []
+				},
+				{
+					"name": "PUT",
+					"item": []
+				}
+			]
+		},
+		{
+			"name": "Lookups",
+			"item": [
+				{
+					"name": "GET experienceLevels",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/experiencelevels/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"experiencelevels",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET experienceLevel by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/experiencelevels/3/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"experiencelevels",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET instruments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/instruments/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"instruments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET instrument by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/instruments/13/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"instruments",
+								"13",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET musicGenres",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/musicgenres/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"musicgenres",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET musicGenre by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/musicgenres/13/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"musicgenres",
+								"13",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
