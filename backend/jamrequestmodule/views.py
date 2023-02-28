@@ -282,13 +282,11 @@ def login_user(request):
 
     if user is not None and user.is_authenticated:
         login(request, user)
-        response = Response({"status":1, "profile_id":user.pk}, status=status.HTTP_200_OK)
-        return response
+        return Response({"status":1, "profile_id":user.pk}, status=status.HTTP_200_OK)
     else:
-        response = Response({"status":0, "error":"Invalid username or password"}, status=status.HTTP_200_OK)
-        return response
-
+        return Response({"status":0, "error":"Invalid username or password"}, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 def logout_user(request):
     logout(request)
+    return Response({"status":0}, status=status.HTTP_200_OK)

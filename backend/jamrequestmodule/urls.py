@@ -24,6 +24,7 @@ urlpatterns = [
     path('checkserver', views.checkserver),
     
     path('api/login_user', views.login_user, name='login'),
+    path('api/logout_user', views.logout_user, name='logout'),
 
     path('api/users', views.UserList.as_view(actions={'get': 'list', 'post': 'create'}), name='user-list'),
     path('api/users/<int:pk>', views.UserDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='user-detail'),
