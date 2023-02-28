@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import axios from "axios";
+import { store } from "./app/store";
+import { Provider } from "react-redux";
 
 axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 axios.defaults.mode = "no-cors";
@@ -15,8 +17,10 @@ window.React1 = require("react");
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter {...window.__REACT_DEVTOOLS_GLOBAL_HOOK__}>
-      <App signedInUser={initialUser} />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter {...window.__REACT_DEVTOOLS_GLOBAL_HOOK__}>
+        <App signedInUser={initialUser} />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );

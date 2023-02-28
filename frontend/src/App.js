@@ -1,11 +1,15 @@
 import React from "react";
 import Body from "./components/Body";
-import Navbar from "./components/partials/Navbar";
+import Counter from "./features/Counter";
+import User from "./features/User";
+import { useSelector } from "react-redux";
 
-function App(signedInUser) {
+function App() {
   return (
     <div>
-      <Body signedInUser={signedInUser} />
+      <Body />
+      <User />
+      {/* <Counter /> */}
     </div>
   );
 }

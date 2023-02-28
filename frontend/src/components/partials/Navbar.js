@@ -13,12 +13,14 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import "./../css/Navbar.css";
+import { useSelector } from "react-redux";
 
 const pages = ["Profiles", "Jam Requests"];
 const settings = ["Profile", "Logout"];
 
 function Navbar(props) {
-  const [signedInUser, setSignedInUser] = React.useState({ props });
+  const userData = useSelector((state) => state.user);
+
   const [handleLogout] = React.useState(props);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -35,14 +37,10 @@ function Navbar(props) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-    setSignedInUser(null);
-    localStorage.removeItem("user");
-    console.log(signedInUser);
-    console.log(localStorage);
   };
 
   const signOut = () => {
-    handleLogout;
+    props.handleLogout();
   };
 
   return (
@@ -140,11 +138,11 @@ function Navbar(props) {
             ))}
           </Box>
 
-          {signedInUser && (
+          {userData && (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="" src={signedInUser.photo} />
+                  <Avatar alt="" src={userData.photo} />
                 </IconButton>
               </Tooltip>
               <Menu

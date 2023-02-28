@@ -10,6 +10,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.6",
     "@mui/styled-engine-sc": "^5.11.0",
+    "@reduxjs/toolkit": "^1.9.3",
     "axios": "^1.2.4",
     "cloudinary-react": "^1.8.1",
     "express": "^4.18.2",

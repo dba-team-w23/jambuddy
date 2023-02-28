@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 export default function Form() {
   const [instruments, setInstruments] = React.useState([]);
   const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app";
-  const instrumentApi = `${baseURL}/api/instruments/`
-  const postApi = `${baseURL}/api/users/`
+  const instrumentApi = `${baseURL}/api/instruments`;
+  const postApi = `${baseURL}/api/users`;
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
