@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import axios from "axios";
-import { store } from "./app/store";
+import { store } from "./features/store";
 import { Provider } from "react-redux";
 
 axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
@@ -18,7 +18,7 @@ window.React1 = require("react");
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter {...window.__REACT_DEVTOOLS_GLOBAL_HOOK__}>
+      <BrowserRouter>
         <App signedInUser={initialUser} />
       </BrowserRouter>
     </Provider>

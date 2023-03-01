@@ -10,7 +10,7 @@ import JamsModal from "./JamsModal";
 
 export default function ProfileCard({ profile }) {
   return (
-    <div className="m-5 max-w-[200px]">
+    <div className="m-5 w-[200px]">
       <Card sx={{ position: "relative" }}>
         <div className="aspect-[4/3]">
           <img

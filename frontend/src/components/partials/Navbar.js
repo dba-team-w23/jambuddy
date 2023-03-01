@@ -14,16 +14,18 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import "./../css/Navbar.css";
 import { useSelector } from "react-redux";
+import { userSlice } from "../../features/userSlice";
+import { useDispatch } from "react-redux";
 
 const pages = ["Profiles", "Jam Requests"];
 const settings = ["Profile", "Logout"];
 
 function Navbar(props) {
   const userData = useSelector((state) => state.user);
-
-  const [handleLogout] = React.useState(props);
+  const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -39,8 +41,12 @@ function Navbar(props) {
     setAnchorElUser(null);
   };
 
-  const signOut = () => {
-    props.handleLogout();
+  const signOut = async () => {
+    try {
+      await props.handleLogout(userData.id);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

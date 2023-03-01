@@ -12,8 +12,13 @@ import InputLabel from "@mui/material/InputLabel";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { getCookie } from "./partials/csrftoken";
+import { useDispatch } from "react-redux";
+import { setUserProfile } from "../features/userSlice";
+import { setSignedIn } from "../features/userSlice";
+import { useSelector } from "react-redux";
 
-export default function SignIn({ signedInUser, setSignedInUser }) {
+export default function SignIn() {
+  const isSignedIn = useSelector((state) => state.user.isSignedIn);
   const [formInput, setFormInput] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -23,7 +28,7 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
   );
   const [showPassword, setShowPassword] = React.useState(false);
   const [userId, setUserId] = React.useState(null);
-
+  const dispatch = useDispatch();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
@@ -66,20 +71,28 @@ export default function SignIn({ signedInUser, setSignedInUser }) {
       mode: "cors",
     }).then((response) => response.json());
 
-    React.useEffect =
-      (() => {
-        const userData = fetchUserData(resData.profile_id);
-        console.log("user data", userData);
-        setSignedInUser(userData);
-        setUserId(resData.profile_id);
-        localStorage.setItem("user", JSON.stringify(userData));
-      },
-      []);
+    setUserId(resData.profile_id);
+    console.log("user id", userId);
   };
+  React.useEffect(() => {
+    const updateUser = async () => {
+      const userData = await fetchUserData(userId);
+      console.log("user data", userData);
+
+      localStorage.setItem("user", JSON.stringify(userData));
+
+      dispatch(setUserProfile(userData));
+      dispatch(setSignedIn(true));
+      console.log("user profile", userData);
+    };
+    if (userId) {
+      updateUser();
+    }
+  }, [userId, isSignedIn, dispatch]);
 
   return (
     <>
-      {!signedInUser && (
+      {!isSignedIn && (
         <Box
           className="signIn"
           component="form"

@@ -13,22 +13,35 @@ import "../index.css";
 import HomePage from "./HomePage";
 import ApiTest from "./ApiTest";
 import { useSelector } from "react-redux";
-// import { clearUserProfile } from "../features/userSlice";
 import { userSlice } from "../features/userSlice";
 import { useDispatch } from "react-redux";
 
 export default function Body() {
   const userData = useSelector((state) => state.user);
+  const isSignedIn = useSelector((state) => state.user.isSignedIn);
   const [isLoading, setIsLoading] = React.useState(false);
+  const baseURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/logout_user`;
   const dispatch = useDispatch();
-  const handleLogout = () => {
-    console.log("Handle logout");
-    // dispatch(clearUserProfile());
-    dispatch(userSlice.actions.clearUserProfile());
-    localStorage.removeItem("user");
 
-    console.log("signed in user", userData);
-    console.log("local storage", localStorage);
+  const handleLogout = async (userid) => {
+    try {
+      const response = await fetch(`${baseURL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userid }),
+      });
+      const data = await response.json();
+      console.log("data", data);
+      localStorage.removeItem("user");
+      dispatch(userSlice.actions.clearUserProfile());
+
+      console.log("local storage", localStorage);
+      console.log("user data", userData);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -43,21 +56,24 @@ export default function Body() {
 
         <div className="signedInUser">
           <Routes>
-            <Route path="/" element={userData ? <HomePage /> : <SignIn />} />
+            <Route path="/" element={isSignedIn ? <HomePage /> : <SignIn />} />
 
             <Route path="signup" element={<SignUp />} />
-            <Route path="profiles" element={true ? <Profiles /> : <SignIn />} />
+            <Route
+              path="profiles"
+              element={isSignedIn ? <Profiles /> : <SignIn />}
+            />
             <Route
               path="jamrequests"
-              element={true ? <JamRequests /> : <SignIn />}
+              element={isSignedIn ? <JamRequests /> : <SignIn />}
             />
             <Route
               path="newjamrequest"
-              element={userData ? <NewJamRequest /> : <SignIn />}
+              element={isSignedIn ? <NewJamRequest /> : <SignIn />}
             />
             <Route
               path="profile"
-              element={userData ? <Profile /> : <SignIn />}
+              element={isSignedIn ? <Profile /> : <SignIn />}
             />
             <Route path="logout" onClick={handleLogout} element={<SignIn />} />
             <Route path="apitest" element={<ApiTest />} />
