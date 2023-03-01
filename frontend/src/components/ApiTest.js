@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useSelector } from "react-redux";
 
 const ApiTest = () => {
+  const userData = useSelector((state) => state.user);
   const doApi = "https://sea-turtle-app-zggz6.ondigitalocean.app";
   const localApi = "http://localhost:8000";
-  const localStorageApi = "http://localhost:8088";
+
   const getUsers = `${doApi}/api/users`;
   const localUsers = `${localApi}/api/users`;
 
@@ -15,8 +16,7 @@ const ApiTest = () => {
 
   const [doProfiles, setDoProfiles] = React.useState([]);
   const [lhProfiles, setLhProfiles] = React.useState([]);
-  const [DOCreateUserResp, setDoCreateUserResp] = React.useState([]);
-  const [LhCreateUserResp, setLhCreateUserResp] = React.useState([]);
+
   const randomArray = Array.from({ length: 25 }, () =>
     Math.floor(Math.random() * 1000)
   );

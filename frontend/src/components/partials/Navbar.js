@@ -14,7 +14,6 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import "./../css/Navbar.css";
 import { useSelector } from "react-redux";
-import { userSlice } from "../../features/userSlice";
 import { useDispatch } from "react-redux";
 
 const pages = ["Profiles", "Jam Requests"];
@@ -22,6 +21,7 @@ const settings = ["Profile", "Logout"];
 
 function Navbar(props) {
   const userData = useSelector((state) => state.user);
+  userData.user ? console.log("Navbar user data:", userData.user.photo) : null;
   const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -148,7 +148,7 @@ function Navbar(props) {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="" src={userData.photo} />
+                  <Avatar alt="" src={userData.user && userData.user.photo} />
                 </IconButton>
               </Tooltip>
               <Menu
