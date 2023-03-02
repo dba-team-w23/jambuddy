@@ -515,6 +515,52 @@
 							"response": []
 						},
 						{
+							"name": "Update_User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"Dan\",\n    \"last_name\": \"Dan\",\n    \"email\": \"dan@jambuddy.com\",\n    \"username\": \"dan\",\n    \"password\": \"dan\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "userFaveJamReq",
 							"request": {
 								"method": "POST",
@@ -654,6 +700,36 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "searchJamRequests",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"instrumentid\": 3,\n    \"daysback\":7\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/searchjamrequests",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"searchjamrequests"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -676,14 +752,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/experiencelevels/",
+							"raw": "{{base_url}}/api/experiencelevels",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
-								"experiencelevels",
-								""
+								"experiencelevels"
 							]
 						}
 					},
@@ -695,15 +770,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/experiencelevels/3/",
+							"raw": "{{base_url}}/api/experiencelevels/3",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"experiencelevels",
-								"3",
-								""
+								"3"
 							]
 						}
 					},
@@ -715,14 +789,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/instruments/",
+							"raw": "{{base_url}}/api/instruments",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
-								"instruments",
-								""
+								"instruments"
 							]
 						}
 					},
@@ -734,15 +807,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/instruments/13/",
+							"raw": "{{base_url}}/api/instruments/13",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"instruments",
-								"13",
-								""
+								"13"
 							]
 						}
 					},
@@ -754,14 +826,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/musicgenres/",
+							"raw": "{{base_url}}/api/musicgenres",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
-								"musicgenres",
-								""
+								"musicgenres"
 							]
 						}
 					},
@@ -773,15 +844,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/musicgenres/13/",
+							"raw": "{{base_url}}/api/musicgenres/13",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"musicgenres",
-								"13",
-								""
+								"13"
 							]
 						}
 					},

@@ -27,7 +27,7 @@ urlpatterns = [
     path('api/logout_user', views.logout_user, name='logout'),
 
     path('api/users', views.UserList.as_view(actions={'get': 'list', 'post': 'create'}), name='user-list'),
-    path('api/users/<int:pk>', views.UserDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='user-detail'),
+    path('api/users/<int:pk>', views.UserDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'patch':'update', 'delete': 'destroy'}), name='user-detail'),
     path('api/user-details/<int:pk>', views.UserDetailsView.as_view(), name='user-details'),    
 
     path('api/experiencelevels', views.ExperienceLevelList.as_view(actions={'get': 'list', 'post': 'create'}), name='experiencelevel-list'),
@@ -38,6 +38,7 @@ urlpatterns = [
 
     path('api/jamrequests', views.JamRequestList.as_view(actions={'get': 'list', 'post': 'create'}), name='jamrequest-list'),
     path('api/jamrequests/<int:pk>', views.JamRequestDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='jamrequest-detail'),
+    path('api/searchjamrequests', views.searchJamRequests, name='jamrequest-search'),
 
     path('api/jamresponses', views.JamResponseList.as_view(actions={'get': 'list', 'post': 'create'}), name='jamresponse-list'),
     path('api/jamresponses/<int:pk>', views.JamResponseDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='jamresponse-detail'),
@@ -69,4 +70,6 @@ urlpatterns = [
     path('api/userreviews/<int:pk>', views.UserReviewDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='userreview-detail'),
     path('api/userreviewsforuser/<int:profile_id>', views.getUserReviewsForUser, name='user-reviews-list-for'),
     path('api/userreviewsbyuser/<int:profile_id>', views.getUserReviewsByUser, name='user-reviews-list-by'),
+
+
 ]
