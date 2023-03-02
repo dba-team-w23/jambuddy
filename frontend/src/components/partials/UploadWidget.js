@@ -33,15 +33,14 @@ export default function CloudinaryUpload(props) {
   return (
     <>
       <Grid item xs={9}>
-        <Button variant="contained" component="label">
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => {
-              setImageSelected(e.target.files[0]);
-            }}
-          />
-        </Button>
+        <input
+          className="mb-4"
+          type="file"
+          accept="image/*"
+          onChange={(e) => {
+            setImageSelected(e.target.files[0]);
+          }}
+        />
       </Grid>
       <Grid item xs={3}>
         <Button variant="contained" onClick={uploadImage}>

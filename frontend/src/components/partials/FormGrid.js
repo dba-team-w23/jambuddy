@@ -14,6 +14,21 @@ export default function FormGrid() {
   const userData = useSelector((state) => state.user);
   const [instruments, setInstruments] = React.useState([]);
   const [imageURL, setImageURL] = React.useState("");
+  const [formInput, setFormInput] = React.useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      first_name: userData.user.first_name ? userData.user.first_name : "",
+      last_name: userData.user.last_name ? userData.user.last_name : "",
+      email: userData.user.email ? userData.user.email : "",
+      username: userData.user.username ? userData.user.username : "",
+      city: userData.user.city ? userData.user.city : "",
+      state: userData.user.state ? userData.user.state : "",
+      bio: userData.user.bio ? userData.user.bio : "",
+      notes: userData.user.notes ? userData.user.notes : "",
+      password: "",
+      photo: imageURL ? imageURL : userData.user.photo,
+    }
+  );
   const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app";
   const instrumentApi = `${baseURL}/api/instruments`;
 
@@ -21,6 +36,8 @@ export default function FormGrid() {
     evt.preventDefault();
     const formData = new FormData(evt.target);
     const data = Object.fromEntries(formData.entries());
+    data.photo = imageURL ? imageURL : userData.user.photo;
+    console.log(JSON.stringify(data));
 
     fetch(`${baseURL}/api/users/${userData.user.id}`, {
       method: "PUT",
@@ -43,9 +60,16 @@ export default function FormGrid() {
       });
   };
   const handleChange = (e) => {
-    setValue(e.target.value);
+    const name = e.target.name;
+    const newValue = e.target.value;
+    setFormInput({ ...formInput, [name]: newValue });
+    const updatedFormInput = { ...formInput, [name]: newValue };
+    const inputElement = document.getElementsByName(name)[0];
   };
-
+  const setInstrument = (e) => {
+    console.log("setInstrument");
+    setInstruments(e.target.value);
+  };
   const sortObject = (arr) => {
     arr.sort((a, b) => {
       if (a.name < b.name) {
@@ -75,7 +99,7 @@ export default function FormGrid() {
             name="first_name"
             label="First Name"
             variant="outlined"
-            value={userData.user.first_name ? userData.user.first_name : ""}
+            value={formInput.first_name}
             onChange={handleChange}
           />
         </Grid>
@@ -86,7 +110,7 @@ export default function FormGrid() {
             label="Last Name"
             variant="outlined"
             shrink="true"
-            value={userData.user.last_name ? userData.user.last_name : ""}
+            value={formInput.last_name}
             onChange={handleChange}
           />
         </Grid>
@@ -96,7 +120,7 @@ export default function FormGrid() {
             name="email"
             label="Email"
             variant="outlined"
-            value={userData.user.email ? userData.user.email : ""}
+            value={formInput.email}
             onChange={handleChange}
           />
         </Grid>
@@ -106,7 +130,7 @@ export default function FormGrid() {
             name="username"
             label="User Name"
             variant="outlined"
-            value={userData.user.username ? userData.user.username : ""}
+            value={formInput.username}
             onChange={handleChange}
           />
         </Grid>
@@ -116,7 +140,7 @@ export default function FormGrid() {
             name="city"
             label="City"
             variant="outlined"
-            value={userData.user.city ? userData.user.city : ""}
+            value={formInput.city}
             onChange={handleChange}
           />
         </Grid>
@@ -128,6 +152,7 @@ export default function FormGrid() {
             label="Primary Instrument"
             name="instrument"
             list={instruments}
+            onChange={setInstrument}
           />
         </Grid>
         <Grid item xs={12}>
@@ -137,7 +162,7 @@ export default function FormGrid() {
             default="Enter your bio here"
             label="Bio"
             id="bio"
-            value={userData.user.note ? userData.user.note : ""}
+            value={formInput.note ? formImput.note : ""}
             onChange={handleChange}
           />
         </Grid>
@@ -148,13 +173,15 @@ export default function FormGrid() {
         <Grid item xs={6}>
           <Password label="Repeat Password" id="pw2" />
         </Grid>
+        <Grid item xs={8}>
+          <UploadWidget value={imageURL} setImageURL={setImageURL} />
+        </Grid>
         <Grid item xs={12}>
           <Button type="submit" variant="contained">
             Save Profile
           </Button>
         </Grid>
       </Grid>
-      <UploadWidget value={imageURL} setImageURL={setImageURL} />
     </form>
   );
 }
