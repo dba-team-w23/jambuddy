@@ -9,7 +9,6 @@ const HomePage = () => {
   const [favJams, setFavJams] = React.useState([]);
 
   const userId = userData.user && userData.user.id;
-  console.log("Homepage user id", userData.user && userId);
   const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
   const baseURL = `${apiRoot}/api/users`;
   const jamURL = `${apiRoot}/api/jamrequests`;

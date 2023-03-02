@@ -19,6 +19,7 @@ import { useSelector } from "react-redux";
 
 export default function SignIn() {
   const isSignedIn = useSelector((state) => state.user.isSignedIn);
+  const userData = useSelector((state) => state.user);
   const [formInput, setFormInput] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -48,10 +49,10 @@ export default function SignIn() {
   const baseURL = `${apiRoot}/api/login_user`;
 
   const fetchUserData = async (userId) => {
-    const userData = await fetch(`${apiRoot}/api/users/${userId}`).then((res) =>
+    const data = await fetch(`${apiRoot}/api/users/${userId}`).then((res) =>
       res.json()
     );
-    return userData;
+    return data;
   };
 
   const handleSubmit = async (evt) => {
@@ -72,18 +73,16 @@ export default function SignIn() {
     }).then((response) => response.json());
 
     setUserId(resData.profile_id);
-    console.log("user id", userId);
   };
   React.useEffect(() => {
     const updateUser = async () => {
-      const userData = await fetchUserData(userId);
-      console.log("user data", userData);
-
+      const data = await fetchUserData(userId);
       localStorage.setItem("user", JSON.stringify(userData));
 
-      dispatch(setUserProfile(userData));
+      dispatch(setUserProfile(data));
       dispatch(setSignedIn(true));
-      console.log("user profile", userData);
+      console.log("Sign In user profile", userData);
+      console.log("Sign In Local storage", localStorage.getItem("user"));
     };
     if (userId) {
       updateUser();

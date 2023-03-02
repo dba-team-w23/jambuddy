@@ -26,7 +26,7 @@ export default function ProfileCard({ profile }) {
         />
         <div className="aspect-[4/3]">
           <img
-            src={profile.photo}
+            src={profile.photo ? profile.photo : "./sunset.jpg"}
             alt={profile.first_name}
             className="object-cover position-absolute w-full h-full"
           />

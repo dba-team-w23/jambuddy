@@ -21,7 +21,6 @@ const settings = ["Profile", "Logout"];
 
 function Navbar(props) {
   const userData = useSelector((state) => state.user);
-  userData.user ? console.log("Navbar user data:", userData.user.photo) : null;
   const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
