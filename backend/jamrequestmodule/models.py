@@ -43,14 +43,12 @@ class JamRequest(models.Model):
     profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     instrumentid = models.ForeignKey(Instrument, on_delete=models.CASCADE)
     genreid = models.ForeignKey(MusicGenre, on_delete=models.CASCADE)
-    location = models.CharField(max_length=255)
     exp_level = models.ForeignKey(ExperienceLevel, on_delete=models.CASCADE)
+    location = models.CharField(max_length=255)
     status = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     instrument = models.TextField(null=True)
     genre = models.TextField(null=True)
-    exp_level = models.TextField(null=True)
-
 
 class JamResponse(models.Model):
     jrid = models.ForeignKey(JamRequest, on_delete=models.CASCADE)

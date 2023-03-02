@@ -18,7 +18,7 @@ from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, UserFavoriteJamRequest, UserFavoriteProfile, UserGenre, UserInstrument, UserMedia,
                      UserReview, Profile)
 from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
-                          JamRequestSerializer, JamResponseSerializer,
+                          JamRequestSerializer, JamRequestSimpleSerializer, JamResponseSerializer,
                           MusicGenreSerializer, UserFavoriteJamRequestSerializer,
                           UserFaveProfileSerializer, UserGenreSerializer,
                           UserInstrumentSerializer, UserMediaSerializer,
@@ -240,6 +240,24 @@ def getUserReviewsByUser(request, profile_id):
     user_reviews = UserReview.objects.filter(reviewerid=profile_id).all()
     ser_reviews = UserReviewSerializer(user_reviews, many=True)
     return JsonResponse(ser_reviews.data)
+
+@api_view(('GET',))
+def searchJamRequests(request):
+    jam_results = JamRequest.objects.filter(status="Open")
+    instrument_id = request.data.get("instrumentid")
+    genre_id = request.data.get("genreid")
+    exp_level_id = request.data.get("explevel")
+
+    if instrument_id:
+        jam_results = jam_results.filter(instrumentid=instrument_id)
+    if genre_id:
+        jam_results = jam_results.filter(genreid=genre_id)
+    if exp_level_id:
+        jam_results = jam_results.filter(exp_level=exp_level_id)
+
+    ser_reviews = JamRequestSimpleSerializer(jam_results, many=True)
+    return JsonResponse(ser_reviews.data, safe=False)
+
 
 
 def index(request):

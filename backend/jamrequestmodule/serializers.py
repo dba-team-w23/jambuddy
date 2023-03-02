@@ -27,6 +27,8 @@ class ProfileSerializer(serializers.ModelSerializer):
         )
 
         return user
+    
+
 
 class ExperienceLevelSerializer(serializers.ModelSerializer):
     class Meta:
@@ -54,6 +56,12 @@ class JamRequestSerializer(serializers.ModelSerializer):
         representation['genre'] = MusicGenreSerializer(instance.genreid).data
         representation['requestor_profile'] = ProfileSerializer(instance.profileid).data
         return representation
+
+class JamRequestSimpleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JamRequest
+        db_table = JamRequest
+        fields = '__all__'
 
 class JamResponseSerializer(serializers.ModelSerializer):
     class Meta:
