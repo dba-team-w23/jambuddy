@@ -1,7 +1,5 @@
 # views.py
-from datetime import datetime
-
-import environ
+import datetime
 import pytz
 import pkg_resources
 from django.contrib.auth import authenticate, login, logout
@@ -247,6 +245,7 @@ def searchJamRequests(request):
     instrument_id = request.data.get("instrumentid")
     genre_id = request.data.get("genreid")
     exp_level_id = request.data.get("explevel")
+    daysback = request.data.get("daysback")
 
     if instrument_id:
         jam_results = jam_results.filter(instrumentid=instrument_id)
@@ -254,10 +253,11 @@ def searchJamRequests(request):
         jam_results = jam_results.filter(genreid=genre_id)
     if exp_level_id:
         jam_results = jam_results.filter(exp_level=exp_level_id)
+    if daysback:
+        jam_results = jam_results.filter(created__gte=datetime.datetime.now() - datetime.timedelta(days=daysback))
 
     ser_reviews = JamRequestSimpleSerializer(jam_results, many=True)
     return JsonResponse(ser_reviews.data, safe=False)
-
 
 
 def index(request):
