@@ -711,7 +711,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"instrumentid\": 3,\n    \"daysback\":7\n}",
+									"raw": "{\n    \"instrumentid\": 10,\n    \"genreid\": 10,\n    \"explevel\": 2,\n    \"daysback\": 30,\n    \"from_zipcode\": \"84057\",\n    \"distance_miles\":1800\n}",
 									"options": {
 										"raw": {
 											"language": "json"

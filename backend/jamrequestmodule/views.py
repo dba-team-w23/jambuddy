@@ -1,7 +1,11 @@
 # views.py
 import datetime
+import environ
+import http.client
+import json
 import pytz
 import pkg_resources
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse, JsonResponse
@@ -12,6 +16,9 @@ from rest_framework import generics, status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser, FormParser, MultiPartParser
+from urllib.parse import quote
+from typing import List
+
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, UserFavoriteJamRequest, UserFavoriteProfile, UserGenre, UserInstrument, UserMedia,
                      UserReview, Profile)
@@ -21,7 +28,6 @@ from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
                           UserFaveProfileSerializer, UserGenreSerializer,
                           UserInstrumentSerializer, UserMediaSerializer,
                           UserReviewSerializer, ProfileSerializer)
-
 
 class UserList(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
@@ -246,6 +252,8 @@ def searchJamRequests(request):
     genre_id = request.data.get("genreid")
     exp_level_id = request.data.get("explevel")
     daysback = request.data.get("daysback")
+    distance_miles = request.data.get("distance_miles")
+    searching_user_zipcode = request.data.get("from_zipcode")
 
     if instrument_id:
         jam_results = jam_results.filter(instrumentid=instrument_id)
@@ -256,9 +264,46 @@ def searchJamRequests(request):
     if daysback:
         jam_results = jam_results.filter(created__gte=datetime.datetime.now() - datetime.timedelta(days=daysback))
 
+    are_distance_search_prereqs_met = all([
+        distance_miles is not None and int(distance_miles) > 0,
+        _is_valid_zip_code(searching_user_zipcode)]
+    )
+    
+    if are_distance_search_prereqs_met:
+        # join results using profile ID of JamRequestory to get zipcode of requestor's ID
+        profile_ids_of_jam_requestors = list(jam_results.values_list('profileid_id', flat=True))
+        
+        # extract zip codes for profiles of all current jam requests
+        profiles = Profile.objects.filter(pk__in=profile_ids_of_jam_requestors)
+        profile_id_to_zip_code = {profile.pk: profile.zipcode for profile in profiles}
+
+        # filter to only those that are valid zip codes
+        requestor_zipcodes = list(profile_id_to_zip_code.values())
+        valid_zip_codes = [zip_code for zip_code in requestor_zipcodes if _is_valid_zip_code(zip_code)]
+
+        candidate_zipcodes = ','.join(valid_zip_codes)
+
+        zip_codes_within_range = getZipcodesWithinDistance(searching_user_zipcode, candidate_zipcodes, distance_miles)
+
+        profile_ids_in_range = [profile_id for profile_id, zip_code in profile_id_to_zip_code.items() if zip_code in zip_codes_within_range]
+
+        jam_results = jam_results.filter(profileid_id__in=profile_ids_in_range)
+
     ser_reviews = JamRequestSimpleSerializer(jam_results, many=True)
     return JsonResponse(ser_reviews.data, safe=False)
 
+
+
+def _is_valid_zip_code(input: str or None) -> bool:
+    if input is None:
+        return False
+    input = input.strip()
+    if len(input) == 5 and input.isdigit():
+        return True
+    elif len(input) == 10 and input[5] == '-' and input[:5].isdigit() and input[6:].isdigit():
+        return True
+    else:
+        return False
 
 def index(request):
     utc_time = datetime.now(pytz.utc)
@@ -308,3 +353,36 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return Response({"status":0}, status=status.HTTP_200_OK)
+
+
+
+def getZipcodesWithinDistance(from_zipcode: str, candidate_zipcodes: str, distance: List[str]) -> List[str]:
+    env = environ.Env()
+    environ.Env.read_env()
+    zip_api_token = env('ZIP_API_TOKEN')
+    api_endpoint = "/rest/{}/multi-distance.json/{}/{}/mile".format(zip_api_token, from_zipcode, candidate_zipcodes)
+    api_endpoint = quote(api_endpoint)  # url-encode the zipcode CSV list
+
+    headers = {'Content-type': 'application/json'}
+    result_zipcodes = [from_zipcode]
+    try:
+        conn = http.client.HTTPConnection('www.zipcodeapi.com', 80, timeout=10)
+        conn.request("GET", api_endpoint, "", headers)
+        response = conn.getresponse()
+        result = json.loads(response.read().decode())
+
+        if response.status != 200:
+            print("Error connecting to zipcodeapi.com, err:", result['error_msg'])
+
+        zip_distances:dict = result['distances']
+        for zip,dist in zip_distances.items():
+            if dist < distance:
+                result_zipcodes.append(zip)
+       
+    except Exception as e:
+        print("Error connecting to zipcodeapi.com, err:", e)
+
+    finally:
+        conn.close() 
+    
+    return result_zipcodes
