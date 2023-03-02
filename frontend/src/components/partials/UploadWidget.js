@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { Grid, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 
-export default function CloudinaryUpload() {
+export default function CloudinaryUpload(props) {
   const [imageSelected, setImageSelected] = React.useState("");
-  const [imageURL, setImageURL] = React.useState("")
 
   const uploadImage = async (files) => {
     const fd = new FormData();
@@ -25,8 +24,8 @@ export default function CloudinaryUpload() {
       }
       const data = await res.json();
       console.log(data);
-      console.log(data.url)
-      return data.secure_url;
+      console.log(data.url);
+      props.setImageURL(data.secure_url);
     } catch (error) {
       console.error(error);
     }

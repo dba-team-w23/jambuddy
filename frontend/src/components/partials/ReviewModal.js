@@ -2,6 +2,8 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+import { useSelector } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -16,13 +18,16 @@ const style = {
 };
 
 export default function BasicModal({ ...profile }) {
+  const userData = useSelector((state) => state.user);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const userMatch = profile.username == userData.user.username;
 
   return (
     <div>
-      <Button onClick={handleOpen}>Review Me</Button>
+      {userMatch ? null : <Button onClick={handleOpen}>Review Me</Button>}
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -30,7 +35,13 @@ export default function BasicModal({ ...profile }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <h2>Leave a review for {profile.username}</h2>
+          <TextField
+            className="w-full"
+            id="outlined-multiline-static"
+            label={`Leave a review for ${profile.username}`}
+            multiline
+            rows={4}
+          />
         </Box>
       </Modal>
     </div>

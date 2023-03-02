@@ -81,8 +81,8 @@ export default function SignIn() {
 
       dispatch(setUserProfile(data));
       dispatch(setSignedIn(true));
-      console.log("Sign In user profile", userData);
-      console.log("Sign In Local storage", localStorage.getItem("user"));
+      // console.log("Sign In user profile", userData);
+      // console.log("Sign In Local storage", localStorage.getItem("user"));
     };
     if (userId) {
       updateUser();
@@ -105,7 +105,6 @@ export default function SignIn() {
             label="User Name"
             name="username"
             variant="outlined"
-            required
             onChange={handleInput}
           />
           <FormControl variant="outlined">

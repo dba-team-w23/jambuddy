@@ -36,7 +36,6 @@ export default function SignUp() {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     let data = formInput;
-    console.log("sign up data", data);
 
     const returnedUser = await fetch(baseURL, {
       method: "POST",
@@ -50,7 +49,6 @@ export default function SignUp() {
       .catch((error) => {
         console.error("Error: " + error);
       });
-    console.log("returnedUser", returnedUser);
     setTempUser(returnedUser);
   };
 

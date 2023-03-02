@@ -7,31 +7,22 @@ import Multiline from "./Multiline";
 import UploadWidget from "./UploadWidget";
 import { Grid, TextField } from "@mui/material";
 import { allStates } from "./variables";
-import { FormControl } from "@mui/material";
-import Box from "@mui/material/Box";
+
+import { useSelector } from "react-redux";
 
 export default function FormGrid() {
+  const userData = useSelector((state) => state.user);
   const [instruments, setInstruments] = React.useState([]);
+  const [imageURL, setImageURL] = React.useState("");
   const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app";
   const instrumentApi = `${baseURL}/api/instruments`;
-  const [formValues, setFormValues] = React.useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    username: "",
-    city: "",
-    state: "",
-    instrument: "",
-    bio: "",
-    password: "",
-  });
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const formData = new FormData(evt.target);
     const data = Object.fromEntries(formData.entries());
 
-    fetch(`${baseURL}/api/users/`, {
+    fetch(`${baseURL}/api/users`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -50,6 +41,9 @@ export default function FormGrid() {
         console.error("Error:", error);
         console.log("response obj: ", error.response);
       });
+  };
+  const handleChange = (e) => {
+    setValue(e.target.value);
   };
 
   const sortObject = (arr) => {
@@ -81,6 +75,8 @@ export default function FormGrid() {
             name="first_name"
             label="First Name"
             variant="outlined"
+            value={userData.user.first_name ? userData.user.first_name : ""}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={6}>
@@ -89,10 +85,19 @@ export default function FormGrid() {
             name="last_name"
             label="Last Name"
             variant="outlined"
+            shrink="true"
+            value={userData.user.last_name ? userData.user.last_name : ""}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField id="outlined-basic-3" label="Email" variant="outlined" />
+          <TextField
+            id="outlined-basic-3"
+            label="Email"
+            variant="outlined"
+            value={userData.user.email ? userData.user.email : ""}
+            onChange={handleChange}
+          />
         </Grid>
         <Grid item xs={6}>
           <TextField
@@ -100,6 +105,8 @@ export default function FormGrid() {
             name="username"
             label="User Name"
             variant="outlined"
+            value={userData.user.username ? userData.user.username : ""}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={8}>
@@ -108,6 +115,8 @@ export default function FormGrid() {
             name="city"
             label="City"
             variant="outlined"
+            value={userData.user.city ? userData.user.city : ""}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={4}>
@@ -123,10 +132,12 @@ export default function FormGrid() {
         <Grid item xs={12}>
           <Multiline
             className="bio"
-            name="bio"
+            name="note"
             default="Enter your bio here"
-            label="bio"
+            label="Bio"
             id="bio"
+            value={userData.user.note ? userData.user.note : ""}
+            onChange={handleChange}
           />
         </Grid>
 
@@ -142,7 +153,7 @@ export default function FormGrid() {
           </Button>
         </Grid>
       </Grid>
-      <UploadWidget />
+      <UploadWidget value={imageURL} setImageURL={setImageURL} />
     </form>
   );
 }
