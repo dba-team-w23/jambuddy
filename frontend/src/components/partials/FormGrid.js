@@ -22,13 +22,13 @@ export default function FormGrid() {
     const formData = new FormData(evt.target);
     const data = Object.fromEntries(formData.entries());
 
-    fetch(`${baseURL}/api/users`, {
-      method: "POST",
+    fetch(`${baseURL}/api/users/${userData.user.id}`, {
+      method: "PUT",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
-      mode: "no-cors",
+      mode: "cors",
     })
       .then((response) => {
         if (!response.ok) {
@@ -93,6 +93,7 @@ export default function FormGrid() {
         <Grid item xs={6}>
           <TextField
             id="outlined-basic-3"
+            name="email"
             label="Email"
             variant="outlined"
             value={userData.user.email ? userData.user.email : ""}

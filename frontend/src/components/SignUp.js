@@ -42,6 +42,7 @@ export default function SignUp() {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
+        "X-CSRFToken": getCookie("csrftoken"),
       },
       body: JSON.stringify(data),
     })
