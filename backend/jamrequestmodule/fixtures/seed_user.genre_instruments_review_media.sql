@@ -1,6 +1,6 @@
 BEGIN;
 
-INSERT INTO public.jamrequestmodule_usergenre (genreid_id, userid_id)
+INSERT INTO public.jamrequestmodule_usergenre (genreid_id, profileid_id)
 VALUES
 (1, 1),
 (2, 12),
@@ -74,7 +74,7 @@ VALUES
 (41, 13),
 (42, 14);
 
-INSERT INTO public.jamrequestmodule_userinstrument (exp_level_id, instrumentid_id, userid_id)
+INSERT INTO public.jamrequestmodule_userinstrument (exp_level_id, instrumentid_id, profileid_id)
 VALUES
 (1, 1, 1), (1, 2, 5), (1, 3, 6), (1, 4, 7), (1, 5, 8),
 (2, 6, 9), (2, 7, 10), (2, 8, 11), (2, 9, 12), (2, 10, 13),
@@ -82,7 +82,7 @@ VALUES
 (1, 16, 8), (2, 17, 9), (3, 18, 10), (1, 19, 11), (2, 20, 12),
 (3, 21, 13), (1, 22, 14), (2, 23, 1), (3, 24, 5), (1, 25, 6);
 
-INSERT INTO public.jamrequestmodule_usermedia (type, location, seconds, userid_id)
+INSERT INTO public.jamrequestmodule_usermedia (type, location, seconds, profileid_id)
 VALUES
 ('a', 'https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg', 120, 1),
 ('v', 'https://actions.google.com/sounds/v1/ambiences/arcade_room.ogg', 240, 5),
@@ -105,7 +105,7 @@ VALUES
 ('v', 'https://actions.google.com/sounds/v1/ambiences/children_group_ambience.ogg', 240, 11),
 ('v', 'https://actions.google.com/sounds/v1/ambiences/coffee_shop.ogg', 360, 12);
 
-INSERT INTO public.jamrequestmodule_userreview (created, rating, comment, reviewerid_id, userid_id)
+INSERT INTO public.jamrequestmodule_userreview (created, rating, comment, reviewerid_id, profileid_id)
 VALUES
 (NOW(), 4, 'Good musician with great skills', 10, 1),
 (NOW(), 3, 'She has potential but needs improvement', 10, 12),

@@ -28,8 +28,6 @@ class ProfileSerializer(serializers.ModelSerializer):
 
         return user
     
-
-
 class ExperienceLevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExperienceLevel
@@ -111,6 +109,17 @@ class UserReviewSerializer(serializers.ModelSerializer):
         model = UserReview
         db_table = UserReview
         fields = '__all__'
+
+class UserReviewFullSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserReview
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['reviewer'] = instance.reviewerid.first_name + " " + instance.reviewerid.last_name[0] + "."
+        representation['reviewer_location'] = instance.reviewerid.city + ", " + instance.reviewerid.state
+        return representation        
 
 class UserFavoriteJamRequestSerializer(serializers.ModelSerializer):
     class Meta:
