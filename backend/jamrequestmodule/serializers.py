@@ -110,7 +110,7 @@ class UserReviewSerializer(serializers.ModelSerializer):
         db_table = UserReview
         fields = '__all__'
 
-class UserReviewFullSerializer(serializers.ModelSerializer):
+class UserReviewForUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserReview
         fields = '__all__'
@@ -120,6 +120,18 @@ class UserReviewFullSerializer(serializers.ModelSerializer):
         representation['reviewer'] = instance.reviewerid.first_name + " " + instance.reviewerid.last_name[0] + "."
         representation['reviewer_location'] = instance.reviewerid.city + ", " + instance.reviewerid.state
         return representation        
+
+class UserReviewByUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserReview
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['for_user'] = instance.profileid.first_name + " " + instance.profileid.last_name[0] + "."
+        representation['for_user_location'] = instance.profileid.city + ", " + instance.profileid.state
+        return representation
+
 
 class UserFavoriteJamRequestSerializer(serializers.ModelSerializer):
     class Meta:

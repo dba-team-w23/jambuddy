@@ -27,7 +27,8 @@ from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
                           MusicGenreSerializer, UserFavoriteJamRequestSerializer,
                           UserFaveProfileSerializer, UserGenreSerializer,
                           UserInstrumentSerializer, UserMediaSerializer,
-                          UserReviewSerializer, UserReviewFullSerializer, ProfileSerializer)
+                          UserReviewSerializer, UserReviewForUserSerializer, UserReviewByUserSerializer,
+                          ProfileSerializer)
 
 class UserList(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
@@ -234,16 +235,14 @@ def getUserMedia(request, profile_id):
 @api_view(('GET',))
 def getUserReviewsForUser(request, profile_id):
     user_reviews = UserReview.objects.filter(profileid=profile_id)
-    ser_reviews = UserReviewFullSerializer(user_reviews, many=True)
-    return Response({
-        'reviews': ser_reviews.data
-    })
+    ser_reviews = UserReviewForUserSerializer(user_reviews, many=True)
+    return JsonResponse(ser_reviews.data, safe=False)
 
 @api_view(('GET',))
 def getUserReviewsByUser(request, profile_id):
     user_reviews = UserReview.objects.filter(reviewerid=profile_id).all()
-    ser_reviews = UserReviewSerializer(user_reviews, many=True)
-    return JsonResponse(ser_reviews.data)
+    ser_reviews = UserReviewByUserSerializer(user_reviews, many=True)
+    return JsonResponse(ser_reviews.data, safe=False)
 
 @api_view(('GET',))
 def searchJamRequests(request):
