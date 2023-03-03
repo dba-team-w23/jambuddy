@@ -613,6 +613,33 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "userReviews",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/userreviews",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userreviews"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
