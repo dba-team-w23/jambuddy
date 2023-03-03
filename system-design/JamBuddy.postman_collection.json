@@ -339,14 +339,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/userreviewsforuser/11",
+									"raw": "{{base_url}}/api/userreviewsforuser/78",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"userreviewsforuser",
-										"11"
+										"78"
 									]
 								}
 							},
@@ -358,14 +358,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/userreviewsbyuser/10",
+									"raw": "{{base_url}}/api/userreviewsbyuser/50",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"userreviewsbyuser",
-										"10"
+										"50"
 									]
 								}
 							},
@@ -494,7 +494,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"first_name\": \"Dan\",\n    \"last_name\": \"Dan\",\n    \"email\": \"dan@jambuddy.com\",\n    \"username\": \"dan\",\n    \"password\": \"dan\"\n}",
+									"raw": "{\n    \"first_name\": \"Dan\",\n    \"last_name\": \"Dan\",\n    \"email\": \"dan@jambuddy.com\",\n    \"username\": \"dan\",\n    \"password\": \"dan\",\n    \"instruments\": [1,2,3],\n    \"genres\": [10,12,13]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -530,7 +530,7 @@
 								}
 							],
 							"request": {
-								"method": "POST",
+								"method": "PUT",
 								"header": [
 									{
 										"key": "X-CSRFToken",
@@ -540,7 +540,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"first_name\": \"Dan\",\n    \"last_name\": \"Dan\",\n    \"email\": \"dan@jambuddy.com\",\n    \"username\": \"dan\",\n    \"password\": \"dan\"\n}",
+									"raw": "{\n    \"username\": \"swally\",\n    \"instruments\": [2,3],\n    \"genres\": [12,13,14]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -548,13 +548,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/api/users",
+									"raw": "{{base_url}}/api/users/2",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
-										"users"
+										"users",
+										"2"
 									]
 								}
 							},
@@ -562,33 +563,6 @@
 						},
 						{
 							"name": "userFaveJamReq",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\"profileid\":2, \"jrid\":9}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{base_url}}/api/userfavejamreqs",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"userfavejamreqs"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "userFaveJamReq Copy",
 							"request": {
 								"method": "POST",
 								"header": [],
