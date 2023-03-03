@@ -4,6 +4,7 @@ import "./css/SignIn.css";
 import ProfileCard from "./partials/ProfileCard";
 import FormGrid from "./partials/FormGrid";
 import { useSelector } from "react-redux";
+import NewJamRequest from "./NewJamRequest";
 
 export default function EditProfile(props) {
   const userData = useSelector((state) => state.user);
@@ -24,6 +25,7 @@ export default function EditProfile(props) {
           autoComplete="off"
         >
           <ProfileCard profile={userData.user} />
+          <NewJamRequest />
           <FormGrid style={{ margin: "40px auto" }} />
         </Box>
       ) : (

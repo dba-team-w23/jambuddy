@@ -92,98 +92,101 @@ export default function FormGrid() {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <TextField
-            id="outlined-basic-1"
-            name="first_name"
-            label="First Name"
-            variant="outlined"
-            value={formInput.first_name}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            id="outlined-basic-2"
-            name="last_name"
-            label="Last Name"
-            variant="outlined"
-            shrink="true"
-            value={formInput.last_name}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            id="outlined-basic-3"
-            name="email"
-            label="Email"
-            variant="outlined"
-            value={formInput.email}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            id="outlined-basic-4"
-            name="username"
-            label="User Name"
-            variant="outlined"
-            value={formInput.username}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={8}>
-          <TextField
-            id="outlined-basic-5"
-            name="city"
-            label="City"
-            variant="outlined"
-            value={formInput.city}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={4}>
-          <PickList label="State" name="state" list={allStates} />
-        </Grid>
-        <Grid item xs={12}>
-          <PickInstruments
-            label="Add an Instrument"
-            name="instruments"
-            value={instrument}
-            list={instruments}
-            onChange={handleInstrument}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Multiline
-            className="bio"
-            name="note"
-            default="Enter your bio here"
-            label="Bio"
-            id="bio"
-            value={formInput.note ? formInput.note : ""}
-            onChange={handleChange}
-          />
-        </Grid>
+    <div className="border-4 rounded p-5 mb-4">
+      <h2 className="text-lg text-center mb-4">Edit Profile</h2>
+      <form onSubmit={handleSubmit}>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-basic-1"
+              name="first_name"
+              label="First Name"
+              variant="outlined"
+              value={formInput.first_name}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-basic-2"
+              name="last_name"
+              label="Last Name"
+              variant="outlined"
+              shrink="true"
+              value={formInput.last_name}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-basic-3"
+              name="email"
+              label="Email"
+              variant="outlined"
+              value={formInput.email}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-basic-4"
+              name="username"
+              label="User Name"
+              variant="outlined"
+              value={formInput.username}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={8}>
+            <TextField
+              id="outlined-basic-5"
+              name="city"
+              label="City"
+              variant="outlined"
+              value={formInput.city}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <PickList label="State" name="state" list={allStates} />
+          </Grid>
+          <Grid item xs={12}>
+            <PickInstruments
+              label="Add an Instrument"
+              name="instruments"
+              value={instrument}
+              list={instruments}
+              onChange={handleInstrument}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Multiline
+              className="bio"
+              name="note"
+              default="Enter your bio here"
+              label="Bio"
+              id="bio"
+              value={formInput.note ? formInput.note : ""}
+              onChange={handleChange}
+            />
+          </Grid>
 
-        <Grid item xs={6}>
-          <Password label="Password" name="password" id="pw1" />
+          <Grid item xs={6}>
+            <Password label="Password" name="password" id="pw1" />
+          </Grid>
+          <Grid item xs={6}>
+            <Password label="Repeat Password" id="pw2" />
+          </Grid>
+          <Grid item xs={8}>
+            <UploadWidget value={imageURL} setImageURL={setImageURL} />
+          </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained">
+              Save Profile
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <Password label="Repeat Password" id="pw2" />
-        </Grid>
-        <Grid item xs={8}>
-          <UploadWidget value={imageURL} setImageURL={setImageURL} />
-        </Grid>
-        <Grid item xs={12}>
-          <Button type="submit" variant="contained">
-            Save Profile
-          </Button>
-        </Grid>
-      </Grid>
-    </form>
+      </form>
+    </div>
   );
 }
