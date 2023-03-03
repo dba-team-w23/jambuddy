@@ -7,15 +7,12 @@ import pytz
 import pkg_resources
 
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from jamrequestmodule.models import Instrument
 from rest_framework import generics, status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.parsers import JSONParser, FormParser, MultiPartParser
 from urllib.parse import quote
 from typing import List
 

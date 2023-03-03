@@ -2,8 +2,21 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+class Instrument(models.Model):
+    name = models.CharField(max_length=255)
+    type = models.CharField(max_length=255)
+
+    def __str__(self):
+        return str(self.name)
+
+class MusicGenre(models.Model):
+    genre = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.genre
+
 class Profile(AbstractUser):
-    email = models.CharField(max_length=255)
+    email = models.CharField(max_length=255, null=True)
     street = models.CharField(max_length=255, null=True)
     street2 = models.CharField(max_length=255, null=True)
     city = models.CharField(max_length=255, null=True)
@@ -13,8 +26,8 @@ class Profile(AbstractUser):
     photo = models.CharField(max_length=255, null=True)
     note = models.TextField(null=True)
     created = models.DateTimeField(auto_now_add=True)
-    instruments = models.TextField(null=True)
-    genres = models.TextField(null=True)
+    instruments = models.ManyToManyField(Instrument, blank=True)
+    genres = models.ManyToManyField(MusicGenre, blank=True)
     exp_level = models.TextField(null=True)
 
 class ExperienceLevel(models.Model):
@@ -22,22 +35,6 @@ class ExperienceLevel(models.Model):
 
     def __str__(self):
         return str(self.level)
-
-
-class Instrument(models.Model):
-    name = models.CharField(max_length=255)
-    type = models.CharField(max_length=255)
-
-    def __str__(self):
-        return str(self.name)
-
-
-class MusicGenre(models.Model):
-    genre = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.genre
-
 
 class JamRequest(models.Model):
     profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
