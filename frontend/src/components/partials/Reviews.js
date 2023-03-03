@@ -1,7 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
 const style = {
@@ -17,13 +16,47 @@ const style = {
 };
 
 export default function BasicModal({ ...profile }) {
+  const [reviews, setReviews] = React.useState([]);
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+
   const handleClose = () => setOpen(false);
+  const baseURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/userreviewsforuser/`;
+  const usersURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/`;
+
+  const handleOpen = (id) => {
+    setOpen(true);
+    const getData = async () => {
+      try {
+        const response = await fetch(`${baseURL}${id}`);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        console.log("data.reviews: ", data.reviews);
+        // Look up reviewerid in users table
+        const reviewsWithReviewer = await Promise.all(
+          data.reviews.map(async (review) => {
+            const response = await fetch(`${usersURL}${review.reviewerid}`);
+            const userData = await response.json();
+            return { ...review, reviewer: userData.username };
+          })
+        );
+        console.log("reviewsWithReviewer: ", reviewsWithReviewer);
+        setReviews(reviewsWithReviewer);
+      } catch (error) {
+        console.error("Error: " + error);
+      }
+    };
+    getData();
+  };
+
+  React.useEffect(() => {
+    console.log("UE reviews", reviews);
+  }, []);
 
   return (
     <div>
-      <Button onClick={handleOpen}>Reviews</Button>
+      <Button onClick={() => handleOpen(profile.id)}>Reviews</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -31,7 +64,17 @@ export default function BasicModal({ ...profile }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <h2>Reviews for {profile.username}</h2>
+          <div>
+            <h2 className="text-lg mb-2">Reviews for {profile.username}</h2>
+            {reviews.length > 0
+              ? reviews.map((review, i) => (
+                  <p key={i} className="m-2">
+                    <i>{review.comment}</i>
+                    <span className="font-bold"> - {review.reviewer}</span>
+                  </p>
+                ))
+              : "No reviews yet!"}
+          </div>
         </Box>
       </Modal>
     </div>

@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 export default function FormGrid() {
   const userData = useSelector((state) => state.user);
   const [instruments, setInstruments] = React.useState([]);
+  const [instrument, setInstrument] = React.useState({});
   const [imageURL, setImageURL] = React.useState("");
   const [formInput, setFormInput] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -66,9 +67,9 @@ export default function FormGrid() {
     const updatedFormInput = { ...formInput, [name]: newValue };
     const inputElement = document.getElementsByName(name)[0];
   };
-  const setInstrument = (e) => {
+  const handleInstrument = (e) => {
     console.log("setInstrument");
-    setInstruments(e.target.value);
+    setInstrument(e.target.value);
   };
   const sortObject = (arr) => {
     arr.sort((a, b) => {
@@ -149,10 +150,11 @@ export default function FormGrid() {
         </Grid>
         <Grid item xs={12}>
           <PickInstruments
-            label="Primary Instrument"
-            name="instrument"
+            label="Add an Instrument"
+            name="instruments"
+            value={instrument}
             list={instruments}
-            onChange={setInstrument}
+            onChange={handleInstrument}
           />
         </Grid>
         <Grid item xs={12}>
@@ -162,7 +164,7 @@ export default function FormGrid() {
             default="Enter your bio here"
             label="Bio"
             id="bio"
-            value={formInput.note ? formImput.note : ""}
+            value={formInput.note ? formInput.note : ""}
             onChange={handleChange}
           />
         </Grid>

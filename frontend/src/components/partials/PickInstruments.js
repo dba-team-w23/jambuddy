@@ -1,21 +1,25 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 export default function PickList(props) {
-  const { label, list } = props;
+  const { label, name, value, list, onChange } = props;
 
   return (
     <Autocomplete
-      id={`${list}-select`}
+      id={`${name}-select`}
       options={list}
       autoHighlight
       getOptionLabel={(option) => option.name}
       renderOption={(props, option) => (
-        <Box key={option.id} component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-  
-          {option.name} 
+        <Box
+          key={option.id}
+          component="li"
+          sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+          {...props}
+        >
+          {option.name}
         </Box>
       )}
       renderInput={(params) => (
@@ -24,7 +28,7 @@ export default function PickList(props) {
           label={label}
           inputProps={{
             ...params.inputProps,
-            autoComplete: 'new-password', 
+            autoComplete: "new-password",
           }}
         />
       )}

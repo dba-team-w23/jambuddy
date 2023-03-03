@@ -31,7 +31,7 @@ const userSlice = createSlice({
   extraReducers: {},
 });
 
-console.log(userSlice.actions.clearUserProfile);
+// console.log(userSlice.actions.clearUserProfile);
 
 export const { setUserProfile, clearUserProfile, setSignedIn } =
   userSlice.actions;
