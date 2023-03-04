@@ -2,18 +2,22 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Password from "./Password";
 import PickList from "./PickList";
-import PickInstruments from "./PickInstruments";
 import Multiline from "./Multiline";
 import UploadWidget from "./UploadWidget";
+import Autocomplete from "@mui/material/Autocomplete";
 import { Grid, TextField } from "@mui/material";
 import { allStates } from "./variables";
+import { useState } from "react";
+import axios from "axios";
 
 import { useSelector } from "react-redux";
 
 export default function FormGrid() {
   const userData = useSelector((state) => state.user);
   const [instruments, setInstruments] = React.useState([]);
-  const [instrument, setInstrument] = React.useState({});
+  const [genres, setGenres] = React.useState([]);
+  const [selectedInstruments, setSelectedInstruments] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState([]);
   const [imageURL, setImageURL] = React.useState("");
   const [formInput, setFormInput] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -30,17 +34,34 @@ export default function FormGrid() {
       photo: imageURL ? imageURL : userData.user.photo,
     }
   );
-  const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app";
-  const instrumentApi = `${baseURL}/api/instruments`;
+  const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app/api/";
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [instrumentsResponse, genresResponse] = await Promise.all([
+          axios.get(baseURL + "instruments"),
+          axios.get(baseURL + "musicgenres"),
+        ]);
+        setInstruments(instrumentsResponse.data);
+        setGenres(genresResponse.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const formData = new FormData(evt.target);
     const data = Object.fromEntries(formData.entries());
+    data.instruments = selectedInstruments;
+    data.genres = selectedGenres;
     data.photo = imageURL ? imageURL : userData.user.photo;
     console.log(JSON.stringify(data));
 
-    fetch(`${baseURL}/api/users/${userData.user.id}`, {
+    fetch(`${baseURL}users/${userData.user.id}`, {
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
@@ -64,32 +85,20 @@ export default function FormGrid() {
     const name = e.target.name;
     const newValue = e.target.value;
     setFormInput({ ...formInput, [name]: newValue });
-    const updatedFormInput = { ...formInput, [name]: newValue };
-    const inputElement = document.getElementsByName(name)[0];
   };
-  const handleInstrument = (e) => {
-    console.log("setInstrument");
-    setInstrument(e.target.value);
+  const handleInstrument = (e, value) => {
+    const selectedIds = value.map((instrument) => instrument.id);
+    setSelectedInstruments(selectedIds);
   };
-  const sortObject = (arr) => {
-    arr.sort((a, b) => {
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
-      return 0;
-    });
+  const handleGenre = (e, value) => {
+    const selectedIds = value.map((genre) => genre.id);
+    setSelectedGenres(selectedIds);
   };
+
   React.useEffect(() => {
-    async function getData() {
-      const instruments = await fetch(instrumentApi).then((res) => res.json());
-      sortObject(instruments);
-      setInstruments(instruments);
-    }
-    getData();
-  }, []);
+    console.log("selectedInstruments", selectedInstruments);
+    console.log("selectedGenres", selectedGenres);
+  }, [selectedInstruments, selectedGenres]);
 
   return (
     <div className="border-4 rounded p-5 mb-4">
@@ -150,13 +159,40 @@ export default function FormGrid() {
           <Grid item xs={4}>
             <PickList label="State" name="state" list={allStates} />
           </Grid>
-          <Grid item xs={12}>
-            <PickInstruments
-              label="Add an Instrument"
-              name="instruments"
-              value={instrument}
-              list={instruments}
+          <Grid className="pl-4 pt-4" xs={12}>
+            <Autocomplete
+              multiple
+              id="instrument-select"
+              options={instruments}
+              getOptionSelected={(option, value) => option.id === value.id}
+              getOptionLabel={(option) => option.name}
               onChange={handleInstrument}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Select instruments you play"
+                  placeholder="Instruments"
+                />
+              )}
+            />
+          </Grid>
+          <Grid className="pl-4 mb-0 pt-4" xs={12}>
+            <Autocomplete
+              multiple
+              id="genres-needed"
+              options={genres}
+              getOptionSelected={(option, value) => option.id === value.id}
+              getOptionLabel={(option) => option.genre}
+              defaultValue={[]}
+              filterSelectedOptions
+              onChange={handleGenre}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Select genres you play"
+                  placeholder="Genres"
+                />
+              )}
             />
           </Grid>
           <Grid item xs={12}>
@@ -164,7 +200,7 @@ export default function FormGrid() {
               className="bio"
               name="note"
               default="Enter your bio here"
-              label="Bio"
+              label="Enter your bio here"
               id="bio"
               value={formInput.note ? formInput.note : ""}
               onChange={handleChange}

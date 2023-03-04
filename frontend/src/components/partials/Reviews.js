@@ -32,17 +32,8 @@ export default function BasicModal({ ...profile }) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("data.reviews: ", data.reviews);
-        // Look up reviewerid in users table
-        const reviewsWithReviewer = await Promise.all(
-          data.reviews.map(async (review) => {
-            const response = await fetch(`${usersURL}${review.reviewerid}`);
-            const userData = await response.json();
-            return { ...review, reviewer: userData.username };
-          })
-        );
-        console.log("reviewsWithReviewer: ", reviewsWithReviewer);
-        setReviews(reviewsWithReviewer);
+
+        setReviews(data);
       } catch (error) {
         console.error("Error: " + error);
       }
@@ -70,7 +61,10 @@ export default function BasicModal({ ...profile }) {
               ? reviews.map((review, i) => (
                   <p key={i} className="m-2">
                     <i>{review.comment}</i>
-                    <span className="font-bold"> - {review.reviewer}</span>
+                    <span className="font-bold">
+                      {" "}
+                      - {review.reviewer}, {review.reviewer_location}
+                    </span>
                   </p>
                 ))
               : "No reviews yet!"}

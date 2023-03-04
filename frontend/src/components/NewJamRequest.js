@@ -32,10 +32,6 @@ const JamRequestForm = () => {
         setInstruments(instrumentsResponse.data);
         setGenres(genresResponse.data);
         setExperienceLevels(experienceLevelsResponse.data);
-
-        console.log(instrumentsResponse.data);
-        console.log(genresResponse.data);
-        console.log(experienceLevelsResponse.data);
       } catch (error) {
         console.error(error);
       }
