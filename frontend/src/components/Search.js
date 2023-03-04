@@ -65,7 +65,7 @@ const Search = () => {
       if (distanceToTravel !== '') payload.distance_miles = distanceToTravel;
 
       const res = await fetch(`${apiRoot}/api/searchjamrequests`, {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
