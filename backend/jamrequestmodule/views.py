@@ -17,13 +17,12 @@ from urllib.parse import quote
 from typing import List
 
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
-                     MusicGenre, UserFavoriteJamRequest, UserFavoriteProfile, UserGenre, UserInstrument, UserMedia,
+                     MusicGenre, UserFavoriteJamRequest, UserFavoriteProfile, UserMedia,
                      UserReview, Profile)
 from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
                           JamRequestSerializer, JamRequestSimpleSerializer, JamResponseSerializer,
                           MusicGenreSerializer, UserFavoriteJamRequestSerializer,
-                          UserFaveProfileSerializer, UserGenreSerializer,
-                          UserInstrumentSerializer, UserMediaSerializer,
+                          UserFaveProfileSerializer, UserMediaSerializer,
                           UserReviewSerializer, UserReviewForUserSerializer, UserReviewByUserSerializer,
                           ProfileSerializer)
 
@@ -58,37 +57,43 @@ class JamRequestDetail(viewsets.ModelViewSet):
     queryset = JamRequest.objects.all()
     serializer_class = JamRequestSerializer
 
+
 class JamRequestList(viewsets.ModelViewSet):
-    filter_params = [
-        'instrument_name',
-        'instrument_type',
-        'genre',
-        'location',
-        'status',
-        'requestor_username',
-    ]
-
-    def get_queryset(self):
-        queryset = JamRequest.objects.all()
-
-        filter_lookup = {
-            'instrument_name': 'instrumentid__name',
-            'instrument_type': 'instrumentid__type',
-            'genre': 'genreid__genre',
-            'location': 'location',
-            'status': 'status',
-            'requestor_username': 'profileid__username',
-        }
-        for client_key, backend_key in filter_lookup.items():
-            if self.request.query_params.get(client_key):
-                client_value = self.request.query_params.get(client_key)
-                case_insensitive_client_value = client_value.lower()
-                queryset = queryset.filter(
-                    **{f'{backend_key}__icontains': case_insensitive_client_value}
-                )
-        return queryset
-
+    queryset = JamRequest.objects.all()
     serializer_class = JamRequestSerializer
+
+
+# class JamRequestList(viewsets.ModelViewSet):
+#     filter_params = [
+#         'instrument_name',
+#         'instrument_type',
+#         'genre',
+#         'location',
+#         'status',
+#         'requestor_username',
+#     ]
+
+#     def get_queryset(self):
+#         queryset = JamRequest.objects.all()
+
+#         filter_lookup = {
+#             'instrument_name': 'instrumentid__name',
+#             'instrument_type': 'instrumentid__type',
+#             'genre': 'genreid__genre',
+#             'location': 'location',
+#             'status': 'status',
+#             'requestor_username': 'profileid__username',
+#         }
+#         for client_key, backend_key in filter_lookup.items():
+#             if self.request.query_params.get(client_key):
+#                 client_value = self.request.query_params.get(client_key)
+#                 case_insensitive_client_value = client_value.lower()
+#                 queryset = queryset.filter(
+#                     **{f'{backend_key}__icontains': case_insensitive_client_value}
+#                 )
+#         return queryset
+
+#     serializer_class = JamRequestSerializer
 
 
 class JamResponseDetail(viewsets.ModelViewSet):
@@ -117,24 +122,6 @@ class UserFaveProfileList(viewsets.ModelViewSet):
     queryset = UserFavoriteProfile.objects.all()
     serializer_class = UserFaveProfileSerializer
 
-class UserGenreList(viewsets.ModelViewSet):
-    queryset = UserGenre.objects.all()
-    serializer_class = UserGenreSerializer
-
-class UserGenreDetail(viewsets.ModelViewSet):
-    queryset = UserGenre.objects.all()
-    serializer_class = UserGenreSerializer
-
-
-class UserInstrumentList(viewsets.ModelViewSet):
-    queryset = UserInstrument.objects.all()
-    serializer_class = UserInstrumentSerializer
-
-class UserInstrumentDetail(viewsets.ModelViewSet):
-    queryset = UserInstrument.objects.all()
-    serializer_class = UserInstrumentSerializer
-
-
 class UserMediaList(viewsets.ModelViewSet):
     queryset = UserMedia.objects.all()
     serializer_class = UserMediaSerializer
@@ -159,24 +146,17 @@ class UserDetailsView(generics.RetrieveAPIView):
 
     def retrieve(self, request, *args, **kwargs):
         user = self.get_object()
-        user_instruments = UserInstrument.objects.filter(profileid=user).all()
         user_media = UserMedia.objects.filter(profileid=user).all()
         user_reviews = UserReview.objects.filter(profileid=user).all()
-        user_genres = UserGenre.objects.filter(profileid=user).all()
 
         user_serializer = ProfileSerializer(user)
-        user_instruments_serializer = UserInstrumentSerializer(user_instruments, many=True)
         user_media_serializer = UserMediaSerializer(user_media, many=True)
         user_reviews_serializer = UserReviewSerializer(user_reviews, many=True)
 
-        genres = [user_genre.genreid for user_genre in user_genres]
-        serialized_genres = MusicGenreSerializer(genres, many=True)
-
-
         return Response({
             'user': user_serializer.data,
-            'genres': serialized_genres.data,
-            'instruments': user_instruments_serializer.data,
+            'genres': "",
+            'instruments': "",
             'media': user_media_serializer.data,
             'reviews': user_reviews_serializer.data
         })
@@ -201,25 +181,6 @@ def getUserFaveProfiles(request, profile_id):
     profiles = Profile.objects.filter(id__in=ids).all()
 
     return Response({'profile_ids': ids, 'profiles': ProfileSerializer(profiles, many=True).data})
-
-
-@api_view(('GET',))
-def getUserGenres(request, profile_id):
-    user_genres = UserGenre.objects.filter(profileid=profile_id).all()
-    genres = [user_genre.genreid for user_genre in user_genres]
-    ser_genres = MusicGenreSerializer(genres, many=True)
-    return Response({
-        'genres': ser_genres.data
-    })
-
-@api_view(('GET',))
-def getUserInstruments(request, profile_id):
-    user_instruments = UserInstrument.objects.filter(profileid=profile_id).all()
-    instruments = [user_instrument.instrumentid for user_instrument in user_instruments]
-    ser_instruments = InstrumentSerializer(instruments, many=True)
-    return Response({
-        'instruments': ser_instruments.data
-    })
 
 @api_view(('GET',))
 def getUserMedia(request, profile_id):
