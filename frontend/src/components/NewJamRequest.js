@@ -19,8 +19,6 @@ const JamRequestForm = () => {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [selectedExperienceLevel, setSelectedExperienceLevel] = useState("");
   const [location, setLocation] = useState("");
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [zip, setZip] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,18 +45,19 @@ const JamRequestForm = () => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    data.location = console.log("data", data);
-    // data.instruments = selectedInstruments;
-    // data.genres = selectedGenres;
-    // data.exp_level = selectedExperienceLevel;
-    // data.date =
+    data.location = location;
+    data.instruments = selectedInstruments;
+    data.genres = selectedGenres;
+    data.exp_level = selectedExperienceLevel;
+    console.log("data", data);
+
     try {
       await axios.post(BASE_URL + "jamrequests", {
         userid: userData.user.id,
-        // instrumentid: selectedInstruments,
-        // genreid: selectedGenres,
-        // location: ,
-        // exp_level: selectedExperienceLevel,
+        instrumentid: selectedInstruments,
+        genreid: selectedGenres,
+        location: location,
+        exp_level: selectedExperienceLevel,
       });
       history.push("/jamrequests");
       // Show success message
@@ -67,11 +66,7 @@ const JamRequestForm = () => {
       // Show error message
     }
   };
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const newValue = e.target.value;
-    setFormInput({ ...formInput, [name]: newValue });
-  };
+
   const handleInstrument = (e, value) => {
     const selectedIds = value.map((instrument) => instrument.id);
     setSelectedInstruments(selectedIds);
@@ -155,19 +150,18 @@ const JamRequestForm = () => {
               name="zip"
               label="Zip Code"
               variant="outlined"
-              value={zip}
               width="50%"
-              onChange={(e) => setZip(e.target.value)}
+              onChange={(e) => setLocation(e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}>
+          {/* <Grid item xs={6}>
             <input
               className="border border-slate-300 hover:border-black rounded p-3 pb-4 mb-4 focus:border-blue-800 focus:ring-2 focus:outline-none"
               type="date"
               id="jamdate"
               name="jamdate"
             />
-          </Grid>
+          </Grid> */}
           <Button sx={{ margin: "1rem" }} type="submit" variant="contained">
             Submit Jam Request
           </Button>

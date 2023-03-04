@@ -22,6 +22,8 @@ export default function FormGrid() {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [imageURL, setImageURL] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
+  const [city, setCity] = React.useState("");
+  const [state, setState] = React.useState("");
   const [formInput, setFormInput] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -168,7 +170,7 @@ export default function FormGrid() {
               name="city"
               label="City"
               variant="outlined"
-              value={formInput.city}
+              defaultValue={formInput.city}
               onChange={handleChange}
             />
           </Grid>
@@ -177,7 +179,7 @@ export default function FormGrid() {
               id="just-state"
               name="state"
               label="State"
-              value={formInput.state}
+              defaultValue={formInput.state}
               onChange={handleChange}
             />
           </Grid>
@@ -186,7 +188,7 @@ export default function FormGrid() {
               multiple
               id="instrument-select"
               options={instruments}
-              getOptionSelected={(option, value) => option.id === value.id}
+              // getOptionselected={(option, value) => option.id === value.id}
               getOptionLabel={(option) => option.name}
               onChange={handleInstrument}
               renderInput={(params) => (
@@ -203,7 +205,7 @@ export default function FormGrid() {
               multiple
               id="genres-needed"
               options={genres}
-              getOptionSelected={(option, value) => option.id === value.id}
+              // getOptionselected={(option, value) => option.id === value.id}
               getOptionLabel={(option) => option.genre}
               defaultValue={[]}
               filterSelectedOptions
