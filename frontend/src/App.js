@@ -13,7 +13,7 @@ function App() {
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <div>
         <Body />
-        {user.user && <User />}
+        {/* {user.user && <User />} */}
       </div>
     </LocalizationProvider>
   );
