@@ -1,11 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// const initialState = {
-//   user: null,
-//   isLoading: false,
-//   error: null,
-// };
-
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -27,11 +21,16 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.error = null;
     },
+    updateUserProfile: (state, action) => {
+      console.log("updating user profile");
+      state.user = {
+        ...state.user,
+        ...action.payload,
+      };
+    },
   },
   extraReducers: {},
 });
-
-// console.log(userSlice.actions.clearUserProfile);
 
 export const { setUserProfile, clearUserProfile, setSignedIn } =
   userSlice.actions;

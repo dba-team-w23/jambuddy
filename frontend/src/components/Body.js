@@ -24,8 +24,6 @@ export default function Body() {
   const [isLoading, setIsLoading] = React.useState(false);
   const baseURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/logout_user`;
   const dispatch = useDispatch();
-  console.log("Body local storage:", localStorage);
-  console.log("Body user data", userData);
   const user = localStorage.getItem("user");
 
   React.useEffect(() => {
@@ -33,7 +31,6 @@ export default function Body() {
       dispatch(setUserProfile(JSON.parse(user)));
       dispatch(setSignedIn(true));
     }
-    console.log("Body userData", userData);
   }, []);
 
   const handleLogout = async (userid) => {

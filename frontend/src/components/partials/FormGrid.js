@@ -9,8 +9,10 @@ import { Grid, TextField } from "@mui/material";
 import { allStates } from "./variables";
 import { useState } from "react";
 import axios from "axios";
-
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { userSlice } from "../../features/userSlice";
+import Box from "@mui/material/Box";
 
 export default function FormGrid() {
   const userData = useSelector((state) => state.user);
@@ -19,6 +21,7 @@ export default function FormGrid() {
   const [selectedInstruments, setSelectedInstruments] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [imageURL, setImageURL] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
   const [formInput, setFormInput] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -35,6 +38,7 @@ export default function FormGrid() {
     }
   );
   const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app/api/";
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -60,6 +64,7 @@ export default function FormGrid() {
     data.genres = selectedGenres;
     data.photo = imageURL ? imageURL : userData.user.photo;
     console.log(JSON.stringify(data));
+    setIsLoading(true);
 
     fetch(`${baseURL}users/${userData.user.id}`, {
       method: "PUT",
@@ -73,21 +78,27 @@ export default function FormGrid() {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
+        console.log(response);
+        dispatch(userSlice.actions.updateUserProfile(data));
         return response.json();
       })
       .then((response) => {
         console.log("success", JSON.stringify(response));
-        history.push("/profiles");
+        dispatch(userSlice.actions.updateUserProfile(data));
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error:", error);
         console.log("response obj: ", error.response);
       });
+    setIsLoading(false);
   };
   const handleChange = (e) => {
-    const name = e.target.name;
-    const newValue = e.target.value;
-    setFormInput({ ...formInput, [name]: newValue });
+    const { name, value } = e.target;
+    setFormInput((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
   const handleInstrument = (e, value) => {
     const selectedIds = value.map((instrument) => instrument.id);
@@ -102,7 +113,9 @@ export default function FormGrid() {
     console.log("selectedInstruments", selectedInstruments);
     console.log("selectedGenres", selectedGenres);
   }, [selectedInstruments, selectedGenres]);
-
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="border-4 rounded p-5 mb-4">
       <h2 className="text-lg text-center mb-4">Edit Profile</h2>
@@ -160,7 +173,13 @@ export default function FormGrid() {
             />
           </Grid>
           <Grid item xs={4}>
-            <PickList label="State" name="state" list={allStates} />
+            <TextField
+              id="just-state"
+              name="state"
+              label="State"
+              value={formInput.state}
+              onChange={handleChange}
+            />
           </Grid>
           <Grid className="pl-4 pt-4" item xs={12}>
             <Autocomplete

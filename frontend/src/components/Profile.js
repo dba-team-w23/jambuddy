@@ -5,13 +5,33 @@ import ProfileCard from "./partials/ProfileCard";
 import FormGrid from "./partials/FormGrid";
 import { useSelector } from "react-redux";
 import NewJamRequest from "./NewJamRequest";
+import axios from "axios";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setUserProfile } from "../features/userSlice";
 
 export default function EditProfile(props) {
   const userData = useSelector((state) => state.user);
+  const [userProfile, setUserProfile] = React.useState({});
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = React.useState(false);
-  console.log("user id from edit profile", userData.user.id);
 
   const baseURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/${userData.user.id}`;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${baseURL}`);
+        const data = await response.data;
+        console.log("data from fetch", data);
+        setUserProfile(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -24,7 +44,7 @@ export default function EditProfile(props) {
           noValidate
           autoComplete="off"
         >
-          <ProfileCard profile={userData.user} />
+          <ProfileCard profile={userProfile} />
           {userData.user.note ? (
             <>
               <NewJamRequest />

@@ -31,6 +31,7 @@ export default function SignUp() {
   const handleInput = (evt) => {
     const name = evt.target.name;
     const newValue = evt.target.value;
+    console.log(name, newValue);
     setFormInput({ ...formInput, [name]: newValue });
   };
 
