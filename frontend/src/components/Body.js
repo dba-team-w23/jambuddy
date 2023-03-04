@@ -15,6 +15,8 @@ import ApiTest from "./ApiTest";
 import { useSelector } from "react-redux";
 import { userSlice } from "../features/userSlice";
 import { useDispatch } from "react-redux";
+import { setUserProfile } from "../features/userSlice";
+import { setSignedIn } from "../features/userSlice";
 
 export default function Body() {
   const userData = useSelector((state) => state.user);
@@ -22,8 +24,17 @@ export default function Body() {
   const [isLoading, setIsLoading] = React.useState(false);
   const baseURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/logout_user`;
   const dispatch = useDispatch();
-  console.log(localStorage);
-  console.log("user data", userData);
+  console.log("Body local storage:", localStorage);
+  console.log("Body user data", userData);
+  const user = localStorage.getItem("user");
+
+  React.useEffect(() => {
+    if (user) {
+      dispatch(setUserProfile(JSON.parse(user)));
+      dispatch(setSignedIn(true));
+    }
+    console.log("Body userData", userData);
+  }, []);
 
   const handleLogout = async (userid) => {
     try {
@@ -35,12 +46,11 @@ export default function Body() {
         body: JSON.stringify({ userid }),
       });
       const data = await response.json();
-      console.log("data", data);
       localStorage.removeItem("user");
       dispatch(userSlice.actions.clearUserProfile());
       dispatch(userSlice.actions.setSignedIn(false));
-      console.log("local storage", localStorage);
-      console.log("user data", userData);
+      console.log("after logout local storage", localStorage);
+      console.log("after logout user data", userData);
     } catch (error) {
       console.error(error);
     }

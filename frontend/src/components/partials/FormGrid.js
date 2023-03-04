@@ -75,7 +75,10 @@ export default function FormGrid() {
         }
         return response.json();
       })
-      .then((response) => console.log("success", JSON.stringify(response)))
+      .then((response) => {
+        console.log("success", JSON.stringify(response));
+        history.push("/profiles");
+      })
       .catch((error) => {
         console.error("Error:", error);
         console.log("response obj: ", error.response);
@@ -159,7 +162,7 @@ export default function FormGrid() {
           <Grid item xs={4}>
             <PickList label="State" name="state" list={allStates} />
           </Grid>
-          <Grid className="pl-4 pt-4" xs={12}>
+          <Grid className="pl-4 pt-4" item xs={12}>
             <Autocomplete
               multiple
               id="instrument-select"
@@ -176,7 +179,7 @@ export default function FormGrid() {
               )}
             />
           </Grid>
-          <Grid className="pl-4 mb-0 pt-4" xs={12}>
+          <Grid className="pl-4 mb-0 pt-4" item xs={12}>
             <Autocomplete
               multiple
               id="genres-needed"

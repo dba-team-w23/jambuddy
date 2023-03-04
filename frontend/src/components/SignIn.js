@@ -35,6 +35,7 @@ export default function SignIn() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
   const handleInput = (evt) => {
     const name = evt.target.name;
     const value = evt.target.value;
@@ -48,19 +49,8 @@ export default function SignIn() {
   const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
   const baseURL = `${apiRoot}/api/login_user`;
 
-  const fetchUserData = async (userId) => {
-    const data = await fetch(`${apiRoot}/api/users/${userId}`).then((res) =>
-      res.json()
-    );
-    return data;
-  };
-
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
-    let data = {
-      username: formInput.username,
-      password: formInput.password,
-    };
+  const handleSignIn = async (username, password) => {
+    const data = { username, password };
 
     const resData = await fetch(baseURL, {
       method: "POST",
@@ -71,23 +61,37 @@ export default function SignIn() {
       body: JSON.stringify(data),
       mode: "cors",
     }).then((response) => response.json());
+    console.log("data", resData);
+    console.log(resData.status);
 
-    setUserId(resData.profile_id);
-  };
-  React.useEffect(() => {
-    const updateUser = async () => {
-      const data = await fetchUserData(userId);
+    if (resData.status == 1) {
+      const userData = await fetchUserData(resData.profile_id);
       localStorage.setItem("user", JSON.stringify(userData));
-
-      dispatch(setUserProfile(data));
+      dispatch(setUserProfile(userData));
       dispatch(setSignedIn(true));
-      // console.log("Sign In user profile", userData);
-      // console.log("Sign In Local storage", localStorage.getItem("user"));
-    };
-    if (userId) {
-      updateUser();
+      console.log("dispatched in signin", userData);
+    } else {
+      alert("Invalid username or password");
     }
-  }, [userId, isSignedIn, dispatch]);
+  };
+
+  const fetchUserData = async (userId) => {
+    const data = await fetch(`${apiRoot}/api/users/${userId}`).then((res) =>
+      res.json()
+    );
+    return data;
+  };
+
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    const { username, password } = formInput;
+    console.log("username", username);
+    console.log("password", password);
+    const success = await handleSignIn(username, password);
+    if (success) {
+      props.history.push("/profile");
+    }
+  };
 
   return (
     <>

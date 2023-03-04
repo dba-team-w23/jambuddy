@@ -25,8 +25,18 @@ export default function EditProfile(props) {
           autoComplete="off"
         >
           <ProfileCard profile={userData.user} />
-          <NewJamRequest />
-          <FormGrid style={{ margin: "40px auto" }} />
+          {userData.user.note ? (
+            <>
+              <NewJamRequest />
+              <FormGrid style={{ margin: "40px auto" }} />
+            </>
+          ) : (
+            <>
+              <FormGrid style={{ margin: "40px auto" }} />
+
+              <NewJamRequest />
+            </>
+          )}
         </Box>
       ) : (
         <div>Loading...</div>

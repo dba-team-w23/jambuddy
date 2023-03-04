@@ -25,6 +25,7 @@ export default function SignUp() {
     }
   );
   const dispatch = useDispatch();
+
   const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app/api/users";
 
   const handleInput = (evt) => {
@@ -36,6 +37,7 @@ export default function SignUp() {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     let data = formInput;
+    console.log("data", data);
 
     const returnedUser = await fetch(baseURL, {
       method: "POST",
@@ -46,7 +48,11 @@ export default function SignUp() {
       },
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        response.json().then((data) => {
+          console.log("Success:", data);
+        });
+      })
       .catch((error) => {
         console.error("Error: " + error);
       });
@@ -67,10 +73,6 @@ export default function SignUp() {
 
   return (
     <>
-      <p>
-        Sign Up will take the user to a{" "}
-        <a href="/profile">Create/Edit Profile</a> page
-      </p>
       <Box
         className="signIn"
         component="form"

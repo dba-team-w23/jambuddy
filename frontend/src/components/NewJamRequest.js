@@ -20,6 +20,7 @@ const JamRequestForm = () => {
   const [selectedExperienceLevel, setSelectedExperienceLevel] = useState("");
   const [location, setLocation] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [zip, setZip] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,7 +47,7 @@ const JamRequestForm = () => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    console.log("data", data);
+    data.location = console.log("data", data);
     // data.instruments = selectedInstruments;
     // data.genres = selectedGenres;
     // data.exp_level = selectedExperienceLevel;
@@ -59,7 +60,7 @@ const JamRequestForm = () => {
         // location: ,
         // exp_level: selectedExperienceLevel,
       });
-
+      history.push("/jamrequests");
       // Show success message
     } catch (error) {
       console.error(error);
@@ -104,7 +105,7 @@ const JamRequestForm = () => {
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Select instruments you play"
+              label="Select instruments you need"
               placeholder="Instruments"
             />
           )}
@@ -140,31 +141,32 @@ const JamRequestForm = () => {
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Select your experience level"
-              placeholder="Experience Level"
+              label="Select experience level"
+              placeholder="Experience Level(s)"
             />
           )}
         />
 
-        <input
-          className="border border-slate-300 hover:border-black rounded p-3 mb-4 focus:border-blue-800 focus:ring-2 focus:outline-none"
-          type="date"
-          id="jamdate"
-          name="jamdate"
-        />
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <TextField
               id="outlined-basic-5"
-              name="city"
-              label="City"
+              type="number"
+              name="zip"
+              label="Zip Code"
               variant="outlined"
-              value=""
+              value={zip}
               width="50%"
+              onChange={(e) => setZip(e.target.value)}
             />
           </Grid>
-          <Grid item xs={5}>
-            <PickList label="State" name="state" list={allStates} />
+          <Grid item xs={6}>
+            <input
+              className="border border-slate-300 hover:border-black rounded p-3 pb-4 mb-4 focus:border-blue-800 focus:ring-2 focus:outline-none"
+              type="date"
+              id="jamdate"
+              name="jamdate"
+            />
           </Grid>
           <Button sx={{ margin: "1rem" }} type="submit" variant="contained">
             Submit Jam Request
