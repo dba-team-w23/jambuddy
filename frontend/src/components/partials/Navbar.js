@@ -16,7 +16,8 @@ import "./../css/Navbar.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
-const pages = ["Profiles", "Jam Requests"];
+// TODO DAN: I added this because I was getting an error logging in, need to remove and move functionality to logged in page
+const pages = ["Profiles", "Jam Requests", "TEMP Search Jam Requests"];
 const settings = ["Profile", "Logout"];
 
 function Navbar(props) {

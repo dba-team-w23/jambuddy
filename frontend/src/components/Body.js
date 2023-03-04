@@ -5,6 +5,7 @@ import JamRequests from "./JamRequests";
 import NewJamRequest from "./NewJamRequest";
 import Profiles from "./Profiles";
 import SignIn from "./SignIn";
+import Search from "./Search";
 import SignUp from "./SignUp";
 import Error from "./partials/Error";
 import Navbar from "./partials/Navbar";
@@ -68,6 +69,12 @@ export default function Body() {
               <h2 className="text-center">{isSignedIn && "is signed in"}</h2>
             </>
           }
+        </div>
+
+        <div className="signedOutUser">
+          <Routes>
+            <Route path="TEMPSearchJamRequests" element= {<Search />} />
+          </Routes>
         </div>
 
         <div className="signedInUser">
