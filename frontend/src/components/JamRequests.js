@@ -40,9 +40,9 @@ export default function JamRequests() {
           id: request.id,
           location: request.location,
           status: request.status,
-          instrument: request.instrument.name,
-          genre: request.genre.genre,
-          exp_level: request.exp_level,
+          // instrument: request.instrument.name,
+          // genre: request.genre.genre,
+          // exp_level: request.exp_level,
         };
 
         return (

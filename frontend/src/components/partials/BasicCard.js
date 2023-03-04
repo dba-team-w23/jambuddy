@@ -23,12 +23,12 @@ export default function BasicCard({ post, author }) {
           {post.location} -- {post.status}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          contact name: {author.first_name} {author.last_name}
+          {/* contact name: {author.first_name} {author.last_name} */}
         </Typography>
         <Typography variant="body2">
-          We need:{post.instrument}
+          {/* We need:{post.instrument} */}
           <br />
-          We play: {post.genre}
+          {/* We play: {post.genre} */}
         </Typography>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
