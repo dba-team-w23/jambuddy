@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
-                     MusicGenre, UserGenre, UserInstrument, UserMedia,
+                     MusicGenre, UserMedia,
                      UserReview, Profile)
 
 
@@ -18,7 +18,7 @@ class InstrumentAdmin(admin.ModelAdmin):
 
 
 class JamRequestAdmin(admin.ModelAdmin):
-    list_display = ('id', 'profileid', 'instrumentid', 'genreid', 'location', 'exp_level', 'status')
+    list_display = ('id', 'profileid', 'zipcode', 'status', 'note')
 
 
 class JamResponseAdmin(admin.ModelAdmin):
@@ -27,14 +27,6 @@ class JamResponseAdmin(admin.ModelAdmin):
 
 class MusicGenreAdmin(admin.ModelAdmin):
     list_display = ('id', 'genre')
-
-
-class UserGenreAdmin(admin.ModelAdmin):
-    list_display = ('id', 'profileid', 'genreid')
-
-
-class UserInstrumentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'profileid', 'instrumentid', 'exp_level')
 
 
 class UserMediaAdmin(admin.ModelAdmin):
@@ -46,8 +38,6 @@ class UserReviewAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Profile, ProfileAdmin)
-admin.site.register(UserInstrument, UserInstrumentAdmin)
-admin.site.register(UserGenre, UserGenreAdmin)
 admin.site.register(JamRequest, JamRequestAdmin)
 admin.site.register(JamResponse, JamResponseAdmin)
 admin.site.register(ExperienceLevel, ExperienceLevelAdmin)

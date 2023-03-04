@@ -55,14 +55,6 @@ urlpatterns = [
             name='userfave-profile-list' ),
     path('api/userfaveprofiles/<int:profile_id>', views.getUserFaveProfiles, name='userfaveprofile'),
 
-    path('api/usergenres', views.UserGenreList.as_view(actions={'get': 'list', 'post': 'create'}), name='usergenre-list'),
-    path('api/usergenres/<int:pk>', views.UserGenreDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='usergenre-detail'),
-    path('api/usergenresforuser/<int:profile_id>', views.getUserGenres, name='user-genres-list'),
-
-    path('api/userinstruments', views.UserInstrumentList.as_view(actions={'get': 'list', 'post': 'create'}), name='userinstrument-list'),
-    path('api/userinstruments/<int:pk>', views.UserInstrumentDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='userinstrument-detail'),
-    path('api/userinstrumentsforuser/<int:profile_id>', views.getUserInstruments, name='user-instruments-list'),
-
     path('api/usermedia', views.UserMediaList.as_view(actions={'get': 'list', 'post': 'create'}), name='usermedia-list'),
     path('api/usermedia/<int:pk>', views.UserMediaDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='usermedia-detail'),
     path('api/usermediaforuser/<int:profile_id>', views.getUserMedia, name='user-media-list'),
