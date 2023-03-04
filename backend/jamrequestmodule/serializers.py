@@ -12,8 +12,8 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['id', 'last_login','date_joined','username','first_name','last_name',
-            'email','street','street2','city','state','zipcode','phone','photo','note',
-            'instruments','genres','exp_level']
+            'email','street','street2','city','state','country','zipcode','phone','photo','note',
+            'instruments','genres','instrument_names','genre_names']
         #fields = '__all__'
 
     def create(self, validated_data):
@@ -24,14 +24,13 @@ class ProfileSerializer(serializers.ModelSerializer):
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
         )
-
         return user
     
 class ProfileJamRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['username','first_name','last_name', 'email','street','street2','city','state',
-                  'zipcode','phone','photo','note', 'instruments','genres','exp_level']
+                  'zipcode','phone','photo','note', 'instrument_names','genre_names']
         #fields = '__all__'
     
 class ExperienceLevelSerializer(serializers.ModelSerializer):
@@ -47,15 +46,12 @@ class InstrumentSerializer(serializers.ModelSerializer):
 class JamRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = JamRequest
-        fields = '__all__'
-
-    #     list_serializer = serializers.ListSerializer(child=serializers.IntegerField())
+        fields = ['id', 'profileid','note','status','created',
+            'instruments','genres','exp_level','instrument_names','genre_names','exp_level_names']
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['requestor_profile'] = ProfileJamRequestSerializer(instance.profileid).data
-    #     representation['instrument'] = InstrumentSerializer(instance.instrumentid).data
-    #     representation['genre'] = MusicGenreSerializer(instance.genreid).data
         return representation
 
 class JamRequestSimpleSerializer(serializers.ModelSerializer):

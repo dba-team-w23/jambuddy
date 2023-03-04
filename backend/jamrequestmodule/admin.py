@@ -18,7 +18,7 @@ class InstrumentAdmin(admin.ModelAdmin):
 
 
 class JamRequestAdmin(admin.ModelAdmin):
-    list_display = ('id', 'profileid', 'zipcode', 'status', 'note')
+    list_display = ('id', 'profileid', 'status', 'note')
 
 
 class JamResponseAdmin(admin.ModelAdmin):

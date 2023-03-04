@@ -36,7 +36,7 @@ class UserDetail(viewsets.ModelViewSet):
 
 
 class ExperienceLevelList(viewsets.ModelViewSet):
-    queryset = ExperienceLevel.objects.all()
+    queryset = ExperienceLevel.objects.all().order_by('id')
     serializer_class = ExperienceLevelSerializer
 
 class ExperienceLevelDetail(viewsets.ModelViewSet):
@@ -45,7 +45,7 @@ class ExperienceLevelDetail(viewsets.ModelViewSet):
 
 
 class InstrumentList(viewsets.ModelViewSet):
-    queryset = Instrument.objects.all()
+    queryset = Instrument.objects.all().order_by('name')
     serializer_class = InstrumentSerializer
 
 class InstrumentDetail(viewsets.ModelViewSet):
@@ -62,40 +62,6 @@ class JamRequestList(viewsets.ModelViewSet):
     queryset = JamRequest.objects.all()
     serializer_class = JamRequestSerializer
 
-
-# class JamRequestList(viewsets.ModelViewSet):
-#     filter_params = [
-#         'instrument_name',
-#         'instrument_type',
-#         'genre',
-#         'location',
-#         'status',
-#         'requestor_username',
-#     ]
-
-#     def get_queryset(self):
-#         queryset = JamRequest.objects.all()
-
-#         filter_lookup = {
-#             'instrument_name': 'instrumentid__name',
-#             'instrument_type': 'instrumentid__type',
-#             'genre': 'genreid__genre',
-#             'location': 'location',
-#             'status': 'status',
-#             'requestor_username': 'profileid__username',
-#         }
-#         for client_key, backend_key in filter_lookup.items():
-#             if self.request.query_params.get(client_key):
-#                 client_value = self.request.query_params.get(client_key)
-#                 case_insensitive_client_value = client_value.lower()
-#                 queryset = queryset.filter(
-#                     **{f'{backend_key}__icontains': case_insensitive_client_value}
-#                 )
-#         return queryset
-
-#     serializer_class = JamRequestSerializer
-
-
 class JamResponseDetail(viewsets.ModelViewSet):
     queryset = JamResponse.objects.all()
     serializer_class = JamResponseSerializer
@@ -106,7 +72,7 @@ class JamResponseList(viewsets.ModelViewSet):
 
 
 class MusicGenreList(viewsets.ModelViewSet):
-    queryset = MusicGenre.objects.all()
+    queryset = MusicGenre.objects.all().order_by('genre')
     serializer_class = MusicGenreSerializer
 
 class MusicGenreDetail(viewsets.ModelViewSet):
@@ -155,8 +121,6 @@ class UserDetailsView(generics.RetrieveAPIView):
 
         return Response({
             'user': user_serializer.data,
-            'genres': "",
-            'instruments': "",
             'media': user_media_serializer.data,
             'reviews': user_reviews_serializer.data
         })
@@ -202,7 +166,7 @@ def getUserReviewsByUser(request, profile_id):
     ser_reviews = UserReviewByUserSerializer(user_reviews, many=True)
     return JsonResponse(ser_reviews.data, safe=False)
 
-@api_view(('GET',))
+@api_view(('GET','POST',))
 def searchJamRequests(request):
     jam_results = JamRequest.objects.filter(status="Open")
     instrument_id = request.data.get("instrumentid")
@@ -213,38 +177,40 @@ def searchJamRequests(request):
     searching_user_zipcode = request.data.get("from_zipcode")
 
     if instrument_id:
-        jam_results = jam_results.filter(instrumentid=instrument_id)
+        jam_results = jam_results.filter(instruments__id=instrument_id)
     if genre_id:
-        jam_results = jam_results.filter(genreid=genre_id)
+        jam_results = jam_results.filter(genres__id=genre_id)
     if exp_level_id:
-        jam_results = jam_results.filter(exp_level=exp_level_id)
+        jam_results = jam_results.filter(exp_level__id=exp_level_id)
     if daysback:
         jam_results = jam_results.filter(created__gte=datetime.datetime.now() - datetime.timedelta(days=daysback))
 
-    are_distance_search_prereqs_met = all([
-        distance_miles is not None and int(distance_miles) > 0,
-        _is_valid_zip_code(searching_user_zipcode)]
-    )
+    if distance_miles:
+        are_distance_search_prereqs_met = all([
+            distance_miles is not None and int(distance_miles) > 0,
+            _is_valid_zip_code(searching_user_zipcode)]
+        )
     
-    if are_distance_search_prereqs_met:
-        # join results using profile ID of JamRequestory to get zipcode of requestor's ID
-        profile_ids_of_jam_requestors = list(jam_results.values_list('profileid_id', flat=True))
-        
-        # extract zip codes for profiles of all current jam requests
-        profiles = Profile.objects.filter(pk__in=profile_ids_of_jam_requestors)
-        profile_id_to_zip_code = {profile.pk: profile.zipcode for profile in profiles}
+        if are_distance_search_prereqs_met:
+            # join results using profile ID of JamRequestory to get zipcode of requestor's ID
+            profile_ids_of_jam_requestors = list(jam_results.values_list('profileid_id', flat=True))
+            
+            # extract zip codes for profiles of all current jam requests
+            profiles = Profile.objects.filter(pk__in=profile_ids_of_jam_requestors)
+            profile_id_to_zip_code = {profile.pk: profile.zipcode for profile in profiles}
 
-        # filter to only those that are valid zip codes
-        requestor_zipcodes = list(profile_id_to_zip_code.values())
-        valid_zip_codes = [zip_code for zip_code in requestor_zipcodes if _is_valid_zip_code(zip_code)]
+            # filter to only those that are valid zip codes
+            requestor_zipcodes = list(profile_id_to_zip_code.values())
+            valid_zip_codes = [zip_code for zip_code in requestor_zipcodes if _is_valid_zip_code(zip_code)]
 
-        candidate_zipcodes = ','.join(valid_zip_codes)
+            candidate_zipcodes = ','.join(valid_zip_codes)
 
-        zip_codes_within_range = getZipcodesWithinDistance(searching_user_zipcode, candidate_zipcodes, distance_miles)
+            zip_codes_within_range = getZipcodesWithinDistance(searching_user_zipcode, candidate_zipcodes, distance_miles)
 
-        profile_ids_in_range = [profile_id for profile_id, zip_code in profile_id_to_zip_code.items() if zip_code in zip_codes_within_range]
+            profile_ids_in_range = [profile_id for profile_id, zip_code in profile_id_to_zip_code.items() if zip_code in zip_codes_within_range]
 
-        jam_results = jam_results.filter(profileid_id__in=profile_ids_in_range)
+            jam_results = jam_results.filter(profileid_id__in=profile_ids_in_range)
+
 
     ser_reviews = JamRequestSimpleSerializer(jam_results, many=True)
     return JsonResponse(ser_reviews.data, safe=False)
@@ -263,7 +229,7 @@ def _is_valid_zip_code(input: str or None) -> bool:
         return False
 
 def index(request):
-    utc_time = datetime.now(pytz.utc)
+    utc_time = datetime.datetime.now(pytz.utc)
     current_time = utc_time.strftime("%-I:%S %p")
     current_date = utc_time.strftime("%A %m %-Y")
 
@@ -287,7 +253,7 @@ def checkserver(request):
         version = pkg_resources.get_distribution(library).version
         message += library + " v" + version + ", "
 
-    date = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+    date = datetime.datetime.now().strftime("%m/%d/%Y %H:%M:%S")
     message += " -- Server time is: " + date
     return Response(data=message, status=status.HTTP_200_OK)
 
@@ -310,7 +276,6 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return Response({"status":0}, status=status.HTTP_200_OK)
-
 
 
 def getZipcodesWithinDistance(from_zipcode: str, candidate_zipcodes: str, distance: List[str]) -> List[str]:
@@ -343,3 +308,36 @@ def getZipcodesWithinDistance(from_zipcode: str, candidate_zipcodes: str, distan
         conn.close() 
     
     return result_zipcodes
+
+
+# class JamRequestList(viewsets.ModelViewSet):
+#     filter_params = [
+#         'instrument_name',
+#         'instrument_type',
+#         'genre',
+#         'location',
+#         'status',
+#         'requestor_username',
+#     ]
+
+#     def get_queryset(self):
+#         queryset = JamRequest.objects.all()
+
+#         filter_lookup = {
+#             'instrument_name': 'instrumentid__name',
+#             'instrument_type': 'instrumentid__type',
+#             'genre': 'genreid__genre',
+#             'location': 'location',
+#             'status': 'status',
+#             'requestor_username': 'profileid__username',
+#         }
+#         for client_key, backend_key in filter_lookup.items():
+#             if self.request.query_params.get(client_key):
+#                 client_value = self.request.query_params.get(client_key)
+#                 case_insensitive_client_value = client_value.lower()
+#                 queryset = queryset.filter(
+#                     **{f'{backend_key}__icontains': case_insensitive_client_value}
+#                 )
+#         return queryset
+
+#     serializer_class = JamRequestSerializer
