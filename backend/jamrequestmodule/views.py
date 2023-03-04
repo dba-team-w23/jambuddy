@@ -177,11 +177,11 @@ def searchJamRequests(request):
     searching_user_zipcode = request.data.get("from_zipcode")
 
     if instrument_id:
-        jam_results = jam_results.filter(instrumentid=instrument_id)
+        jam_results = jam_results.filter(instruments__id=instrument_id)
     if genre_id:
-        jam_results = jam_results.filter(genreid=genre_id)
+        jam_results = jam_results.filter(genres__id=genre_id)
     if exp_level_id:
-        jam_results = jam_results.filter(exp_level=exp_level_id)
+        jam_results = jam_results.filter(exp_level__id=exp_level_id)
     if daysback:
         jam_results = jam_results.filter(created__gte=datetime.datetime.now() - datetime.timedelta(days=daysback))
 
