@@ -406,7 +406,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"username\": \"bj\",\n    \"city\": \"Toronto\",\n    \"state\": \"ON\",\n    \"zipcode\": \"C37FG9\"\n}",
+									"raw": "{\n    \"username\": \"swally\",\n    \"city\": \"Salt Lake City\",\n    \"state\": \"UT\",\n    \"country\":\"USA\",\n    \"zipcode\": \"84042\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -414,14 +414,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/api/users/86",
+									"raw": "{{base_url}}/api/users/2",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"users",
-										"86"
+										"2"
 									]
 								}
 							},
@@ -575,7 +575,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"instrumentid\": 10,\n    \"genreid\": 10,\n    \"explevel\": 2,\n    \"daysback\": 30,\n    \"from_zipcode\": \"84057\",\n    \"distance_miles\":1800\n}",
+									"raw": "{\n    \"instrumentid\": 7,\n    \"genreid\":13,\n    \"from_zipcode\": \"84057\",\n    \"days_back\": 60,\n    \"distance_miles\":5\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -629,10 +629,6 @@
 							"response": []
 						}
 					]
-				},
-				{
-					"name": "PUT",
-					"item": []
 				}
 			]
 		},

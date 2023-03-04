@@ -177,38 +177,40 @@ def searchJamRequests(request):
     searching_user_zipcode = request.data.get("from_zipcode")
 
     if instrument_id:
-        jam_results = jam_results.filter(instrumentid=instrument_id)
+        jam_results = jam_results.filter(instruments__id=instrument_id)
     if genre_id:
-        jam_results = jam_results.filter(genreid=genre_id)
+        jam_results = jam_results.filter(genres__id=genre_id)
     if exp_level_id:
-        jam_results = jam_results.filter(exp_level=exp_level_id)
+        jam_results = jam_results.filter(exp_level__id=exp_level_id)
     if daysback:
         jam_results = jam_results.filter(created__gte=datetime.datetime.now() - datetime.timedelta(days=daysback))
 
-    are_distance_search_prereqs_met = all([
-        distance_miles is not None and int(distance_miles) > 0,
-        _is_valid_zip_code(searching_user_zipcode)]
-    )
+    if distance_miles:
+        are_distance_search_prereqs_met = all([
+            distance_miles is not None and int(distance_miles) > 0,
+            _is_valid_zip_code(searching_user_zipcode)]
+        )
     
-    if are_distance_search_prereqs_met:
-        # join results using profile ID of JamRequestory to get zipcode of requestor's ID
-        profile_ids_of_jam_requestors = list(jam_results.values_list('profileid_id', flat=True))
-        
-        # extract zip codes for profiles of all current jam requests
-        profiles = Profile.objects.filter(pk__in=profile_ids_of_jam_requestors)
-        profile_id_to_zip_code = {profile.pk: profile.zipcode for profile in profiles}
+        if are_distance_search_prereqs_met:
+            # join results using profile ID of JamRequestory to get zipcode of requestor's ID
+            profile_ids_of_jam_requestors = list(jam_results.values_list('profileid_id', flat=True))
+            
+            # extract zip codes for profiles of all current jam requests
+            profiles = Profile.objects.filter(pk__in=profile_ids_of_jam_requestors)
+            profile_id_to_zip_code = {profile.pk: profile.zipcode for profile in profiles}
 
-        # filter to only those that are valid zip codes
-        requestor_zipcodes = list(profile_id_to_zip_code.values())
-        valid_zip_codes = [zip_code for zip_code in requestor_zipcodes if _is_valid_zip_code(zip_code)]
+            # filter to only those that are valid zip codes
+            requestor_zipcodes = list(profile_id_to_zip_code.values())
+            valid_zip_codes = [zip_code for zip_code in requestor_zipcodes if _is_valid_zip_code(zip_code)]
 
-        candidate_zipcodes = ','.join(valid_zip_codes)
+            candidate_zipcodes = ','.join(valid_zip_codes)
 
-        zip_codes_within_range = getZipcodesWithinDistance(searching_user_zipcode, candidate_zipcodes, distance_miles)
+            zip_codes_within_range = getZipcodesWithinDistance(searching_user_zipcode, candidate_zipcodes, distance_miles)
 
-        profile_ids_in_range = [profile_id for profile_id, zip_code in profile_id_to_zip_code.items() if zip_code in zip_codes_within_range]
+            profile_ids_in_range = [profile_id for profile_id, zip_code in profile_id_to_zip_code.items() if zip_code in zip_codes_within_range]
 
-        jam_results = jam_results.filter(profileid_id__in=profile_ids_in_range)
+            jam_results = jam_results.filter(profileid_id__in=profile_ids_in_range)
+
 
     ser_reviews = JamRequestSimpleSerializer(jam_results, many=True)
     return JsonResponse(ser_reviews.data, safe=False)
