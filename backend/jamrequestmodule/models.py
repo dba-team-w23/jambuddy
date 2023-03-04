@@ -15,6 +15,12 @@ class MusicGenre(models.Model):
     def __str__(self):
         return self.genre
 
+class ExperienceLevel(models.Model):
+    level = models.CharField(max_length=255)
+
+    def __str__(self):
+        return str(self.level)
+
 class Profile(AbstractUser):
     email = models.CharField(max_length=255, null=True)
     street = models.CharField(max_length=255, null=True)
@@ -28,24 +34,17 @@ class Profile(AbstractUser):
     created = models.DateTimeField(auto_now_add=True)
     instruments = models.ManyToManyField(Instrument, blank=True)
     genres = models.ManyToManyField(MusicGenre, blank=True)
-    exp_level = models.TextField(null=True)
-
-class ExperienceLevel(models.Model):
-    level = models.CharField(max_length=255)
-
-    def __str__(self):
-        return str(self.level)
+    exp_level = models.ManyToManyField(ExperienceLevel, blank=True)
 
 class JamRequest(models.Model):
     profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    instrumentid = models.ForeignKey(Instrument, on_delete=models.CASCADE)
-    genreid = models.ForeignKey(MusicGenre, on_delete=models.CASCADE)
-    exp_level = models.ForeignKey(ExperienceLevel, on_delete=models.CASCADE)
-    location = models.CharField(max_length=255)
+    instruments = models.ManyToManyField(Instrument, blank=True)
+    genres = models.ManyToManyField(MusicGenre, blank=True)
+    exp_level = models.ManyToManyField(ExperienceLevel, blank=True)
+    note = models.TextField(null=True)
+    zipcode = models.CharField(max_length=255)
     status = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
-    instrument = models.TextField(null=True)
-    genre = models.TextField(null=True)
 
 class JamResponse(models.Model):
     jrid = models.ForeignKey(JamRequest, on_delete=models.CASCADE)
@@ -53,21 +52,6 @@ class JamResponse(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     note = models.TextField()
     status = models.CharField(max_length=255)
-
-
-class UserGenre(models.Model):
-    profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    genreid = models.ForeignKey(MusicGenre, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.userid) + "-" + str(self.genreid)
-
-
-class UserInstrument(models.Model):
-    profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    instrumentid = models.ForeignKey(Instrument, on_delete=models.CASCADE)
-    exp_level = models.ForeignKey(ExperienceLevel, on_delete=models.CASCADE)
-
 
 class UserMedia(models.Model):
     profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -77,7 +61,6 @@ class UserMedia(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.location}"
-
 
 class UserReview(models.Model):
     profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -90,7 +73,6 @@ class UserFavoriteJamRequest(models.Model):
     profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     jrid = models.ForeignKey(JamRequest, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
-
 
 class UserFavoriteProfile(models.Model):
     profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
