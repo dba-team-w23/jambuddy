@@ -22,19 +22,28 @@ class ExperienceLevel(models.Model):
         return str(self.level)
 
 class Profile(AbstractUser):
-    email = models.CharField(max_length=255, null=True)
-    street = models.CharField(max_length=255, null=True)
-    street2 = models.CharField(max_length=255, null=True)
-    city = models.CharField(max_length=255, null=True)
-    state = models.CharField(max_length=255, null=True)
-    zipcode = models.CharField(max_length=255, null=True)
+    email = models.CharField(max_length=50, null=True)
+    street = models.CharField(max_length=100, null=True)
+    street2 = models.CharField(max_length=100, null=True)
+    city = models.CharField(max_length=50, null=True)
+    state = models.CharField(max_length=50, null=True)
+    zipcode = models.CharField(max_length=10, null=True)
+    country = models.CharField(max_length=50, null=True)
     phone = models.CharField(max_length=255, null=True)
     photo = models.CharField(max_length=255, null=True)
     note = models.TextField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     instruments = models.ManyToManyField(Instrument, blank=True)
     genres = models.ManyToManyField(MusicGenre, blank=True)
-    exp_level = models.ManyToManyField(ExperienceLevel, blank=True)
+
+    def instrument_names(self):
+        return ', '.join([i.name for i in self.instruments.all()])    
+    instrument_names.short_description = "InstrumentNames"
+
+    def genre_names(self):
+        return ', '.join([g.genre for g in self.genres.all()])    
+    genre_names.short_description = "GenreNames"
+
 
 class JamRequest(models.Model):
     profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -42,9 +51,21 @@ class JamRequest(models.Model):
     genres = models.ManyToManyField(MusicGenre, blank=True)
     exp_level = models.ManyToManyField(ExperienceLevel, blank=True)
     note = models.TextField(null=True)
-    zipcode = models.CharField(max_length=255)
-    status = models.CharField(max_length=255)
+    status = models.CharField(max_length=255, null=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    def instrument_names(self):
+        return ', '.join([i.name for i in self.instruments.all()])    
+    instrument_names.short_description = "InstrumentNames"
+
+    def genre_names(self):
+        return ', '.join([g.genre for g in self.genres.all()])    
+    genre_names.short_description = "GenreNames"
+
+    def exp_level_names(self):
+        return ', '.join([x.level for x in self.exp_level.all()])    
+    exp_level_names.short_description = "ExperienceLevels"
+
 
 class JamResponse(models.Model):
     jrid = models.ForeignKey(JamRequest, on_delete=models.CASCADE)

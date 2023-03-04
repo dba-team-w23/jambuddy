@@ -7,28 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "Status",
-			"item": [
-				{
-					"name": "Checkserver",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/checkserver",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"checkserver"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Users",
 			"item": [
 				{
@@ -91,75 +69,19 @@
 							"response": []
 						},
 						{
-							"name": "userGenres",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{base_url}}/api/usergenres",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"usergenres"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "userGenre by id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{base_url}}/api/usergenres/39",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"usergenres",
-										"39"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "userGenre by userid",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{base_url}}/api/usergenresforuser/7",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"usergenresforuser",
-										"7"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "userFaveJamReq for userid",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/userfavejamreqs/2",
+									"raw": "{{base_url}}/api/userfavejamreqs/55",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"userfavejamreqs",
-										"2"
+										"55"
 									]
 								}
 							},
@@ -171,70 +93,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/userfaveprofiles/2",
+									"raw": "{{base_url}}/api/userfaveprofiles/55",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"userfaveprofiles",
-										"2"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "userInstruments",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{base_url}}/api/userinstruments",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"userinstruments"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "userInstruments by id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{base_url}}/api/userinstruments/86",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"userinstruments",
-										"86"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "userInstruments by userid",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{base_url}}/api/userinstrumentsforuser/6",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"userinstrumentsforuser",
-										"6"
+										"55"
 									]
 								}
 							},
@@ -283,14 +149,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/usermediaforuser/8",
+									"raw": "{{base_url}}/api/usermediaforuser/53",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"usermediaforuser",
-										"8"
+										"53"
 									]
 								}
 							},
@@ -339,14 +205,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/userreviewsforuser/78",
+									"raw": "{{base_url}}/api/userreviewsforuser/76",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"userreviewsforuser",
-										"78"
+										"76"
 									]
 								}
 							},
@@ -374,7 +240,7 @@
 					]
 				},
 				{
-					"name": "POST",
+					"name": "POST / PUT",
 					"item": [
 						{
 							"name": "Login_User",
@@ -402,7 +268,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"username\":\"swally\",\n    \"password\":\"swally\"\n}",
+									"raw": "{\n    \"username\":\"dan\",\n    \"password\":\"dan\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -540,7 +406,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"username\": \"swally\",\n    \"instruments\": [2,3],\n    \"genres\": [12,13,14]\n}",
+									"raw": "{\n    \"username\": \"bj\",\n    \"city\": \"Toronto\",\n    \"state\": \"ON\",\n    \"zipcode\": \"C37FG9\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -548,14 +414,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/api/users/2",
+									"raw": "{{base_url}}/api/users/86",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"users",
-										"2"
+										"86"
 									]
 								}
 							},
@@ -595,7 +461,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "",
+									"raw": "    {\n        \"profileid\": 2,\n        \"reviewerid\": 76,\n        \"rating\": 4,\n        \"comment\": \"Testing out review API for Dan\"\n    }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -631,14 +497,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/jamrequests/",
+									"raw": "{{base_url}}/api/jamrequests",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
-										"jamrequests",
-										""
+										"jamrequests"
 									]
 								}
 							},
@@ -650,14 +515,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/jamrequests/14",
+									"raw": "{{base_url}}/api/jamrequests/36",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"jamrequests",
-										"14"
+										"36"
 									]
 								}
 							},
@@ -669,14 +534,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/jamresponses/",
+									"raw": "{{base_url}}/api/jamresponses",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
-										"jamresponses",
-										""
+										"jamresponses"
 									]
 								}
 							},
@@ -688,15 +552,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/jamresponses/16/",
+									"raw": "{{base_url}}/api/jamresponses/16",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"jamresponses",
-										"16",
-										""
+										"16"
 									]
 								}
 							},
@@ -735,8 +598,37 @@
 					]
 				},
 				{
-					"name": "POST",
-					"item": []
+					"name": "POST / PUT",
+					"item": [
+						{
+							"name": "jamRequest",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"profileid\": 2,\n    \"instruments\": [1,2,7],\n    \"genres\": [12,13,14],\n    \"exp_level\": [1,2]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/jamrequests/36",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"jamrequests",
+										"36"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "PUT",
@@ -853,6 +745,28 @@
 								"api",
 								"musicgenres",
 								"13"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Checkserver",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/checkserver",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"checkserver"
 							]
 						}
 					},

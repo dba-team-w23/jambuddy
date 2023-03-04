@@ -36,7 +36,7 @@ class UserDetail(viewsets.ModelViewSet):
 
 
 class ExperienceLevelList(viewsets.ModelViewSet):
-    queryset = ExperienceLevel.objects.all()
+    queryset = ExperienceLevel.objects.all().order_by('id')
     serializer_class = ExperienceLevelSerializer
 
 class ExperienceLevelDetail(viewsets.ModelViewSet):
@@ -45,7 +45,7 @@ class ExperienceLevelDetail(viewsets.ModelViewSet):
 
 
 class InstrumentList(viewsets.ModelViewSet):
-    queryset = Instrument.objects.all()
+    queryset = Instrument.objects.all().order_by('name')
     serializer_class = InstrumentSerializer
 
 class InstrumentDetail(viewsets.ModelViewSet):
@@ -62,40 +62,6 @@ class JamRequestList(viewsets.ModelViewSet):
     queryset = JamRequest.objects.all()
     serializer_class = JamRequestSerializer
 
-
-# class JamRequestList(viewsets.ModelViewSet):
-#     filter_params = [
-#         'instrument_name',
-#         'instrument_type',
-#         'genre',
-#         'location',
-#         'status',
-#         'requestor_username',
-#     ]
-
-#     def get_queryset(self):
-#         queryset = JamRequest.objects.all()
-
-#         filter_lookup = {
-#             'instrument_name': 'instrumentid__name',
-#             'instrument_type': 'instrumentid__type',
-#             'genre': 'genreid__genre',
-#             'location': 'location',
-#             'status': 'status',
-#             'requestor_username': 'profileid__username',
-#         }
-#         for client_key, backend_key in filter_lookup.items():
-#             if self.request.query_params.get(client_key):
-#                 client_value = self.request.query_params.get(client_key)
-#                 case_insensitive_client_value = client_value.lower()
-#                 queryset = queryset.filter(
-#                     **{f'{backend_key}__icontains': case_insensitive_client_value}
-#                 )
-#         return queryset
-
-#     serializer_class = JamRequestSerializer
-
-
 class JamResponseDetail(viewsets.ModelViewSet):
     queryset = JamResponse.objects.all()
     serializer_class = JamResponseSerializer
@@ -106,7 +72,7 @@ class JamResponseList(viewsets.ModelViewSet):
 
 
 class MusicGenreList(viewsets.ModelViewSet):
-    queryset = MusicGenre.objects.all()
+    queryset = MusicGenre.objects.all().order_by('genre')
     serializer_class = MusicGenreSerializer
 
 class MusicGenreDetail(viewsets.ModelViewSet):
@@ -155,8 +121,6 @@ class UserDetailsView(generics.RetrieveAPIView):
 
         return Response({
             'user': user_serializer.data,
-            'genres': "",
-            'instruments': "",
             'media': user_media_serializer.data,
             'reviews': user_reviews_serializer.data
         })
@@ -202,7 +166,7 @@ def getUserReviewsByUser(request, profile_id):
     ser_reviews = UserReviewByUserSerializer(user_reviews, many=True)
     return JsonResponse(ser_reviews.data, safe=False)
 
-@api_view(('GET',))
+@api_view(('GET','POST',))
 def searchJamRequests(request):
     jam_results = JamRequest.objects.filter(status="Open")
     instrument_id = request.data.get("instrumentid")
@@ -263,7 +227,7 @@ def _is_valid_zip_code(input: str or None) -> bool:
         return False
 
 def index(request):
-    utc_time = datetime.now(pytz.utc)
+    utc_time = datetime.datetime.now(pytz.utc)
     current_time = utc_time.strftime("%-I:%S %p")
     current_date = utc_time.strftime("%A %m %-Y")
 
@@ -287,7 +251,7 @@ def checkserver(request):
         version = pkg_resources.get_distribution(library).version
         message += library + " v" + version + ", "
 
-    date = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+    date = datetime.datetime.now().strftime("%m/%d/%Y %H:%M:%S")
     message += " -- Server time is: " + date
     return Response(data=message, status=status.HTTP_200_OK)
 
@@ -310,7 +274,6 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return Response({"status":0}, status=status.HTTP_200_OK)
-
 
 
 def getZipcodesWithinDistance(from_zipcode: str, candidate_zipcodes: str, distance: List[str]) -> List[str]:
@@ -343,3 +306,36 @@ def getZipcodesWithinDistance(from_zipcode: str, candidate_zipcodes: str, distan
         conn.close() 
     
     return result_zipcodes
+
+
+# class JamRequestList(viewsets.ModelViewSet):
+#     filter_params = [
+#         'instrument_name',
+#         'instrument_type',
+#         'genre',
+#         'location',
+#         'status',
+#         'requestor_username',
+#     ]
+
+#     def get_queryset(self):
+#         queryset = JamRequest.objects.all()
+
+#         filter_lookup = {
+#             'instrument_name': 'instrumentid__name',
+#             'instrument_type': 'instrumentid__type',
+#             'genre': 'genreid__genre',
+#             'location': 'location',
+#             'status': 'status',
+#             'requestor_username': 'profileid__username',
+#         }
+#         for client_key, backend_key in filter_lookup.items():
+#             if self.request.query_params.get(client_key):
+#                 client_value = self.request.query_params.get(client_key)
+#                 case_insensitive_client_value = client_value.lower()
+#                 queryset = queryset.filter(
+#                     **{f'{backend_key}__icontains': case_insensitive_client_value}
+#                 )
+#         return queryset
+
+#     serializer_class = JamRequestSerializer
