@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
 
+import "./css/Search.css";
+
 const Search = () => {
   const [instrumentOptions, setInstrumentOptions] = useState([]);
   const [genreOptions, setGenreOptions] = useState([]);
@@ -77,65 +79,65 @@ const Search = () => {
     }
   };
   return (
-    <div>
-      <h1>Search for Jam Buddies</h1>
-      <label htmlFor="instrument">Instrument:</label>
-      <select
+    <div class="jam-buddies-search">
+    <h1>Search for Jam Buddies</h1>
+    <label htmlFor="instrument">Instrument:</label>
+    <select
         id="instrument"
         value={instrument}
         onChange={(e) => setInstrument(e.target.value)}
-      >
+    >
         <option value="">Select an instrument</option>
         {instrumentOptions.map((opt) => (
-          <option key={opt.id} value={opt.id}>
+        <option key={opt.id} value={opt.id}>
             {opt.name} ({opt.type})
-          </option>
+        </option>
         ))}
-      </select>
-      <br />
-      <label htmlFor="genre">Music Genre:</label>
-      <select
+    </select>
+    <br />
+    <label htmlFor="genre">Music Genre:</label>
+    <select
         id="genre"
         value={genre}
         onChange={(e) => setGenre(e.target.value)}
-      >
+    >
         <option value="">Select a genre</option>
         {genreOptions.map((opt) => (
-          <option key={opt.id} value={opt.id}>
+        <option key={opt.id} value={opt.id}>
             {opt.genre}
-          </option>
+        </option>
         ))}
-      </select>
-      <br />
-      <label htmlFor="experienceLevel">Experience Level:</label>
-      <select
+    </select>
+    <br />
+    <label htmlFor="experienceLevel">Experience Level:</label>
+    <select
         id="experienceLevel"
         value={experienceLevel}
         onChange={(e) => setExperienceLevel(e.target.value)}
-      >
+    >
         <option value="">Select an experience level</option>
         {expLevelOptions.map((opt) => (
-          <option key={opt.id} value={opt.level}>
+        <option key={opt.id} value={opt.level}>
             {opt.level}
-          </option>
+        </option>
         ))}
-      </select>
-      <br />
-      <label htmlFor="distance">Distance to Travel:</label>
-      <input
+    </select>
+    <br />
+    <label htmlFor="distance">Distance to Travel:</label>
+    <input
         id="distance"
         type="number"
         min="1"
         value={distanceToTravel}
         onChange={(e) => setDistanceToTravel(e.target.value)}
-      />
-      <br />
-      <label htmlFor="requestPlaced">Request Placed:</label>
-      <select
+    />
+    <br />
+    <label htmlFor="requestPlaced">Request Placed:</label>
+    <select
         id="requestPlaced"
         value={requestPlaced}
         onChange={(e) => setRequestPlaced(e.target.value)}
-      >
+    >
         <option value="">Select a time range</option>
         <option value="All">All</option>
         <option value="last7days">Last 7 days</option>
@@ -143,9 +145,9 @@ const Search = () => {
         <option value="lastmonth">Last month</option>
         <option value="last6months">Last 6 months</option>
         <option value="lastyear">Last year</option>
-      </select>
-      <br />
-      <button onClick={search}>Search</button>
+    </select>
+    <br />
+    <button onClick={search}>Search</button>
     </div>
   );
 };

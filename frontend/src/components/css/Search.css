@@ -1,0 +1,45 @@
+.jam-buddies-search {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    padding: 20px;
+  }
+
+  .jam-buddies-search h1 {
+    color: #007aff;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .jam-buddies-search label {
+    color: #007aff;
+    display: block;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .jam-buddies-search select,
+  .jam-buddies-search input[type="number"] {
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    font-size: 18px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .jam-buddies-search button {
+    background-color: #007aff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px 15px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .jam-buddies-search button:hover {
+    background-color: #0056b3;
+  }
