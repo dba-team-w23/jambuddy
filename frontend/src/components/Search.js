@@ -9,6 +9,7 @@ const Search = () => {
   const [genreOptions, setGenreOptions] = useState([]);
   const [expLevelOptions, setExpLevelOptions] = useState([]);
   const [results, setResults] = useState([]);
+  const [searchConducted, setSearchConducted] = useState(false);
 
   React.useEffect(() => {
     const fetchInstruments = async () => {
@@ -38,9 +39,25 @@ const Search = () => {
         console.error(error);
       }
     };
+    const fetchInitialJamRequests = async () => {
+      try {
+        const res = await fetch(`${apiRoot}/api/searchjamrequests`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        setResults(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     fetchInstruments();
     fetchGenres();
     fetchExperiences();
+    fetchInitialJamRequests();
   }, []);
 
   const [distanceToTravel, setDistanceToTravel] = useState("");
@@ -76,6 +93,7 @@ const Search = () => {
       const data = await res.json();
       console.log(data);
       setResults(data);
+      setSearchConducted(true);
     } catch (error) {
       console.error(error);
     }
@@ -153,7 +171,6 @@ const Search = () => {
 </div>
 
     <div className="jam-buddies-results">
-      <h2>Search Results</h2>
       <div className="grid-container">
       {results.map(result => (
     <div key={result.id} className="jam-buddy-item">
@@ -182,6 +199,9 @@ const Search = () => {
     </div>
     </div>
 ))}
+{searchConducted && results.length === 0 && (
+  <p style={{ textAlign: "center", fontSize: "20px", paddingTop: "20px" }}>No results found. Please try changing your search criteria.</p>
+      )}
       </div>
     </div>
 
