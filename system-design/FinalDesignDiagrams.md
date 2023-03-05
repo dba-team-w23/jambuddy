@@ -66,3 +66,40 @@ graph LR
   DigitalOcean -->|Request Data| ElephantSQL
   ElephantSQL -->|Return Data| DigitalOcean
   ```
+
+
+## Component Structure
+```mermaid
+flowchart TD
+  subgraph "Backend Container"
+    A[Django]
+    B[Django Rest Framework]
+    C[Pytest]
+    D[Django Cors Headers]
+    E[Psycopg2]
+  end
+
+  A -->|Uses| B
+  A -->|Uses| D
+  A -->|Uses| E
+  B -->|Uses| C
+  B -->|Uses| D
+  B -->|Uses| E
+
+```
+
+```mermaid
+flowchart TD
+  subgraph "Frontend Container"
+    A[React]
+    B[Redux]
+    C[Axios]
+    D[Material UI]
+  end
+
+  A -->|Uses| B
+  A -->|Uses| C
+  A -->|Uses| D
+  B -->|Uses| C
+  B -->|Uses| D
+```
