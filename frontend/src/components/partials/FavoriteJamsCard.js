@@ -4,19 +4,13 @@ import CardContent from "@mui/material/CardContent";
 import { Typography } from "@mui/material";
 import { format } from "date-fns";
 import ProfileModal from "./ProfileModal";
-import FavoriteJamButton from "./FavoriteJamButton";
+import FavoriteJamButton from "./FavoriteUserButton";
 import { useSelector } from "react-redux";
-import axios from "axios";
 
-export default function BasicCard({
-  post,
-  instruments,
-  genres,
-  experienceLevels,
-}) {
+export default function BasicCard({ post }) {
   const user = useSelector((state) => state.user);
   const formattedDate = format(new Date(post.created), "MM/dd/yyyy");
-  console.log("post from fjr", post);
+
   return (
     <Card>
       <CardContent>

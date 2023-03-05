@@ -73,7 +73,7 @@ export default function Body() {
 
         <div className="signedOutUser">
           <Routes>
-            <Route path="TEMPSearchJamRequests" element= {<Search />} />
+            <Route path="TEMPSearchJamRequests" element={<Search />} />
           </Routes>
         </div>
 
@@ -97,6 +97,10 @@ export default function Body() {
             <Route
               path="profile"
               element={isSignedIn ? <Profile /> : <SignIn />}
+            />
+            <Route
+              path="search"
+              element={isSignedIn ? <Search /> : <SignIn />}
             />
             <Route path="logout" onClick={handleLogout} element={<SignIn />} />
             <Route path="apitest" element={<ApiTest />} />

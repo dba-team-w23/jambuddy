@@ -23,7 +23,6 @@ export default function EditProfile(props) {
       try {
         const response = await axios.get(`${baseURL}`);
         const data = await response.data;
-        console.log("data from fetch", data);
         setUserProfile(data);
         setIsLoading(false);
       } catch (error) {

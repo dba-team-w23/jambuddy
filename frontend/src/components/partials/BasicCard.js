@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import { Typography } from "@mui/material";
 import { format } from "date-fns";
 import ProfileModal from "./ProfileModal";
-import FavoriteJamButton from "./FavoriteJamButton";
+import FavoriteJamButton from "./FavoriteUserButton";
 import { useSelector } from "react-redux";
 import axios from "axios";
 

@@ -129,7 +129,8 @@ export default function FormGrid() {
               name="first_name"
               label="First Name"
               variant="outlined"
-              value={formInput.first_name}
+              defaultValue={formInput.first_name}
+              InputLabelProps={formInput.first_name && { shrink: true }}
               onChange={handleChange}
             />
           </Grid>
@@ -140,7 +141,8 @@ export default function FormGrid() {
               label="Last Name"
               variant="outlined"
               shrink="true"
-              value={formInput.last_name}
+              defaultValue={formInput.last_name}
+              InputLabelProps={formInput.last_name && { shrink: true }}
               onChange={handleChange}
             />
           </Grid>
@@ -150,7 +152,8 @@ export default function FormGrid() {
               name="email"
               label="Email"
               variant="outlined"
-              value={formInput.email}
+              defaultValue={formInput.email}
+              InputLabelProps={formInput.email && { shrink: true }}
               onChange={handleChange}
             />
           </Grid>
@@ -160,7 +163,8 @@ export default function FormGrid() {
               name="username"
               label="User Name"
               variant="outlined"
-              value={formInput.username}
+              defaultValue={formInput.username}
+              InputLabelProps={formInput.username && { shrink: true }}
               onChange={handleChange}
             />
           </Grid>
@@ -171,6 +175,7 @@ export default function FormGrid() {
               label="City"
               variant="outlined"
               defaultValue={formInput.city}
+              InputLabelProps={formInput.city && { shrink: true }}
               onChange={handleChange}
             />
           </Grid>

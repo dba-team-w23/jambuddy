@@ -5,18 +5,20 @@ import Grid from "@mui/material/Grid";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-export default function FavoriteJamRequests(userId) {
+export default function FavoriteUsers(userId) {
   const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
+  console.log("favorite Users userid", userId.id);
+  const jamApi = `${apiRoot}/api/userfaveprofiles/${userId.id}`;
 
-  const jamApi = `${apiRoot}/api/userfavejamreqs/${userId.id}`;
-  const [jamRequests, setJamRequests] = React.useState([]);
+  const [favoriteUserIds, setFavoriteUserIds] = React.useState([]);
+  const [favoriteUsers, setFavoriteUsers] = React.useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(jamApi);
-        setJamRequests(response.data.jamrequests);
-        console.log("fjr", response.data.jamrequests);
+        setFavoriteUserIds(response.data.profiles);
+        console.log("fave users", response.data.profiles);
       } catch (error) {
         console.error(error);
       }
@@ -27,10 +29,10 @@ export default function FavoriteJamRequests(userId) {
 
   return (
     <Grid container spacing={6}>
-      {jamRequests.map((request, i) => {
+      {favoriteUsers.map((request, i) => {
         return (
           <Grid key={i} item xs={6}>
-            <FavoriteJamsCard key={i + 1000} post={request} />
+            <FavoriteUsersCard key={i + 1000} post={request} />
           </Grid>
         );
       })}
