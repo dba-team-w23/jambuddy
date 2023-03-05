@@ -43,3 +43,23 @@
   .jam-buddies-search button:hover {
     background-color: #0056b3;
   }
+
+
+  .card {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .card h2 {
+    color: #0066cc;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
