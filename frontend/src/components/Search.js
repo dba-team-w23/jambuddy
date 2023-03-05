@@ -200,8 +200,10 @@ const Search = () => {
     </div>
 ))}
 {searchConducted && results.length === 0 && (
-  <p style={{ textAlign: "center", fontSize: "20px", paddingTop: "20px" }}>No results found. Please try changing your search criteria.</p>
+  <p style={{ textAlign: "center", fontSize: "20px", paddingTop: "20px" }}>Aww, no results found! Try changing your search criteria.</p>
       )}
+
+      {!searchConducted && <p style={{ textAlign: "center", fontSize: "20px", paddingTop: "20px" }}>Enter your criteria and click Search to begin.</p>}
       </div>
     </div>
 
