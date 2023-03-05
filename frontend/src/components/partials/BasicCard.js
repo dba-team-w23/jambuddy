@@ -5,34 +5,69 @@ import CardContent from "@mui/material/CardContent";
 import { Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { format } from "date-fns";
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
+export default function BasicCard({
+  post,
+  instruments,
+  genres,
+  experienceLevels,
+  i,
+}) {
+  const formattedDate = format(new Date(post.created), "MM/dd/yyyy");
+  const mapInstrumentstoNames = (instruments, ids) => {
+    return ids.map((id) => {
+      const instrument = instruments.find((instrument) => instrument.id === id);
+      return instrument ? instrument.name : "";
+    });
+  };
+  const mapGenrestoNames = (genres, ids) => {
+    return ids.map((id) => {
+      const genre = genres.find((genre) => genre.id === id);
+      console.log("gtn genre", genre);
+      return genre ? genre.genre : "";
+    });
+  };
+  const mapExperiencetoNames = (experienceLevels, ids) => {
+    console.log("gtn experienceLevels", experienceLevels);
+    console.log("gtn ids", ids);
+    return ids.map((id) => {
+      const experience = experienceLevels.find(
+        (experience) => experience.id === id
+      );
+      return experience ? experience.level : "";
+    });
+  };
 
-export default function BasicCard({ post, author }) {
   return (
     <Card>
       <CardContent>
         <Typography variant="h5" color="text.secondary" gutterBottom>
-          {post.location} -- {post.status}
+          {post.requestor_profile.city} -- {post.status}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {/* contact name: {author.first_name} {author.last_name} */}
+          contact name: {post.requestor_profile.first_name}
+          {post.requestor_profile.last_name}
         </Typography>
         <Typography variant="body2">
-          {/* We need:{post.instrument} */}
+          {post.instruments.length
+            ? `We need: ${mapInstrumentstoNames(
+                instruments,
+                post.instruments
+              ).join(", ")}`
+            : ""}
           <br />
-          {/* We play: {post.genre} */}
+          experience:{" "}
+          {mapExperiencetoNames(experienceLevels, post.exp_level).join(", ")}
+          <br />
+          {post.genres.length
+            ? `We play: ${mapGenrestoNames(genres, post.genres).join(", ")}`
+            : ""}
         </Typography>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
+        <p>Posted {formattedDate}</p>
       </CardContent>
     </Card>
   );
