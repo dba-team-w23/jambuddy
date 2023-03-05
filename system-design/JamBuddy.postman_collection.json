@@ -69,10 +69,22 @@
 							"response": []
 						},
 						{
-							"name": "userFaveJamReq for userid",
+							"name": "userFaveJamReqs for userid",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
 								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{base_url}}/api/userfavejamreqs/2",
 									"host": [
@@ -514,7 +526,7 @@
 					"name": "DELETE",
 					"item": [
 						{
-							"name": "userFaveJamReq",
+							"name": "userFaveJamReqs",
 							"request": {
 								"method": "DELETE",
 								"header": [],
