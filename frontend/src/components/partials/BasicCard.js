@@ -3,9 +3,11 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { format } from "date-fns";
 import ProfileModal from "./ProfileModal";
+import FavoriteButton from "./FavoriteButton";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 export default function BasicCard({
   post,
@@ -14,6 +16,7 @@ export default function BasicCard({
   experienceLevels,
   i,
 }) {
+  const user = useSelector((state) => state.user);
   const formattedDate = format(new Date(post.created), "MM/dd/yyyy");
   const mapInstrumentstoNames = (instruments, ids) => {
     return ids.map((id) => {
@@ -24,13 +27,10 @@ export default function BasicCard({
   const mapGenrestoNames = (genres, ids) => {
     return ids.map((id) => {
       const genre = genres.find((genre) => genre.id === id);
-      console.log("gtn genre", genre);
       return genre ? genre.genre : "";
     });
   };
   const mapExperiencetoNames = (experienceLevels, ids) => {
-    console.log("gtn experienceLevels", experienceLevels);
-    console.log("gtn ids", ids);
     return ids.map((id) => {
       const experience = experienceLevels.find(
         (experience) => experience.id === id
@@ -42,9 +42,7 @@ export default function BasicCard({
   return (
     <Card>
       <CardContent>
-        <IconButton sx={{ float: "right" }} aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
+        <FavoriteButton userId={user.user.id} postId={post.id} />
         <Typography variant="h5" color="text.secondary" gutterBottom>
           {post.requestor_profile.city}
         </Typography>
@@ -92,11 +90,11 @@ export default function BasicCard({
             </Typography>
           </li>
         </ul>
-        <Typography variant="body1" margin="10px 0">
+        <div className="my-5">
           Posted {formattedDate} by {post.requestor_profile.first_name}{" "}
           {post.requestor_profile.last_name}
           <ProfileModal {...post.requestor_profile} />
-        </Typography>
+        </div>
       </CardContent>
     </Card>
   );

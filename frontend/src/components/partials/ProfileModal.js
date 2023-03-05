@@ -3,7 +3,6 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import ProfileCard from "./ProfileCard";
 import { Box } from "@mui/system";
-import { TextField } from "@mui/material";
 import { Avatar } from "@mui/material";
 
 const style = {
@@ -22,13 +21,12 @@ export default function BasicModal({ ...profile }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  console.log("Profilecard profile", profile);
 
   return (
     <div>
       <Button onClick={handleOpen}>
         <Avatar alt="" src={profile.photo} />
-        <div className="inline mx-5">{profile.username}</div>
+        <span className="mx-5">{profile.username}</span>
       </Button>
       <Modal
         open={open}

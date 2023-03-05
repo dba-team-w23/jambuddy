@@ -39,11 +39,6 @@ export default function JamRequests() {
 
     fetchData();
   }, []);
-  useEffect(() => {
-    console.log("JR instruments", instruments);
-    console.log("JR genres", genres);
-    console.log("JR experienceLevels", experienceLevels);
-  }, [instruments, genres, experienceLevels]);
 
   return (
     <Grid container spacing={6}>
