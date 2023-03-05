@@ -4,50 +4,59 @@ import BasicCard from "./partials/BasicCard";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 
-const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
+const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app/api/";
 
 const jamApi = `${apiRoot}/api/jamrequests`;
-const usersApi = `${apiRoot}/api/users`;
 
 export default function JamRequests() {
   const [jamRequests, setJamRequests] = React.useState([]);
-  const [users, setUsers] = React.useState([]);
+  const [instruments, setInstruments] = React.useState([]);
+  const [genres, setGenres] = React.useState([]);
+  const [experienceLevels, setExperienceLevels] = React.useState([]);
 
   useEffect(() => {
-    Promise.all([fetch(jamApi), fetch(usersApi)])
-      .then(function (responses) {
-        return Promise.all(
-          responses.map(function (response) {
-            return response.json();
-          })
-        );
-      })
-      .then(function (data) {
-        setJamRequests(data[0]);
-        setUsers(data[1]);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
-  return (
-    <Grid container spacing={3}>
-      {jamRequests.map((request, i) => {
-        const author = users.find(
-          (user) => user.id === request.requestor_profile.id
-        );
-        const post = {
-          id: request.id,
-          location: request.location,
-          status: request.status,
-          // instrument: request.instrument.name,
-          // genre: request.genre.genre,
-          // exp_level: request.exp_level,
-        };
+    const fetchData = async () => {
+      try {
+        const [
+          jamResponse,
+          instrumentsResponse,
+          genresResponse,
+          experienceLevelsResponse,
+        ] = await Promise.all([
+          axios.get(apiRoot + "jamrequests"),
+          axios.get(apiRoot + "instruments"),
+          axios.get(apiRoot + "musicgenres"),
+          axios.get(apiRoot + "experiencelevels"),
+        ]);
+        setJamRequests(jamResponse.data);
+        setInstruments(instrumentsResponse.data);
+        setGenres(genresResponse.data);
+        setExperienceLevels(experienceLevelsResponse.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
+    fetchData();
+  }, []);
+  useEffect(() => {
+    console.log("JR instruments", instruments);
+    console.log("JR genres", genres);
+    console.log("JR experienceLevels", experienceLevels);
+  }, [instruments, genres, experienceLevels]);
+
+  return (
+    <Grid container spacing={6}>
+      {jamRequests.map((request, i) => {
         return (
-          <Grid key={i} item xs={3}>
-            <BasicCard key={i * 100} post={post} author={author} />
+          <Grid key={i} item xs={6}>
+            <BasicCard
+              key={i * 1000 - 1}
+              post={request}
+              instruments={instruments}
+              genres={genres}
+              experienceLevels={experienceLevels}
+            />
           </Grid>
         );
       })}
