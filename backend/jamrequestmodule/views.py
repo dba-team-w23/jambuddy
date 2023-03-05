@@ -84,9 +84,22 @@ class UserFaveJamReqList(viewsets.ModelViewSet):
     queryset = UserFavoriteJamRequest.objects.all()
     serializer_class = UserFavoriteJamRequestSerializer
 
+    def destroy(self, request):
+        profid = request.data.get("profileid")
+        jrid = request.data.get("jrid")
+        UserFavoriteJamRequest.objects.filter(profileid_id=profid,jrid_id=jrid).delete()
+        return Response({"status":"success"})
+
 class UserFaveProfileList(viewsets.ModelViewSet):
     queryset = UserFavoriteProfile.objects.all()
     serializer_class = UserFaveProfileSerializer
+
+    def destroy(self, request):
+        profid = request.data.get("profileid")
+        favoriteid = request.data.get("favorite_profileid")
+        UserFavoriteProfile.objects.filter(profileid_id=profid,favorite_profileid=favoriteid).delete()
+        return Response({"status":"success"})
+
 
 class UserMediaList(viewsets.ModelViewSet):
     queryset = UserMedia.objects.all()
