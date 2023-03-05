@@ -156,41 +156,29 @@ const Search = () => {
       <div className="grid-container">
       {results.map(result => (
     <div key={result.id} className="jam-buddy-item">
-        <div className="card">
-            <h2>Record Information</h2>
-            <p><strong>ID: </strong>{result.id}</p>
-            <p><strong>Status: </strong>{result.status}</p>
-            <p><strong>Created: </strong>{result.created}</p>
-            <p><strong>Profile ID: </strong>{result.profileid}</p>
-            <p>
-              <strong>Instruments: </strong>
-              {result.instruments && result.instruments.length > 0 ?
-                  result.instruments.map(i => i.name).join(', ') : 'Any'}
-            </p>
+    <div class="card">
+      <h2>Record Information</h2>
+      <p><strong>Status: </strong>{result.status}</p>
+      <p><strong>Created: </strong>{result.created}</p>
+      <p><strong>Instruments: </strong>
+        {result.instruments && result.instruments.length > 0 ?
+          result.instruments.map(i => i.name).join(', ') : 'Any'}
+      </p>
 
-            <p>
-              <strong>Genres: </strong>
-              {result.genres && result.genres.length > 0 ? result.genres.join(', ') : 'Any'}
-            </p>
+      <p><strong>Genres: </strong>
+        {result.genres && result.genres.length > 0 ? result.genres.join(', ') : 'Any'}
+      </p>
 
-            <p>
-              <strong>Experience Level: </strong>
-              {result.exp_level && result.exp_level.length > 0
-                ? result.exp_level.join(', ')
-                : 'Any'}
-            </p>
+      <p><strong>Experience Level: </strong>
+        {result.exp_level && result.exp_level.length > 0 ? result.exp_level.join(', ') : 'Any'}
+      </p>
 
-            <hr />
-            <h3>Requestor Profile Information</h3>
-            <p><strong>Username: </strong>{result.requestor_profile.username}</p>
-            <p><strong>Full Name: </strong>{result.requestor_profile.first_name} {result.requestor_profile.last_name}</p>
-            <p><strong>Email: </strong>{result.requestor_profile.email}</p>
-            <p><strong>Phone: </strong>{result.requestor_profile.phone}</p>
-            <p>
-              <strong>Address: </strong>
-              {result.requestor_profile.street}, {result.requestor_profile.city}, {result.requestor_profile.state}, {result.requestor_profile.zipcode}, {result.requestor_profile.country ? result.requestor_profile.country : "N/A"}
-            </p>
-        </div>
+      <p><strong>Requestor: </strong>{result.requestor_profile.username}</p>
+      <p>
+        <strong>Location: </strong>
+        {result.requestor_profile.city}, {result.requestor_profile.state}, {result.requestor_profile.zipcode}
+      </p>
+    </div>
     </div>
 ))}
       </div>
