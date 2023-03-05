@@ -2,10 +2,9 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Typography } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
 import { format } from "date-fns";
 import ProfileModal from "./ProfileModal";
-import FavoriteButton from "./FavoriteButton";
+import FavoriteJamButton from "./FavoriteJamButton";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
@@ -14,7 +13,6 @@ export default function BasicCard({
   instruments,
   genres,
   experienceLevels,
-  i,
 }) {
   const user = useSelector((state) => state.user);
   const formattedDate = format(new Date(post.created), "MM/dd/yyyy");
@@ -38,11 +36,10 @@ export default function BasicCard({
       return experience ? experience.level : "";
     });
   };
-
   return (
     <Card>
       <CardContent>
-        <FavoriteButton userId={user.user.id} postId={post.id} />
+        <FavoriteJamButton userId={user.user.id} postId={post.id} />
         <Typography variant="h5" color="text.secondary" gutterBottom>
           {post.requestor_profile.city}
         </Typography>

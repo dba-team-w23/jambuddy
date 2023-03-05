@@ -1,5 +1,5 @@
 import React from "react";
-import JamRequests from "./JamRequests";
+import FavoriteJamRequests from "./FavoriteJamRequests";
 import ProfileCardMini from "./partials/ProfileCardMini";
 import { useSelector } from "react-redux";
 
@@ -32,14 +32,14 @@ const HomePage = () => {
   return (
     <div className="flex flex-wrap">
       <div className="bg-blue-50 rounded shadow p-4 flex flex-row flex-wrap">
+        <h2 className="text-center w-full py-5">Saved Jam Requests</h2>
+        <FavoriteJamRequests />
+      </div>
+      <div className="bg-blue-50 rounded shadow p-4 flex flex-row flex-wrap">
         <h2 className="text-center w-full">Favorite Musicians</h2>
         {favProfiles.map((profile, i) => (
           <ProfileCardMini key={i} profile={profile} />
         ))}
-      </div>
-      <div className="bg-blue-50 rounded shadow p-4 flex flex-row flex-wrap">
-        <h2 className="text-center w-full py-5">Saved Jam Requests</h2>
-        <JamRequests />
       </div>
     </div>
   );

@@ -31,7 +31,7 @@ function LikeButton({ userId, postId }) {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      fetch(`$url/${userId}`)
+      fetch(`${url}/${userId}`)
         .then((response) => response.json())
         .then((data) => {
           console.log("from faves: ", data);
