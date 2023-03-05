@@ -14,28 +14,29 @@ export default function BasicCard({
   genres,
   experienceLevels,
 }) {
+  console.log("In basic card");
   const user = useSelector((state) => state.user);
   const formattedDate = format(new Date(post.created), "MM/dd/yyyy");
-  const mapInstrumentstoNames = (instruments, ids) => {
-    return ids.map((id) => {
-      const instrument = instruments.find((instrument) => instrument.id === id);
-      return instrument ? instrument.name : "";
-    });
-  };
-  const mapGenrestoNames = (genres, ids) => {
-    return ids.map((id) => {
-      const genre = genres.find((genre) => genre.id === id);
-      return genre ? genre.genre : "";
-    });
-  };
-  const mapExperiencetoNames = (experienceLevels, ids) => {
-    return ids.map((id) => {
-      const experience = experienceLevels.find(
-        (experience) => experience.id === id
-      );
-      return experience ? experience.level : "";
-    });
-  };
+  // const mapInstrumentstoNames = (instruments, ids) => {
+  //   return ids.map((id) => {
+  //     const instrument = instruments.find((instrument) => instrument.id === id);
+  //     return instrument ? instrument.name : "";
+  //   });
+  // };
+  // const mapGenrestoNames = (genres, ids) => {
+  //   return ids.map((id) => {
+  //     const genre = genres.find((genre) => genre.id === id);
+  //     return genre ? genre.genre : "";
+  //   });
+  // };
+  // const mapExperiencetoNames = (experienceLevels, ids) => {
+  //   return ids.map((id) => {
+  //     const experience = experienceLevels.find(
+  //       (experience) => experience.id === id
+  //     );
+  //     return experience ? experience.level : "";
+  //   });
+  // };
   return (
     <Card>
       <CardContent>
@@ -60,12 +61,13 @@ export default function BasicCard({
             <Typography variant="body2">
               We need:
               <i>
-                {post.instruments.length
+                {instruments}
+                {/* {post.instruments.length
                   ? ` ${mapInstrumentstoNames(
                       instruments,
                       post.instruments
                     ).join(", ")}`
-                  : ""}
+                  : ""} */}
               </i>
             </Typography>
           </li>
@@ -73,17 +75,19 @@ export default function BasicCard({
             <Typography variant="body2">
               Experience:{" "}
               <i>
-                {mapExperiencetoNames(experienceLevels, post.exp_level).join(
+                {experienceLevels}
+                {/* {mapExperiencetoNames(experienceLevels, post.exp_level).join(
                   ", "
-                )}
+                )} */}
               </i>
             </Typography>
           </li>
           <li>
             <Typography variant="body2">
-              {post.genres.length
+              {genres}
+              {/* {post.genres.length
                 ? `We play: ${mapGenrestoNames(genres, post.genres).join(", ")}`
-                : ""}
+                : ""} */}
             </Typography>
           </li>
         </ul>

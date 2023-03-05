@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BasicCard from "./partials/BasicCard";
 
 const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
 
@@ -10,6 +11,7 @@ const Search = () => {
   const [expLevelOptions, setExpLevelOptions] = useState([]);
   const [results, setResults] = useState([]);
   const [searchConducted, setSearchConducted] = useState(false);
+  console.log("search results", results);
 
   React.useEffect(() => {
     const fetchInstruments = async () => {
@@ -41,6 +43,7 @@ const Search = () => {
     };
     const fetchInitialJamRequests = async () => {
       try {
+        const payload = {};
         const res = await fetch(`${apiRoot}/api/searchjamrequests`, {
           method: "POST",
           headers: {
@@ -70,17 +73,17 @@ const Search = () => {
     try {
       const payload = {};
 
-      if (instrument !== '')   payload.instrumentid = parseInt(instrument);
-      if (genre !== '')        payload.genreid = parseInt(genre);
-      if (experienceLevel !== '') payload.explevel = parseInt(experienceLevel);
+      if (instrument !== "") payload.instrumentid = parseInt(instrument);
+      if (genre !== "") payload.genreid = parseInt(genre);
+      if (experienceLevel !== "") payload.explevel = parseInt(experienceLevel);
 
-      if (requestPlaced === "last7days")      payload.daysback = 7;
-      if (requestPlaced === "last2weeks")    payload.daysback = 14;
-      if (requestPlaced === "lastmonth")     payload.daysback = 30;
-      if (requestPlaced === "last6months")   payload.daysback = 180;
-      if (requestPlaced === "lastyear")      payload.daysback = 365;
+      if (requestPlaced === "last7days") payload.daysback = 7;
+      if (requestPlaced === "last2weeks") payload.daysback = 14;
+      if (requestPlaced === "lastmonth") payload.daysback = 30;
+      if (requestPlaced === "last6months") payload.daysback = 180;
+      if (requestPlaced === "lastyear") payload.daysback = 365;
 
-      if (distanceToTravel !== '') payload.distance_miles = distanceToTravel;
+      if (distanceToTravel !== "") payload.distance_miles = distanceToTravel;
 
       const res = await fetch(`${apiRoot}/api/searchjamrequests`, {
         method: "POST",
@@ -98,116 +101,181 @@ const Search = () => {
       console.error(error);
     }
   };
+
   return (
-    <div class="jam-buddies-search">
-<div class="jam-buddies-search">
-  <h1>Search for Jam Buddies</h1>
+    <div className="jam-buddies-search">
+      <div className="jam-buddies-search">
+        <h1>Search for Jam Buddies</h1>
 
-  <div class="row">
-    <div class="col">
-      <label for="instrument">Instrument:</label>
-      <select id="instrument" value={instrument} onChange={(e) => setInstrument(e.target.value)}>
-        <option value="">Select an instrument</option>
-        {instrumentOptions.map((opt) => (
-        <option key={opt.id} value={opt.id}>
-            {opt.name} ({opt.type})
-        </option>
-        ))}
-      </select>
-    </div>
+        <div className="row">
+          <div className="col">
+            <label htmlFor="instrument">Instrument:</label>
+            <select
+              id="instrument"
+              value={instrument}
+              onChange={(e) => setInstrument(e.target.value)}
+            >
+              <option value="">Select an instrument</option>
+              {instrumentOptions.map((opt) => (
+                <option key={opt.id} value={opt.id}>
+                  {opt.name} ({opt.type})
+                </option>
+              ))}
+            </select>
+          </div>
 
-    <div class="col">
-      <label for="genre">Music Genre:</label>
-      <select id="genre" value={genre} onChange={(e) => setGenre(e.target.value)}>
-        <option value="">Select a genre</option>
-        {genreOptions.map((opt) => (
-        <option key={opt.id} value={opt.id}>
-            {opt.genre}
-        </option>
-        ))}
-      </select>
-    </div>
+          <div className="col">
+            <label htmlFor="genre">Music Genre:</label>
+            <select
+              id="genre"
+              value={genre}
+              onChange={(e) => setGenre(e.target.value)}
+            >
+              <option value="">Select a genre</option>
+              {genreOptions.map((opt) => (
+                <option key={opt.id} value={opt.id}>
+                  {opt.genre}
+                </option>
+              ))}
+            </select>
+          </div>
 
-    <div class="col">
-      <label for="experienceLevel">Experience Level:</label>
-      <select id="experienceLevel" value={experienceLevel} onChange={(e) => setExperienceLevel(e.target.value)}>
-        <option value="">Select an experience level</option>
-        {expLevelOptions.map((opt) => (
-        <option key={opt.id} value={opt.id}>
-            {opt.level}
-        </option>
-        ))}
-      </select>
-    </div>
+          <div className="col">
+            <label htmlFor="experienceLevel">Experience Level:</label>
+            <select
+              id="experienceLevel"
+              value={experienceLevel}
+              onChange={(e) => setExperienceLevel(e.target.value)}
+            >
+              <option value="">Select an experience level</option>
+              {expLevelOptions.map((opt) => (
+                <option key={opt.id} value={opt.id}>
+                  {opt.level}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
 
-  </div>
+        <div className="row">
+          <div className="col">
+            <label htmlFor="distance">Distance to Travel (miles):</label>
+            <input
+              id="distance"
+              type="number"
+              min="1"
+              value={distanceToTravel}
+              onChange={(e) => setDistanceToTravel(e.target.value)}
+            />
+          </div>
 
-  <div class="row">
-    <div class="col">
-      <label for="distance">Distance to Travel (miles):</label>
-      <input id="distance" type="number" min="1" value={distanceToTravel} onChange={(e) => setDistanceToTravel(e.target.value)} />
-    </div>
+          <div className="col">
+            <label htmlFor="requestPlaced">Request Placed:</label>
+            <select
+              id="requestPlaced"
+              value={requestPlaced}
+              onChange={(e) => setRequestPlaced(e.target.value)}
+            >
+              <option value="">Select a time range</option>
+              <option value="All">All</option>
+              <option value="last7days">Last 7 days</option>
+              <option value="last2weeks">Last 2 weeks</option>
+              <option value="lastmonth">Last month</option>
+              <option value="last6months">Last 6 months</option>
+              <option value="lastyear">Last year</option>
+            </select>
+          </div>
 
-    <div class="col">
-      <label for="requestPlaced">Request Placed:</label>
-      <select id="requestPlaced" value={requestPlaced} onChange={(e) => setRequestPlaced(e.target.value)}>
-        <option value="">Select a time range</option>
-        <option value="All">All</option>
-        <option value="last7days">Last 7 days</option>
-        <option value="last2weeks">Last 2 weeks</option>
-        <option value="lastmonth">Last month</option>
-        <option value="last6months">Last 6 months</option>
-        <option value="lastyear">Last year</option>
-      </select>
-    </div>
-
-    <div class="col">
-    <button onClick={search}>Search</button>
-    </div>
-
-  </div>
-
-
-</div>
-
-    <div className="jam-buddies-results">
-      <div className="grid-container">
-      {results.map(result => (
-    <div key={result.id} className="jam-buddy-item">
-    <div class="card">
-      <h2>Record Information</h2>
-      <p><strong>Status: </strong>{result.status}</p>
-      <p><strong>Created: </strong>{result.created}</p>
-      <p><strong>Instruments: </strong>
-        {result.instruments && result.instruments.length > 0 ?
-          result.instruments.map(i => i.name).join(', ') : 'Any'}
-      </p>
-
-      <p><strong>Genres: </strong>
-        {result.genres && result.genres.length > 0 ? result.genres.join(', ') : 'Any'}
-      </p>
-
-      <p><strong>Experience Level: </strong>
-        {result.exp_level && result.exp_level.length > 0 ? result.exp_level.join(', ') : 'Any'}
-      </p>
-
-      <p><strong>Requestor: </strong>{result.requestor_profile.username}</p>
-      <p>
-        <strong>Location: </strong>
-        {result.requestor_profile.city}, {result.requestor_profile.state}, {result.requestor_profile.zipcode}
-      </p>
-    </div>
-    </div>
-))}
-{searchConducted && results.length === 0 && (
-  <p style={{ textAlign: "center", fontSize: "20px", paddingTop: "20px" }}>Aww, no results found! Try changing your search criteria.</p>
-      )}
-
-      {!searchConducted && <p style={{ textAlign: "center", fontSize: "20px", paddingTop: "20px" }}>Enter your criteria and click Search to begin.</p>}
+          <div className="col">
+            <button onClick={search}>Search</button>
+          </div>
+        </div>
       </div>
-    </div>
 
+      <div className="jam-buddies-results flex gap-4 justify-center">
+        <div className="max-w-xs">
+          {results.map((result) => (
+            <BasicCard
+              key={result.id}
+              post={result}
+              instruments={result.instruments}
+              genres={result.genres}
+              experienceLevels={result.exp_level}
+            />
+          ))}
+        </div>
+        {/* <div className="grid-container">
+          {results.map((result) => (
+            <div key={result.id} className="jam-buddy-item">
+              <div className="card">
+                <h2>Record Information</h2>
+                <p>
+                  <strong>Status: </strong>
+                  {result.status}
+                </p>
+                <p>
+                  <strong>Created: </strong>
+                  {result.created}
+                </p>
+                <p>
+                  <strong>Instruments: </strong>
+                  {result.instruments && result.instruments.length > 0
+                    ? result.instruments.map((i) => i.name).join(", ")
+                    : "Any"}
+                </p>
 
+                <p>
+                  <strong>Genres: </strong>
+                  {result.genres && result.genres.length > 0
+                    ? result.genres.join(", ")
+                    : "Any"}
+                </p>
+
+                <p>
+                  <strong>Experience Level: </strong>
+                  {result.exp_level && result.exp_level.length > 0
+                    ? result.exp_level.join(", ")
+                    : "Any"}
+                </p>
+
+                <p>
+                  <strong>Requestor: </strong>
+                  {result.requestor_profile.username}
+                </p>
+                <p>
+                  <strong>Location: </strong>
+                  {result.requestor_profile.city},{" "}
+                  {result.requestor_profile.state},{" "}
+                  {result.requestor_profile.zipcode}
+                </p>
+              </div>
+            </div>
+          ))}
+          {searchConducted && results.length === 0 && (
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: "20px",
+                paddingTop: "20px",
+              }}
+            >
+              Aww, no results found! Try changing your search criteria.
+            </p>
+          )}
+
+          {!searchConducted && (
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: "20px",
+                paddingTop: "20px",
+              }}
+            >
+              Enter your criteria and click Search to begin.
+            </p>
+          )}
+        </div> */}
+      </div>
     </div>
   );
 };
