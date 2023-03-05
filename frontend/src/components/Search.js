@@ -52,9 +52,9 @@ const Search = () => {
     try {
       const payload = {};
 
-      if (instrument !== '')   payload.instrumentid = instrument;
-      if (genre !== '')        payload.genreid = genre;
-      if (experienceLevel !== '') payload.explevel = experienceLevel;
+      if (instrument !== '')   payload.instrumentid = parseInt(instrument);
+      if (genre !== '')        payload.genreid = parseInt(genre);
+      if (experienceLevel !== '') payload.explevel = parseInt(experienceLevel);
 
       if (requestPlaced === "last7days")      payload.daysback = 7;
       if (requestPlaced === "last2weeks")    payload.daysback = 14;
@@ -117,7 +117,7 @@ const Search = () => {
     >
         <option value="">Select an experience level</option>
         {expLevelOptions.map((opt) => (
-        <option key={opt.id} value={opt.level}>
+        <option key={opt.id} value={opt.id}>
             {opt.level}
         </option>
         ))}
