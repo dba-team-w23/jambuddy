@@ -13,7 +13,7 @@ import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
 
 export default function ProfileCard({ profile }) {
   return (
-    <div className="m-5">
+    <div>
       <Card sx={{ position: "relative" }}>
         <CardHeader
           action={

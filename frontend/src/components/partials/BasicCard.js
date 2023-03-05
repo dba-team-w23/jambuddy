@@ -1,11 +1,11 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { format } from "date-fns";
+import ProfileModal from "./ProfileModal";
 
 export default function BasicCard({
   post,
@@ -42,32 +42,61 @@ export default function BasicCard({
   return (
     <Card>
       <CardContent>
-        <Typography variant="h5" color="text.secondary" gutterBottom>
-          {post.requestor_profile.city} -- {post.status}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          contact name: {post.requestor_profile.first_name}
-          {post.requestor_profile.last_name}
-        </Typography>
-        <Typography variant="body2">
-          {post.instruments.length
-            ? `We need: ${mapInstrumentstoNames(
-                instruments,
-                post.instruments
-              ).join(", ")}`
-            : ""}
-          <br />
-          experience:{" "}
-          {mapExperiencetoNames(experienceLevels, post.exp_level).join(", ")}
-          <br />
-          {post.genres.length
-            ? `We play: ${mapGenrestoNames(genres, post.genres).join(", ")}`
-            : ""}
-        </Typography>
-        <IconButton aria-label="add to favorites">
+        <IconButton sx={{ float: "right" }} aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <p>Posted {formattedDate}</p>
+        <Typography variant="h5" color="text.secondary" gutterBottom>
+          {post.requestor_profile.city}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {post.status}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          border="1px solid blue"
+          padding="5px"
+          margin="10px 0"
+        >
+          {post.note && post.note}
+        </Typography>
+        <ul className="list-disc list-outside ml-5">
+          <li>
+            <Typography variant="body2">
+              We need:
+              <i>
+                {post.instruments.length
+                  ? ` ${mapInstrumentstoNames(
+                      instruments,
+                      post.instruments
+                    ).join(", ")}`
+                  : ""}
+              </i>
+            </Typography>
+          </li>
+          <li>
+            <Typography variant="body2">
+              Experience:{" "}
+              <i>
+                {mapExperiencetoNames(experienceLevels, post.exp_level).join(
+                  ", "
+                )}
+              </i>
+            </Typography>
+          </li>
+          <li>
+            <Typography variant="body2">
+              {post.genres.length
+                ? `We play: ${mapGenrestoNames(genres, post.genres).join(", ")}`
+                : ""}
+            </Typography>
+          </li>
+        </ul>
+        <Typography variant="body1" margin="10px 0">
+          Posted {formattedDate} by {post.requestor_profile.first_name}{" "}
+          {post.requestor_profile.last_name}
+          <ProfileModal {...post.requestor_profile} />
+        </Typography>
       </CardContent>
     </Card>
   );
