@@ -51,7 +51,7 @@ class JamRequest(models.Model):
     genres = models.ManyToManyField(MusicGenre, blank=True)
     exp_level = models.ManyToManyField(ExperienceLevel, blank=True)
     note = models.TextField(null=True)
-    status = models.CharField(max_length=255, null=True)
+    status = models.CharField(max_length=255, null=True, default='Open')
     created = models.DateTimeField(auto_now_add=True)
 
     def instrument_names(self):

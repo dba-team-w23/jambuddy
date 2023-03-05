@@ -74,14 +74,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/userfavejamreqs/55",
+									"raw": "{{base_url}}/api/userfavejamreqs/2",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"userfavejamreqs",
-										"55"
+										"2"
 									]
 								}
 							},
@@ -93,14 +93,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/userfaveprofiles/55",
+									"raw": "{{base_url}}/api/userfaveprofiles/2",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"userfaveprofiles",
-										"55"
+										"2"
 									]
 								}
 							},
@@ -428,13 +428,13 @@
 							"response": []
 						},
 						{
-							"name": "userFaveJamReq",
+							"name": "userFaveJamReqs",
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"profileid\":2, \"jrid\":9}",
+									"raw": "{\"profileid\":2, \"jrid\":42}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -449,6 +449,33 @@
 									"path": [
 										"api",
 										"userfavejamreqs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userFaveProfiles",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"profileid\":2, \"favorite_profileid\":42}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/userfaveprofiles",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userfaveprofiles"
 									]
 								}
 							},
@@ -476,6 +503,65 @@
 									"path": [
 										"api",
 										"userreviews"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "userFaveJamReq",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"profileid\":2, \"jrid\":33}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/userfavejamreqs",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userfavejamreqs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userFaveProfiles",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"profileid\":2, \"favorite_profileid\":84}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/userfaveprofiles",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userfaveprofiles"
 									]
 								}
 							},
@@ -603,6 +689,33 @@
 						{
 							"name": "jamRequest",
 							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"profileid\": 76,\n    \"instruments\": [2,7,10],\n    \"genres\": [16,18],\n    \"exp_level\": [1,2],\n    \"note\": \"I just wanna thrash with a drummer and play some angry punk songs.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/jamrequests",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"jamrequests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "jamRequest",
+							"request": {
 								"method": "PUT",
 								"header": [],
 								"body": {
@@ -629,6 +742,10 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "DELETE",
+					"item": []
 				}
 			]
 		},
