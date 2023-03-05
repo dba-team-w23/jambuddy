@@ -126,7 +126,7 @@ const Search = () => {
 
   <div class="row">
     <div class="col">
-      <label for="distance">Distance to Travel:</label>
+      <label for="distance">Distance to Travel (miles):</label>
       <input id="distance" type="number" min="1" value={distanceToTravel} onChange={(e) => setDistanceToTravel(e.target.value)} />
     </div>
 
