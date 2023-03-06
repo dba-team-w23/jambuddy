@@ -1,30 +1,31 @@
 # views.py
 import datetime
-import environ
 import http.client
 import json
-import pytz
-import pkg_resources
+from typing import List
+from urllib.parse import quote
 
+import environ
+import pkg_resources
+import pytz
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from jamrequestmodule.models import Instrument
 from rest_framework import generics, status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from urllib.parse import quote
-from typing import List
 
 from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
-                     MusicGenre, UserFavoriteJamRequest, UserFavoriteProfile, UserMedia,
-                     UserReview, Profile)
+                     MusicGenre, Profile, UserFavoriteJamRequest,
+                     UserFavoriteProfile, UserMedia, UserReview)
 from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
-                          JamRequestSerializer, JamRequestSimpleSerializer, JamResponseSerializer,
-                          MusicGenreSerializer, UserFavoriteJamRequestSerializer,
-                          UserFaveProfileSerializer, UserMediaSerializer,
-                          UserReviewSerializer, UserReviewForUserSerializer, UserReviewByUserSerializer,
-                          ProfileSerializer)
+                          JamRequestSerializer, JamRequestSimpleSerializer,
+                          JamResponseSerializer, MusicGenreSerializer,
+                          ProfileSerializer, UserFaveProfileSerializer,
+                          UserFavoriteJamRequestSerializer,
+                          UserMediaSerializer, UserReviewByUserSerializer,
+                          UserReviewForUserSerializer, UserReviewSerializer)
+
 
 class UserList(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
