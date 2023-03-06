@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import BasicCard from "./partials/BasicCard";
-
-const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
+import SearchCard from "./partials/SearchCard";
+import axios from "axios";
 
 import "./css/Search.css";
 
@@ -11,7 +10,7 @@ const Search = () => {
   const [expLevelOptions, setExpLevelOptions] = useState([]);
   const [results, setResults] = useState([]);
   const [searchConducted, setSearchConducted] = useState(false);
-  console.log("search results", results);
+  const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
 
   React.useEffect(() => {
     const fetchInstruments = async () => {
@@ -94,7 +93,6 @@ const Search = () => {
       });
 
       const data = await res.json();
-      console.log(data);
       setResults(data);
       setSearchConducted(true);
     } catch (error) {
@@ -192,89 +190,17 @@ const Search = () => {
         </div>
       </div>
 
-      <div className="jam-buddies-results flex gap-4 justify-center">
-        <div className="max-w-xs">
-          {results.map((result) => (
-            <BasicCard
-              key={result.id}
+      <div className="jam-buddies-results flex flex-row flex-wrap gap-4 justify-center">
+        {results.map((result) => (
+          <div key={result.id} className="max-w-sm m-5">
+            <SearchCard
               post={result}
               instruments={result.instruments}
               genres={result.genres}
               experienceLevels={result.exp_level}
             />
-          ))}
-        </div>
-        {/* <div className="grid-container">
-          {results.map((result) => (
-            <div key={result.id} className="jam-buddy-item">
-              <div className="card">
-                <h2>Record Information</h2>
-                <p>
-                  <strong>Status: </strong>
-                  {result.status}
-                </p>
-                <p>
-                  <strong>Created: </strong>
-                  {result.created}
-                </p>
-                <p>
-                  <strong>Instruments: </strong>
-                  {result.instruments && result.instruments.length > 0
-                    ? result.instruments.map((i) => i.name).join(", ")
-                    : "Any"}
-                </p>
-
-                <p>
-                  <strong>Genres: </strong>
-                  {result.genres && result.genres.length > 0
-                    ? result.genres.join(", ")
-                    : "Any"}
-                </p>
-
-                <p>
-                  <strong>Experience Level: </strong>
-                  {result.exp_level && result.exp_level.length > 0
-                    ? result.exp_level.join(", ")
-                    : "Any"}
-                </p>
-
-                <p>
-                  <strong>Requestor: </strong>
-                  {result.requestor_profile.username}
-                </p>
-                <p>
-                  <strong>Location: </strong>
-                  {result.requestor_profile.city},{" "}
-                  {result.requestor_profile.state},{" "}
-                  {result.requestor_profile.zipcode}
-                </p>
-              </div>
-            </div>
-          ))}
-          {searchConducted && results.length === 0 && (
-            <p
-              style={{
-                textAlign: "center",
-                fontSize: "20px",
-                paddingTop: "20px",
-              }}
-            >
-              Aww, no results found! Try changing your search criteria.
-            </p>
-          )}
-
-          {!searchConducted && (
-            <p
-              style={{
-                textAlign: "center",
-                fontSize: "20px",
-                paddingTop: "20px",
-              }}
-            >
-              Enter your criteria and click Search to begin.
-            </p>
-          )}
-        </div> */}
+          </div>
+        ))}
       </div>
     </div>
   );

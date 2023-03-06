@@ -2,9 +2,10 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Typography } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import { format } from "date-fns";
 import ProfileModal from "./ProfileModal";
-import FavoriteJamButton from "./FavoriteUserButton";
+import FavoriteJamButton from "./FavoriteJamButton";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
@@ -13,34 +14,39 @@ export default function BasicCard({
   instruments,
   genres,
   experienceLevels,
+  i,
 }) {
-  console.log("In basic card");
   const user = useSelector((state) => state.user);
+  console.log("userid", user.id, "postid", post.id);
   const formattedDate = format(new Date(post.created), "MM/dd/yyyy");
-  // const mapInstrumentstoNames = (instruments, ids) => {
-  //   return ids.map((id) => {
-  //     const instrument = instruments.find((instrument) => instrument.id === id);
-  //     return instrument ? instrument.name : "";
-  //   });
-  // };
-  // const mapGenrestoNames = (genres, ids) => {
-  //   return ids.map((id) => {
-  //     const genre = genres.find((genre) => genre.id === id);
-  //     return genre ? genre.genre : "";
-  //   });
-  // };
-  // const mapExperiencetoNames = (experienceLevels, ids) => {
-  //   return ids.map((id) => {
-  //     const experience = experienceLevels.find(
-  //       (experience) => experience.id === id
-  //     );
-  //     return experience ? experience.level : "";
-  //   });
-  // };
+  const mapInstrumentstoNames = (instruments, ids) => {
+    return ids.map((id) => {
+      const instrument = instruments.find((instrument) => instrument.id === id);
+      return instrument ? instrument.name : "";
+    });
+  };
+  const mapGenrestoNames = (genres, ids) => {
+    return ids.map((id) => {
+      const genre = genres.find((genre) => genre.id === id);
+      console.log("gtn genre", genre);
+      return genre ? genre.genre : "";
+    });
+  };
+  const mapExperiencetoNames = (experienceLevels, ids) => {
+    return ids.map((id) => {
+      const experience = experienceLevels.find(
+        (experience) => experience.id === id
+      );
+      return experience ? experience.level : "";
+    });
+  };
+
   return (
     <Card>
       <CardContent>
-        <FavoriteJamButton userId={user.user.id} postId={post.id} />
+        <IconButton sx={{ float: "right" }} aria-label="add to favorites">
+          <FavoriteJamButton />
+        </IconButton>
         <Typography variant="h5" color="text.secondary" gutterBottom>
           {post.requestor_profile.city}
         </Typography>
@@ -61,13 +67,12 @@ export default function BasicCard({
             <Typography variant="body2">
               We need:
               <i>
-                {instruments}
-                {/* {post.instruments.length
+                {post.instruments.length
                   ? ` ${mapInstrumentstoNames(
                       instruments,
                       post.instruments
                     ).join(", ")}`
-                  : ""} */}
+                  : ""}
               </i>
             </Typography>
           </li>
@@ -75,27 +80,25 @@ export default function BasicCard({
             <Typography variant="body2">
               Experience:{" "}
               <i>
-                {experienceLevels}
-                {/* {mapExperiencetoNames(experienceLevels, post.exp_level).join(
+                {mapExperiencetoNames(experienceLevels, post.exp_level).join(
                   ", "
-                )} */}
+                )}
               </i>
             </Typography>
           </li>
           <li>
             <Typography variant="body2">
-              {genres}
-              {/* {post.genres.length
+              {post.genres.length
                 ? `We play: ${mapGenrestoNames(genres, post.genres).join(", ")}`
-                : ""} */}
+                : ""}
             </Typography>
           </li>
         </ul>
-        <div className="my-5">
+        <Typography variant="body1" margin="10px 0">
           Posted {formattedDate} by {post.requestor_profile.first_name}{" "}
           {post.requestor_profile.last_name}
           <ProfileModal {...post.requestor_profile} />
-        </div>
+        </Typography>
       </CardContent>
     </Card>
   );
