@@ -47,8 +47,6 @@ export default function Body() {
       localStorage.removeItem("user");
       dispatch(userSlice.actions.clearUserProfile());
       dispatch(userSlice.actions.setSignedIn(false));
-      console.log("after logout local storage", localStorage);
-      console.log("after logout user data", userData);
     } catch (error) {
       console.error(error);
     }

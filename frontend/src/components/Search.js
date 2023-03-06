@@ -185,14 +185,19 @@ const Search = () => {
           </div>
 
           <div className="col">
-            <button onClick={search}>Search</button>
+            <button
+              className="bg-blue-500 rounded text-white cursor-pointer text-xl py-2 px-4 hover:bg-blue-700 transition-all "
+              onClick={search}
+            >
+              Search
+            </button>
           </div>
         </div>
       </div>
 
-      <div className="jam-buddies-results flex flex-row flex-wrap gap-4 justify-center">
+      <div className="jam-buddies-results flex flex-row flex-wrap gap-6 justify-center align-stretch py-6">
         {results.map((result) => (
-          <div key={result.id} className="max-w-sm m-5">
+          <div key={result.id} className="max-w-xs h-full">
             <SearchCard
               post={result}
               instruments={result.instruments}

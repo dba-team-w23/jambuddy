@@ -8,7 +8,7 @@ function LikeButton({ userId, postId }) {
   const user = useSelector((state) => state.user);
   const [isLiked, setIsLiked] = useState(false);
   const url = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/userfavejamreqs`;
-  console.log("userId: ", userId, "postId: ", postId);
+
   const handleLike = () => {
     setIsLiked(!isLiked);
     const fetchData = async () => {
