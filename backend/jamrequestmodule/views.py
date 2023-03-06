@@ -203,11 +203,11 @@ def searchJamRequests(request):
             distance_miles is not None and int(distance_miles) > 0,
             _is_valid_zip_code(searching_user_zipcode)]
         )
-    
+
         if are_distance_search_prereqs_met:
-            # join results using profile ID of JamRequestory to get zipcode of requestor's ID
+            # join results using profile ID of JamRequest to get zipcode of requestor's ID
             profile_ids_of_jam_requestors = list(jam_results.values_list('profileid_id', flat=True))
-            
+
             # extract zip codes for profiles of all current jam requests
             profiles = Profile.objects.filter(pk__in=profile_ids_of_jam_requestors)
             profile_id_to_zip_code = {profile.pk: profile.zipcode for profile in profiles}
@@ -218,16 +218,16 @@ def searchJamRequests(request):
 
             candidate_zipcodes = ','.join(valid_zip_codes)
 
-            zip_codes_within_range = getZipcodesWithinDistance(searching_user_zipcode, candidate_zipcodes, distance_miles)
+            zip_codes_within_range = getZipcodesWithinDistance(
+                searching_user_zipcode, candidate_zipcodes, distance_miles)
 
-            profile_ids_in_range = [profile_id for profile_id, zip_code in profile_id_to_zip_code.items() if zip_code in zip_codes_within_range]
+            profile_ids_in_range = [profile_id for profile_id, zip_code in profile_id_to_zip_code.items()
+                                    if zip_code in zip_codes_within_range]
 
             jam_results = jam_results.filter(profileid_id__in=profile_ids_in_range)
 
-
-    ser_reviews = JamRequestSimpleSerializer(jam_results, many=True)
-    return JsonResponse(ser_reviews.data, safe=False)
-
+    serialized_reviews = JamRequestSimpleSerializer(jam_results, many=True)
+    return JsonResponse(serialized_reviews.data, safe=False)
 
 
 def _is_valid_zip_code(input: str or None) -> bool:
@@ -256,7 +256,7 @@ def index(request):
 
 @api_view(['GET'])
 def checkserver(request):
-    path = request.META.get('HTTP_HOST') 
+    path = request.META.get('HTTP_HOST')
     message = "Host is '" + path + "' -- "
 
     #Gather important library versions
@@ -313,13 +313,13 @@ def getZipcodesWithinDistance(from_zipcode: str, candidate_zipcodes: str, distan
         for zip,dist in zip_distances.items():
             if dist < distance:
                 result_zipcodes.append(zip)
-       
+
     except Exception as e:
         print("Error connecting to zipcodeapi.com, err:", e)
 
     finally:
-        conn.close() 
-    
+        conn.close()
+
     return result_zipcodes
 
 
