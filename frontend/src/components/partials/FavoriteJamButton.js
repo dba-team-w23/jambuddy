@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import axios from "axios";
+import { useSelector } from "react-redux";
 
 function LikeButton({ userId, postId }) {
+  const user = useSelector((state) => state.user);
   const [isLiked, setIsLiked] = useState(false);
   const url = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/userfavejamreqs`;
   console.log("userId: ", userId, "postId: ", postId);

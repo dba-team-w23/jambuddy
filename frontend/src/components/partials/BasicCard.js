@@ -7,7 +7,6 @@ import { format } from "date-fns";
 import ProfileModal from "./ProfileModal";
 import FavoriteJamButton from "./FavoriteJamButton";
 import { useSelector } from "react-redux";
-import axios from "axios";
 
 export default function BasicCard({
   post,
@@ -17,7 +16,7 @@ export default function BasicCard({
   i,
 }) {
   const user = useSelector((state) => state.user);
-  console.log("userid", user.id, "postid", post.id);
+  console.log("***userid", user.user.id, "postid", post.id);
   const formattedDate = format(new Date(post.created), "MM/dd/yyyy");
   const mapInstrumentstoNames = (instruments, ids) => {
     return ids.map((id) => {
@@ -45,7 +44,7 @@ export default function BasicCard({
     <Card>
       <CardContent>
         <IconButton sx={{ float: "right" }} aria-label="add to favorites">
-          <FavoriteJamButton />
+          <FavoriteJamButton postId={post.id} userId={user.user.id} />
         </IconButton>
         <Typography variant="h5" color="text.secondary" gutterBottom>
           {post.requestor_profile.city}
