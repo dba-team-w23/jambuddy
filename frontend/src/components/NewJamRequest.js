@@ -86,7 +86,7 @@ const JamRequestForm = () => {
   }, [selectedInstruments, selectedGenres, selectedExperienceLevel]);
 
   return (
-    <div className="border-4 rounded p-5 mb-4">
+    <div className="border-4 rounded p-5 mb-4" style={{background: '#FFFFFF'}}>
       <h2 className="text-lg text-center mb-4">Make a Jam Request</h2>
       <form onSubmit={handleSubmit}>
         <Autocomplete

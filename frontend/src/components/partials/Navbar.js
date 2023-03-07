@@ -16,6 +16,18 @@ import "./../css/Navbar.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
+// Import necessary Material-UI components
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+// Create a custom theme instance
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#3F5FDE',
+    },
+  },
+})
+
 const pages = ["Profiles", "Jam Requests", "Search"];
 const settings = ["Profile", "Logout"];
 
@@ -49,7 +61,7 @@ function Navbar(props) {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" style={{ background: '3F5fde'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <MusicNoteIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />

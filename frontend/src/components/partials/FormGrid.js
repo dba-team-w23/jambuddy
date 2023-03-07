@@ -119,7 +119,7 @@ export default function FormGrid() {
     return <div>Loading...</div>;
   }
   return (
-    <div className="border-4 rounded p-5 mb-4">
+    <div className="border-4 rounded p-5 mb-4" style={{background: '#FFFFFF'}}>
       <h2 className="text-lg text-center mb-4">Edit Profile</h2>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>

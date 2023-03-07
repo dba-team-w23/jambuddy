@@ -9,7 +9,6 @@ import Modal from "./Modal";
 import JamsModal from "./JamsModal";
 import Reviews from "./Reviews";
 import ReviewModal from "./ReviewModal";
-import FavoriteUserButton from "./FavoriteUserButton";
 import { useSelector } from "react-redux";
 
 import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
