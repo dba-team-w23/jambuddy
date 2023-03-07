@@ -69,7 +69,7 @@ export default function BasicCard({
         <Typography
           variant="body2"
           color="text.secondary"
-          border="1px solid blue"
+          border="1px solid '#1976D2'"
           padding="5px"
           margin="10px 0"
         >
