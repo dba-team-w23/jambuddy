@@ -77,7 +77,7 @@ export default function SignUp() {
       <Box
         className="signIn"
         component="form"
-        sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
+        sx={{ "& > :not(style)": { m: 1, width: "25ch", background: '#FFFF' } }}
         noValidate
         autoComplete="off"
         onSubmit={handleSubmit}
@@ -113,10 +113,11 @@ export default function SignUp() {
           onChange={handleInput}
         />
         <Password />
-        <Button type="submit" variant="contained">
+        <Button type="submit" variant="contained" style={{background: '#1976D2'}} >
           Sign Up
         </Button>
       </Box>
     </>
   );
 }
+
