@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import axios from "axios";
 
-function LikeButton({ userId, postId }) {
+function LikeButton({ userId, profileId }) {
   const [isLiked, setIsLiked] = useState(false);
-  const url = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/userfavejamreqs`;
-  console.log("userId: ", userId, "postId: ", postId);
+  const url = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/userfaveprofiles`;
+  console.log("profileid: ", userId, "favorite_profileid: ", profileId);
   const handleLike = () => {
     setIsLiked(!isLiked);
     const fetchData = async () => {
@@ -19,7 +18,7 @@ function LikeButton({ userId, postId }) {
           },
           body: JSON.stringify({
             profileid: userId,
-            jrid: postId,
+            favorite_profileid: profileId,
           }),
         });
       } catch (error) {

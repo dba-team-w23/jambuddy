@@ -169,14 +169,14 @@ function Navbar(props) {
                 <Button
                   key="Profile"
                   onClick={handleCloseUserMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  sx={{ py: 0, color: "white", display: "block" }}
                 >
                   <Link to="/profile">Profile</Link>
                 </Button>
                 <Button
                   key="Logout"
                   onClick={signOut}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  sx={{ py: 0, color: "white", display: "block" }}
                 >
                   <Link to="/">Logout</Link>
                 </Button>

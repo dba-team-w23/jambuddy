@@ -16,7 +16,7 @@ export default function BasicCard({
   i,
 }) {
   const user = useSelector((state) => state.user);
-  console.log("***userid", user.user.id, "postid", post.id);
+
   const formattedDate = format(new Date(post.created), "MM/dd/yyyy");
   const mapInstrumentstoNames = (instruments, ids) => {
     return ids.map((id) => {

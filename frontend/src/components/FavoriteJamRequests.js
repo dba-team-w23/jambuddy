@@ -16,7 +16,6 @@ export default function FavoriteJamRequests(userId) {
       try {
         const response = await axios.get(jamApi);
         setJamRequests(response.data.jamrequests);
-        console.log("fjr", response.data.jamrequests);
       } catch (error) {
         console.error(error);
       }

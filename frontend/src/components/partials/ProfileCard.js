@@ -8,10 +8,13 @@ import Modal from "./Modal";
 import JamsModal from "./JamsModal";
 import Reviews from "./Reviews";
 import ReviewModal from "./ReviewModal";
+import FavoriteUserButton from "./FavoriteUserButton";
+import { useSelector } from "react-redux";
 
 import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
 
 export default function ProfileCard({ profile }) {
+  const user = useSelector((state) => state.user);
   return (
     <div>
       <Card sx={{ position: "relative" }}>
@@ -42,7 +45,7 @@ export default function ProfileCard({ profile }) {
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+            <FavoriteUserButton userId={user.user.id} profileId={profile.id} />
           </IconButton>
           <JamsModal {...profile} />
         </CardActions>
