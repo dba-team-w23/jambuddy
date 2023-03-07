@@ -1,6 +1,7 @@
 import * as React from "react";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
+import FavoriteUserButton from "./FavoriteUserButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ReviewModal from "./ReviewModal";
 import "../css/Global.css";
@@ -9,8 +10,13 @@ import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
 import JamsModal from "./JamsModal";
 
 export default function ProfileCard({ profile }) {
+  const [isLiked, setIsLiked] = React.useState(true);
+  const toggleButton = () => {
+    setIsLiked(!isLiked);
+  };
+
   return (
-    <div className="m-5 w-[200px]">
+    <div className="m-5 ">
       <Card sx={{ position: "relative" }}>
         <div className="aspect-[4/3]">
           <img
@@ -34,7 +40,11 @@ export default function ProfileCard({ profile }) {
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+            {isLiked ? (
+              <FavoriteIcon onClick={toggleButton} />
+            ) : (
+              <FavoriteUserButton onClick={toggleButton} />
+            )}
           </IconButton>
           <JamsModal {...profile} />
         </CardActions>

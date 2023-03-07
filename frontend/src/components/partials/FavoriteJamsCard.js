@@ -5,16 +5,29 @@ import { Typography } from "@mui/material";
 import { format } from "date-fns";
 import ProfileModal from "./ProfileModal";
 import FavoriteJamButton from "./FavoriteUserButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
 
 export default function BasicCard({ post }) {
   const user = useSelector((state) => state.user);
+  const [isLiked, setIsLiked] = React.useState(true);
   const formattedDate = format(new Date(post.created), "MM/dd/yyyy");
+  const toggleFavorite = () => {
+    setIsLiked(!isLiked);
+  };
 
   return (
     <Card>
       <CardContent>
-        <FavoriteJamButton userId={user.user.id} postId={post.id} />
+        {isLiked ? (
+          <FavoriteIcon onClick={toggleFavorite} />
+        ) : (
+          <FavoriteJamButton
+            onClick={toggleFavorite}
+            userId={user.user.id}
+            postId={post.id}
+          />
+        )}
         <Typography variant="h5" color="text.secondary" gutterBottom>
           {post.requestor_profile.city}
         </Typography>

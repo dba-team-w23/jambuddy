@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect } from "react";
-import FavoriteUsersCard from "./partials/FavoriteUsersCard";
 import Grid from "@mui/material/Grid";
 import ProfileCardMini from "./partials/ProfileCardMini";
 import axios from "axios";
@@ -11,7 +10,6 @@ export default function FavoriteUsers(userId) {
   console.log("favorite Users userid", userId.id);
   const favUserApi = `${apiRoot}/api/userfaveprofiles/${userId.id}`;
 
-  const [favoriteUserIds, setFavoriteUserIds] = React.useState([]);
   const [favoriteUsers, setFavoriteUsers] = React.useState([]);
 
   useEffect(() => {

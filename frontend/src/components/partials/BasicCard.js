@@ -6,6 +6,8 @@ import IconButton from "@mui/material/IconButton";
 import { format } from "date-fns";
 import ProfileModal from "./ProfileModal";
 import FavoriteJamButton from "./FavoriteJamButton";
+import FavoriteUserButton from "./FavoriteUserButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
 
 export default function BasicCard({
@@ -16,6 +18,7 @@ export default function BasicCard({
   i,
 }) {
   const user = useSelector((state) => state.user);
+  const [isLiked, setIsLiked] = React.useState(false);
 
   const formattedDate = format(new Date(post.created), "MM/dd/yyyy");
   const mapInstrumentstoNames = (instruments, ids) => {
@@ -39,12 +42,23 @@ export default function BasicCard({
       return experience ? experience.level : "";
     });
   };
+  const toggleFavorite = () => {
+    setIsLiked(!isLiked);
+  };
 
   return (
     <Card>
       <CardContent>
         <IconButton sx={{ float: "right" }} aria-label="add to favorites">
-          <FavoriteJamButton postId={post.id} userId={user.user.id} />
+          {isLiked ? (
+            <FavoriteIcon onClick={toggleFavorite} />
+          ) : (
+            <FavoriteJamButton
+              postId={post.id}
+              userId={user.user.id}
+              onClick={toggleFavorite}
+            />
+          )}
         </IconButton>
         <Typography variant="h5" color="text.secondary" gutterBottom>
           {post.requestor_profile.city}
