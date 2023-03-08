@@ -202,7 +202,7 @@ def getUserClipsOfUserId(request, profile_id):
     return JsonResponse(user_clips_data, safe=False)
 
 
-@api_view(('GET','POST',))
+@api_view(('GET',))
 def searchJamRequests(request):
     jam_results = JamRequest.objects.filter(status="Open")
     instrument_id = request.data.get("instrumentid")
@@ -251,6 +251,50 @@ def searchJamRequests(request):
 
     serialized_reviews = JamRequestSimpleSerializer(jam_results, many=True)
     return JsonResponse(serialized_reviews.data, safe=False)
+
+@api_view(('GET',))
+def searchUsers(request):
+    searcher_profile_id = request.data.get("searcher_profile_id")
+    searching_user = Profile.objects.filter(pk=searcher_profile_id).values('zipcode')
+    searching_user_zipcode = searching_user[0]['zipcode']
+
+    if searching_user_zipcode == "" or searching_user_zipcode is None:
+        return JsonResponse({'error':'Searching user does not have a zipcode in their profile. Zipcode is required to perform a distance search.'}, status=400)
+
+    profiles = Profile.objects.filter(hidden=False).exclude(pk=searcher_profile_id)
+    instrument_id = request.data.get("instrumentid")
+    genre_id = request.data.get("genreid")
+    distance_miles = request.data.get("distance_miles")
+
+    if instrument_id:
+        profiles = profiles.filter(instruments__id=instrument_id)
+    if genre_id:
+        profiles = profiles.filter(genres__id=genre_id)
+    if distance_miles:
+        are_distance_search_prereqs_met = all([
+            distance_miles is not None and int(distance_miles) > 0,
+            _is_valid_zip_code(searching_user_zipcode)]
+        )
+
+        if are_distance_search_prereqs_met:
+            # extract zip codes for profiles
+            profile_id_to_zip_code = {prof.pk: prof.zipcode for prof in profiles}
+
+            # filter to only those that are valid zip codes
+            profile_zipcodes = list(profile_id_to_zip_code.values())
+            valid_zip_codes = [zip_code for zip_code in profile_zipcodes if _is_valid_zip_code(zip_code)]
+            candidate_zipcodes = ','.join(valid_zip_codes)
+
+            zip_codes_within_range = getZipcodesWithinDistance(
+                searching_user_zipcode, candidate_zipcodes, distance_miles)
+
+            profile_ids_in_range = [profile_id for profile_id, zip_code in profile_id_to_zip_code.items()
+                                    if zip_code in zip_codes_within_range]
+
+            profiles = profiles.filter(id__in=profile_ids_in_range)
+
+    serialized_profiles = ProfileSerializer(profiles, many=True)
+    return JsonResponse(serialized_profiles.data, safe=False)
 
 
 def _is_valid_zip_code(input: str or None) -> bool:
