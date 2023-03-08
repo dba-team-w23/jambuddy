@@ -22,7 +22,7 @@ class JamRequestAdmin(admin.ModelAdmin):
 
 
 class JamResponseAdmin(admin.ModelAdmin):
-    list_display = ('id', 'jrid', 'profileid', 'status')
+    list_display = ('id', 'jrid', 'profileid', 'note')
 
 
 class MusicGenreAdmin(admin.ModelAdmin):

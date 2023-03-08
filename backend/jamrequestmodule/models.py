@@ -21,6 +21,12 @@ class ExperienceLevel(models.Model):
     def __str__(self):
         return str(self.level)
 
+class Clips(models.Model):
+    link = models.CharField(max_length=255)
+
+    def __str__(self):
+        return str(self.link)
+
 class Profile(AbstractUser):
     email = models.CharField(max_length=50, null=True)
     street = models.CharField(max_length=100, null=True)
@@ -33,6 +39,7 @@ class Profile(AbstractUser):
     photo = models.CharField(max_length=255, null=True)
     note = models.TextField(null=True)
     created = models.DateTimeField(auto_now_add=True)
+    clips = models.ManyToManyField(Clips, blank=True)
     instruments = models.ManyToManyField(Instrument, blank=True)
     genres = models.ManyToManyField(MusicGenre, blank=True)
 
@@ -70,9 +77,8 @@ class JamRequest(models.Model):
 class JamResponse(models.Model):
     jrid = models.ForeignKey(JamRequest, on_delete=models.CASCADE)
     profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
     note = models.TextField()
-    status = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
 
 class UserMedia(models.Model):
     profileid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
