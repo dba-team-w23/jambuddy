@@ -38,6 +38,7 @@ class Profile(AbstractUser):
     phone = models.CharField(max_length=255, null=True)
     photo = models.CharField(max_length=255, null=True)
     note = models.TextField(null=True)
+    hidden = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     clips = models.ManyToManyField(Clips, blank=True)
     instruments = models.ManyToManyField(Instrument, blank=True)
