@@ -29,7 +29,8 @@ urlpatterns = [
 
     path('api/users', views.UserList.as_view(actions={'get': 'list', 'post': 'create'}), name='user-list'),
     path('api/users/<int:pk>', views.UserDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'patch':'update', 'delete': 'destroy'}), name='user-detail'),
-    path('api/user-details/<int:pk>', views.UserDetailsView.as_view(), name='user-details'),    
+    path('api/user-details/<int:pk>', views.UserDetailsView.as_view(), name='user-details'),
+    path('api/searchusers', views.searchUsers, name='user-search'),
 
     path('api/experiencelevels', views.ExperienceLevelList.as_view(actions={'get': 'list', 'post': 'create'}), name='experiencelevel-list'),
     path('api/experiencelevels/<int:pk>', views.ExperienceLevelDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='experiencelevel-detail'),
@@ -48,7 +49,6 @@ urlpatterns = [
     path('api/jamresponses/<int:pk>', views.JamResponseDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='jamresponse-detail'),
     path('api/jamresponsesforrequest/<int:request_id>', views.getJamResponseForRequest, name='jamresponse-by-request'),
     
-
     path('api/musicgenres', views.MusicGenreList.as_view(actions={'get': 'list', 'post': 'create'}), name='musicgenre-list'),
     path('api/musicgenres/<int:pk>', views.MusicGenreDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='musicgenre-detail'),
 

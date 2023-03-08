@@ -248,6 +248,36 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "searchUsers",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"searcher_profile_id\": 53,\n    \"distance_miles\":1000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/searchusers",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"searchusers"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
