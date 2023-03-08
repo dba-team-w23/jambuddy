@@ -13,7 +13,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ['id', 'last_login','date_joined','username','first_name','last_name',
             'email','street','street2','city','state','country','zipcode','phone','photo','note','hidden',
-            'instruments','genres','instrument_names','genre_names']
+            'clips','instruments','genres','instrument_names','genre_names']
         #fields = '__all__'
 
     def create(self, validated_data):
