@@ -4,7 +4,7 @@ from django.conf import settings
 from rest_framework import serializers
 
 from .models import (Clips, ExperienceLevel, Instrument, JamRequest, JamResponse,
-                     MusicGenre, Profile, UserMedia, UserReview, 
+                     MusicGenre, Profile, UserMedia, UserReview,
                      UserFavoriteJamRequest, UserFavoriteProfile)
 
 
@@ -13,7 +13,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ['id', 'last_login','date_joined','username','first_name','last_name',
             'email','street','street2','city','state','country','zipcode','phone','photo','note','hidden',
-            'instruments','genres','instrument_names','genre_names']
+            'instruments','genres','instrument_names','genre_names', 'clips',]
         #fields = '__all__'
 
     def create(self, validated_data):
@@ -25,14 +25,14 @@ class ProfileSerializer(serializers.ModelSerializer):
             last_name=validated_data['last_name'],
         )
         return user
-    
+
 class ProfileJamRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['username','first_name','last_name', 'email','street','street2','city','state',
                   'zipcode','phone','photo','note', 'instrument_names','genre_names']
         #fields = '__all__'
-    
+
 class ClipsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clips
@@ -113,7 +113,7 @@ class UserReviewForUserSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation['reviewer'] = instance.reviewerid.first_name + " " + instance.reviewerid.last_name[0] + "."
         representation['reviewer_location'] = instance.reviewerid.city + ", " + instance.reviewerid.state
-        return representation        
+        return representation
 
 class UserReviewByUserSerializer(serializers.ModelSerializer):
     class Meta:
