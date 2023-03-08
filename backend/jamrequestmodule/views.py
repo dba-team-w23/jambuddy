@@ -15,10 +15,10 @@ from rest_framework import generics, status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
+from .models import (Clips, ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, Profile, UserFavoriteJamRequest,
                      UserFavoriteProfile, UserMedia, UserReview)
-from .serializers import (ExperienceLevelSerializer, InstrumentSerializer,
+from .serializers import (ClipsSerializer, ExperienceLevelSerializer, InstrumentSerializer,
                           JamRequestSerializer, JamRequestSimpleSerializer,
                           JamResponseSerializer, MusicGenreSerializer,
                           ProfileSerializer, UserFaveProfileSerializer,
@@ -52,6 +52,11 @@ class InstrumentList(viewsets.ModelViewSet):
 class InstrumentDetail(viewsets.ModelViewSet):
     queryset = Instrument.objects.all()
     serializer_class = InstrumentSerializer
+
+
+class ClipsDetail(viewsets.ModelViewSet):
+    queryset = Clips.objects.all()
+    serializer_class = ClipsSerializer
 
 
 class JamRequestDetail(viewsets.ModelViewSet):
@@ -149,6 +154,15 @@ def getUserFaveJamReqs(request, profile_id):
 
     return Response({'jamrequest_ids': ids, 'jamrequests': JamRequestSerializer(jam_requests, many=True).data})
 
+@api_view(('GET',))
+def getUserJamRequests(request, profile_id):
+    jam_requests = JamRequest.objects.filter(profileid=profile_id)
+    return Response(JamRequestSerializer(jam_requests, many=True).data)
+
+@api_view(('GET',))
+def getJamResponseForRequest(request, request_id):
+    jam_responses = JamResponse.objects.filter(jrid_id=request_id)
+    return Response(JamResponseSerializer(jam_responses, many=True).data)
 
 @api_view(('GET',))
 def getUserFaveProfiles(request, profile_id):

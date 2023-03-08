@@ -3,7 +3,7 @@
 from django.conf import settings
 from rest_framework import serializers
 
-from .models import (ExperienceLevel, Instrument, JamRequest, JamResponse,
+from .models import (Clips, ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, Profile, UserMedia, UserReview, 
                      UserFavoriteJamRequest, UserFavoriteProfile)
 
@@ -33,6 +33,11 @@ class ProfileJamRequestSerializer(serializers.ModelSerializer):
                   'zipcode','phone','photo','note', 'instrument_names','genre_names']
         #fields = '__all__'
     
+class ClipsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Clips
+        fields = '__all__'
+
 class ExperienceLevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExperienceLevel

@@ -34,15 +34,20 @@ urlpatterns = [
     path('api/experiencelevels', views.ExperienceLevelList.as_view(actions={'get': 'list', 'post': 'create'}), name='experiencelevel-list'),
     path('api/experiencelevels/<int:pk>', views.ExperienceLevelDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='experiencelevel-detail'),
 
+    path('api/clips/<int:pk>', views.ClipsDetail.as_view(actions={'get': 'retrieve', 'post': 'create', 'delete': 'destroy'}), name='clips-detail'),
+
     path('api/instruments', views.InstrumentList.as_view(actions={'get': 'list', 'post': 'create'}), name='instrument-list'),
     path('api/instruments/<int:pk>', views.InstrumentDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='instrument-detail'),
 
     path('api/jamrequests', views.JamRequestList.as_view(actions={'get': 'list', 'post': 'create'}), name='jamrequest-list'),
     path('api/jamrequests/<int:pk>', views.JamRequestDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='jamrequest-detail'),
+    path('api/jamrequestsforuser/<int:profile_id>', views.getUserJamRequests, name='user-jamrequest-list'),
     path('api/searchjamrequests', views.searchJamRequests, name='jamrequest-search'),
 
     path('api/jamresponses', views.JamResponseList.as_view(actions={'get': 'list', 'post': 'create'}), name='jamresponse-list'),
     path('api/jamresponses/<int:pk>', views.JamResponseDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='jamresponse-detail'),
+    path('api/jamresponsesforrequest/<int:request_id>', views.getJamResponseForRequest, name='jamresponse-by-request'),
+    
 
     path('api/musicgenres', views.MusicGenreList.as_view(actions={'get': 'list', 'post': 'create'}), name='musicgenre-list'),
     path('api/musicgenres/<int:pk>', views.MusicGenreDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='musicgenre-detail'),

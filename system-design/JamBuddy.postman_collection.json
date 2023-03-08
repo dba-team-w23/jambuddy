@@ -590,7 +590,7 @@
 					"name": "GET",
 					"item": [
 						{
-							"name": "GET jamRequests",
+							"name": "jamRequests",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -608,7 +608,7 @@
 							"response": []
 						},
 						{
-							"name": "GET jamRequest by id",
+							"name": "jamRequest by id",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -627,7 +627,26 @@
 							"response": []
 						},
 						{
-							"name": "GET jamResponses",
+							"name": "jamRequests for user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/jamrequestsforuser/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"jamrequestsforuser",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "jamResponses",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -645,7 +664,7 @@
 							"response": []
 						},
 						{
-							"name": "GET jamResponse by id",
+							"name": "jamResponse by id",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -658,6 +677,25 @@
 										"api",
 										"jamresponses",
 										"16"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "jamResponses for request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/jamresponsesforrequest/42",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"jamresponsesforrequest",
+										"42"
 									]
 								}
 							},
@@ -726,6 +764,33 @@
 							"response": []
 						},
 						{
+							"name": "jamResponse",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"profileid\": 2,\n    \"jrid\": 42,\n    \"note\": \"I love angry music, too, brother! I play some mean drums. Let's schedule a time to rock out. I'm available on the weekends, afternoons.  I've got a basement we could play in.  LMK\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/jamresponses",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"jamresponses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "jamRequest",
 							"request": {
 								"method": "PUT",
@@ -748,6 +813,34 @@
 										"api",
 										"jamrequests",
 										"36"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "jamResponse",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"profileid\": 2,\n    \"jrid\": 42,\n    \"note\": \"I love angry music, too, man! I play some mean drums. Let's schedule a time to rock out. I'm available on the weekends, afternoons.  I've got a basement we could play in.  LMK\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/jamresponses/17",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"jamresponses",
+										"17"
 									]
 								}
 							},
