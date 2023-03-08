@@ -372,7 +372,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"first_name\": \"Dan\",\n    \"last_name\": \"Dan\",\n    \"email\": \"dan@jambuddy.com\",\n    \"username\": \"dan\",\n    \"password\": \"dan\",\n    \"instruments\": [1,2,3],\n    \"genres\": [10,12,13]\n}",
+									"raw": "{\n    \"first_name\": \"Eddie\",\n    \"last_name\": \"Veder\",\n    \"email\": \"pearljamfrontman@jambuddy.com\",\n    \"username\": \"eddie\",\n    \"password\": \"eddie\",\n    \"hidden\": false,\n    \"instruments\": [1,27],\n    \"genres\": [12,31,32]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
