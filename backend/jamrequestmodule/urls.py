@@ -37,6 +37,9 @@ urlpatterns = [
 
     path('api/clips/<int:pk>', views.ClipsDetail.as_view(actions={'get': 'retrieve', 'post': 'create', 'delete': 'destroy'}), name='clips-detail'),
 
+    # add a path to post a clip to a user id
+    path('api/clip', views.ClipLink.as_view(actions={'post': 'create', 'delete': 'destroy'}), name='clip'),
+
     path('api/instruments', views.InstrumentList.as_view(actions={'get': 'list', 'post': 'create'}), name='instrument-list'),
     path('api/instruments/<int:pk>', views.InstrumentDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='instrument-detail'),
 

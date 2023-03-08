@@ -107,6 +107,32 @@ class UserFaveProfileList(viewsets.ModelViewSet):
         return Response({"status":"success"})
 
 
+class ClipLink(viewsets.ModelViewSet):
+    def create(self, request):
+
+        profile_id = request.data.get("profile_id")
+        if not Profile.objects.filter(id=profile_id).exists():
+            return Response({"status":"error", "message": f"Profile ID {profile_id} does not exist"})
+
+        link = request.data.get("clip_to_link")
+        profile_to_link = Profile.objects.get(id=profile_id)
+        profile_clips = profile_to_link.clips()
+
+        for clip in profile_clips:
+            if clip.link == link:
+                return Response({"status":"error", "message": f"The provided clip has already been linked to profile ID {profile_id}"})
+
+        new_clip = Clips.objects.create(link=link, profile_id=profile_to_link)
+
+        return Response({"status":"success", "new_clip_id": new_clip.id})
+
+    def destroy(self, request):
+        clip_id = request.data.get("clip_id")
+        if not Clips.objects.filter(id=clip_id).exists():
+            return Response({"status":"error", "message": f"Clip ID {clip_id} does not exist"})
+        Clips.objects.filter(id=clip_id).delete()
+        return Response({"status":"success"})
+
 class UserMediaList(viewsets.ModelViewSet):
     queryset = UserMedia.objects.all()
     serializer_class = UserMediaSerializer
@@ -197,7 +223,7 @@ def getUserReviewsByUser(request, profile_id):
 
 @api_view(('GET',))
 def getUserClipsOfUserId(request, profile_id):
-    user_clips = Clips.objects.filter(profile=profile_id).all()
+    user_clips = Clips.objects.filter(profile_id=profile_id).all()
     user_clips_data = ClipsSerializer(user_clips, many=True).data
     return JsonResponse(user_clips_data, safe=False)
 

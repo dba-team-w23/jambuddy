@@ -23,9 +23,11 @@ class ExperienceLevel(models.Model):
 
 class Clips(models.Model):
     link = models.CharField(max_length=255)
+    profile_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.link)
+
 
 class Profile(AbstractUser):
     email = models.CharField(max_length=50, null=True)
@@ -40,17 +42,20 @@ class Profile(AbstractUser):
     note = models.TextField(null=True)
     hidden = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
-    clips = models.ManyToManyField(Clips, blank=True)
     instruments = models.ManyToManyField(Instrument, blank=True)
     genres = models.ManyToManyField(MusicGenre, blank=True)
 
     def instrument_names(self):
-        return ', '.join([i.name for i in self.instruments.all()])    
+        return ', '.join([i.name for i in self.instruments.all()])
     instrument_names.short_description = "InstrumentNames"
 
     def genre_names(self):
-        return ', '.join([g.genre for g in self.genres.all()])    
+        return ', '.join([g.genre for g in self.genres.all()])
     genre_names.short_description = "GenreNames"
+
+    def clips(self):
+        return Clips.objects.filter(profile_id=self.id)
+    clips.short_description = "Clips"
 
 
 class JamRequest(models.Model):
@@ -63,15 +68,15 @@ class JamRequest(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def instrument_names(self):
-        return ', '.join([i.name for i in self.instruments.all()])    
+        return ', '.join([i.name for i in self.instruments.all()])
     instrument_names.short_description = "InstrumentNames"
 
     def genre_names(self):
-        return ', '.join([g.genre for g in self.genres.all()])    
+        return ', '.join([g.genre for g in self.genres.all()])
     genre_names.short_description = "GenreNames"
 
     def exp_level_names(self):
-        return ', '.join([x.level for x in self.exp_level.all()])    
+        return ', '.join([x.level for x in self.exp_level.all()])
     exp_level_names.short_description = "ExperienceLevels"
 
 

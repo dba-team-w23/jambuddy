@@ -262,7 +262,7 @@
 									"options": {
 										"raw": {
 											"language": "json"
-										},
+										}
 						{
 							"name": "userClipUrls for userid",
 							"request": {
