@@ -16,7 +16,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import (Clips, ExperienceLevel, Instrument, JamRequest, JamResponse,
-                     MusicGenre, Profile, UserFavoriteJamRequest,
+                     MusicGenre, Profile, UserFavoriteJamRequest, Clips,
                      UserFavoriteProfile, UserMedia, UserReview)
 from .serializers import (ClipsSerializer, ExperienceLevelSerializer, InstrumentSerializer,
                           JamRequestSerializer, JamRequestSimpleSerializer,
@@ -193,6 +193,14 @@ def getUserReviewsByUser(request, profile_id):
     user_reviews = UserReview.objects.filter(reviewerid=profile_id).all()
     ser_reviews = UserReviewByUserSerializer(user_reviews, many=True)
     return JsonResponse(ser_reviews.data, safe=False)
+
+
+@api_view(('GET',))
+def getUserClipsOfUserId(request, profile_id):
+    user_clips = Clips.objects.filter(profile=profile_id).all()
+    user_clips_data = ClipsSerializer(user_clips, many=True).data
+    return JsonResponse(user_clips_data, safe=False)
+
 
 @api_view(('GET','POST',))
 def searchJamRequests(request):

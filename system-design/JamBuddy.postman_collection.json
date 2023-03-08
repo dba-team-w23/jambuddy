@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "da4f57cb-148e-4265-b1f7-91ad946b1922",
+		"_postman_id": "57f73901-4f2d-45e5-adf1-c48b7f2eacd1",
 		"name": "JamBuddy",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "11092666"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -244,6 +243,24 @@
 										"api",
 										"userreviewsbyuser",
 										"50"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userClipUrls for userid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/userclips/76",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"userclips",
+										"76"
 									]
 								}
 							},
