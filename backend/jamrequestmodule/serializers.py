@@ -56,6 +56,7 @@ class JamRequestSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
+        representation['number_of_responses'] = JamResponse.objects.filter(jrid_id=instance.id).count()
         representation['requestor_profile'] = ProfileJamRequestSerializer(instance.profileid).data
         return representation
 
