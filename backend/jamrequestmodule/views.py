@@ -16,7 +16,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import (Clips, ExperienceLevel, Instrument, JamRequest, JamResponse,
-                     MusicGenre, Profile, UserFavoriteJamRequest, Clips,
+                     MusicGenre, Profile, UserFavoriteJamRequest,
                      UserFavoriteProfile, UserMedia, UserReview)
 from .serializers import (ClipsSerializer, ExperienceLevelSerializer, InstrumentSerializer,
                           JamRequestSerializer, JamRequestSimpleSerializer,

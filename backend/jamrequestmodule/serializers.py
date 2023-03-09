@@ -13,7 +13,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ['id', 'last_login','date_joined','username','first_name','last_name',
             'email','street','street2','city','state','country','zipcode','phone','photo','note','hidden',
-            'clips','instruments','genres','instrument_names','genre_names']
+            'instruments','genres','instrument_names','genre_names']
         #fields = '__all__'
 
     def create(self, validated_data):
@@ -30,7 +30,7 @@ class ProfileJamRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['username','first_name','last_name', 'email','street','street2','city','state',
-                  'zipcode','phone','photo','note', 'instrument_names','genre_names']
+                  'zipcode','phone','photo','note','instrument_names','genre_names']
         #fields = '__all__'
 
 class ClipsSerializer(serializers.ModelSerializer):
@@ -70,8 +70,6 @@ class JamRequestSimpleSerializer(serializers.ModelSerializer):
         representation['requestor_profile'] = ProfileSerializer(instance.profileid).data
         return representation
 
-
-
 class JamResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = JamResponse
@@ -81,18 +79,6 @@ class MusicGenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = MusicGenre
         fields = '__all__'
-
-# class UserInstrumentSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = UserInstrument
-#         db_table = UserInstrument
-#         fields = '__all__'
-
-#     def to_representation(self, instance):
-#         representation = super().to_representation(instance)
-#         representation['instrument'] = InstrumentSerializer(instance.instrumentid).data
-#         representation['exp_level'] = ExperienceLevelSerializer(instance.exp_level).data
-#         return representation
 
 class UserMediaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -126,12 +112,10 @@ class UserReviewByUserSerializer(serializers.ModelSerializer):
         representation['for_user_location'] = instance.profileid.city + ", " + instance.profileid.state
         return representation
 
-
 class UserFavoriteJamRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserFavoriteJamRequest
         fields = ['profileid','jrid']
-
 
 class UserFaveProfileSerializer(serializers.ModelSerializer):
     class Meta:
