@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import Password from "./Password";
-import PickList from "./PickList";
 import Multiline from "./Multiline";
 import UploadWidget from "./UploadWidget";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -12,7 +11,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { userSlice } from "../../features/userSlice";
-import Box from "@mui/material/Box";
 
 export default function FormGrid() {
   const userData = useSelector((state) => state.user);
@@ -22,8 +20,7 @@ export default function FormGrid() {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [imageURL, setImageURL] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
-  const [city, setCity] = React.useState("");
-  const [state, setState] = React.useState("");
+  const [formSuccess, setFormSuccess] = React.useState(false);
   const [formInput, setFormInput] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -88,6 +85,7 @@ export default function FormGrid() {
         console.log("success", JSON.stringify(response));
         dispatch(userSlice.actions.updateUserProfile(data));
         setIsLoading(false);
+        setFormSuccess(true);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -119,7 +117,10 @@ export default function FormGrid() {
     return <div>Loading...</div>;
   }
   return (
-    <div className="border-4 rounded p-5 mb-4" style={{background: '#FFFFFF'}}>
+    <div
+      className="border-4 rounded p-5 mb-4"
+      style={{ background: "#FFFFFF" }}
+    >
       <h2 className="text-lg text-center mb-4">Edit Profile</h2>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -193,7 +194,6 @@ export default function FormGrid() {
               multiple
               id="instrument-select"
               options={instruments}
-              // getOptionselected={(option, value) => option.id === value.id}
               getOptionLabel={(option) => option.name}
               onChange={handleInstrument}
               renderInput={(params) => (
@@ -210,7 +210,6 @@ export default function FormGrid() {
               multiple
               id="genres-needed"
               options={genres}
-              // getOptionselected={(option, value) => option.id === value.id}
               getOptionLabel={(option) => option.genre}
               defaultValue={[]}
               filterSelectedOptions
@@ -245,10 +244,13 @@ export default function FormGrid() {
           <Grid item xs={8}>
             <UploadWidget value={imageURL} setImageURL={setImageURL} />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <Button type="submit" variant="contained">
               Save Profile
             </Button>
+          </Grid>
+          <Grid item xs={6}>
+            {formSuccess && "Profile updated!"}
           </Grid>
         </Grid>
       </form>

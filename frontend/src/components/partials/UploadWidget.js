@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 
 export default function CloudinaryUpload(props) {
   const [imageSelected, setImageSelected] = React.useState("");
+  const [imageURL, setImageURL] = React.useState("");
 
   const uploadImage = async (files) => {
     const fd = new FormData();
@@ -25,27 +26,35 @@ export default function CloudinaryUpload(props) {
       const data = await res.json();
       console.log(data);
       console.log(data.url);
+      setImageSelected(data.url);
       props.setImageURL(data.secure_url);
+      setImageURL(data.url);
     } catch (error) {
       console.error(error);
     }
   };
   return (
     <>
-      <Grid item xs={9}>
-        <input
-          className="mb-4"
-          type="file"
-          accept="image/*"
-          onChange={(e) => {
-            setImageSelected(e.target.files[0]);
-          }}
-        />
-      </Grid>
-      <Grid item xs={3}>
-        <Button variant="contained" onClick={uploadImage}>
-          Upload
-        </Button>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <input
+            className="mb-4"
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              setImageSelected(e.target.files[0]);
+            }}
+          />
+        </Grid>
+
+        <Grid item xs={5}>
+          <Button variant="contained" onClick={uploadImage}>
+            Upload
+          </Button>
+        </Grid>
+        <Grid item xs={6}>
+          <div>{imageURL && <a href={imageURL}>Sucess</a>}</div>
+        </Grid>
       </Grid>
     </>
   );

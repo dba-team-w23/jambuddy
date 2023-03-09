@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Grid from "@mui/material/Grid";
-import PickList from "./partials/PickList";
 import Button from "@mui/material/Button";
 import axios from "axios";
-import { allStates } from "./partials/variables";
 import { useSelector } from "react-redux";
 
 const BASE_URL = "https://sea-turtle-app-zggz6.ondigitalocean.app/api/";

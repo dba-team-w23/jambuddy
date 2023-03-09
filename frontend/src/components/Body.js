@@ -56,8 +56,8 @@ export default function Body() {
 
   return (
     <>
-      <Navbar handleLogout={handleLogout} />
-      <div className="max-w-[90%] sm:max-w-[80%] md:max-w-[70%] m-auto">
+      <Navbar handleLogout={handleLogout} sx={{ marginBottom: "40px" }} />
+      <div className="max-w-[90%] sm:max-w-[80%] md:max-w-[70%] m-auto my-10">
         <div className="signedOutUser">
           <Routes>
             <Route path="TEMPSearchJamRequests" element={<Search />} />
