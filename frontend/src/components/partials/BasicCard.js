@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import ProfileModal from "./ProfileModal";
 import FavoriteJamButton from "./FavoriteJamButton";
 import { useSelector } from "react-redux";
+import JamResponseModal from "./JamResponseModal";
 
 export default function BasicCard({
   post,
@@ -98,6 +99,9 @@ export default function BasicCard({
           <ProfileModal {...post.requestor_profile} />
         </div>
       </CardContent>
+      <div className="flex place-content-around mb-2  ">
+          <JamResponseModal {...post} />
+        </div>
     </Card>
   );
 }
