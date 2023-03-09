@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const userSlice = createSlice({
   name: "user",
@@ -29,7 +30,6 @@ const userSlice = createSlice({
       };
     },
   },
-  extraReducers: {},
 });
 
 export const { setUserProfile, clearUserProfile, setSignedIn } =

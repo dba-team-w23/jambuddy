@@ -19,15 +19,12 @@ export default function BasicCard({ post }) {
   return (
     <Card>
       <CardContent>
-        {isLiked ? (
-          <FavoriteIcon onClick={toggleFavorite} />
-        ) : (
-          <FavoriteJamButton
-            onClick={toggleFavorite}
-            userId={user.user.id}
-            postId={post.id}
-          />
-        )}
+        <FavoriteJamButton
+          onClick={toggleFavorite}
+          userId={user.user.id}
+          postId={post.id}
+        />
+
         <Typography variant="h5" color="text.secondary" gutterBottom>
           {post.requestor_profile.city}
         </Typography>

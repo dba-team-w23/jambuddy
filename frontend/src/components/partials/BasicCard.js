@@ -2,12 +2,9 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Typography } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
 import { format } from "date-fns";
 import ProfileModal from "./ProfileModal";
 import FavoriteJamButton from "./FavoriteJamButton";
-import FavoriteUserButton from "./FavoriteUserButton";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
 
 export default function BasicCard({
@@ -18,7 +15,7 @@ export default function BasicCard({
   i,
 }) {
   const user = useSelector((state) => state.user);
-  const [isLiked, setIsLiked] = React.useState(false);
+  // const isLiked = useSelector((state) => state.jam.likedJams.includes(post.id));
 
   const formattedDate = format(new Date(post.created), "MM/dd/yyyy");
   const mapInstrumentstoNames = (instruments, ids) => {
@@ -30,7 +27,6 @@ export default function BasicCard({
   const mapGenrestoNames = (genres, ids) => {
     return ids.map((id) => {
       const genre = genres.find((genre) => genre.id === id);
-      console.log("gtn genre", genre);
       return genre ? genre.genre : "";
     });
   };
@@ -42,24 +38,13 @@ export default function BasicCard({
       return experience ? experience.level : "";
     });
   };
-  const toggleFavorite = () => {
-    setIsLiked(!isLiked);
-  };
 
   return (
     <Card>
       <CardContent>
-        <IconButton sx={{ float: "right" }} aria-label="add to favorites">
-          {isLiked ? (
-            <FavoriteIcon onClick={toggleFavorite} />
-          ) : (
-            <FavoriteJamButton
-              postId={post.id}
-              userId={user.user.id}
-              onClick={toggleFavorite}
-            />
-          )}
-        </IconButton>
+        <div sx={{ float: "right" }} aria-label="add to favorites">
+          <FavoriteJamButton jamId={post.id} />
+        </div>
         <Typography variant="h5" color="text.secondary" gutterBottom>
           {post.requestor_profile.city}
         </Typography>
@@ -107,11 +92,11 @@ export default function BasicCard({
             </Typography>
           </li>
         </ul>
-        <Typography variant="body1" margin="10px 0">
+        <div className="m-4">
           Posted {formattedDate} by {post.requestor_profile.first_name}{" "}
           {post.requestor_profile.last_name}
           <ProfileModal {...post.requestor_profile} />
-        </Typography>
+        </div>
       </CardContent>
     </Card>
   );

@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { setUserProfile } from "../features/userSlice";
 import { setSignedIn } from "../features/userSlice";
 import { useSelector } from "react-redux";
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Grid";
 
 export default function SignIn() {
   const isSignedIn = useSelector((state) => state.user.isSignedIn);
@@ -97,63 +97,53 @@ export default function SignIn() {
   return (
     <>
       {!isSignedIn && (
-          <Grid item xs={12} md={6}>
-            {!isSignedIn && (
-              <Box
-                className="signIn"
-                component="form"
-                sx={{
-                  "& > :not(style)": { m: 1 },
-                  p: 2,
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  marginTop: "8rem",
-                  backgroundColor: "white",
-                }}
-                noValidate
-                autoComplete="off"
-                onSubmit={handleSubmit}
-              >
-                <TextField
-                  id="outlined-basic"
-                  label="User Name"
-                  name="username"
-                  variant="outlined"
-                  onChange={handleInput}
-                />
-                <FormControl variant="outlined">
-                  <InputLabel htmlFor={`outlined-adornment-password`}>
-                    Password
-                  </InputLabel>
-                  <OutlinedInput
-                    id={`outlined-adornment-password`}
-                    label="Password"
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    onChange={handlePassword}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-                <Button type="submit" variant="contained">
-                  Sign In
-                </Button>
-                <Link to={"/signup"} underline="hover">
-                  Sign Up
-                </Link>
-              </Box>
-            )}
-          </Grid>
+        <Box
+          className="signIn"
+          component="form"
+          sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
+          noValidate
+          autoComplete="off"
+          onSubmit={handleSubmit}
+        >
+          <TextField
+            id="outlined-basic"
+            label="User Name"
+            name="username"
+            variant="outlined"
+            onChange={handleInput}
+          />
+          <FormControl variant="outlined">
+            <InputLabel htmlFor={`outlined-adornment-password`}>
+              Password
+            </InputLabel>
+            <OutlinedInput
+              id={`outlined-adornment-password`}
+              label="Password"
+              type={showPassword ? "text" : "password"}
+              name="password"
+              onChange={handlePassword}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+          <Button type="submit" variant="contained">
+            Sign In
+          </Button>
+          <p>Not a member yet?</p>
+          <Button href="/signup" variant="contained">
+            Sign Up
+          </Button>
+        </Box>
       )}
     </>
   );

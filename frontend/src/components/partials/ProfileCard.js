@@ -1,9 +1,7 @@
 import * as React from "react";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteUserButton from "./FavoriteUserButton";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "../css/Global.css";
 import Modal from "./Modal";
 import JamsModal from "./JamsModal";
@@ -19,11 +17,6 @@ export default function ProfileCard({ profile }) {
     <div>
       <Card sx={{ position: "relative" }}>
         <CardHeader
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
           title={`${profile.first_name} ${profile.last_name}`}
           subheader={profile.username}
         />

@@ -10,6 +10,8 @@ export default function FavoriteJamRequests(userId) {
 
   const jamApi = `${apiRoot}/api/userfavejamreqs/${userId.id}`;
   const [jamRequests, setJamRequests] = React.useState([]);
+  const likedJams = useSelector((state) => state.jam.likedJams);
+  console.log("likedJams from FavoriteJamRequests", likedJams);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +29,7 @@ export default function FavoriteJamRequests(userId) {
   return (
     <Grid container spacing={6}>
       {jamRequests.map((request, i) => {
+        console.log(request);
         return (
           <Grid key={i} item xs={6}>
             <FavoriteJamsCard key={i + 1000} post={request} />

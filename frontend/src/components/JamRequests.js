@@ -32,7 +32,6 @@ export default function JamRequests() {
         setInstruments(instrumentsResponse.data);
         setGenres(genresResponse.data);
         setExperienceLevels(experienceLevelsResponse.data);
-        console.log("jr instruments", instrumentsResponse.data);
       } catch (error) {
         console.error(error);
       }

@@ -3,7 +3,6 @@ import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 import FavoriteUserButton from "./FavoriteUserButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ReviewModal from "./ReviewModal";
 import "../css/Global.css";
 import Modal from "./Modal";
 import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
@@ -39,13 +38,13 @@ export default function ProfileCard({ profile }) {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
+          <div aria-label="add to favorites">
             {isLiked ? (
               <FavoriteIcon onClick={toggleButton} />
             ) : (
               <FavoriteUserButton onClick={toggleButton} />
             )}
-          </IconButton>
+          </div>
           <JamsModal {...profile} />
         </CardActions>
 
