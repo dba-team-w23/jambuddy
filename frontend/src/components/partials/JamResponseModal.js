@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 
 const baseURL =
-  "https://sea-turtle-app-zggz6.ondigitalocean.app/api/userJamResponses";
+  "https://sea-turtle-app-zggz6.ondigitalocean.app/api/jamresponses";
 const style = {
   position: "absolute",
   top: "50%",
@@ -22,7 +22,7 @@ const style = {
 
 export default function JamResponseModal({ ...jamRequest }) {
   const userData = useSelector((state) => state.user);
-  const [comment, setComment] = React.useState("");
+  const [note, setNote] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -31,14 +31,16 @@ export default function JamResponseModal({ ...jamRequest }) {
     (state, newState) => ({ ...state, ...newState }),
     {
       responderUserId: userData.user.id,
-      jamRequestId: jamRequest.id,
+      jrid: jamRequest.id,
+      profileid: jamRequest.profileid,
       rating: 5,
     }
   );
+
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    let data = { ...formInput, comment };
-    console.log(JSON.stringify(data));
+    let data = { ...formInput, note };
+    console.log("form data", JSON.stringify(data));
     const returnedUser = await fetch(baseURL, {
       method: "POST",
       mode: "cors",
@@ -49,7 +51,7 @@ export default function JamResponseModal({ ...jamRequest }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("return data", data);
       })
       .catch((error) => {
         console.error("Error: " + error);
@@ -58,18 +60,19 @@ export default function JamResponseModal({ ...jamRequest }) {
   };
 
   const handleJamResponseChange = (evt) => {
-    setComment(evt.target.value);
+    setNote(evt.target.value);
   };
 
   return (
     <div>
-      {userMatch ? null :
-      <div
-        onClick={handleOpen}
-        className="rounded-full hover:bg-blue-50  flex items-center justify-center cursor-pointer"
-      >
-        <MusicNoteIcon style={{ color: "#1976d2" }} /> Let's jam!
-      </div>}
+      {userMatch ? null : (
+        <div
+          onClick={handleOpen}
+          className="rounded-full hover:bg-blue-50  flex items-center justify-center cursor-pointer"
+        >
+          <MusicNoteIcon style={{ color: "#1976d2" }} /> Let's jam!
+        </div>
+      )}
       <Modal
         open={open}
         onClose={handleClose}
@@ -82,7 +85,7 @@ export default function JamResponseModal({ ...jamRequest }) {
               className="w-full"
               id="outlined-multiline-static"
               label={`Leave a note for ${jamRequest.requestor_profile.username}`}
-              value={comment}
+              value={note}
               onChange={handleJamResponseChange}
               multiline
               rows={8}
