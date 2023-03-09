@@ -22,8 +22,8 @@ class ExperienceLevel(models.Model):
         return str(self.level)
 
 class Clips(models.Model):
-    link = models.CharField(max_length=255)
     profile_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    link = models.CharField(max_length=255)
 
     def __str__(self):
         return str(self.link)
@@ -53,9 +53,9 @@ class Profile(AbstractUser):
         return ', '.join([g.genre for g in self.genres.all()])
     genre_names.short_description = "GenreNames"
 
-    def clips(self):
-        return Clips.objects.filter(profile_id=self.id)
-    clips.short_description = "Clips"
+    # def clips(self):
+    #     return Clips.objects.filter(profile_id=self.id)
+    # clips.short_description = "Clips"
 
 
 class JamRequest(models.Model):
