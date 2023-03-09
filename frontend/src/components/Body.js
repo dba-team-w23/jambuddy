@@ -58,17 +58,6 @@ export default function Body() {
     <>
       <Navbar handleLogout={handleLogout} />
       <div className="max-w-[90%] sm:max-w-[80%] md:max-w-[70%] m-auto">
-        <div className="w-48 py-4 m-auto border border-blue-500 my-4 shadow-blue-500/50 rounded-md">
-          {
-            <>
-              <h1 className="text-4xl text-center">
-                {userData.user && userData.user.username}
-              </h1>
-              <h2 className="text-center">{isSignedIn && "is signed in"}</h2>
-            </>
-          }
-        </div>
-
         <div className="signedOutUser">
           <Routes>
             <Route path="TEMPSearchJamRequests" element={<Search />} />
