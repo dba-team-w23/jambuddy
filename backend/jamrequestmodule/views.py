@@ -227,6 +227,20 @@ def getUserClipsOfUserId(request, profile_id):
     user_clips_data = ClipsSerializer(user_clips, many=True).data
     return JsonResponse(user_clips_data, safe=False)
 
+@api_view(('POST',))
+def jamRequestOpen(request, request_id):
+    jr = JamRequest.objects.get(id=request_id)
+    jr.status='Open'
+    jr.save()
+    return Response("success", status=status.HTTP_200_OK)
+
+@api_view(('POST',))
+def jamRequestClose(request, request_id):
+    jr = JamRequest.objects.get(id=request_id)
+    jr.status='Close'
+    jr.save()
+    return Response("success", status=status.HTTP_200_OK)
+
 
 @api_view(('GET',))
 def searchJamRequests(request):

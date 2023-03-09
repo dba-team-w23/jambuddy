@@ -875,6 +875,62 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "jamRequest Open",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/jamrequestopen/42",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"jamrequestopen",
+										"42"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "jamRequest Close",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/jamrequestclose/42",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"jamrequestclose",
+										"42"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
