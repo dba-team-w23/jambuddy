@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Multiline from "./partials/Multiline";
 
 const BASE_URL = "https://sea-turtle-app-zggz6.ondigitalocean.app/api/";
 
@@ -16,7 +17,8 @@ const JamRequestForm = () => {
   const [selectedInstruments, setSelectedInstruments] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [selectedExperienceLevel, setSelectedExperienceLevel] = useState("");
-  const [location, setLocation] = useState("");
+  const [jamInfo, setJamInfo] = useState("");
+  const [formSuccess, setFormSuccess] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,22 +45,23 @@ const JamRequestForm = () => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    data.location = location;
+    data.profileid = userData.user.id;
     data.instruments = selectedInstruments;
     data.genres = selectedGenres;
     data.exp_level = selectedExperienceLevel;
+    data.note = jamInfo;
+    console.log(selectedInstruments);
     console.log("data", data);
+    const sData = JSON.stringify(data);
 
     try {
-      await axios.post(BASE_URL + "jamrequests", {
-        userid: userData.user.id,
-        instrumentid: selectedInstruments,
-        genreid: selectedGenres,
-        location: location,
-        exp_level: selectedExperienceLevel,
+      await axios.post(BASE_URL + "jamrequests", sData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
-      history.push("/jamrequests");
-      // Show success message
+
+      setFormSuccess(true);
     } catch (error) {
       console.error(error);
       // Show error message
@@ -77,6 +80,11 @@ const JamRequestForm = () => {
     const selectedIds = value.map((level) => level.id);
     setSelectedExperienceLevel(selectedIds);
   };
+  const handleJamInfo = (e) => {
+    console.log("hji", e.target.value);
+    setJamInfo(e.target.value);
+  };
+
   React.useEffect(() => {
     console.log("instruments", selectedInstruments);
     console.log("genres", selectedGenres);
@@ -142,23 +150,37 @@ const JamRequestForm = () => {
             />
           )}
         />
+        <Grid item xs={12} sx={{ marginBottom: "1rem" }}>
+          {/* <Multiline
+            sx={{ marginBottom: "1rem" }}
+            className="jam-info"
+            name="note"
+            default="Jam Description"
+            label="Jam Description"
+          > */}
+          <div>
+            <TextField
+              fullWidth
+              id="jam-info"
+              name="note"
+              multiline
+              maxRows={16}
+              value={jamInfo}
+              onChange={handleJamInfo}
+            />
+          </div>
+          {/* </Multiline> */}
+        </Grid>
 
         <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <TextField
-              id="outlined-basic-5"
-              type="number"
-              name="zip"
-              label="Zip Code"
-              variant="outlined"
-              width="50%"
-              onChange={(e) => setLocation(e.target.value)}
-            />
+          <Grid item xs={8}>
+            <Button sx={{ margin: "1rem" }} type="submit" variant="contained">
+              Submit Jam Request
+            </Button>
           </Grid>
-
-          <Button sx={{ margin: "1rem" }} type="submit" variant="contained">
-            Submit Jam Request
-          </Button>
+          <Grid item xs={4} sx={{ marginTop: "1rem" }}>
+            {formSuccess ? "Success!" : ""}
+          </Grid>
         </Grid>
       </form>
     </div>

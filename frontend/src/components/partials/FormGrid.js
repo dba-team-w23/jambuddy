@@ -9,8 +9,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { userSlice } from "../../features/userSlice";
-import { Checkbox } from "@material-ui/core";
-import { FormControlLabel } from "@material-ui/core";
 
 export default function FormGrid() {
   const userData = useSelector((state) => state.user);
