@@ -10,7 +10,9 @@ axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 axios.defaults.mode = "no-cors";
 
 const root = createRoot(document.getElementById("root"));
-const savedUser = JSON.parse(localStorage.getItem("user"));
+const lsUser = localStorage.getItem("user");
+if (lsUser === "undefined") localStorage.removeItem("user");
+const savedUser = lsUser ? JSON.parse(lsUser) : null;
 const initialUser = savedUser ? savedUser : null;
 
 window.React1 = require("react");

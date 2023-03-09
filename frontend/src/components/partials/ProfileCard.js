@@ -1,6 +1,7 @@
 import * as React from "react";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteUserButton from "./FavoriteUserButton";
 import "../css/Global.css";
 import Modal from "./Modal";

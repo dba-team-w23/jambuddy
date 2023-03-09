@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { setUserProfile } from "../features/userSlice";
 import { setSignedIn } from "../features/userSlice";
 import { useSelector } from "react-redux";
+// import { Redirect } from "react-router-dom";
 
 export default function SignUp() {
   const isSignedIn = useSelector((state) => state.user.isSignedIn);
@@ -62,7 +63,8 @@ export default function SignUp() {
 
   React.useEffect(() => {
     const updateUser = async () => {
-      if (!tempUser.id) return;
+      if (!tempUser) return;
+      console.log("tempUser", tempUser);
       localStorage.setItem("user", JSON.stringify(tempUser));
       dispatch(setUserProfile(tempUser));
       dispatch(setSignedIn(true));
@@ -74,50 +76,61 @@ export default function SignUp() {
 
   return (
     <>
-      <Box
-        className="signIn"
-        component="form"
-        sx={{ "& > :not(style)": { m: 1, width: "25ch", background: '#FFFF' } }}
-        noValidate
-        autoComplete="off"
-        onSubmit={handleSubmit}
-      >
-        <TextField
-          id="firstName-textfield"
-          name="first_name"
-          label="First Name"
-          variant="outlined"
-          onChange={handleInput}
-        />
-        <TextField
-          id="lastName-textfield"
-          label="Last Name"
-          name="last_name"
-          variant="outlined"
-          onChange={handleInput}
-        />
-        <TextField
-          id="email-textfield"
-          label="Email"
-          name="email"
-          type="email"
-          required
-          variant="outlined"
-          onChange={handleInput}
-        />
-        <TextField
-          id="outlined-basic-4"
-          label="User Name"
-          name="username"
-          variant="outlined"
-          onChange={handleInput}
-        />
-        <Password />
-        <Button type="submit" variant="contained" style={{background: '#1976D2'}} >
-          Sign Up
-        </Button>
-      </Box>
+      {isSignedIn ? (
+        <Redirect to="/profile" />
+      ) : (
+        <div>
+          <Box
+            className="signIn"
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch", background: "#FFFF" },
+            }}
+            noValidate
+            autoComplete="off"
+            onSubmit={handleSubmit}
+          >
+            <TextField
+              id="firstName-textfield"
+              name="first_name"
+              label="First Name"
+              variant="outlined"
+              onChange={handleInput}
+            />
+            <TextField
+              id="lastName-textfield"
+              label="Last Name"
+              name="last_name"
+              variant="outlined"
+              onChange={handleInput}
+            />
+            <TextField
+              id="email-textfield"
+              label="Email"
+              name="email"
+              type="email"
+              required
+              variant="outlined"
+              onChange={handleInput}
+            />
+            <TextField
+              id="outlined-basic-4"
+              label="User Name"
+              name="username"
+              variant="outlined"
+              onChange={handleInput}
+            />
+            <Password />
+            <Button
+              type="submit"
+              variant="contained"
+              style={{ background: "#1976D2" }}
+            >
+              Sign Up
+            </Button>
+          </Box>
+        </div>
+      )}
     </>
   );
 }
-

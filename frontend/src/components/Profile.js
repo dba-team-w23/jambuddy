@@ -43,7 +43,7 @@ export default function EditProfile(props) {
           noValidate
           autoComplete="off"
         >
-          <ProfileCard profile={userProfile} />
+          <ProfileCard profile={userData.user} />
           {userData.user.note ? (
             <>
               <NewJamRequest />
@@ -52,7 +52,6 @@ export default function EditProfile(props) {
           ) : (
             <>
               <FormGrid style={{ margin: "40px auto" }} />
-
               <NewJamRequest />
             </>
           )}

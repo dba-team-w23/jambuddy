@@ -86,7 +86,10 @@ const JamRequestForm = () => {
   }, [selectedInstruments, selectedGenres, selectedExperienceLevel]);
 
   return (
-    <div className="border-4 rounded p-5 mb-4" style={{background: '#FFFFFF'}}>
+    <div
+      className="border-4 rounded p-5 mb-4"
+      style={{ background: "#FFFFFF" }}
+    >
       <h2 className="text-lg text-center mb-4">Make a Jam Request</h2>
       <form onSubmit={handleSubmit}>
         <Autocomplete
@@ -94,7 +97,7 @@ const JamRequestForm = () => {
           multiple
           id="instrument-select"
           options={instruments}
-          getOptionSelected={(option, value) => option.id === value.id}
+          getoptionselected={(option, value) => option.id === value.id}
           getOptionLabel={(option) => option.name}
           onChange={handleInstrument}
           renderInput={(params) => (
@@ -110,7 +113,7 @@ const JamRequestForm = () => {
           multiple
           id="genres-needed"
           options={genres}
-          getOptionSelected={(option, value) => option.id === value.id}
+          getoptionselected={(option, value) => option.id === value.id}
           getOptionLabel={(option) => option.genre}
           defaultValue={[]}
           filterSelectedOptions
@@ -128,7 +131,7 @@ const JamRequestForm = () => {
           multiple
           id="experience-levels"
           options={experienceLevels}
-          getOptionSelected={(option, value) => option.id === value.id}
+          getoptionselected={(option, value) => option.id === value.id}
           getOptionLabel={(option) => option.level}
           defaultValue={[]}
           filterSelectedOptions
@@ -154,14 +157,7 @@ const JamRequestForm = () => {
               onChange={(e) => setLocation(e.target.value)}
             />
           </Grid>
-          {/* <Grid item xs={6}>
-            <input
-              className="border border-slate-300 hover:border-black rounded p-3 pb-4 mb-4 focus:border-blue-800 focus:ring-2 focus:outline-none"
-              type="date"
-              id="jamdate"
-              name="jamdate"
-            />
-          </Grid> */}
+
           <Button sx={{ margin: "1rem" }} type="submit" variant="contained">
             Submit Jam Request
           </Button>
