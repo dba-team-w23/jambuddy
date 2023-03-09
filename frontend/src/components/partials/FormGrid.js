@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Password from "./Password";
 import Multiline from "./Multiline";
 import UploadWidget from "./UploadWidget";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Grid, TextField } from "@mui/material";
-import { allStates } from "./variables";
-import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { userSlice } from "../../features/userSlice";
+import { Checkbox } from "@material-ui/core";
+import { FormControlLabel } from "@material-ui/core";
 
 export default function FormGrid() {
   const userData = useSelector((state) => state.user);
@@ -21,6 +21,8 @@ export default function FormGrid() {
   const [imageURL, setImageURL] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [formSuccess, setFormSuccess] = React.useState(false);
+  const label = { inputProps: { "aria-label": "Exclude from search results" } };
+  const [hidden, setHidden] = React.useState(false);
   const [formInput, setFormInput] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -34,6 +36,7 @@ export default function FormGrid() {
       notes: userData.user.notes ? userData.user.notes : "",
       password: "",
       photo: imageURL ? imageURL : userData.user.photo,
+      hidden: hidden,
     }
   );
   const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app/api/";
@@ -93,6 +96,7 @@ export default function FormGrid() {
       });
     setIsLoading(false);
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormInput((prevState) => ({
@@ -108,7 +112,9 @@ export default function FormGrid() {
     const selectedIds = value.map((genre) => genre.id);
     setSelectedGenres(selectedIds);
   };
-
+  const handleHidden = (e) => {
+    setHidden(e.target.checked);
+  };
   React.useEffect(() => {
     console.log("selectedInstruments", selectedInstruments);
     console.log("selectedGenres", selectedGenres);
@@ -124,6 +130,18 @@ export default function FormGrid() {
       <h2 className="text-lg text-center mb-4">Edit Profile</h2>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <input
+              type="checkbox"
+              id="hidden"
+              name="hidden"
+              value={hidden}
+              onChange={handleHidden}
+            />
+            <label className="mx-3" htmlFor="hidden">
+              Exclude profile from search results
+            </label>
+          </Grid>
           <Grid item xs={6}>
             <TextField
               id="outlined-basic-1"
@@ -141,7 +159,7 @@ export default function FormGrid() {
               name="last_name"
               label="Last Name"
               variant="outlined"
-              shrink="true"
+              shrink={true}
               defaultValue={formInput.last_name}
               InputLabelProps={formInput.last_name && { shrink: true }}
               onChange={handleChange}
