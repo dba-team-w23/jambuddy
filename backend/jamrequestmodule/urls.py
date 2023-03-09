@@ -46,7 +46,9 @@ urlpatterns = [
     path('api/jamrequests', views.JamRequestList.as_view(actions={'get': 'list', 'post': 'create'}), name='jamrequest-list'),
     path('api/jamrequests/<int:pk>', views.JamRequestDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='jamrequest-detail'),
     path('api/jamrequestsforuser/<int:profile_id>', views.getUserJamRequests, name='user-jamrequest-list'),
-    path('api/searchjamrequests', views.searchJamRequests, name='jamrequest-search'),
+    path('api/jamrequests', views.searchJamRequests, name='jamrequest-search'),
+    path('api/jamrequestopen/<request_id>', views.jamRequestOpen, name='jamrequest-open'),
+    path('api/jamrequestclose/<request_id>', views.jamRequestClose, name='jamrequest-close'),
 
     path('api/jamresponses', views.JamResponseList.as_view(actions={'get': 'list', 'post': 'create'}), name='jamresponse-list'),
     path('api/jamresponses/<int:pk>', views.JamResponseDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='jamresponse-detail'),
