@@ -15,6 +15,7 @@ const userSlice = createSlice({
     setUserProfile: (state, action) => {
       console.log("setting user profile");
       state.user = action.payload;
+      console.log("state.user", state.user);
     },
     clearUserProfile: (state, action) => {
       console.log("clearing user profile");

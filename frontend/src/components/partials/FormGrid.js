@@ -147,7 +147,9 @@ export default function FormGrid() {
               label="First Name"
               variant="outlined"
               defaultValue={formInput.first_name}
-              InputLabelProps={formInput.first_name && { shrink: true }}
+              // InputLabelProps={
+              //   formInput.first_name ? { shrink: true } : { shrink: false }
+              // }
               onChange={handleChange}
             />
           </Grid>
@@ -157,9 +159,11 @@ export default function FormGrid() {
               name="last_name"
               label="Last Name"
               variant="outlined"
-              shrink={true}
+              // shrink={true}
               defaultValue={formInput.last_name}
-              InputLabelProps={formInput.last_name && { shrink: true }}
+              // InputLabelProps={
+              //   formInput.last_name ? { shrink: true } : { shrink: false }
+              // }
               onChange={handleChange}
             />
           </Grid>
@@ -170,7 +174,9 @@ export default function FormGrid() {
               label="Email"
               variant="outlined"
               defaultValue={formInput.email}
-              InputLabelProps={formInput.email && { shrink: true }}
+              // InputLabelProps={
+              //   formInput.email ? { shrink: true } : { shrink: false }
+              // }
               onChange={handleChange}
             />
           </Grid>
@@ -181,7 +187,9 @@ export default function FormGrid() {
               label="User Name"
               variant="outlined"
               defaultValue={formInput.username}
-              InputLabelProps={formInput.username && { shrink: true }}
+              // InputLabelProps={
+              //   formInput.username ? { shrink: true } : { shrink: false }
+              // }
               onChange={handleChange}
             />
           </Grid>
@@ -192,7 +200,9 @@ export default function FormGrid() {
               label="City"
               variant="outlined"
               defaultValue={formInput.city}
-              InputLabelProps={formInput.city && { shrink: true }}
+              // InputLabelProps={
+              //   formInput.city ? { shrink: true } : { shrink: false }
+              // }
               onChange={handleChange}
             />
           </Grid>

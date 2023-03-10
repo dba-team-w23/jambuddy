@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { setUserProfile } from "../features/userSlice";
 import { setSignedIn } from "../features/userSlice";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const isSignedIn = useSelector((state) => state.user.isSignedIn);
@@ -27,6 +28,7 @@ export default function SignUp() {
     }
   );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app/api/users";
 
@@ -43,39 +45,30 @@ export default function SignUp() {
     evt.preventDefault();
     let data = { ...formInput, password };
     console.log("data", data);
-
-    const returnedUser = await fetch(baseURL, {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": getCookie("csrftoken"),
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        response.json().then((data) => {
-          console.log("Success:", data);
-        });
-      })
-      .catch((error) => {
-        console.error("Error: " + error);
+    try {
+      const response = await fetch(baseURL, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCookie("csrftoken"),
+        },
+        body: JSON.stringify(data),
       });
-    setTempUser(returnedUser);
-  };
+      const userData = await response.json();
+      console.log("Success! userData", userData);
 
-  React.useEffect(() => {
-    const updateUser = async () => {
-      if (!tempUser) return;
+      setTempUser(userData);
       console.log("tempUser", tempUser);
-      localStorage.setItem("user", JSON.stringify(tempUser));
-      dispatch(setUserProfile(tempUser));
+      localStorage.setItem("user", JSON.stringify(userData));
+      console.log("localStorage", localStorage.getItem("user"));
+      dispatch(setUserProfile(userData));
       dispatch(setSignedIn(true));
-      console.log("Sign Up user profile", userData);
-      console.log("Sign Up Local storage", localStorage.getItem("user"));
-    };
-    updateUser();
-  }, [tempUser, isSignedIn, dispatch]);
+      navigate("/profile");
+    } catch (error) {
+      console.error("Error: " + error);
+    }
+  };
 
   return (
     <>
@@ -129,7 +122,7 @@ export default function SignUp() {
             variant="outlined"
             onChange={handleInput}
           />
-          <Password onPasswordChange={handlePasswordChange} label="Password" />
+          <Password onPasswordChange={handlePasswordChange} />
           <Button
             type="submit"
             variant="contained"

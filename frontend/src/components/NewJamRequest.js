@@ -103,7 +103,6 @@ const JamRequestForm = () => {
           multiple
           id="instrument-select"
           options={instruments}
-          getoptionselected={(option, value) => option.id === value.id}
           getOptionLabel={(option) => option.name}
           onChange={handleInstrument}
           renderInput={(params) => (
@@ -119,7 +118,6 @@ const JamRequestForm = () => {
           multiple
           id="genres-needed"
           options={genres}
-          getoptionselected={(option, value) => option.id === value.id}
           getOptionLabel={(option) => option.genre}
           defaultValue={[]}
           filterSelectedOptions
@@ -137,7 +135,6 @@ const JamRequestForm = () => {
           multiple
           id="experience-levels"
           options={experienceLevels}
-          getoptionselected={(option, value) => option.id === value.id}
           getOptionLabel={(option) => option.level}
           defaultValue={[]}
           filterSelectedOptions

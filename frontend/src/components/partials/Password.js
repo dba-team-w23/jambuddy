@@ -7,7 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-export default function Password({ onPasswordChange, value }) {
+export default function Password({ onPasswordChange }) {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -17,7 +17,9 @@ export default function Password({ onPasswordChange, value }) {
   };
   const handlePasswordChange = (evt) => {
     console.log("password", evt.target.value);
-    onPasswordChange(evt.target.value);
+    if (typeof onPasswordChange === "function") {
+      onPasswordChange(evt.target.value);
+    }
   };
 
   return (
