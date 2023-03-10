@@ -23,6 +23,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             password=self.initial_data['password'],
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
+            zipcode=validated_data['zipcode'],
         )
         return user
 
