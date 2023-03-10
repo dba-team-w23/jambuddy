@@ -198,6 +198,8 @@ export default function FormGrid() {
               id="outlined-basic-5"
               name="city"
               label="City"
+              required
+              error={formInput.city === ""}
               variant="outlined"
               defaultValue={formInput.city}
               // InputLabelProps={
@@ -209,6 +211,8 @@ export default function FormGrid() {
           <Grid item xs={4}>
             <TextField
               id="just-state"
+              required
+              error={formInput.state === ""}
               name="state"
               label="State"
               defaultValue={formInput.state}
