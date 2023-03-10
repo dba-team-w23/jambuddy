@@ -549,6 +549,34 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\":\"pianogirl\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/userchangepw/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userchangepw",
+										""
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},

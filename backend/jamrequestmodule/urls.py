@@ -28,8 +28,9 @@ urlpatterns = [
     path('api/logout_user', views.logout_user, name='logout'),
 
     path('api/users', views.UserList.as_view(actions={'get': 'list', 'post': 'create'}), name='user-list'),
-    path('api/users/<int:pk>', views.UserDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'patch':'update', 'delete': 'destroy'}), name='user-detail'),
+    path('api/users/<int:pk>', views.UserDetail.as_view(actions={'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='user-detail'),
     path('api/user-details/<int:pk>', views.UserDetailsView.as_view(), name='user-details'),
+    path('api/userchangepw/<int:pk>', views.changePassword, name='changepw'),
     path('api/searchusers', views.searchUsers, name='user-search'),
 
     path('api/experiencelevels', views.ExperienceLevelList.as_view(actions={'get': 'list', 'post': 'create'}), name='experiencelevel-list'),
@@ -75,5 +76,4 @@ urlpatterns = [
     path('api/userreviewsbyuser/<int:profile_id>', views.getUserReviewsByUser, name='user-reviews-list-by'),
 
     path('api/userclips/<int:profile_id>', views.getUserClipsOfUserId, name='user-clips-list'),
-
 ]
