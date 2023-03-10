@@ -171,6 +171,13 @@ class UserDetailsView(generics.RetrieveAPIView):
             'reviews': user_reviews_serializer.data
         })
 
+@api_view(('POST',))
+def changePassword(request, pk):
+    u = Profile.objects.get(id=pk)
+    u.set_password(request.data.get('password'))
+    u.save()
+    return Response("success", status=status.HTTP_200_OK)
+
 @api_view(('GET',))
 def getUserFaveJamReqs(request, profile_id):
     fave_req_ids = UserFavoriteJamRequest.objects.filter(profileid=profile_id).values_list('jrid', flat=True)
@@ -494,36 +501,3 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return Response({"status":0}, status=status.HTTP_200_OK)
-
-
-# class JamRequestList(viewsets.ModelViewSet):
-#     filter_params = [
-#         'instrument_name',
-#         'instrument_type',
-#         'genre',
-#         'location',
-#         'status',
-#         'requestor_username',
-#     ]
-
-#     def get_queryset(self):
-#         queryset = JamRequest.objects.all()
-
-#         filter_lookup = {
-#             'instrument_name': 'instrumentid__name',
-#             'instrument_type': 'instrumentid__type',
-#             'genre': 'genreid__genre',
-#             'location': 'location',
-#             'status': 'status',
-#             'requestor_username': 'profileid__username',
-#         }
-#         for client_key, backend_key in filter_lookup.items():
-#             if self.request.query_params.get(client_key):
-#                 client_value = self.request.query_params.get(client_key)
-#                 case_insensitive_client_value = client_value.lower()
-#                 queryset = queryset.filter(
-#                     **{f'{backend_key}__icontains': case_insensitive_client_value}
-#                 )
-#         return queryset
-
-#     serializer_class = JamRequestSerializer
