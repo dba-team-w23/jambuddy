@@ -163,6 +163,7 @@ const JamRequestForm = () => {
               fullWidth
               id="jam-info"
               name="note"
+              label="Jam Description"
               multiline
               maxRows={16}
               value={jamInfo}

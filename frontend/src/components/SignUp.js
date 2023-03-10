@@ -14,6 +14,7 @@ export default function SignUp() {
   const isSignedIn = useSelector((state) => state.user.isSignedIn);
   const userData = useSelector((state) => state.user);
   const [tempUser, setTempUser] = React.useState({});
+  const [password, setPassword] = React.useState("");
   const [formInput, setFormInput] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -32,13 +33,15 @@ export default function SignUp() {
   const handleInput = (evt) => {
     const name = evt.target.name;
     const newValue = evt.target.value;
-    console.log(name, newValue);
     setFormInput({ ...formInput, [name]: newValue });
+  };
+  const handlePasswordChange = (value) => {
+    setPassword(value);
   };
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    let data = formInput;
+    let data = { ...formInput, password };
     console.log("data", data);
 
     const returnedUser = await fetch(baseURL, {
@@ -126,7 +129,7 @@ export default function SignUp() {
             variant="outlined"
             onChange={handleInput}
           />
-          <Password />
+          <Password onPasswordChange={handlePasswordChange} label="Password" />
           <Button
             type="submit"
             variant="contained"

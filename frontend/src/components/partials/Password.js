@@ -7,31 +7,28 @@ import InputLabel from "@mui/material/InputLabel";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-export default function Password({ label }) {
+export default function Password({ onPasswordChange, value }) {
   const [showPassword, setShowPassword] = React.useState(false);
-  const [password, setPassword] = React.useState("");
-  const passwordLabel = label || "Password";
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const handleChange = (event) => {
-    setPassword(event.target.value);
+  const handlePasswordChange = (evt) => {
+    console.log("password", evt.target.value);
+    onPasswordChange(evt.target.value);
   };
 
   return (
     <FormControl variant="outlined">
-      <InputLabel htmlFor={`outlined-adornment-${passwordLabel[0]}`}>
-        {passwordLabel}
-      </InputLabel>
+      <InputLabel htmlFor={`outlined-adornment-password`}>Password</InputLabel>
       <OutlinedInput
-        id={`outlined-adornment-${passwordLabel[0]}`}
-        label={passwordLabel}
+        id={`outlined-adornment-password`}
+        label="Password"
         type={showPassword ? "text" : "password"}
         name="password"
-        onChange={handleChange}
+        onChange={handlePasswordChange}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
