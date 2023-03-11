@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { styled } from "@mui/material/styles";
 
 const style = {
   position: "absolute",
@@ -24,18 +25,25 @@ export default function BasicModal({ ...profile }) {
 
   // Fetch user's clips on mount
   React.useEffect(() => {
-    try {
-      const baseURL = 'https://sea-turtle-app-zggz6.ondigitalocean.app/api/';
-      const response = fetch(`${baseURL}userclips/${profile.id}`);
-      if (!response.ok) {
-        throw new Error("Network response is not ok");
+    const getData = async () => {
+      try {
+        console.log(profile);
+        const baseURL = 'https://sea-turtle-app-zggz6.ondigitalocean.app/api/';
+        const url = `${baseURL}userclips/${profile.id}`;
+        console.log(url);
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("Network response is not ok");
+        }
+        const data = await response.json();
+        setLinks(data);
+      } catch(error) {
+        console.error('There was an error', error);
       }
-      const data = response.json();
-      setLinks(data);
-    } catch(error) {
-      console.error('There was an error', error);
-    }
-  }, []);
+    };
+
+    getData();
+  }, [profile]);
 
   return (
     <div>
@@ -60,28 +68,17 @@ export default function BasicModal({ ...profile }) {
           {/* My Clips section */}
           <Typography sx={{ mt: 4 }} variant="subtitle1">My Clips</Typography>
           <ul>
+          {console.log(links)}
             {links.length === 0 ? (
               <li>No clips found.</li>
             ) : (
               links.map(link => (
                 <li key={link.id}>
-                  {link.clip_to_link.includes("youtube.com") ? (
-                    <iframe
-                      width="560"
-                      height="315"
-                      src={`https://www.youtube.com/embed/${link.clip_to_link.split("=")[1]}`}
-                      title={`YouTube video ${link.id}`}
-                      frameBorder="0"
-                      allowFullScreen
-                    ></iframe>
-                  ) : (
-                    <a href={link.clip_to_link} target="_blank" rel="noopener noreferrer">
-                      {link.clip_to_link}
-                    </a>
-                  )}
+                  <a href={link.link} style={{color: 'blue', textDecoration: 'none', ':hover': { textDecoration: 'underline' }}}>
+                    {link.link}
+                  </a>
                 </li>
-              ))
-            )}
+              )))}
           </ul>
         </Box>
       </Modal>

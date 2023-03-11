@@ -21,3 +21,7 @@ h3 {
   font-weight: 500;
   margin-bottom: 15px;
 }
+
+a {
+  text-decoration: none;
+}
