@@ -22,21 +22,16 @@ const profileAPI = `${apiRoot}/api/users`;
 
 export default function Search({}) {
   const userData = useSelector((state) => state.user);
-  const [searchTerm, setSearchTerm] = useState("");
-  // State hooks for the search filters
-  const [distanceToTravel, setDistanceToTravel] = useState("");
   const [instrument, setInstrument] = useState("");
   const [genre, setGenre] = useState("");
   const [instrumentOptions, setInstrumentOptions] = useState([]);
   const [genreOptions, setGenreOptions] = useState([]);
   const [expLevelOptions, setExpLevelOptions] = useState([]);
   const [experienceLevel, setExperienceLevel] = useState("");
-  const [requestPlaced, setRequestPlaced] = useState("");
 
   // State hook for search results and some helper hooks
   const [searchConducted, setSearchConducted] = useState(false);
   const [profiles, setProfiles] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   const fetchProfiles = async (payload) => {
     try {
@@ -109,7 +104,6 @@ export default function Search({}) {
             <FormControl sx={{ width: "100%" }}>
               <InputLabel id="jr-search-instrument">Instrument</InputLabel>
               <Select
-                select
                 id="outlined-basic"
                 label="Instrument"
                 variant="outlined"
@@ -129,7 +123,6 @@ export default function Search({}) {
             <FormControl sx={{ width: "100%" }}>
               <InputLabel id="jr-search-genre">Music Genre</InputLabel>
               <Select
-                select
                 id="search-genre"
                 label="Music Genre"
                 variant="outlined"
@@ -149,7 +142,6 @@ export default function Search({}) {
             <FormControl sx={{ width: "100%" }}>
               <InputLabel id="jr-search-exp">Experience Level</InputLabel>
               <Select
-                select
                 id="search-exp"
                 label="Experience Level"
                 variant="outlined"

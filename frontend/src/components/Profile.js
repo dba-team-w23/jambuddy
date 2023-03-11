@@ -8,8 +8,8 @@ import NewJamRequest from "./NewJamRequest";
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setUserProfile } from "../features/userSlice";
 import { ProfileClipLinks } from "./ProfileClipLinks";
+import { Grid } from "@mui/material";
 
 export default function EditProfile(props) {
   const userData = useSelector((state) => state.user);
@@ -39,19 +39,20 @@ export default function EditProfile(props) {
   return (
     <>
       {userData ? (
-        <>
-          <Box
-            sx={{ "& > :not(style)": { m: "40px auto", width: "50ch" } }}
-            noValidate
-            autoComplete="off"
-          >
+        <Grid container rowSpacing={1} columnSpacing={2} xs={12}>
+          <Grid item xs={12} md={6} xl={4}>
             <ProfileCard profile={userData.user} />
-
+          </Grid>
+          <Grid item xs={12} md={6} xl={4}>
             <ProfileClipLinks />
+          </Grid>
+          <Grid item xs={12} md={6} xl={4}>
             <FormGrid style={{ margin: "40px auto" }} />
+          </Grid>
+          <Grid item xs={12} md={6} xl={4}>
             <NewJamRequest />
-          </Box>
-        </>
+          </Grid>
+        </Grid>
       ) : (
         <div>Loading...</div>
       )}

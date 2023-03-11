@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { styled } from "@mui/material/styles";
 
 const style = {
   position: "absolute",
@@ -22,8 +21,6 @@ export default function BasicModal({ ...profile }) {
   const [links, setLinks] = React.useState([]);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  // Fetch user's clips on mount
 
   const getData = async () => {
     try {
@@ -53,11 +50,17 @@ export default function BasicModal({ ...profile }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h4" component="h2">
             {profile.first_name} {profile.last_name}
           </Typography>
           <Typography id="modal-sub-title" variant="h6" component="h3">
             {profile.city}, {profile.state}
+          </Typography>
+          <Typography id="modal-sub-title" variant="h6" component="h3">
+            Instruments: {profile.instrument_names}
+          </Typography>
+          <Typography id="modal-sub-title" variant="h6" component="h3">
+            Genres: {profile.genre_names}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {profile.note}
