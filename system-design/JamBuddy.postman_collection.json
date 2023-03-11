@@ -402,7 +402,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"first_name\": \"Eddie\",\n    \"last_name\": \"Veder\",\n    \"email\": \"pearljamfrontman@jambuddy.com\",\n    \"username\": \"eddie\",\n    \"password\": \"eddie\",\n    \"hidden\": false,\n    \"instruments\": [1,27],\n    \"genres\": [12,31,32]\n}",
+									"raw": "{\n    \"first_name\": \"Steven\",\n    \"last_name\": \"Tyler\",\n    \"email\": \"aerosmith@jambuddy.com\",\n    \"username\": \"tyler\",\n    \"password\": \"tyler\",\n    \"zipcode\": \"54321\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -545,6 +545,34 @@
 									"path": [
 										"api",
 										"userreviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\":\"pianogirl\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/userchangepw/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"userchangepw",
+										""
 									]
 								}
 							},
@@ -741,7 +769,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"instrumentid\": 7,\n    \"genreid\":13,\n    \"from_zipcode\": \"84057\",\n    \"days_back\": 60,\n    \"distance_miles\":5\n}",
+									"raw": "{\n    \"searcher_profile_id\": 53,\n    \"instrumentid\": 1,\n    \"genreid\": 12,\n    \"explevel\": 1,\n    \"daysback\": 120,\n    \"distance_miles\":2500\n}",
 									"options": {
 										"raw": {
 											"language": "json"

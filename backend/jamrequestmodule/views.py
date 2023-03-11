@@ -18,6 +18,7 @@ from rest_framework.response import Response
 from .models import (Clips, ExperienceLevel, Instrument, JamRequest, JamResponse,
                      MusicGenre, Profile, UserFavoriteJamRequest,
                      UserFavoriteProfile, UserMedia, UserReview)
+
 from .serializers import (ClipsSerializer, ExperienceLevelSerializer, InstrumentSerializer,
                           JamRequestSerializer, JamRequestSimpleSerializer,
                           JamResponseSerializer, MusicGenreSerializer,
@@ -170,6 +171,13 @@ class UserDetailsView(generics.RetrieveAPIView):
             'reviews': user_reviews_serializer.data
         })
 
+@api_view(('POST',))
+def changePassword(request, pk):
+    u = Profile.objects.get(id=pk)
+    u.set_password(request.data.get('password'))
+    u.save()
+    return Response("success", status=status.HTTP_200_OK)
+
 @api_view(('GET',))
 def getUserFaveJamReqs(request, profile_id):
     fave_req_ids = UserFavoriteJamRequest.objects.filter(profileid=profile_id).values_list('jrid', flat=True)
@@ -242,16 +250,25 @@ def jamRequestClose(request, request_id):
     return Response("success", status=status.HTTP_200_OK)
 
 
-@api_view(('GET',))
+@api_view(('POST',))
 def searchJamRequests(request):
-    jam_results = JamRequest.objects.filter(status="Open")
+    searcher_profile_id = request.data.get("searcher_profile_id")
+    searching_user = Profile.objects.filter(pk=searcher_profile_id).values('zipcode')
+    searching_user_zipcode = searching_user[0]['zipcode']
+
+    if searching_user_zipcode == "" or searching_user_zipcode is None:
+        return JsonResponse({'error':'Searching user does not have a zipcode in their profile. Zipcode is required to perform a distance search.'}, status=400)
+
     instrument_id = request.data.get("instrumentid")
     genre_id = request.data.get("genreid")
     exp_level_id = request.data.get("explevel")
     daysback = request.data.get("daysback")
     distance_miles = request.data.get("distance_miles")
-    searching_user_zipcode = request.data.get("from_zipcode")
 
+    # Exclude searcher from results
+    jam_results = JamRequest.objects.filter(status="Open").exclude(profileid_id=searcher_profile_id)
+
+    # chain of filters
     if instrument_id:
         jam_results = jam_results.filter(instruments__id=instrument_id)
     if genre_id:
@@ -260,7 +277,6 @@ def searchJamRequests(request):
         jam_results = jam_results.filter(exp_level__id=exp_level_id)
     if daysback:
         jam_results = jam_results.filter(created__gte=datetime.datetime.now() - datetime.timedelta(days=daysback))
-
     if distance_miles:
         are_distance_search_prereqs_met = all([
             distance_miles is not None and int(distance_miles) > 0,
@@ -273,27 +289,54 @@ def searchJamRequests(request):
 
             # extract zip codes for profiles of all current jam requests
             profiles = Profile.objects.filter(pk__in=profile_ids_of_jam_requestors)
+
+            # build dict of profileid -> zipcode
             profile_id_to_zip_code = {profile.pk: profile.zipcode for profile in profiles}
 
             # filter to only those that are valid zip codes
             requestor_zipcodes = list(profile_id_to_zip_code.values())
+
+            # remove invalid or empty zipcode records
             valid_zip_codes = [zip_code for zip_code in requestor_zipcodes if _is_valid_zip_code(zip_code)]
 
+            #create CSV string of all zipcodes
             candidate_zipcodes = ','.join(valid_zip_codes)
 
-            zip_codes_within_range = getZipcodesWithinDistance(
+            # call API to get distances between all zipcodes and searcher
+            zip_response = getZipcodesWithinDistance(
                 searching_user_zipcode, candidate_zipcodes, distance_miles)
 
+            # list of zipcodes within distance of searcher's zipcodes
+            zip_codes_within_range = zip_response[0]
+
+            # dict of zipcode -> distance away
+            zip_dist = zip_response[1]
+
+            # list of profile_ids that are in distance range
             profile_ids_in_range = [profile_id for profile_id, zip_code in profile_id_to_zip_code.items()
                                     if zip_code in zip_codes_within_range]
 
+            # filter jam requests from users that are within distance
             jam_results = jam_results.filter(profileid_id__in=profile_ids_in_range)
 
-    serialized_reviews = JamRequestSimpleSerializer(jam_results, many=True)
-    return JsonResponse(serialized_reviews.data, safe=False)
+    serialized_jrs = JamRequestSimpleSerializer(jam_results, many=True)
+    jr_data = serialized_jrs.data
+
+    # iterate over data object and append a 'distance' field using the zip_dist map
+    #  if for some reason it's not in the list, assign a default value of 10,000 miles
+    for jr in jr_data:
+        if zip_dist and jr['requestor_profile']['zipcode'] is not None:
+            jr['distance'] = zip_dist[jr['requestor_profile']['zipcode']]
+        else:
+            jr['distance'] = 10000
+
+    #sort objects in list by distance, low to high
+    jr_data.sort(key=lambda x: x['distance'], reverse=False)
+    return JsonResponse(jr_data, safe=False)
 
 @api_view(('GET',))
 def searchUsers(request):
+    # Get searcher's zipcode
     searcher_profile_id = request.data.get("searcher_profile_id")
     searching_user = Profile.objects.filter(pk=searcher_profile_id).values('zipcode')
     searching_user_zipcode = searching_user[0]['zipcode']
@@ -301,11 +344,14 @@ def searchUsers(request):
     if searching_user_zipcode == "" or searching_user_zipcode is None:
         return JsonResponse({'error':'Searching user does not have a zipcode in their profile. Zipcode is required to perform a distance search.'}, status=400)
 
-    profiles = Profile.objects.filter(hidden=False).exclude(pk=searcher_profile_id)
     instrument_id = request.data.get("instrumentid")
     genre_id = request.data.get("genreid")
     distance_miles = request.data.get("distance_miles")
 
+    # Exclude searcher from results
+    profiles = Profile.objects.filter(hidden=False).exclude(pk=searcher_profile_id)
+
+    # chain of filters
     if instrument_id:
         profiles = profiles.filter(instruments__id=instrument_id)
     if genre_id:
@@ -317,24 +363,83 @@ def searchUsers(request):
         )
 
         if are_distance_search_prereqs_met:
-            # extract zip codes for profiles
+            # build dict of profileid -> zipcode
             profile_id_to_zip_code = {prof.pk: prof.zipcode for prof in profiles}
 
             # filter to only those that are valid zip codes
             profile_zipcodes = list(profile_id_to_zip_code.values())
+
+            # remove invalid or empty zipcode records
             valid_zip_codes = [zip_code for zip_code in profile_zipcodes if _is_valid_zip_code(zip_code)]
+
+            #create CSV string of all zipcodes
             candidate_zipcodes = ','.join(valid_zip_codes)
 
-            zip_codes_within_range = getZipcodesWithinDistance(
+            # call API to get distances between all zipcodes and searcher
+            zip_response = getZipcodesWithinDistance(
                 searching_user_zipcode, candidate_zipcodes, distance_miles)
 
+            # list of zipcodes within distance of searcher's zipcodes
+            zip_codes_within_range = zip_response[0]
+
+            # dict of zipcode -> distance away
+            zip_dist = zip_response[1]
+
+            # list of profile_ids that are in distance range
             profile_ids_in_range = [profile_id for profile_id, zip_code in profile_id_to_zip_code.items()
                                     if zip_code in zip_codes_within_range]
 
+            # filter profiles that are in the set of profiles within distance
             profiles = profiles.filter(id__in=profile_ids_in_range)
 
     serialized_profiles = ProfileSerializer(profiles, many=True)
-    return JsonResponse(serialized_profiles.data, safe=False)
+    profile_data = serialized_profiles.data
+
+    # iterate over data object and append a 'distance' field using the zip_dist map
+    #  if for some reason it's not in the list, assign a default value of 10,000 miles
+    for user in profile_data:
+        if zip_dist and user['zipcode'] is not None:
+            user['distance'] = zip_dist[user['zipcode']]
+        else:
+            user['distance'] = 10000
+
+    #sort objects in list by distance, low to high
+    profile_data.sort(key=lambda x: x['distance'], reverse=False)
+
+    return JsonResponse(profile_data, safe=False)
+
+
+def getZipcodesWithinDistance(from_zipcode: str, candidate_zipcodes: str, distance: List[str]) -> List[str]:
+    env = environ.Env()
+    environ.Env.read_env()
+    zip_api_token = env('ZIP_API_TOKEN')
+    api_endpoint = "/rest/{}/multi-distance.json/{}/{}/mile".format(zip_api_token, from_zipcode, candidate_zipcodes)
+    api_endpoint = quote(api_endpoint)  # url-encode the zipcode CSV list
+
+    headers = {'Content-type': 'application/json'}
+    result_zipcodes = [from_zipcode]
+    zip_distances = {}
+    try:
+        conn = http.client.HTTPConnection('www.zipcodeapi.com', 80, timeout=10)
+        conn.request("GET", api_endpoint, "", headers)
+        response = conn.getresponse()
+        result = json.loads(response.read().decode())
+
+        if response.status != 200:
+            print("Error connecting to zipcodeapi.com, err:", result['error_msg'])
+
+        zip_distances = result['distances']
+        for zip,dist in zip_distances.items():
+            if dist < distance:
+                result_zipcodes.append(zip)
+
+    except Exception as e:
+        print("Error connecting to zipcodeapi.com, err:", e)
+
+    finally:
+        conn.close()
+
+    return [result_zipcodes, zip_distances]
 
 
 def _is_valid_zip_code(input: str or None) -> bool:
@@ -396,68 +501,3 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return Response({"status":0}, status=status.HTTP_200_OK)
-
-
-def getZipcodesWithinDistance(from_zipcode: str, candidate_zipcodes: str, distance: List[str]) -> List[str]:
-    env = environ.Env()
-    environ.Env.read_env()
-    zip_api_token = env('ZIP_API_TOKEN')
-    api_endpoint = "/rest/{}/multi-distance.json/{}/{}/mile".format(zip_api_token, from_zipcode, candidate_zipcodes)
-    api_endpoint = quote(api_endpoint)  # url-encode the zipcode CSV list
-
-    headers = {'Content-type': 'application/json'}
-    result_zipcodes = [from_zipcode]
-    try:
-        conn = http.client.HTTPConnection('www.zipcodeapi.com', 80, timeout=10)
-        conn.request("GET", api_endpoint, "", headers)
-        response = conn.getresponse()
-        result = json.loads(response.read().decode())
-
-        if response.status != 200:
-            print("Error connecting to zipcodeapi.com, err:", result['error_msg'])
-
-        zip_distances:dict = result['distances']
-        for zip,dist in zip_distances.items():
-            if dist < distance:
-                result_zipcodes.append(zip)
-
-    except Exception as e:
-        print("Error connecting to zipcodeapi.com, err:", e)
-
-    finally:
-        conn.close()
-
-    return result_zipcodes
-
-
-# class JamRequestList(viewsets.ModelViewSet):
-#     filter_params = [
-#         'instrument_name',
-#         'instrument_type',
-#         'genre',
-#         'location',
-#         'status',
-#         'requestor_username',
-#     ]
-
-#     def get_queryset(self):
-#         queryset = JamRequest.objects.all()
-
-#         filter_lookup = {
-#             'instrument_name': 'instrumentid__name',
-#             'instrument_type': 'instrumentid__type',
-#             'genre': 'genreid__genre',
-#             'location': 'location',
-#             'status': 'status',
-#             'requestor_username': 'profileid__username',
-#         }
-#         for client_key, backend_key in filter_lookup.items():
-#             if self.request.query_params.get(client_key):
-#                 client_value = self.request.query_params.get(client_key)
-#                 case_insensitive_client_value = client_value.lower()
-#                 queryset = queryset.filter(
-#                     **{f'{backend_key}__icontains': case_insensitive_client_value}
-#                 )
-#         return queryset
-
-#     serializer_class = JamRequestSerializer
