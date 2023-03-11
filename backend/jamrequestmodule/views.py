@@ -4,6 +4,7 @@ import http.client
 import json
 from typing import List
 from urllib.parse import quote
+from django.core import serializers
 # from django_filters import rest_framework as filters
 from rest_framework import viewsets
 
@@ -404,7 +405,7 @@ def searchUsers(request):
             # filter profiles that are in the set of profiles within distance
             profiles = profiles.filter(id__in=profile_ids_in_range)
 
-    serialized_profiles = ProfileSerializer(profiles, many=True)
+    serialized_profiles = ProfileSerializer(profiles.values(), many=True)
     profile_data = serialized_profiles.data
 
     if False:
