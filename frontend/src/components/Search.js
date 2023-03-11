@@ -206,7 +206,8 @@ const Search = () => {
       </div>
 
       <div className="jam-buddies-results flex flex-row flex-wrap gap-6 justify-center align-stretch py-6">
-        {results.map((result) => (
+      {results.length > 0 ? (
+        results.map((result) => (
           <div key={result.id} className="max-w-xs h-full">
             <SearchCard
               post={result}
@@ -215,7 +216,13 @@ const Search = () => {
               experienceLevels={result.exp_level}
             />
           </div>
-        ))}
+        ))
+        ) : (
+          <div className="text-center">
+            <h2>No results found</h2>
+            <p>Try broadening your search criteria</p>
+            </div>
+        )}
       </div>
     </div>
   );
