@@ -40,7 +40,7 @@ export default function Search({}) {
 
   const fetchProfiles = async (payload) => {
     try {
-      const res = await fetch(`${apiRoot}/api/searchprofiles`, {
+      const res = await fetch(`${apiRoot}/api/searchusers`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -86,7 +86,7 @@ export default function Search({}) {
     fetchInstruments();
     fetchGenres();
     fetchExperiences();
-    fetchProfiles({});
+    // fetchProfiles({});
   }, []);
 
   const handleSearchSubmit = (e) => {
@@ -165,55 +165,8 @@ export default function Search({}) {
               </Select>
             </FormControl>
           </Grid>
-          {/* <div className="col">
-            <label htmlFor="instrument">Instrument:</label>
-            <select
-              id="instrument"
-              value={instrument}
-              onChange={(e) => setInstrument(e.target.value)}
-            >
-              <option value="">Select an instrument</option>
-              {instrumentOptions.map((opt) => (
-                <option key={opt.id} value={opt.id}>
-                  {opt.name} ({opt.type})
-                </option>
-              ))}
-            </select>
-          </div> */}
-
-          {/* <div className="col">
-            <label htmlFor="genre">Music Genre:</label>
-            <select
-              id="genre"
-              value={genre}
-              onChange={(e) => setGenre(e.target.value)}
-            >
-              <option value="">Select a genre</option>
-              {genreOptions.map((opt) => (
-                <option key={opt.id} value={opt.id}>
-                  {opt.genre}
-                </option>
-              ))}
-            </select>
-          </div> */}
-
-          {/* <div className="col">
-            <label htmlFor="experienceLevel">Experience Level:</label>
-            <select
-              id="experienceLevel"
-              value={experienceLevel}
-              onChange={(e) => setExperienceLevel(e.target.value)}
-            >
-              <option value="">Select an experience level</option>
-              {expLevelOptions.map((opt) => (
-                <option key={opt.id} value={opt.id}>
-                  {opt.level}
-                </option>
-              ))}
-            </select>
-          </div> */}
         </Grid>
-        {/* ... more input fields ... */}
+
         <div className="text-center">
           <Button variant="contained" color="primary" type="submit">
             Search

@@ -24,24 +24,24 @@ export default function BasicModal({ ...profile }) {
   const handleClose = () => setOpen(false);
 
   // Fetch user's clips on mount
-  React.useEffect(() => {
-    const getData = async () => {
-      try {
-        const baseURL = 'https://sea-turtle-app-zggz6.ondigitalocean.app/api/';
-        const url = `${baseURL}userclips/${profile.id}`;
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error("Network response is not ok");
-        }
-        const data = await response.json();
-        setLinks(data);
-      } catch(error) {
-        console.error('There was an error', error);
-      }
-    };
 
+  const getData = async () => {
+    try {
+      const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app/api/";
+      const url = `${baseURL}userclips/${profile.id}`;
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Network response is not ok");
+      }
+      const data = await response.json();
+      setLinks(data);
+    } catch (error) {
+      console.error("There was an error", error);
+    }
+  };
+  React.useEffect(() => {
     getData();
-  }, [profile]);
+  }, []);
 
   return (
     <div>
@@ -64,19 +64,28 @@ export default function BasicModal({ ...profile }) {
           </Typography>
 
           {/* My Clips section */}
-          <Typography sx={{ mt: 4 }} variant="subtitle1">My Clips</Typography>
+          <Typography sx={{ mt: 4 }} variant="subtitle1">
+            My Clips
+          </Typography>
           <ul>
-          {console.log(links)}
             {links.length === 0 ? (
               <li>No clips found.</li>
             ) : (
-              links.map(link => (
+              links.map((link) => (
                 <li key={link.id}>
-                  <a href={link.link} style={{color: 'blue', textDecoration: 'none', ':hover': { textDecoration: 'underline' }}}>
+                  <a
+                    href={link.link}
+                    style={{
+                      color: "blue",
+                      textDecoration: "none",
+                      ":hover": { textDecoration: "underline" },
+                    }}
+                  >
                     {link.link}
                   </a>
                 </li>
-              )))}
+              ))
+            )}
           </ul>
         </Box>
       </Modal>
