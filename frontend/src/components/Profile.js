@@ -9,6 +9,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setUserProfile } from "../features/userSlice";
+import { ProfileClipLinks } from "./ProfileClipLinks";
 
 export default function EditProfile(props) {
   const userData = useSelector((state) => state.user);
@@ -46,6 +47,7 @@ export default function EditProfile(props) {
           <ProfileCard profile={userData.user} />
           {userData.user.note ? (
             <>
+            <ProfileClipLinks/>
               <NewJamRequest />
               <FormGrid style={{ margin: "40px auto" }} />
             </>
