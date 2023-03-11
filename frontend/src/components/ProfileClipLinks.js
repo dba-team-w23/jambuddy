@@ -56,7 +56,7 @@ export function ProfileClipLinks() {
 
   // Function to handle removing a clip from the links state.
   function handleRemoveClip(id) {
-    fetch(`${baseURL}clip/${id}`, { method: "DELETE" })
+    fetch(`${baseURL}clips/${id}`, { method: "DELETE" })
     .then(() => {
       setLinks(prevLinks => prevLinks.filter(link => link.id !== id));
     });
@@ -67,6 +67,7 @@ export function ProfileClipLinks() {
     fetch(`${baseURL}userclips/${userData.user.id}`)
     .then(response => response.json())
     .then(data => {
+        console.log(data);
       setLinks(data);
     });
   }, [userData.user.id]);
@@ -93,8 +94,8 @@ export function ProfileClipLinks() {
         {links.length === 0 ? <li>No clips found.</li> :
           links.map(link => (
             <li key={link.id}>
-              <StyledLink href={link.clip_to_link} target="_blank" rel="noopener noreferrer">
-                {link.clip_to_link}
+              <StyledLink href={link.link} target="_blank" rel="noopener noreferrer">
+                {link.link}
               </StyledLink>
               <Button variant="outlined" onClick={() => handleRemoveClip(link.id)}>Remove</Button>
             </li>
