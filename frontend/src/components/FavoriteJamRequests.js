@@ -25,13 +25,21 @@ export default function FavoriteJamRequests(userId) {
 
     fetchData();
   }, []);
-
+  const removeCard = (id) => {
+    setJamRequests((prevJamRequests) =>
+      prevJamRequests.filter((request) => request.id !== id)
+    );
+  };
   return (
     <Grid container spacing={6}>
       {jamRequests.map((request, i) => {
         return (
           <Grid key={i} item xs={6}>
-            <FavoriteJamsCard key={i + 1000} post={request} />
+            <FavoriteJamsCard
+              key={i + 1000}
+              post={request}
+              onRemoveFavorite={() => removeCard(request.id)}
+            />
           </Grid>
         );
       })}
