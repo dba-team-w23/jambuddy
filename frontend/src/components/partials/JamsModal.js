@@ -2,6 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -19,6 +20,18 @@ export default function BasicModal({ ...profile }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const userId = profile.id;
+  const baseURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/jamrequestsforuser/${userId}`;
+
+  const userJams = async () => {
+    try {
+      const response = await axios.get(`${baseURL}`);
+      const data = await response.data;
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
