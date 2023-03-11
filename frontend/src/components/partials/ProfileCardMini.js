@@ -1,18 +1,31 @@
 import * as React from "react";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
-import FavoriteUserButton from "./FavoriteUserButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "../css/Global.css";
 import Modal from "./Modal";
-import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
+import { Card, CardContent, IconButton } from "@mui/material";
 import JamsModal from "./JamsModal";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
-export default function ProfileCard({ profile }) {
+export default function ProfileCardMini({ profile, onRemoveProfile }) {
+  const user = useSelector((state) => state.user);
   const [isLiked, setIsLiked] = React.useState(true);
-  const toggleButton = () => {
-    setIsLiked(!isLiked);
+  console.log("profile card mini", profile, isLiked);
+  const removeFavorite = async () => {
+    const baseURL =
+      "https://sea-turtle-app-zggz6.ondigitalocean.app/api/userfaveprofiles";
+    await axios.delete(`${baseURL}`, {
+      data: { profileid: user.user.id, favorite_profileid: profile.id },
+    });
+    onRemoveProfile(() => {
+      setIsLiked(!isLiked);
+    });
   };
+  React.useEffect(() => {
+    console.log("isLiked FJC", isLiked);
+  }, [isLiked]);
 
   return (
     <div className="m-5 ">
@@ -21,7 +34,7 @@ export default function ProfileCard({ profile }) {
           <img
             src={profile.photo}
             alt={`${profile.first_name} ${profile.last_name}`}
-            className="object-cover w-full h-full position-absolute"
+            className="object-cover w-full h-full position-absolute object-top"
           />
         </div>
         <CardContent>
@@ -38,13 +51,13 @@ export default function ProfileCard({ profile }) {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <div aria-label="add to favorites">
-            {isLiked ? (
-              <FavoriteIcon onClick={toggleButton} />
-            ) : (
-              <FavoriteUserButton onClick={toggleButton} />
-            )}
-          </div>
+          <IconButton
+            onClick={removeFavorite}
+            aria-label="like"
+            sx={{ float: "right" }}
+          >
+            {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          </IconButton>
           <JamsModal {...profile} />
         </CardActions>
 

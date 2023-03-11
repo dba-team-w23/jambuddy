@@ -45,7 +45,6 @@ export default function BasicCard({
   };
   const handleFavorite = () => {
     setIsLiked(!isLiked);
-    console.log("liked = ", isLiked);
     if (isLiked) {
       removeFavorite();
     } else {

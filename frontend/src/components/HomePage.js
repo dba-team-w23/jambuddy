@@ -16,7 +16,7 @@ const HomePage = () => {
       </div>
       <div className="bg-blue-50 rounded shadow p-4 flex flex-row flex-wrap">
         <h2 className="text-center w-full">Favorite Musicians</h2>
-        {/* <FavoriteUsers id={userId} /> */}
+        <FavoriteUsers id={userId} />
       </div>
     </div>
   );
