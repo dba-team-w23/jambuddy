@@ -259,7 +259,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"searcher_profile_id\": 53,\n    \"distance_miles\":1000\n}",
+									"raw": "{\n    \"searcher_profile_id\": 53,\n    \"instrumentid\": 1,\n    \"genreid\": 12,\n    \"distance_miles\":1000\n}",
 									"options": {
 										"raw": {
 											"language": "json"

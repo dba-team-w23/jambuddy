@@ -250,7 +250,7 @@ def jamRequestClose(request, request_id):
     return Response("success", status=status.HTTP_200_OK)
 
 
-@api_view(('POST',))
+@api_view(('POST','GET',))
 def searchJamRequests(request):
     searcher_profile_id = request.data.get("searcher_profile_id")
     searching_user = Profile.objects.filter(pk=searcher_profile_id).values('zipcode')
@@ -277,7 +277,7 @@ def searchJamRequests(request):
         jam_results = jam_results.filter(exp_level__id=exp_level_id)
     if daysback:
         jam_results = jam_results.filter(created__gte=datetime.datetime.now() - datetime.timedelta(days=daysback))
-    if distance_miles:
+    if False and distance_miles:
         are_distance_search_prereqs_met = all([
             distance_miles is not None and int(distance_miles) > 0,
             _is_valid_zip_code(searching_user_zipcode)]
@@ -322,19 +322,20 @@ def searchJamRequests(request):
     serialized_jrs = JamRequestSimpleSerializer(jam_results, many=True)
     jr_data = serialized_jrs.data
 
-    # iterate over data object and append a 'distance' field using the zip_dist map
-    #  if for some reason it's not in the list, assign a default value of 10,000 miles
-    for jr in jr_data:
-        if zip_dist and jr['requestor_profile']['zipcode'] is not None:
-            jr['distance'] = zip_dist[jr['requestor_profile']['zipcode']]
-        else:
-            jr['distance'] = 10000
+    if False:
+        # iterate over data object and append a 'distance' field using the zip_dist map
+        #  if for some reason it's not in the list, assign a default value of 10,000 miles
+        for jr in jr_data:
+            if zip_dist and jr['requestor_profile']['zipcode'] is not None:
+                jr['distance'] = zip_dist[jr['requestor_profile']['zipcode']]
+            else:
+                jr['distance'] = 10000
 
-    #sort objects in list by distance, low to high
-    jr_data.sort(key=lambda x: x['distance'], reverse=False)
+        #sort objects in list by distance, low to high
+        jr_data.sort(key=lambda x: x['distance'], reverse=False)
     return JsonResponse(jr_data, safe=False)
 
-@api_view(('GET',))
+@api_view(('POST','GET',))
 def searchUsers(request):
     # Get searcher's zipcode
     searcher_profile_id = request.data.get("searcher_profile_id")
@@ -356,7 +357,7 @@ def searchUsers(request):
         profiles = profiles.filter(instruments__id=instrument_id)
     if genre_id:
         profiles = profiles.filter(genres__id=genre_id)
-    if distance_miles:
+    if False and distance_miles:
         are_distance_search_prereqs_met = all([
             distance_miles is not None and int(distance_miles) > 0,
             _is_valid_zip_code(searching_user_zipcode)]
@@ -395,21 +396,23 @@ def searchUsers(request):
     serialized_profiles = ProfileSerializer(profiles, many=True)
     profile_data = serialized_profiles.data
 
-    # iterate over data object and append a 'distance' field using the zip_dist map
-    #  if for some reason it's not in the list, assign a default value of 10,000 miles
-    for user in profile_data:
-        if zip_dist and user['zipcode'] is not None:
-            user['distance'] = zip_dist[user['zipcode']]
-        else:
-            user['distance'] = 10000
+    if False:
+        # iterate over data object and append a 'distance' field using the zip_dist map
+        #  if for some reason it's not in the list, assign a default value of 10,000 miles
+        for user in profile_data:
+            if zip_dist and user['zipcode'] is not None:
+                user['distance'] = zip_dist[user['zipcode']]
+            else:
+                user['distance'] = 10000
 
-    #sort objects in list by distance, low to high
-    profile_data.sort(key=lambda x: x['distance'], reverse=False)
+        #sort objects in list by distance, low to high
+        profile_data.sort(key=lambda x: x['distance'], reverse=False)
 
     return JsonResponse(profile_data, safe=False)
 
 
 def getZipcodesWithinDistance(from_zipcode: str, candidate_zipcodes: str, distance: List[str]) -> List[str]:
+    print("got here")
     env = environ.Env()
     environ.Env.read_env()
     zip_api_token = env('ZIP_API_TOKEN')
