@@ -32,9 +32,6 @@ function LikeButton({ userId, profileId }) {
     const fetchData = async () => {
       fetch(`${url}/${userId}`)
         .then((response) => response.json())
-        .then((data) => {
-          console.log("from faves: ", data);
-        });
     };
     fetchData();
   }, [isLiked]);

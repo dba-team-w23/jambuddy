@@ -111,7 +111,8 @@ const Search = () => {
   return (
     <div className="jam-buddies-search">
       <div className="jam-buddies-search">
-        <h1>Search for Jam Buddies</h1>
+        <h1>Search Open Jam Requests</h1>
+
 
         <div className="row">
           <div className="col">

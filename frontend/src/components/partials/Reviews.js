@@ -42,7 +42,6 @@ export default function BasicModal({ ...profile }) {
   };
 
   React.useEffect(() => {
-    console.log("UE reviews", reviews);
   }, []);
 
   return (
