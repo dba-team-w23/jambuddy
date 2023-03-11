@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SearchCard from "./partials/SearchCard";
 import Grid from "@mui/material/Grid";
-import { Button, Select, InputLabel } from "@mui/material";
+import { Button, Select, InputLabel, TextField } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
@@ -140,64 +140,79 @@ const Search = () => {
           </Grid>
 
           <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
-            <label htmlFor="genre">Music Genre:</label>
-            <select
-              id="genre"
-              value={genre}
-              onChange={(e) => setGenre(e.target.value)}
-              className="w-full"
-            >
-              <option value="">Select a genre</option>
-              {genreOptions.map((opt) => (
-                <option key={opt.id} value={opt.id}>
-                  {opt.genre}
-                </option>
-              ))}
-            </select>
+            <FormControl sx={{ width: "100%" }}>
+              <InputLabel id="jr-search-genre">Music Genre</InputLabel>
+              <Select
+                select
+                id="search-genre"
+                label="Music Genre"
+                variant="outlined"
+                value={genre}
+                onChange={(e) => setGenre(e.target.value)}
+              >
+                <MenuItem value=""></MenuItem>
+                {genreOptions.map((opt) => (
+                  <MenuItem key={opt.id} value={opt.id}>
+                    {opt.genre}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
 
           <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
-            <label htmlFor="experienceLevel">Experience Level:</label>
-            <select
-              id="experienceLevel"
-              value={experienceLevel}
-              onChange={(e) => setExperienceLevel(e.target.value)}
-            >
-              <option value="">Select an experience level</option>
-              {expLevelOptions.map((opt) => (
-                <option key={opt.id} value={opt.id}>
-                  {opt.level}
-                </option>
-              ))}
-            </select>
+            <FormControl sx={{ width: "100%" }}>
+              <InputLabel id="jr-search-exp">Experience Level</InputLabel>
+              <Select
+                select
+                id="search-exp"
+                label="Experience Level"
+                variant="outlined"
+                value={experienceLevel}
+                onChange={(e) => setExperienceLevel(e.target.value)}
+              >
+                <MenuItem value=""></MenuItem>
+                {expLevelOptions.map((opt) => (
+                  <MenuItem key={opt.id} value={opt.id}>
+                    {opt.level}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
 
           <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
-            <label htmlFor="distance">Distance to Travel (miles):</label>
-            <input
-              id="distance"
+            <TextField
+              id="outlined-basic"
+              label="Distance in miles"
               type="number"
-              min="1"
+              variant="outlined"
               value={distanceToTravel}
               onChange={(e) => setDistanceToTravel(e.target.value)}
             />
           </Grid>
 
           <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
-            <label htmlFor="requestPlaced">Request Placed:</label>
-            <select
-              id="requestPlaced"
-              value={requestPlaced}
-              onChange={(e) => setRequestPlaced(e.target.value)}
-            >
-              <option value="">Select a time range</option>
-              <option value="All">All</option>
-              <option value="last7days">Last 7 days</option>
-              <option value="last2weeks">Last 2 weeks</option>
-              <option value="lastmonth">Last month</option>
-              <option value="last6months">Last 6 months</option>
-              <option value="lastyear">Last year</option>
-            </select>
+            <FormControl fullWidth>
+              <InputLabel id="search-request-placed">
+                Request Placed:
+              </InputLabel>
+              <Select
+                labelId="search-request-placed"
+                id="request-placed"
+                value={requestPlaced}
+                label="Request Placed:"
+                onChange={(e) => setRequestPlaced(e.target.value)}
+              >
+                <MenuItem value=""></MenuItem>
+                <MenuItem value="All">All</MenuItem>
+                <MenuItem value="last7days">Last 7 days</MenuItem>
+                <MenuItem value="last2weeks">Last 2 weeks</MenuItem>
+                <MenuItem value="lastmonth">Last month</MenuItem>
+                <MenuItem value="last6months">Last 6 months</MenuItem>
+                <MenuItem value="lastyear">Last year</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
 
           <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
