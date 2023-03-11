@@ -250,7 +250,7 @@ def jamRequestClose(request, request_id):
     return Response("success", status=status.HTTP_200_OK)
 
 
-@api_view(('GET',))
+@api_view(('POST',))
 def searchJamRequests(request):
     searcher_profile_id = request.data.get("searcher_profile_id")
     searching_user = Profile.objects.filter(pk=searcher_profile_id).values('zipcode')
@@ -289,13 +289,13 @@ def searchJamRequests(request):
 
             # extract zip codes for profiles of all current jam requests
             profiles = Profile.objects.filter(pk__in=profile_ids_of_jam_requestors)
-            
+
             # build dict of profileid -> zipcode
             profile_id_to_zip_code = {profile.pk: profile.zipcode for profile in profiles}
 
             # filter to only those that are valid zip codes
             requestor_zipcodes = list(profile_id_to_zip_code.values())
-            
+
             # remove invalid or empty zipcode records
             valid_zip_codes = [zip_code for zip_code in requestor_zipcodes if _is_valid_zip_code(zip_code)]
 
@@ -308,7 +308,7 @@ def searchJamRequests(request):
 
             # list of zipcodes within distance of searcher's zipcodes
             zip_codes_within_range = zip_response[0]
-            
+
             # dict of zipcode -> distance away
             zip_dist = zip_response[1]
 
@@ -378,7 +378,7 @@ def searchUsers(request):
             # call API to get distances between all zipcodes and searcher
             zip_response = getZipcodesWithinDistance(
                 searching_user_zipcode, candidate_zipcodes, distance_miles)
-            
+
             # list of zipcodes within distance of searcher's zipcodes
             zip_codes_within_range = zip_response[0]
 

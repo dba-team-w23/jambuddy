@@ -42,15 +42,16 @@ const Search = () => {
     };
     const fetchInitialJamRequests = async () => {
       try {
-        const payload = {};
+        const payload = { "searcher_profile_id": 1};
         const res = await fetch(`${apiRoot}/api/searchjamrequests`, {
-          method: "POST",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(payload),
         });
         const data = await res.json();
+        console.log(data);
         setResults(data);
       } catch (error) {
         console.error(error);
