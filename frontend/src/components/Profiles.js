@@ -7,12 +7,10 @@ import ProfileSearch from "./ProfileSearch";
 const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
 const baseURL = `${apiRoot}/api/users`;
 
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
+
 
 export default function Profiles(props) {
-  const query = useQuery();
+  const query = new URLSearchParams();
 
   const [profiles, setProfiles] = React.useState([]);
 
@@ -39,7 +37,7 @@ export default function Profiles(props) {
 
  React.useEffect(() => {
   getData();
-}, [props.location.search]);
+}, []);
 
   return (
     <div>
