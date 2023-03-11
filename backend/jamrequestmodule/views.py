@@ -4,7 +4,7 @@ import http.client
 import json
 from typing import List
 from urllib.parse import quote
-from django_filters import rest_framework as filters
+# from django_filters import rest_framework as filters
 from rest_framework import viewsets
 
 import environ
@@ -30,19 +30,19 @@ from .serializers import (ClipsSerializer, ExperienceLevelSerializer, Instrument
                           UserReviewForUserSerializer, UserReviewSerializer)
 
 
-class ProfileFilter(filters.FilterSet):
-    instrument_ids = filters.BaseInFilter(field_name='instruments__id', conjoined=True)
-    genre_ids = filters.BaseInFilter(field_name='music_genres__id', conjoined=True)
-    experience_levels = filters.BaseInFilter(field_name='experience_level__id', conjoined=True)
+# class ProfileFilter(filters.FilterSet):
+#     instrument_ids = filters.BaseInFilter(field_name='instruments__id', conjoined=True)
+#     genre_ids = filters.BaseInFilter(field_name='music_genres__id', conjoined=True)
+#     experience_levels = filters.BaseInFilter(field_name='experience_level__id', conjoined=True)
 
-    class Meta:
-        model = Profile
-        fields = ['instrument_ids', 'genre_ids', 'experience_levels']
+#     class Meta:
+#         model = Profile
+#         fields = ['instrument_ids', 'genre_ids', 'experience_levels']
 
 class UserList(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    filterset_class = ProfileFilter
+    # filterset_class = ProfileFilter
 
 class UserDetail(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
