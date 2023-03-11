@@ -38,7 +38,7 @@ export default function BasicModal({ ...profile }) {
   console.log("jams", jams);
   return (
     <div>
-      {jams.length && (
+      {jams.length > 0 && (
         <div
           onClick={handleOpen}
           className="rounded-full hover:bg-blue-50 w-[40px] h-[40px] flex items-center justify-center cursor-pointer"
