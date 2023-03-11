@@ -15,9 +15,6 @@ import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
 export default function ProfileCard({ profile }) {
   const user = useSelector((state) => state.user);
   const userMatch = profile.username == user.user.username;
-
-  console.log("userMatch", userMatch);
-  console.log("user", user.user.username);
   return (
     <div>
       <Card sx={{ position: "relative" }}>

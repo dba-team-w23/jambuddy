@@ -117,9 +117,8 @@ class ClipLink(viewsets.ModelViewSet):
 
         link = request.data.get("clip_to_link")
         profile_to_link = Profile.objects.get(id=profile_id)
-        profile_clips = profile_to_link.clips()
 
-        for clip in profile_clips:
+        for clip in Profile.objects.filter(id=profile_id):
             if clip.link == link:
                 return Response({"status":"error", "message": f"The provided clip has already been linked to profile ID {profile_id}"})
 
