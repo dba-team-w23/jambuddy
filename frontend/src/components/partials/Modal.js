@@ -27,10 +27,8 @@ export default function BasicModal({ ...profile }) {
   React.useEffect(() => {
     const getData = async () => {
       try {
-        console.log(profile);
         const baseURL = 'https://sea-turtle-app-zggz6.ondigitalocean.app/api/';
         const url = `${baseURL}userclips/${profile.id}`;
-        console.log(url);
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error("Network response is not ok");
