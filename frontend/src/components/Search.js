@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import SearchCard from "./partials/SearchCard";
 import Grid from "@mui/material/Grid";
-import { Button, TextField } from "@mui/material";
-import Autocomplete from "@mui/material/Autocomplete";
+import { Button, Select, InputLabel } from "@mui/material";
+import FormControl from "@mui/material/FormControl";
+import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 
 import "./css/Search.css";
@@ -118,32 +119,24 @@ const Search = () => {
         <h1>Search Open Jam Requests</h1>
         <Grid container spacing={6}>
           <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
-            {/* <label htmlFor="instrument">Instrument:</label>
-            <select
-              id="instrument"
-              value={instrument}
-              onChange={(e) => setInstrument(e.target.value)}
-            >
-              <option value="">Select an instrument</option>
-              {instrumentOptions.map((opt) => (
-                <option key={opt.id} value={opt.id}>
-                  {opt.name} ({opt.type})
-                </option>
-              ))}
-            </select> */}
-            <Autocomplete
-              id="instrument-select"
-              options={instrumentOptions}
-              getOptionLabel={(option) => option.name}
-              onChange={(e) => setInstrument(e.target.value)}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Select an instrument"
-                  placeholder="Instruments"
-                />
-              )}
-            />
+            <FormControl sx={{ width: "100%" }}>
+              <InputLabel id="jr-search-instrument">Instrument</InputLabel>
+              <Select
+                select
+                id="outlined-basic"
+                label="Instrument"
+                variant="outlined"
+                value={instrument}
+                onChange={(e) => setInstrument(e.target.value)}
+              >
+                <MenuItem value=""></MenuItem>
+                {instrumentOptions.map((opt) => (
+                  <MenuItem key={opt.id} value={opt.id}>
+                    {opt.name} ({opt.type})
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
 
           <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
