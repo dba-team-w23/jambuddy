@@ -4,7 +4,7 @@ import http.client
 import json
 from typing import List
 from urllib.parse import quote
-import django_filters.rest_framework as filters
+from django_filters import rest_framework as filters
 from rest_framework import viewsets
 
 import environ

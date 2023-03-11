@@ -7,16 +7,39 @@ import ProfileSearch from "./ProfileSearch";
 const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
 const baseURL = `${apiRoot}/api/users`;
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 export default function Profiles(props) {
+  const query = useQuery();
+
   const [profiles, setProfiles] = React.useState([]);
 
   const getData = async () => {
-    const data = await fetch(baseURL).then((response) => response.json());
+    const instruments = query.get("instrument_ids");
+    const genres = query.get("genre_ids");
+    const levels = query.get("experience_levels");
+
+    const url = new URL(baseURL);
+
+    if (instruments) {
+      url.searchParams.append('instrument_ids', instruments);
+    }
+    if (genres) {
+      url.searchParams.append('genre_ids', genres);
+    }
+    if (levels) {
+      url.searchParams.append('experience_levels', levels);
+    }
+
+    const data = await fetch(url.toString()).then((response) => response.json());
     setProfiles(data);
   };
-  React.useEffect(() => {
-    getData();
-  }, []);
+
+ React.useEffect(() => {
+  getData();
+}, [props.location.search]);
 
   return (
     <div>
