@@ -28,7 +28,7 @@ export default function ProfileCardMini({ profile, onRemoveProfile }) {
   }, [isLiked]);
 
   return (
-    <div className="m-5 ">
+    <div>
       <Card sx={{ position: "relative" }}>
         <div className="aspect-[4/3]">
           <img
@@ -38,13 +38,13 @@ export default function ProfileCardMini({ profile, onRemoveProfile }) {
           />
         </div>
         <CardContent>
-          <h2 className="font-medium">{`${profile.first_name} ${profile.last_name}`}</h2>
-          <h3>{profile.username}</h3>
-          <h3>
+          <h3 className="font-medium">{`${profile.first_name} ${profile.last_name}`}</h3>
+          <h4>{profile.username}</h4>
+          <h4>
             {profile.city && profile.state
               ? `${profile.city}, ${profile.state}`
               : `${profile.city} ${profile.state}`}
-          </h3>
+          </h4>
 
           <Typography variant="body2" color="text.secondary">
             {profile.genre}

@@ -34,7 +34,7 @@ export default function FavoriteJamRequests(userId) {
     <Grid container spacing={6}>
       {jamRequests.map((request, i) => {
         return (
-          <Grid key={i} item xs={6}>
+          <Grid key={i} item xs={12} md={6} xl={3}>
             <FavoriteJamsCard
               key={i + 1000}
               post={request}

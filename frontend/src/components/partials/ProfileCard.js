@@ -13,7 +13,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
 
-export default function ProfileCard({ profile, onRemoveProfile }) {
+export default function ProfileCard({ profile }) {
   const user = useSelector((state) => state.user);
   const userMatch = profile.username == user.user.username;
   const [isLiked, setIsLiked] = React.useState(false);
