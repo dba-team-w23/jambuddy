@@ -30,7 +30,6 @@ export default function ProfileCard({ profile }) {
             src={profile.photo ? profile.photo : "./sunset.jpg"}
             alt={profile.first_name}
             className="object-cover position-absolute w-full h-full"
-            style={{ objectPosition: "center top" }}
           />
         </div>
 
