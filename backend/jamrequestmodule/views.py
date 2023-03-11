@@ -331,7 +331,7 @@ def searchJamRequests(request):
             # filter jam requests from users that are within distance
             jam_results = jam_results.filter(profileid_id__in=profile_ids_in_range)
 
-    serialized_jrs = JamRequestSimpleSerializer(jam_results, many=True)
+    serialized_jrs = JamRequestSimpleSerializer(jam_results.values(), many=True)
     jr_data = serialized_jrs.data
 
     if False:
