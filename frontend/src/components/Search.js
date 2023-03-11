@@ -3,8 +3,11 @@ import SearchCard from "./partials/SearchCard";
 import axios from "axios";
 
 import "./css/Search.css";
+import { useSelector } from "react-redux";
 
 const Search = () => {
+  const userData = useSelector((state) => state.user);
+  const [userProfile, setUserProfile] = React.useState({});
   const [instrumentOptions, setInstrumentOptions] = useState([]);
   const [genreOptions, setGenreOptions] = useState([]);
   const [expLevelOptions, setExpLevelOptions] = useState([]);
@@ -13,6 +16,7 @@ const Search = () => {
   const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
 
   React.useEffect(() => {
+
     const fetchInstruments = async () => {
       try {
         const res = await fetch(`${apiRoot}/api/instruments`);
@@ -42,9 +46,10 @@ const Search = () => {
     };
     const fetchInitialJamRequests = async () => {
       try {
-        const payload = { "searcher_profile_id": 1};
+        const payload = { "searcher_profile_id": userData.user.id};
+        console.log(payload);
         const res = await fetch(`${apiRoot}/api/searchjamrequests`, {
-          method: "GET",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
@@ -83,7 +88,11 @@ const Search = () => {
       if (requestPlaced === "last6months") payload.daysback = 180;
       if (requestPlaced === "lastyear") payload.daysback = 365;
 
+      payload.searcher_profile_id = userData.user.id;
+
       if (distanceToTravel !== "") payload.distance_miles = distanceToTravel;
+
+      console.log(payload);
 
       const res = await fetch(`${apiRoot}/api/searchjamrequests`, {
         method: "POST",
