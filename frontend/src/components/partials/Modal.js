@@ -68,7 +68,6 @@ export default function BasicModal({ ...profile }) {
             My Clips
           </Typography>
           <ul>
-            {console.log(links)}
             {links.length === 0 ? (
               <li>No clips found.</li>
             ) : (

@@ -33,9 +33,10 @@ export default function BasicModal({ ...profile }) {
       console.error(error);
     }
   };
-  userJams();
 
-  console.log("jams", jams);
+  React.useEffect(() => {
+    userJams();
+  }, []);
   return (
     <div>
       {jams.length > 0 && (

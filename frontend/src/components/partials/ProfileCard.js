@@ -40,7 +40,6 @@ export default function ProfileCard({ profile }) {
     await axios.delete(`${baseURL}`, {
       data: { profileid: user.user.id, favorite_profileid: profile.id },
     });
-    console.log("removed favorite", profile.id);
   };
   return (
     <div>
