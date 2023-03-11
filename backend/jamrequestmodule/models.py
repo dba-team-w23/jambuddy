@@ -53,9 +53,9 @@ class Profile(AbstractUser):
         return ', '.join([g.genre for g in self.genres.all()])
     genre_names.short_description = "GenreNames"
 
-    # def clips(self):
-    #     return Clips.objects.filter(profile_id=self.id)
-    # clips.short_description = "Clips"
+    def clips(self):
+        return Clips.objects.filter(profile_id=self.id).values_list('link', flat=True)
+    clips.short_description = "Clips"
 
 
 class JamRequest(models.Model):
