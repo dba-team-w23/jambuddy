@@ -1,15 +1,9 @@
 import { useState } from "react";
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { styled } from "@mui/material/styles";
-import ProfileCard from "./partials/ProfileCard";
-import FormGrid from "./partials/FormGrid";
-import NewJamRequest from "./NewJamRequest";
-import axios from "axios";
 import { useEffect } from "react";
 
 
@@ -73,20 +67,26 @@ export function ProfileClipLinks() {
   }, [userData.user.id]);
 
   return (
-    <StyledDiv>
-      <Typography variant="h5" sx={{mb: 2}}>User Clips</Typography>
+    <div
+      className="border-4 rounded p-5 mb-4"
+      style={{ background: "#FFFFFF" }}
+    >
 
+      <h2 className="text-lg text-center mb-4">Highlighted Jam Clips</h2>
       {/* Form for adding new clip */}
+      <p>Got a video of you jammin' that you'd like to share? Drop a URL below to show the world!</p>
+      <br/>
       <form onSubmit={e => {
         e.preventDefault();
         handleAddClip(e.target.url.value);
         e.target.reset();
-      }}>
-        <label htmlFor="url">
-          <Typography sx={{mr: 1}}>Add New Clip:</Typography>
-        </label>
-        <input type="text" id="url" name="url" />
-        <Button variant="contained" type="submit">Add</Button>
+      }}
+      style={{ display: "flex", alignItems: "center" }}
+      >
+        <input type="text" id="url" placeholder='youtube.com/watch?v=<Clip of you jamming out!>' name="url" />
+        <Button variant="contained" type="submit" style={{ minWidth: "30px" }}>
+    Add
+  </Button>
       </form>
 
       {/* List of current clips with remove buttons */}
@@ -101,6 +101,6 @@ export function ProfileClipLinks() {
             </li>
           ))}
       </ul>
-    </StyledDiv>
+    </div>
   );
 }

@@ -18,8 +18,24 @@ const style = {
 
 export default function BasicModal({ ...profile }) {
   const [open, setOpen] = React.useState(false);
+  const [links, setLinks] = React.useState([]);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  // Fetch user's clips on mount
+  React.useEffect(() => {
+    try {
+      const baseURL = 'https://sea-turtle-app-zggz6.ondigitalocean.app/api/';
+      const response = fetch(`${baseURL}userclips/${profile.id}`);
+      if (!response.ok) {
+        throw new Error("Network response is not ok");
+      }
+      const data = response.json();
+      setLinks(data);
+    } catch(error) {
+      console.error('There was an error', error);
+    }
+  }, []);
 
   return (
     <div>
@@ -40,6 +56,33 @@ export default function BasicModal({ ...profile }) {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {profile.note}
           </Typography>
+
+          {/* My Clips section */}
+          <Typography sx={{ mt: 4 }} variant="subtitle1">My Clips</Typography>
+          <ul>
+            {links.length === 0 ? (
+              <li>No clips found.</li>
+            ) : (
+              links.map(link => (
+                <li key={link.id}>
+                  {link.clip_to_link.includes("youtube.com") ? (
+                    <iframe
+                      width="560"
+                      height="315"
+                      src={`https://www.youtube.com/embed/${link.clip_to_link.split("=")[1]}`}
+                      title={`YouTube video ${link.id}`}
+                      frameBorder="0"
+                      allowFullScreen
+                    ></iframe>
+                  ) : (
+                    <a href={link.clip_to_link} target="_blank" rel="noopener noreferrer">
+                      {link.clip_to_link}
+                    </a>
+                  )}
+                </li>
+              ))
+            )}
+          </ul>
         </Box>
       </Modal>
     </div>
