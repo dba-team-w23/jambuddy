@@ -116,12 +116,12 @@ class ClipLink(viewsets.ModelViewSet):
             return Response({"status":"error", "message": f"Profile ID {profile_id} does not exist"})
 
         link = request.data.get("clip_to_link")
+
+        profile_clip_urls = Clips.objects.filter(profile_id=profile_id).values_list('link', flat=True)
+        if link in profile_clip_urls:
+            return Response({"status":"error", "message": f"The provided clip has already been linked to profile ID {profile_id}"})
+
         profile_to_link = Profile.objects.get(id=profile_id)
-
-        for clip in Profile.objects.filter(id=profile_id):
-            if clip.link == link:
-                return Response({"status":"error", "message": f"The provided clip has already been linked to profile ID {profile_id}"})
-
         new_clip = Clips.objects.create(link=link, profile_id=profile_to_link)
 
         return Response({"status":"success", "new_clip_id": new_clip.id})
