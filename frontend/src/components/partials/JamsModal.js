@@ -18,6 +18,7 @@ const style = {
 
 export default function BasicModal({ ...profile }) {
   const [open, setOpen] = React.useState(false);
+  const [jams, setJams] = React.useState([]);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const userId = profile.id;
@@ -27,20 +28,24 @@ export default function BasicModal({ ...profile }) {
     try {
       const response = await axios.get(`${baseURL}`);
       const data = await response.data;
-      console.log(data);
+      setJams(data);
     } catch (error) {
       console.error(error);
     }
   };
+  userJams();
 
+  console.log("jams", jams);
   return (
     <div>
-      <div
-        onClick={handleOpen}
-        className="rounded-full hover:bg-blue-50 w-[40px] h-[40px] flex items-center justify-center cursor-pointer"
-      >
-        <MusicNoteIcon style={{ color: "#1976d2" }} />
-      </div>
+      {jams.length && (
+        <div
+          onClick={handleOpen}
+          className="rounded-full hover:bg-blue-50 w-[40px] h-[40px] flex items-center justify-center cursor-pointer"
+        >
+          <MusicNoteIcon style={{ color: "#1976d2" }} />
+        </div>
+      )}
       <Modal
         open={open}
         onClose={handleClose}
@@ -49,6 +54,14 @@ export default function BasicModal({ ...profile }) {
       >
         <Box sx={style}>
           <h2>{profile.username}'s Jam Requests</h2>
+          <div>
+            {jams}
+            {jams.map((jam) => (
+              <div className="border border-blue-500 my-5 p-5" key={jam.id}>
+                <p>{jam.note}</p>
+              </div>
+            ))}
+          </div>
         </Box>
       </Modal>
     </div>
