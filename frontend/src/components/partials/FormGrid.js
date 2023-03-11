@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import Password from "./Password";
 import Multiline from "./Multiline";
 import UploadWidget from "./UploadWidget";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -147,9 +146,6 @@ export default function FormGrid() {
               label="First Name"
               variant="outlined"
               defaultValue={formInput.first_name}
-              // InputLabelProps={
-              //   formInput.first_name ? { shrink: true } : { shrink: false }
-              // }
               onChange={handleChange}
             />
           </Grid>
@@ -159,11 +155,7 @@ export default function FormGrid() {
               name="last_name"
               label="Last Name"
               variant="outlined"
-              // shrink={true}
               defaultValue={formInput.last_name}
-              // InputLabelProps={
-              //   formInput.last_name ? { shrink: true } : { shrink: false }
-              // }
               onChange={handleChange}
             />
           </Grid>
@@ -174,9 +166,6 @@ export default function FormGrid() {
               label="Email"
               variant="outlined"
               defaultValue={formInput.email}
-              // InputLabelProps={
-              //   formInput.email ? { shrink: true } : { shrink: false }
-              // }
               onChange={handleChange}
             />
           </Grid>
@@ -187,9 +176,6 @@ export default function FormGrid() {
               label="User Name"
               variant="outlined"
               defaultValue={formInput.username}
-              // InputLabelProps={
-              //   formInput.username ? { shrink: true } : { shrink: false }
-              // }
               onChange={handleChange}
             />
           </Grid>
@@ -202,9 +188,6 @@ export default function FormGrid() {
               error={formInput.city === ""}
               variant="outlined"
               defaultValue={formInput.city}
-              // InputLabelProps={
-              //   formInput.city ? { shrink: true } : { shrink: false }
-              // }
               onChange={handleChange}
             />
           </Grid>
@@ -265,12 +248,6 @@ export default function FormGrid() {
             />
           </Grid>
 
-          <Grid item xs={6}>
-            <Password label="Password" name="password" id="pw1" />
-          </Grid>
-          <Grid item xs={6}>
-            <Password label="Repeat Password" id="pw2" />
-          </Grid>
           <Grid item xs={8}>
             <UploadWidget value={imageURL} setImageURL={setImageURL} />
           </Grid>

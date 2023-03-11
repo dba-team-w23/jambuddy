@@ -39,25 +39,19 @@ export default function EditProfile(props) {
   return (
     <>
       {userData ? (
-        <Box
-          sx={{ "& > :not(style)": { m: "40px auto", width: "50ch" } }}
-          noValidate
-          autoComplete="off"
-        >
-          <ProfileCard profile={userData.user} />
-          {userData.user.note ? (
-            <>
-            <ProfileClipLinks/>
-              <NewJamRequest />
-              <FormGrid style={{ margin: "40px auto" }} />
-            </>
-          ) : (
-            <>
-              <FormGrid style={{ margin: "40px auto" }} />
-              <NewJamRequest />
-            </>
-          )}
-        </Box>
+        <>
+          <Box
+            sx={{ "& > :not(style)": { m: "40px auto", width: "50ch" } }}
+            noValidate
+            autoComplete="off"
+          >
+            <ProfileCard profile={userData.user} />
+
+            <ProfileClipLinks />
+            <FormGrid style={{ margin: "40px auto" }} />
+            <NewJamRequest />
+          </Box>
+        </>
       ) : (
         <div>Loading...</div>
       )}
