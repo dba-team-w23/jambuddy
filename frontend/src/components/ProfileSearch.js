@@ -40,7 +40,7 @@ export default function Search({}) {
 
   const fetchProfiles = async (payload) => {
     try {
-      const res = await fetch(`${apiRoot}/api/searchprofiles`, {
+      const res = await fetch(`${apiRoot}/api/searchusers`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -86,7 +86,7 @@ export default function Search({}) {
     fetchInstruments();
     fetchGenres();
     fetchExperiences();
-    fetchProfiles({});
+    // fetchProfiles({});
   }, []);
 
   const handleSearchSubmit = (e) => {
