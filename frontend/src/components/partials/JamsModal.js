@@ -56,12 +56,13 @@ export default function BasicModal({ ...profile }) {
         <Box sx={style}>
           <h2>{profile.username}'s Jam Requests</h2>
           <div>
-            {jams}
-            {jams.map((jam) => (
-              <div className="border border-blue-500 my-5 p-5" key={jam.id}>
-                <p>{jam.note}</p>
-              </div>
-            ))}
+            {jams.map((jam) =>
+              jam.note ? (
+                <div className="border border-blue-500 my-5 p-5" key={jam.id}>
+                  <p>{jam.note}</p>
+                </div>
+              ) : null
+            )}
           </div>
         </Box>
       </Modal>
