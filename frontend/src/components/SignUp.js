@@ -16,17 +16,6 @@ export default function SignUp() {
   const userData = useSelector((state) => state.user);
   const [tempUser, setTempUser] = React.useState({});
   const [password, setPassword] = React.useState("");
-  const [formInput, setFormInput] = React.useReducer(
-    (state, newState) => ({ ...state, ...newState }),
-    {
-      first_name: "",
-      last_name: "",
-      email: "",
-      zipcode: "",
-      username: "",
-      password: "",
-    }
-  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

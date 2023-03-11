@@ -13,9 +13,8 @@ const userSlice = createSlice({
       state.isSignedIn = action.payload;
     },
     setUserProfile: (state, action) => {
-      console.log("setting user profile");
       state.user = action.payload;
-      console.log("state.user", state.user);
+      console.log("slice state.user", state.user);
     },
     clearUserProfile: (state, action) => {
       console.log("clearing user profile");

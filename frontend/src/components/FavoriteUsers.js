@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 export default function FavoriteUsers(userId) {
   const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
-  console.log("favorite Users userid", userId.id);
   const favUserApi = `${apiRoot}/api/userfaveprofiles/${userId.id}`;
 
   const [favoriteUsers, setFavoriteUsers] = React.useState([]);
@@ -18,7 +17,6 @@ export default function FavoriteUsers(userId) {
         const response = await axios.get(favUserApi);
         console.log("fave users", response.data.profiles);
         setFavoriteUsers(response.data.profiles);
-        // console.log("fave users", favoriteUsers);
       } catch (error) {
         console.error(error);
       }

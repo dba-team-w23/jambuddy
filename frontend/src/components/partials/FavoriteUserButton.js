@@ -6,7 +6,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 function LikeButton({ userId, profileId }) {
   const [isLiked, setIsLiked] = useState(false);
   const url = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/userfaveprofiles`;
-  console.log("profileid: ", userId, "favorite_profileid: ", profileId);
+  // console.log("profileid: ", userId, "favorite_profileid: ", profileId);
   const handleLike = () => {
     setIsLiked(!isLiked);
     const fetchData = async () => {

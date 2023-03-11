@@ -7,16 +7,20 @@ import ProfileModal from "./ProfileModal";
 import FavoriteJamButton from "./FavoriteJamButton";
 import { useSelector } from "react-redux";
 import JamResponseModal from "./JamResponseModal";
+import axios from "axios";
+import IconButton from "@mui/material/IconButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 export default function BasicCard({
   post,
   instruments,
   genres,
   experienceLevels,
-  i,
+  // isLiked,
 }) {
   const user = useSelector((state) => state.user);
-  // const isLiked = useSelector((state) => state.jam.likedJams.includes(post.id));
+  const [isLiked, setIsLiked] = React.useState(false);
 
   const formattedDate = format(new Date(post.created), "MM/dd/yyyy");
   const mapInstrumentstoNames = (instruments, ids) => {
@@ -39,12 +43,45 @@ export default function BasicCard({
       return experience ? experience.level : "";
     });
   };
+  const handleFavorite = () => {
+    setIsLiked(!isLiked);
+    console.log("liked = ", isLiked);
+    if (isLiked) {
+      removeFavorite();
+    } else {
+      addFavorite();
+    }
+  };
+  const addFavorite = async () => {
+    const baseURL =
+      "https://sea-turtle-app-zggz6.ondigitalocean.app/api/userfavejamreqs";
+    await axios.post(`${baseURL}`, {
+      profileid: user.user.id,
+      jrid: post.id,
+    });
+  };
+  const removeFavorite = async () => {
+    const baseURL =
+      "https://sea-turtle-app-zggz6.ondigitalocean.app/api/userfavejamreqs";
+    await axios.delete(`${baseURL}`, {
+      data: { profileid: user.user.id, jrid: post.id },
+    });
+  };
 
+  React.useEffect(() => {
+    console.log("isLiked", isLiked);
+  }, [isLiked]);
   return (
     <Card>
       <CardContent>
         <div sx={{ float: "right" }} aria-label="add to favorites">
-          <FavoriteJamButton jamId={post.id} />
+          <IconButton
+            onClick={handleFavorite}
+            aria-label="like"
+            sx={{ float: "right" }}
+          >
+            {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          </IconButton>
         </div>
         <Typography variant="h5" color="text.secondary" gutterBottom>
           {post.requestor_profile.city}
@@ -100,8 +137,8 @@ export default function BasicCard({
         </div>
       </CardContent>
       <div className="flex place-content-around mb-2  ">
-          <JamResponseModal {...post} />
-        </div>
+        <JamResponseModal {...post} />
+      </div>
     </Card>
   );
 }
