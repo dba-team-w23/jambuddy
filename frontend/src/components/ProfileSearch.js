@@ -86,7 +86,6 @@ export default function Search({}) {
     fetchInstruments();
     fetchGenres();
     fetchExperiences();
-    // fetchProfiles({});
   }, []);
 
   const handleSearchSubmit = (e) => {
@@ -98,11 +97,12 @@ export default function Search({}) {
       explevel: experienceLevel !== "" ? parseInt(experienceLevel) : undefined,
       searcher_profile_id: userData.user.id,
     };
-    fetchProfiles(payload); // perform search
+    fetchProfiles(payload);
+    setSearchConducted; // perform search
   };
 
   return (
-    <div className="jam-buddies-search">
+    <div className="jam-buddies-search my-5 bg-slate-100">
       <form onSubmit={handleSearchSubmit}>
         <Grid container spacing={4} sx={{ marginBottom: "1rem" }}>
           <Grid item xs={12} sm={6} md={4} lg={4}>
@@ -167,7 +167,7 @@ export default function Search({}) {
           </Grid>
         </Grid>
 
-        <div className="text-center">
+        <div className="text-center pb-5">
           <Button variant="contained" color="primary" type="submit">
             Search
           </Button>
@@ -185,9 +185,9 @@ export default function Search({}) {
         </Grid>
       ) : (
         <div className="loading">
-          {searchConducted
+          {searchConducted && profiles.length === 0
             ? "No matching profiles found"
-            : "Loading profiles..."}
+            : ""}
         </div>
       )}
     </div>
