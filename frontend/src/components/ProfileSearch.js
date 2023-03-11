@@ -1,15 +1,26 @@
 import SearchIcon from "@mui/icons-material/Search";
-import React, { useState, useEffect } from 'react';
-import { Grid, Box, TextField, InputAdornment, FormControl, Select, MenuItem, Button, Typography, CircularProgress } from '@mui/material';
-import './css/Search.css';
-import ProfileCard from './partials/ProfileCard';
+import React, { useState, useEffect } from "react";
+import {
+  Grid,
+  Box,
+  TextField,
+  InputAdornment,
+  FormControl,
+  Select,
+  MenuItem,
+  Button,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
+import "./css/Search.css";
+import ProfileCard from "./partials/ProfileCard";
 import { useSelector } from "react-redux";
 
 const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
 const profileAPI = `${apiRoot}/api/users`;
 
-export default function Search({ }) {
-    const userData = useSelector((state) => state.user);
+export default function Search({}) {
+  const userData = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState("");
   // State hooks for the search filters
   const [distanceToTravel, setDistanceToTravel] = useState("");
@@ -71,11 +82,11 @@ export default function Search({ }) {
   };
 
   React.useEffect(() => {
-  fetchInstruments();
-  fetchGenres();
-  fetchExperiences();
-  fetchProfiles({});
-}, []);
+    fetchInstruments();
+    fetchGenres();
+    fetchExperiences();
+    fetchProfiles({});
+  }, []);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault(); // prevent form submission
@@ -92,8 +103,7 @@ export default function Search({ }) {
   return (
     <div className="jam-buddies-search">
       <form onSubmit={handleSearchSubmit}>
-
-      <div className="row">
+        <div className="row">
           <div className="col">
             <label htmlFor="instrument">Instrument:</label>
             <select
@@ -144,9 +154,11 @@ export default function Search({ }) {
         </div>
 
         {/* ... more input fields ... */}
-        <Button variant="contained" color="primary" type="submit" fullWidth>
-          Search
-        </Button>
+        <div className="text-center">
+          <Button variant="contained" color="primary" type="submit">
+            Search
+          </Button>
+        </div>
       </form>
 
       {profiles.length > 0 ? (
@@ -160,7 +172,9 @@ export default function Search({ }) {
         </Grid>
       ) : (
         <div className="loading">
-          {searchConducted ? "No matching profiles found" : "Loading profiles..."}
+          {searchConducted
+            ? "No matching profiles found"
+            : "Loading profiles..."}
         </div>
       )}
     </div>

@@ -17,7 +17,6 @@ export default function BasicCard({
   instruments,
   genres,
   experienceLevels,
-  // isLiked,
 }) {
   const user = useSelector((state) => state.user);
   const [isLiked, setIsLiked] = React.useState(false);

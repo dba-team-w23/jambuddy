@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import SearchCard from "./partials/SearchCard";
+import Grid from "@mui/material/Grid";
+import { Button, TextField } from "@mui/material";
+import Autocomplete from "@mui/material/Autocomplete";
 import axios from "axios";
 
 import "./css/Search.css";
@@ -7,7 +10,6 @@ import { useSelector } from "react-redux";
 
 const Search = () => {
   const userData = useSelector((state) => state.user);
-  const [userProfile, setUserProfile] = React.useState({});
   const [instrumentOptions, setInstrumentOptions] = useState([]);
   const [genreOptions, setGenreOptions] = useState([]);
   const [expLevelOptions, setExpLevelOptions] = useState([]);
@@ -16,7 +18,6 @@ const Search = () => {
   const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
 
   React.useEffect(() => {
-
     const fetchInstruments = async () => {
       try {
         const res = await fetch(`${apiRoot}/api/instruments`);
@@ -46,7 +47,7 @@ const Search = () => {
     };
     const fetchInitialJamRequests = async () => {
       try {
-        const payload = { "searcher_profile_id": userData.user.id};
+        const payload = { searcher_profile_id: userData.user.id };
         console.log(payload);
         const res = await fetch(`${apiRoot}/api/searchjamrequests`, {
           method: "POST",
@@ -107,16 +108,17 @@ const Search = () => {
       console.error(error);
     }
   };
+  React.useEffect(() => {
+    console.log("instrument", instrument);
+  }, [instrument]);
 
   return (
-    <div className="jam-buddies-search">
-      <div className="jam-buddies-search">
+    <div className="jam-buddies-search bg-blue-50 w-full">
+      <div className="jam-buddies-search mb-5">
         <h1>Search Open Jam Requests</h1>
-
-
-        <div className="row">
-          <div className="col">
-            <label htmlFor="instrument">Instrument:</label>
+        <Grid container spacing={6}>
+          <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
+            {/* <label htmlFor="instrument">Instrument:</label>
             <select
               id="instrument"
               value={instrument}
@@ -128,15 +130,29 @@ const Search = () => {
                   {opt.name} ({opt.type})
                 </option>
               ))}
-            </select>
-          </div>
+            </select> */}
+            <Autocomplete
+              id="instrument-select"
+              options={instrumentOptions}
+              getOptionLabel={(option) => option.name}
+              onChange={(e) => setInstrument(e.target.value)}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Select an instrument"
+                  placeholder="Instruments"
+                />
+              )}
+            />
+          </Grid>
 
-          <div className="col">
+          <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
             <label htmlFor="genre">Music Genre:</label>
             <select
               id="genre"
               value={genre}
               onChange={(e) => setGenre(e.target.value)}
+              className="w-full"
             >
               <option value="">Select a genre</option>
               {genreOptions.map((opt) => (
@@ -145,9 +161,9 @@ const Search = () => {
                 </option>
               ))}
             </select>
-          </div>
+          </Grid>
 
-          <div className="col">
+          <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
             <label htmlFor="experienceLevel">Experience Level:</label>
             <select
               id="experienceLevel"
@@ -161,11 +177,9 @@ const Search = () => {
                 </option>
               ))}
             </select>
-          </div>
-        </div>
+          </Grid>
 
-        <div className="row">
-          <div className="col">
+          <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
             <label htmlFor="distance">Distance to Travel (miles):</label>
             <input
               id="distance"
@@ -174,9 +188,9 @@ const Search = () => {
               value={distanceToTravel}
               onChange={(e) => setDistanceToTravel(e.target.value)}
             />
-          </div>
+          </Grid>
 
-          <div className="col">
+          <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
             <label htmlFor="requestPlaced">Request Placed:</label>
             <select
               id="requestPlaced"
@@ -191,38 +205,39 @@ const Search = () => {
               <option value="last6months">Last 6 months</option>
               <option value="lastyear">Last year</option>
             </select>
-          </div>
+          </Grid>
 
-          <div className="col">
-            <button
-              className="bg-blue-500 rounded text-white cursor-pointer text-xl py-2 px-4 hover:bg-blue-700 transition-all "
+          <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
+            <Button
+              variant="contained"
+              className="bg-blue-500 rounded text-white cursor-pointer text-xl py-1 px-4 hover:bg-blue-700 transition-all "
               onClick={search}
             >
               Search
-            </button>
-          </div>
-        </div>
+            </Button>
+          </Grid>
+        </Grid>
       </div>
 
-      <div className="jam-buddies-results flex flex-row flex-wrap gap-6 justify-center align-stretch py-6">
-      {results.length > 0 ? (
-        results.map((result) => (
-          <div key={result.id} className="max-w-xs h-full">
-            <SearchCard
-              post={result}
-              instruments={result.instruments}
-              genres={result.genres}
-              experienceLevels={result.exp_level}
-            />
-          </div>
-        ))
+      <Grid container spacing={4}>
+        {results.length > 0 ? (
+          results.map((result) => (
+            <Grid item key={result.id} xs={12} sm={6} md={6} lg={4} xl={3}>
+              <SearchCard
+                post={result}
+                instruments={result.instruments}
+                genres={result.genres}
+                experienceLevels={result.exp_level}
+              />
+            </Grid>
+          ))
         ) : (
           <div className="text-center">
             <h2>No results found</h2>
             <p>Try broadening your search criteria</p>
-            </div>
+          </div>
         )}
-      </div>
+      </Grid>
     </div>
   );
 };

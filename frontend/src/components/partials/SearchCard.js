@@ -57,7 +57,7 @@ export default function SearchCard({
   });
 
   return (
-    <Card sx={{ minWidth: "320px" }}>
+    <Card>
       <CardContent>
         <FavoriteJamButton userId={user.user.id} postId={post.id} />
         <Typography variant="h5" color="text.secondary" gutterBottom>
