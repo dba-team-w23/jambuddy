@@ -97,7 +97,7 @@ export default function SearchCard({
             </Typography>
           </li>
         </ul>
-        <div className="my-5">
+        <div className="my-5 testclass">
           Posted {formattedDate} by {post.requestor_profile.first_name}{" "}
           {post.requestor_profile.last_name}
           <ProfileModal {...post.requestor_profile} />

@@ -10,6 +10,8 @@ import Reviews from "./Reviews";
 import ReviewModal from "./ReviewModal";
 import { useSelector } from "react-redux";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ProfileData from "./ProfileData";
+import { Grid } from "@mui/material";
 
 import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
 
@@ -64,16 +66,24 @@ export default function ProfileCard({ profile }) {
             {profile.genre}
           </Typography>
         </CardContent>
-        <CardActions disableSpacing>
-          <IconButton
-            onClick={handleFavorite}
-            aria-label="like"
-            sx={{ float: "right" }}
-          >
-            {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          </IconButton>
-          <JamsModal {...profile} />
-        </CardActions>
+        <Grid container spacing={2}>
+          <Grid item xs={2}>
+            <CardActions disableSpacing>
+              <IconButton
+                onClick={handleFavorite}
+                aria-label="like"
+                sx={{ float: "right" }}
+              >
+                {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+              </IconButton>
+              {/* <JamsModal {...profile} /> */}
+            </CardActions>
+          </Grid>
+          <Grid item xs={10}>
+            <ProfileData profile={profile} />
+          </Grid>
+        </Grid>
+
         <div className="flex place-content-between  ">
           <Modal {...profile} />
           <ReviewModal {...profile} />

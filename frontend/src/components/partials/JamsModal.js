@@ -36,7 +36,7 @@ export default function BasicModal({ ...profile }) {
 
   React.useEffect(() => {
     userJams();
-  }, []);
+  }, [userId]);
   return (
     <div>
       {jams.length > 0 && (

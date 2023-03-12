@@ -8,6 +8,8 @@ import { Card, CardContent, IconButton } from "@mui/material";
 import JamsModal from "./JamsModal";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import ProfileData from "./ProfileData";
+import Grid from "@mui/material/Grid";
 
 export default function ProfileCardMini({ profile, onRemoveProfile }) {
   const user = useSelector((state) => state.user);
@@ -23,9 +25,6 @@ export default function ProfileCardMini({ profile, onRemoveProfile }) {
       setIsLiked(!isLiked);
     });
   };
-  React.useEffect(() => {
-    console.log("isLiked FJC", isLiked);
-  }, [isLiked]);
 
   return (
     <div>
@@ -50,17 +49,23 @@ export default function ProfileCardMini({ profile, onRemoveProfile }) {
             {profile.genre}
           </Typography>
         </CardContent>
-        <CardActions disableSpacing>
-          <IconButton
-            onClick={removeFavorite}
-            aria-label="like"
-            sx={{ float: "right" }}
-          >
-            {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          </IconButton>
-          <JamsModal {...profile} />
-        </CardActions>
-
+        <Grid container spacing={2}>
+          <Grid item xs={2}>
+            <CardActions disableSpacing>
+              <IconButton
+                onClick={removeFavorite}
+                aria-label="like"
+                sx={{ float: "right" }}
+              >
+                {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+              </IconButton>
+              {/* <JamsModal {...profile} /> */}
+            </CardActions>
+          </Grid>
+          <Grid item xs={10}>
+            <ProfileData profile={profile} />
+          </Grid>
+        </Grid>
         <Modal {...profile} />
       </Card>
     </div>
