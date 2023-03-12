@@ -41,7 +41,7 @@ export default function JamRequests() {
   }, []);
 
   return (
-    <Grid container spacing={4}>
+    <Grid container spacing={4} style={{ gridAutoFlow: "dense" }}>
       {jamRequests.map((request, i) => {
         return (
           <Grid item key={i} xs={12} sm={6} md={6} lg={4} xl={3}>

@@ -32,7 +32,6 @@ export default function BasicModal({ ...profile }) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-
         setReviews(data);
       } catch (error) {
         console.error("Error: " + error);
@@ -42,34 +41,39 @@ export default function BasicModal({ ...profile }) {
   };
 
   React.useEffect(() => {
+    console.log("Reviews Card reviews", reviews, typeof reviews);
   }, []);
 
   return (
     <div>
-      <Button onClick={() => handleOpen(profile.id)}>Reviews</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <div>
-            <h2 className="text-lg mb-2">Reviews for {profile.username}</h2>
-            {reviews.length > 0
-              ? reviews.map((review, i) => (
-                  <p key={i} className="m-2">
-                    <i>{review.comment}</i>
-                    <span className="font-bold">
-                      {" "}
-                      - {review.reviewer}, {review.reviewer_location}
-                    </span>
-                  </p>
-                ))
-              : "No reviews yet!"}
-          </div>
-        </Box>
-      </Modal>
+      {reviews.length > 0 && (
+        <>
+          <Button onClick={() => handleOpen(profile.id)}>Reviews</Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <div>
+                <h2 className="text-lg mb-2">Reviews for {profile.username}</h2>
+                {reviews.length > 0
+                  ? reviews.map((review, i) => (
+                      <p key={i} className="m-2">
+                        <i>{review.comment}</i>
+                        <span className="font-bold">
+                          {" "}
+                          - {review.reviewer}, {review.reviewer_location}
+                        </span>
+                      </p>
+                    ))
+                  : "No reviews yet!"}
+              </div>
+            </Box>
+          </Modal>
+        </>
+      )}
     </div>
   );
 }
