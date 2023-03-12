@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Grid from "@mui/material/Grid";
 
 const JamResponses = () => {
   const user = useSelector((state) => state.user);
@@ -47,34 +48,33 @@ const JamResponses = () => {
   }, [jamRequests]);
 
   return (
-    <div className="border-4 rounded p-5 mb-4 bg-white">
+    <div className="drop-shadow-lg rounded p-5 bg-white">
       <h2>Jam Responses</h2>
       <ul>
         {jamResponses.length > 0 ? (
           jamResponses.map((response, i) => {
             return (
-              <li key={i} style={{
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    marginBottom: '8px',
-    padding: '8px',
-    display: 'flex',
-    alignItems: 'center',
-  }}>
-                <div style={{display: 'flex', alignItems: 'center'}}>
-                  <div style={{marginRight: '16px', width: '8rem'}}>
-                    <b>{response.responder_profile.username}</b> <br/>
-                    <i>{response.responder_profile.first_name + " " + response.responder_profile.last_name}</i>
-                  </div>
-                  <div>
-                    <div style={{fontSize: '14px'}}>{response.responder_profile.email}</div>
-                    <div style={{fontSize: '14px'}}>{response.responder_profile.phone}</div>
-                  </div>
-                </div>
-                  <br/>
-                <div style={{fontSize: '16px', width: '20rem', marginLeft: '16px', tmarginTop: '8px'}}>
-                  {response.note}
-                </div>
+              <li key={i} className="border border-blue-500 rounded px-1 my-2">
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <p>
+                      <b>{response.responder_profile.username}</b>
+                    </p>
+                    <p>
+                      {" "}
+                      <i>
+                        {response.responder_profile.first_name +
+                          " " +
+                          response.responder_profile.last_name}
+                      </i>
+                    </p>
+                    <p>{response.responder_profile.email}</p>
+                    <p>{response.responder_profile.phone}</p>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <p>{response.note}</p>
+                  </Grid>
+                </Grid>
               </li>
             );
             console.log(response);

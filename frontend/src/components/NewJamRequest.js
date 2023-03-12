@@ -93,7 +93,7 @@ const JamRequestForm = () => {
 
   return (
     <div
-      className="border-4 rounded p-5 mb-4"
+      className="drop-shadow-lg rounded-md p-4 "
       style={{ background: "#FFFFFF" }}
     >
       <h2 className="text-lg text-center mb-4">Make a Jam Request</h2>
