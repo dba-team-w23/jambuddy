@@ -3,7 +3,6 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import "./css/SignIn.css";
-import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -16,7 +15,6 @@ import { useDispatch } from "react-redux";
 import { setUserProfile } from "../features/userSlice";
 import { setSignedIn } from "../features/userSlice";
 import { useSelector } from "react-redux";
-import Grid from "@mui/material/Grid";
 
 export default function SignIn() {
   const isSignedIn = useSelector((state) => state.user.isSignedIn);
@@ -29,7 +27,6 @@ export default function SignIn() {
     }
   );
   const [showPassword, setShowPassword] = React.useState(false);
-  const [userId, setUserId] = React.useState(null);
   const dispatch = useDispatch();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -62,8 +59,6 @@ export default function SignIn() {
       body: JSON.stringify(data),
       mode: "cors",
     }).then((response) => response.json());
-    console.log("data", resData);
-    console.log(resData.status);
 
     if (resData.status == 1) {
       const userData = await fetchUserData(resData.profile_id);

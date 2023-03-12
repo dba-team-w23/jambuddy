@@ -16,6 +16,17 @@ export default function SignUp() {
   const userData = useSelector((state) => state.user);
   const [tempUser, setTempUser] = React.useState({});
   const [password, setPassword] = React.useState("");
+  const [formInput, setFormInput] = React.useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      first_name: "",
+      last_name: "",
+      email: "",
+      zipcode: "",
+      username: "",
+      password: "",
+    }
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -77,12 +88,16 @@ export default function SignUp() {
             name="first_name"
             label="First Name"
             variant="outlined"
+            required
+            error={formInput.first_name === ""}
             onChange={handleInput}
           />
           <TextField
             id="lastName-textfield"
             label="Last Name"
             name="last_name"
+            required
+            error={formInput.last_name === ""}
             variant="outlined"
             onChange={handleInput}
           />
@@ -91,6 +106,7 @@ export default function SignUp() {
             label="Email"
             name="email"
             type="email"
+            error={formInput.email === ""}
             required
             variant="outlined"
             onChange={handleInput}
@@ -100,6 +116,7 @@ export default function SignUp() {
             label="Zip Code"
             name="zipcode"
             type="number"
+            error={formInput.zipcode === ""}
             required
             variant="outlined"
             onChange={handleInput}
@@ -108,6 +125,7 @@ export default function SignUp() {
             id="outlined-basic-4"
             label="User Name"
             name="username"
+            error={formInput.username === ""}
             variant="outlined"
             onChange={handleInput}
           />
