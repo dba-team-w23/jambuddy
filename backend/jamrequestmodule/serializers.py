@@ -29,7 +29,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class ProfileJamRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['username','first_name','last_name', 'email','street','street2','city','state',
+        fields = ['id', 'username','first_name','last_name', 'email','street','street2','city','state',
                   'zipcode','phone','photo','note','instrument_names','genre_names']
         #fields = '__all__'
 

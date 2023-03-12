@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import environ
+from django.conf.urls.static import static
 
 env = environ.Env()
 environ.Env.read_env()
