@@ -551,13 +551,13 @@
 							"response": []
 						},
 						{
-							"name": "New Request",
+							"name": "user change PW",
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"password\":\"pianogirl\"\n}",
+									"raw": "{\n    \"password\":\"SGonzalez4\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -565,14 +565,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/api/userchangepw/",
+									"raw": "{{base_url}}/api/userchangepw/71",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"userchangepw",
-										""
+										"71"
 									]
 								}
 							},

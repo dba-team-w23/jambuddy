@@ -91,7 +91,7 @@ class JamResponseList(viewsets.ModelViewSet):
     serializer_class = JamResponseSerializer
 
     def create(self, request):
-        responder_id = request.data.get("responderUserId"),
+        responder_id = request.data.get("responderUserId")
         jam_request_id = request.data.get("jrid")
         note = request.data.get("note")
 
@@ -115,14 +115,20 @@ class JamResponseList(viewsets.ModelViewSet):
             raise Exception("Error, invalid Jam Request ID")
 
         print('here')
+        # new_response = JamResponse.objects.create(
+        #     jrid=jam_request_id,
+        #     profileid=responder_id,
+        #     note=note
+        # )
+
         new_response = JamResponse.objects.create(
-            jrid=jam_request_id,
-            profileid=responder_id,
+            jrid=JamRequest.objects.get(id=jam_request_id),
+            profileid=Profile.objects.get(id=responder_id),
             note=note
         )
-        new_id, _ = new_response.save()
+        new_response.save()
 
-        return Response({"status":"success", "new_response_id": new_id})
+        return Response({"status":"success"})
 
 
 
