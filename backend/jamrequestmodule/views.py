@@ -90,6 +90,30 @@ class JamResponseList(viewsets.ModelViewSet):
     queryset = JamResponse.objects.all()
     serializer_class = JamResponseSerializer
 
+    def create(self, request):
+        responder_id = request.responderUserId,
+        jam_request_id = request.jrid
+        note = request.note
+
+        # check that the responder profile exists
+        responder_profile = Profile.objects.filter(id=responder_id)
+        if responder_profile is None:
+            raise Exception("Error, invalid responder ID")
+
+
+        jam_request = JamRequest.objects.filter(id=jam_request_id)
+        if jam_request is None:
+            raise Exception("Error, invalid Jam Request ID")
+
+        new_response = JamResponse.objects.create(
+            jrid=jam_request_id,
+            profileid=responder_id,
+            note=note
+        )
+
+        return Response({"status":"success", "new_response_id": new_response.id})
+
+
 
 class MusicGenreList(viewsets.ModelViewSet):
     queryset = MusicGenre.objects.all().order_by('genre')
