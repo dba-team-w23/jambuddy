@@ -91,9 +91,9 @@ class JamResponseList(viewsets.ModelViewSet):
     serializer_class = JamResponseSerializer
 
     def create(self, request):
-        responder_id = request.responderUserId,
-        jam_request_id = request.jrid
-        note = request.note
+        responder_id = request.data.get("responderUserId"),
+        jam_request_id = request.data.get("jrid")
+        note = request.data.get("note")
 
         # check that the responder profile exists
         responder_profile = Profile.objects.filter(id=responder_id)
