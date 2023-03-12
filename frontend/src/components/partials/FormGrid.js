@@ -97,6 +97,8 @@ export default function FormGrid() {
       dispatch(userSlice.actions.updateUserProfile(updatedUser));
       setIsLoading(false);
       setFormSuccess(true);
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      console.log("localStorage", localStorage.getItem("user"));
       console.log("userData after update: ", userData);
     } catch (error) {
       console.error("Error:", error);
