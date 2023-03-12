@@ -52,15 +52,29 @@ const JamResponses = () => {
       <ul>
         {jamResponses.length > 0 ? (
           jamResponses.map((response, i) => {
-            username = response.responder_profile.username;
-            full_name = response.responder_profile.first_name + " " + response.responder_profile.last_name;
-            email = response.responder_profile.email;
-            phone = response.responder_profile.phone;
-            contact_info = email + ' - ' + phone;
             return (
-              <li key={i}>
-                <b>{username}</b> <i>{full_name}</i> ({contact_info}):
-                {response.note}
+              <li key={i} style={{
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    marginBottom: '8px',
+    padding: '8px',
+    display: 'flex',
+    alignItems: 'center',
+  }}>
+                <div style={{display: 'flex', alignItems: 'center'}}>
+                  <div style={{marginRight: '16px', width: '8rem'}}>
+                    <b>{response.responder_profile.username}</b> <br/>
+                    <i>{response.responder_profile.first_name + " " + response.responder_profile.last_name}</i>
+                  </div>
+                  <div>
+                    <div style={{fontSize: '14px'}}>{response.responder_profile.email}</div>
+                    <div style={{fontSize: '14px'}}>{response.responder_profile.phone}</div>
+                  </div>
+                </div>
+                  <br/>
+                <div style={{fontSize: '16px', width: '20rem', marginLeft: '16px', tmarginTop: '8px'}}>
+                  {response.note}
+                </div>
               </li>
             );
             console.log(response);
