@@ -54,7 +54,7 @@ const JamResponses = () => {
           jamResponses.map((response, i) => {
             return (
               <li key={i}>
-                <b>{response.jrid}: </b>
+                <b>{response.responder_username}: </b>
                 {response.note}
               </li>
             );
