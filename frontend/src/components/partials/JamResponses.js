@@ -52,9 +52,14 @@ const JamResponses = () => {
       <ul>
         {jamResponses.length > 0 ? (
           jamResponses.map((response, i) => {
+            username = response.responder_profile.username;
+            full_name = response.responder_profile.first_name + " " + response.responder_profile.last_name;
+            email = response.responder_profile.email;
+            phone = response.responder_profile.phone;
+            contact_info = email + ' - ' + phone;
             return (
               <li key={i}>
-                <b>{response.responder_username}: </b>
+                <b>{username}</b> <i>{full_name}</i> ({contact_info}):
                 {response.note}
               </li>
             );

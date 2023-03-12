@@ -67,6 +67,11 @@ class JamResponseSerializer(serializers.ModelSerializer):
         model = JamResponse
         fields = '__all__'
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['responder_profile'] = ProfileJamRequestSerializer(instance.profileid).data
+        return representation
+
 class MusicGenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = MusicGenre
