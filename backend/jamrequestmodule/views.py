@@ -95,23 +95,34 @@ class JamResponseList(viewsets.ModelViewSet):
         jam_request_id = request.data.get("jrid")
         note = request.data.get("note")
 
+        print(request.data)
+
+        print(responder_id, jam_request_id, note)
+
+        if responder_id is None or jam_request_id is None:
+            raise Exception("missing argument")
+
         # check that the responder profile exists
         responder_profile = Profile.objects.filter(id=responder_id)
         if responder_profile is None:
             raise Exception("Error, invalid responder ID")
 
+        print(responder_profile)
 
-        jam_request = JamRequest.objects.filter(id=jam_request_id)
+
+        jam_request = JamRequest.objects.filter(profileid=jam_request_id)
         if jam_request is None:
             raise Exception("Error, invalid Jam Request ID")
 
+        print('here')
         new_response = JamResponse.objects.create(
             jrid=jam_request_id,
             profileid=responder_id,
             note=note
         )
+        new_id, _ = new_response.save()
 
-        return Response({"status":"success", "new_response_id": new_response.id})
+        return Response({"status":"success", "new_response_id": new_id})
 
 
 
