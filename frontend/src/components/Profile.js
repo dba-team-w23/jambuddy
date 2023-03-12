@@ -17,6 +17,7 @@ export default function EditProfile(props) {
   const [userProfile, setUserProfile] = React.useState({});
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = React.useState(false);
+  console.log("userData.user from ProfileCard: ", userData.user);
 
   const baseURL = `https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/${userData.user.id}`;
 

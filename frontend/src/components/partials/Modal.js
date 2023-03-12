@@ -32,6 +32,7 @@ export default function BasicModal({ ...profile }) {
       }
       const data = await response.json();
       setLinks(data);
+      console.log("linkdata", data);
     } catch (error) {
       console.error("There was an error", error);
     }
