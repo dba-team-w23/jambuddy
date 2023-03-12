@@ -97,36 +97,35 @@ export default function BasicCard({
           {post.note && post.note}
         </Typography>
         <ul className="list-disc list-outside ml-5">
+
+          {post.instruments.length
+                ?
           <li>
             <Typography variant="body2">
-              We need:
-              <i>
-                {post.instruments.length
-                  ? ` ${mapInstrumentstoNames(
-                      instruments,
-                      post.instruments
-                    ).join(", ")}`
-                  : ""}
-              </i>
+              <i>We need:</i> {mapInstrumentstoNames(instruments, post.instruments).join(", ")}
             </Typography>
           </li>
+          : ''}
+
+
+          {post.exp_level.length
+                ?
           <li>
             <Typography variant="body2">
-              Experience:{" "}
-              <i>
-                {mapExperiencetoNames(experienceLevels, post.exp_level).join(
-                  ", "
-                )}
-              </i>
+              <i>Experience:</i> {mapExperiencetoNames(experienceLevels, post.exp_level).join(", ")}
             </Typography>
           </li>
+          : ''}
+
+          {post.genres.length
+                ?
           <li>
             <Typography variant="body2">
-              {post.genres.length
-                ? `We play: ${mapGenrestoNames(genres, post.genres).join(", ")}`
-                : ""}
+            <i>We play:</i> {mapGenrestoNames(genres, post.genres).join(", ")}
             </Typography>
           </li>
+          : ''}
+
         </ul>
         <div className="m-4">
           Posted {formattedDate} by {post.requestor_profile.first_name}{" "}
