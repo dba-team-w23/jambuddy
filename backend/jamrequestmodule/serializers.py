@@ -61,15 +61,6 @@ class JamRequestSerializer(serializers.ModelSerializer):
         representation['requestor_profile'] = ProfileJamRequestSerializer(instance.profileid).data
         return representation
 
-class JamRequestSimpleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = JamRequest
-        fields = '__all__'
-
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['requestor_profile'] = ProfileSerializer(instance.profileid).data
-        return representation
 
 class JamResponseSerializer(serializers.ModelSerializer):
     class Meta:
