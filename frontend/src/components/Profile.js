@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ProfileClipLinks } from "./ProfileClipLinks";
 import { Grid } from "@mui/material";
+import JamResponses from "./partials/JamResponses";
 
 export default function EditProfile(props) {
   const userData = useSelector((state) => state.user);
@@ -39,18 +40,22 @@ export default function EditProfile(props) {
   return (
     <>
       {userData ? (
-        <Grid container rowSpacing={1} columnSpacing={2} xs={12}>
+        <Grid container rowSpacing={1} columnSpacing={2}>
           <Grid item xs={12} md={6} xl={4}>
             <ProfileCard profile={userData.user} />
+          </Grid>
+          <Grid item xs={12} md={6} xl={4}>
+            <NewJamRequest />
+          </Grid>
+
+          <Grid item xs={12} md={6} xl={4}>
+            <FormGrid style={{ margin: "40px auto" }} />
           </Grid>
           <Grid item xs={12} md={6} xl={4}>
             <ProfileClipLinks />
           </Grid>
           <Grid item xs={12} md={6} xl={4}>
-            <FormGrid style={{ margin: "40px auto" }} />
-          </Grid>
-          <Grid item xs={12} md={6} xl={4}>
-            <NewJamRequest />
+            <JamResponses />
           </Grid>
         </Grid>
       ) : (

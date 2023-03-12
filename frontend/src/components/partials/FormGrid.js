@@ -62,7 +62,6 @@ export default function FormGrid() {
     data.instruments = selectedInstruments;
     data.genres = selectedGenres;
     data.photo = imageURL ? imageURL : userData.user.photo;
-    console.log(JSON.stringify(data));
     setIsLoading(true);
 
     fetch(`${baseURL}users/${userData.user.id}`, {
@@ -112,18 +111,12 @@ export default function FormGrid() {
   const handleHidden = (e) => {
     setHidden(e.target.checked);
   };
-  React.useEffect(() => {
-    console.log("selectedInstruments", selectedInstruments);
-    console.log("selectedGenres", selectedGenres);
-  }, [selectedInstruments, selectedGenres]);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
   return (
-    <div
-      className="border-4 rounded p-5 mb-4"
-      style={{ background: "#FFFFFF" }}
-    >
+    <div className="border-4 rounded p-5 mb-4 bg-white">
       <h2 className="text-lg text-center mb-4">Edit Profile</h2>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -202,7 +195,7 @@ export default function FormGrid() {
               onChange={handleChange}
             />
           </Grid>
-          <Grid className="pl-4 pt-4" item xs={12}>
+          <Grid item xs={12} className="pl-4 pt-4">
             <Autocomplete
               multiple
               id="instrument-select"
@@ -218,7 +211,7 @@ export default function FormGrid() {
               )}
             />
           </Grid>
-          <Grid className="pl-4 mb-0 pt-4" item xs={12}>
+          <Grid item xs={12} className="pl-4 mb-0 pt-4">
             <Autocomplete
               multiple
               id="genres-needed"
