@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import Password from "./Password";
 import Multiline from "./Multiline";
 import UploadWidget from "./UploadWidget";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -63,7 +62,6 @@ export default function FormGrid() {
     data.instruments = selectedInstruments;
     data.genres = selectedGenres;
     data.photo = imageURL ? imageURL : userData.user.photo;
-    console.log(JSON.stringify(data));
     setIsLoading(true);
 
     fetch(`${baseURL}users/${userData.user.id}`, {
@@ -113,18 +111,12 @@ export default function FormGrid() {
   const handleHidden = (e) => {
     setHidden(e.target.checked);
   };
-  React.useEffect(() => {
-    console.log("selectedInstruments", selectedInstruments);
-    console.log("selectedGenres", selectedGenres);
-  }, [selectedInstruments, selectedGenres]);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
   return (
-    <div
-      className="border-4 rounded p-5 mb-4"
-      style={{ background: "#FFFFFF" }}
-    >
+    <div className="border-4 rounded p-5 mb-4 bg-white">
       <h2 className="text-lg text-center mb-4">Edit Profile</h2>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -147,9 +139,6 @@ export default function FormGrid() {
               label="First Name"
               variant="outlined"
               defaultValue={formInput.first_name}
-              // InputLabelProps={
-              //   formInput.first_name ? { shrink: true } : { shrink: false }
-              // }
               onChange={handleChange}
             />
           </Grid>
@@ -159,11 +148,7 @@ export default function FormGrid() {
               name="last_name"
               label="Last Name"
               variant="outlined"
-              // shrink={true}
               defaultValue={formInput.last_name}
-              // InputLabelProps={
-              //   formInput.last_name ? { shrink: true } : { shrink: false }
-              // }
               onChange={handleChange}
             />
           </Grid>
@@ -174,9 +159,6 @@ export default function FormGrid() {
               label="Email"
               variant="outlined"
               defaultValue={formInput.email}
-              // InputLabelProps={
-              //   formInput.email ? { shrink: true } : { shrink: false }
-              // }
               onChange={handleChange}
             />
           </Grid>
@@ -187,9 +169,6 @@ export default function FormGrid() {
               label="User Name"
               variant="outlined"
               defaultValue={formInput.username}
-              // InputLabelProps={
-              //   formInput.username ? { shrink: true } : { shrink: false }
-              // }
               onChange={handleChange}
             />
           </Grid>
@@ -198,24 +177,25 @@ export default function FormGrid() {
               id="outlined-basic-5"
               name="city"
               label="City"
+              required
+              error={formInput.city === ""}
               variant="outlined"
               defaultValue={formInput.city}
-              // InputLabelProps={
-              //   formInput.city ? { shrink: true } : { shrink: false }
-              // }
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={4}>
             <TextField
               id="just-state"
+              required
+              error={formInput.state === ""}
               name="state"
               label="State"
               defaultValue={formInput.state}
               onChange={handleChange}
             />
           </Grid>
-          <Grid className="pl-4 pt-4" item xs={12}>
+          <Grid item xs={12} className="pl-4 pt-4">
             <Autocomplete
               multiple
               id="instrument-select"
@@ -231,7 +211,7 @@ export default function FormGrid() {
               )}
             />
           </Grid>
-          <Grid className="pl-4 mb-0 pt-4" item xs={12}>
+          <Grid item xs={12} className="pl-4 mb-0 pt-4">
             <Autocomplete
               multiple
               id="genres-needed"
@@ -261,12 +241,6 @@ export default function FormGrid() {
             />
           </Grid>
 
-          <Grid item xs={6}>
-            <Password label="Password" name="password" id="pw1" />
-          </Grid>
-          <Grid item xs={6}>
-            <Password label="Repeat Password" id="pw2" />
-          </Grid>
           <Grid item xs={8}>
             <UploadWidget value={imageURL} setImageURL={setImageURL} />
           </Grid>

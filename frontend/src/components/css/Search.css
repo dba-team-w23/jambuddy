@@ -1,10 +1,10 @@
-.jam-buddies-search {
+ .jam-buddies-search {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   padding: 20px;
 }
-
+/*
 .jam-buddies-search h1 {
   color: #1976D2;
   font-size: 36px;
@@ -16,7 +16,7 @@
   display: block;
   font-size: 20px;
   margin-bottom: 10px;
-}
+}*/
 
 .jam-buddies-search select,
 .jam-buddies-search input[type="number"] {
@@ -45,7 +45,7 @@
 } */
 
 /*new styles*/
-
+/* 
 .jam-buddies-search .row {
   display: flex;
   justify-content: space-between;
@@ -73,4 +73,4 @@
     color: #333;
     font-size: 16px;
     margin-bottom: 5px;
-  }
+  } */

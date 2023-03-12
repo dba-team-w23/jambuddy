@@ -13,7 +13,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ['id', 'last_login','date_joined','username','first_name','last_name',
             'email','street','street2','city','state','country','zipcode','phone','photo','note','hidden',
-            'instruments','genres','instrument_names','genre_names']
+            'instruments','genres','instrument_names','genre_names', 'clips', ]
         #fields = '__all__'
 
     def create(self, validated_data):
@@ -23,6 +23,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             password=self.initial_data['password'],
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
+            zipcode=validated_data['zipcode'],
         )
         return user
 
@@ -60,20 +61,16 @@ class JamRequestSerializer(serializers.ModelSerializer):
         representation['requestor_profile'] = ProfileJamRequestSerializer(instance.profileid).data
         return representation
 
-class JamRequestSimpleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = JamRequest
-        fields = '__all__'
-
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['requestor_profile'] = ProfileSerializer(instance.profileid).data
-        return representation
 
 class JamResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = JamResponse
         fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['responder_profile'] = ProfileJamRequestSerializer(instance.profileid).data
+        return representation
 
 class MusicGenreSerializer(serializers.ModelSerializer):
     class Meta:

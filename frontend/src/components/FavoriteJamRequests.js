@@ -3,20 +3,20 @@ import { useEffect } from "react";
 import FavoriteJamsCard from "./partials/FavoriteJamsCard";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function FavoriteJamRequests(userId) {
-  const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
+  const dispatch = useDispatch();
+  const baseURL =
+    "https://sea-turtle-app-zggz6.ondigitalocean.app/api/userfavejamreqs";
 
-  const jamApi = `${apiRoot}/api/userfavejamreqs/${userId.id}`;
   const [jamRequests, setJamRequests] = React.useState([]);
-  const likedJams = useSelector((state) => state.jam.likedJams);
-  console.log("likedJams from FavoriteJamRequests", likedJams);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(jamApi);
+        const response = await axios.get(`${baseURL}/${userId.id}`);
+        console.log("fave jam requests", response.data.jamrequests);
         setJamRequests(response.data.jamrequests);
       } catch (error) {
         console.error(error);
@@ -25,14 +25,21 @@ export default function FavoriteJamRequests(userId) {
 
     fetchData();
   }, []);
-
+  const removeCard = (id) => {
+    setJamRequests((prevJamRequests) =>
+      prevJamRequests.filter((request) => request.id !== id)
+    );
+  };
   return (
     <Grid container spacing={6}>
       {jamRequests.map((request, i) => {
-        console.log(request);
         return (
-          <Grid key={i} item xs={6}>
-            <FavoriteJamsCard key={i + 1000} post={request} />
+          <Grid key={i} item xs={12} md={6} xl={3}>
+            <FavoriteJamsCard
+              key={i + 1000}
+              post={request}
+              onRemoveFavorite={() => removeCard(request.id)}
+            />
           </Grid>
         );
       })}
