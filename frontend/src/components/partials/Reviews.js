@@ -45,7 +45,7 @@ export default function BasicModal({ ...profile }) {
   }, []);
 
   return (
-    <div>
+    <>
       {reviews.length > 0 && (
         <>
           <Button onClick={() => handleOpen(profile.id)}>Reviews</Button>
@@ -74,6 +74,6 @@ export default function BasicModal({ ...profile }) {
           </Modal>
         </>
       )}
-    </div>
+    </>
   );
 }
