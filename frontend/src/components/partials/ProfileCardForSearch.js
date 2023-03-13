@@ -9,15 +9,17 @@ import Reviews from "./Reviews";
 import ReviewModal from "./ReviewModal";
 import { useSelector } from "react-redux";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ProfileData from "./ProfileData";
+import ProfileSearchData from "./ProfileSearchData";
 import { Grid } from "@mui/material";
 
 import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
 
-export default function ProfileCard({ profile }) {
+export default function ProfileCardForSearch({ profile }) {
   const user = useSelector((state) => state.user);
   const userMatch = profile.username == user.user.username;
   const [isLiked, setIsLiked] = React.useState(false);
+  const [instruments, setInstruments] = React.useState([]);
+  const [genres, setGenres] = React.useState([]);
   const handleFavorite = () => {
     setIsLiked(!isLiked);
     if (isLiked) {
@@ -26,6 +28,7 @@ export default function ProfileCard({ profile }) {
       addFavorite();
     }
   };
+
   const addFavorite = async () => {
     const baseURL =
       "https://sea-turtle-app-zggz6.ondigitalocean.app/api/userfaveprofiles";
@@ -42,6 +45,7 @@ export default function ProfileCard({ profile }) {
       data: { profileid: user.user.id, favorite_profileid: profile.id },
     });
   };
+  console.log("profile from pcfs", profile);
   return (
     <div>
       <Card sx={{ position: "relative" }}>
@@ -79,7 +83,7 @@ export default function ProfileCard({ profile }) {
             </CardActions>
           </Grid>
           <Grid item xs={10}>
-            <ProfileData profile={profile} />
+            <ProfileSearchData profile={profile} />
           </Grid>
         </Grid>
 

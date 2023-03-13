@@ -8,7 +8,7 @@ import {
   Button,
 } from "@mui/material";
 import "./css/Search.css";
-import ProfileCard from "./partials/ProfileCard";
+import ProfileCardForSearch from "./partials/ProfileCardForSearch";
 import { useSelector } from "react-redux";
 
 const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
@@ -37,6 +37,7 @@ export default function Search({}) {
       });
       const data = await res.json();
       setProfiles(data);
+      console.log("profile search profiles: ", data);
     } catch (error) {
       console.error(error);
     }
@@ -164,7 +165,7 @@ export default function Search({}) {
         <Grid container spacing={2}>
           {profiles.map((profile, i) => (
             <Grid item key={i} xs={12} sm={6} md={6} lg={4}>
-              <ProfileCard profile={profile} />
+              <ProfileCardForSearch profile={profile} />
             </Grid>
           ))}
         </Grid>
