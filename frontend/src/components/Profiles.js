@@ -44,9 +44,18 @@ export default function Profiles(props) {
       <ProfileSearch profiles={profiles} setFilteredProfiles={setProfiles} />
       <br />
       {profiles.length > 0 ? (
-        <Grid container spacing={4} sx={{ margin: "2rem auto" }}>
+        <Grid container spacing={4} className="mx-auto my-8">
           {profiles.map((profile, i) => (
-            <Grid item key={i} xs={10} sm={6} md={6} lg={4} xl={3}>
+            <Grid
+              item
+              key={i}
+              xs={10}
+              sm={6}
+              md={6}
+              lg={4}
+              xl={3}
+              className="p-2"
+            >
               <ProfileCard profile={profile} />
             </Grid>
           ))}
