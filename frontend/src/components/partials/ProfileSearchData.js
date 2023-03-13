@@ -12,7 +12,7 @@ const ProfileSearchData = ({ profile }) => {
   console.log("profile from psd: ", profile);
   console.log("profile id from psd: ", profile.id);
 
-  const baseURL = "http://sea-turtle-app-zggz6.ondigitalocean.app/api/users/";
+  const baseURL = "https://sea-turtle-app-zggz6.ondigitalocean.app/api/users/";
 
   useEffect(() => {
     const fetchData = async () => {
