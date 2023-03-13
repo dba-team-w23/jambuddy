@@ -79,6 +79,7 @@ export default function BasicModal({ ...profile }) {
                 <li key={link.id}>
                   <a
                     href={link.link}
+                    target="_blank"
                     style={{
                       color: "blue",
                       textDecoration: "none",

@@ -1,24 +1,17 @@
-import SearchIcon from "@mui/icons-material/Search";
 import React, { useState, useEffect } from "react";
 import {
   Grid,
-  Box,
-  TextField,
-  InputAdornment,
   InputLabel,
   FormControl,
   Select,
   MenuItem,
   Button,
-  Typography,
-  CircularProgress,
 } from "@mui/material";
 import "./css/Search.css";
 import ProfileCard from "./partials/ProfileCard";
 import { useSelector } from "react-redux";
 
 const apiRoot = "https://sea-turtle-app-zggz6.ondigitalocean.app";
-const profileAPI = `${apiRoot}/api/users`;
 
 export default function Search({}) {
   const userData = useSelector((state) => state.user);
