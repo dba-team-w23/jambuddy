@@ -54,7 +54,7 @@ export default function Profiles(props) {
               md={6}
               lg={4}
               xl={3}
-              className="p-2"
+              style={{ margin: "auto" }}
             >
               <ProfileCard profile={profile} />
             </Grid>
