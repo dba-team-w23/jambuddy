@@ -330,7 +330,7 @@ def searchJamRequests(request):
         jam_results = jam_results.filter(exp_level__id=exp_level_id)
     if daysback:
         jam_results = jam_results.filter(created__gte=datetime.datetime.now() - datetime.timedelta(days=daysback))
-    if distance_miles:
+    if False and distance_miles:
         are_distance_search_prereqs_met = all([
             distance_miles is not None and int(distance_miles) > 0,
             _is_valid_zip_code(searching_user_zipcode)]
@@ -376,7 +376,7 @@ def searchJamRequests(request):
     serialized_jrs = JamRequestSerializer(jam_results, many=True)
     jr_data = serialized_jrs.data
 
-    if True:
+    if False:
         # iterate over data object and append a 'distance' field using the zip_dist map
         #  if for some reason it's not in the list, assign a default value of 10,000 miles
         for jr in jr_data:
